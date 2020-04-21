@@ -1,0 +1,41 @@
+<div class="login-panel">
+  <div class="p-grid p-nogutter p-justify-center p-align-center" style="height:100%">
+
+      <div class="p-xl-3 p-lg-6 p-md-8 p-sm-10">
+        <p-panel header="{{ 'login-msg' | translate}}">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="p-col-12">
+              <p-messages [(value)]="msgs"></p-messages>
+            </div>
+            <div class="p-grid p-justify-center p-align-center">
+              <div class="p-col-12">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                  <input type="text" formControlName="username" size="30"  pInputText [ngClass]="{ 'is-invalid': submitted && f.username.errors }" 
+                  placeholder="Enter User name" autocomplete="username"/>
+                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                  </div>              
+                </div>
+              </div>
+              <div class="p-col-12">
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+                  <input type="password" formControlName="password" size="30" pInputText [ngClass]="{ 'is-invalid': submitted && f.password.errors }" 
+                  placeholder="Enter Password" autocomplete="current-password"/>
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password is required</div>
+                  </div> 
+                </div>
+              </div>
+            </div>
+            <div class="p-grid">
+              <div class="p-col-12 right">
+                <button pButton [disabled]="loading"  label="{{ 'Login' | translate}}" class="ui-button-raised"></button>
+              </div>
+            </div>
+        </form>
+        </p-panel>
+      </div>
+  </div>
+</div>

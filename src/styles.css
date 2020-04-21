@@ -1,0 +1,323 @@
+.theme-light {
+    --main-background: #F5F5F5;
+    --header-footer-color: #000000;
+    --header-footer-bg-color: #d9d9d9;
+    --header-footer-bg-color2: #a6a6a6;
+    --menubar-background: #E8E8E8;
+    --menubar-color: #000000;
+    --active-menu-color: #212A59;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.ng-main {
+    background-color: var(--main-background);
+    height: 100%;
+}
+
+.ng-header, .ng-footer {
+    height: 50px;
+    background-image: -webkit-gradient(linear, left top, right top, from(var(--header-footer-bg-color)), to(var(--header-footer-bg-color2)));
+    color: var(--header-footer-color);
+}
+
+.ng-header-right {
+    height: 50px;
+}
+
+.ng-header a {
+    color: var(--header-footer-color);
+}
+
+.ng-header a:hover {
+    color: var(--header-footer-color);
+}
+
+.ng-header .pi {
+    color: #000000;
+}
+
+.ng-footer div {
+    text-align: center;
+    padding: 10px;
+}
+
+.ng-content {
+    overflow: auto;
+    height: calc(100% - 100px);
+    padding: 10px;
+    padding-left: 240px;
+}
+
+.hidden-menu-content {
+    padding-left: 10px;
+}
+
+.ng-content .ui-card {
+    min-height: 100%;
+    background: #f7f9fa;
+}
+
+.icon {
+    line-height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.prime-button {
+    width: 150px !important;
+}
+
+.overview-box-1 .ui-card-body {
+    background-color: #F39611;
+}
+
+.overview-box-2 .ui-card-body {
+    background-color: #326DDF;
+}
+
+.overview-box-3 .ui-card-body {
+    background-color: #E02364;
+}
+
+.overview-box-4 .ui-card-body {
+    background-color: #7DC931;
+}
+
+.color-red {
+    color: red;
+}
+
+.header-breadcrumb {
+    margin-bottom: 10px;
+}
+
+.login-panel, .user-regisration {
+    height: 100%;
+    background-image: radial-gradient(var(--header-footer-bg-color) 40%, var(--header-footer-bg-color2));
+}
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.login-logo {
+    height: 100%;
+    width: 100%;
+}
+
+.toggle-menu-button {
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    background-color: var(--menubar-background);
+}
+
+.toggle-menu-button .icon {
+    padding: 0;
+    color: var(--menubar-color) !important;
+}
+
+.logo-large {
+    display: block;
+    height: 50px;
+    width: 180px;
+}
+
+.logo-small {
+    display: none;
+}
+
+.user-name {
+    font-size: 15px;
+    padding: 5px;
+}
+
+.notification-message {
+    min-height: 25px;
+    width: 200px;
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.np-loader {
+    position: fixed;
+    z-index: 1100;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.np-loader:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.fa-fw {
+    width: 50px;
+}
+
+.right {
+    float: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.left {
+    float: left;
+}
+
+.np-menubar {
+    background-color: var(--menubar-background) !important;
+    height: calc(100% - 100px);
+    overflow: auto;
+    border: none !important;
+    padding: 0px !important;
+    margin-top: 50px;
+    width: 230px;
+}
+
+.np-sub-menu {
+    padding: 0px;
+    width: 100%;
+    list-style: none;
+    position: relative;
+}
+
+.np-menu {
+    padding: 5px;
+    margin: 0px;
+}
+
+.np-menu li a {
+    padding: 7px;
+    color: var(--menubar-color);
+    display: block;
+    text-decoration: none !important;
+    position: relative;
+}
+
+.np-menu li a:hover, .np-menu .active {
+    color: var(--active-menu-color);
+    cursor: pointer;
+}
+
+.np-menu .fa {
+    width: 25px;
+    text-align: center;
+}
+
+.np-menu li ul {
+    display: block;
+}
+
+.np-menu li ul::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid var(--menubar-color);
+}
+
+.np-menubar {
+    box-shadow: none !important;
+}
+
+a {
+    cursor: pointer;
+}
+
+.extra-page-footer {
+    position: relative;
+    bottom: 0px;
+    padding: 10px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
+.ui-messages ul{
+    display: inline-block !important;
+}
+
+/* Extra large devices (large laptops and desktops, 1200px or more) */
+
+@media only screen and (min-width: 1200px) {}
+
+/* Large devices (laptops/desktops, 1200px or less) */
+
+@media only screen and (max-width: 1200px) {}
+
+/* Medium devices (landscape tablets, 992px or less) */
+
+@media only screen and (max-width: 992px) {
+    .logo-large {
+        display: none;
+    }
+    .logo-small {
+        display: block;
+        height: 50px;
+        width: 50px;
+    }
+    .user-name {
+        display: none;
+    }
+    .ng-content {
+        padding-left: 10px;
+    }
+    .ng-header-left {
+        width: 100px;
+    }
+}
+
+.error-box {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 100%;
+    overflow: auto;
+    color: var(--header-footer-bg-color2)
+}
+
+/* Small devices (portrait tablets and large phones, 768px or less) */
+
+@media only screen and (max-width: 768px) {}
+
+/* Extra small devices (phones, 600px or less) */
+
+@media only screen and (max-width: 600px) {}

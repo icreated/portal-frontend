@@ -1,0 +1,52 @@
+<app-header-breadcrumb></app-header-breadcrumb>
+<p-panel header="Invoice Details">
+
+<div class="ui-g">
+  <div class="ui-g-6">
+    <p-panel header="Header">
+      <p><b>DocumentNo :</b> {{invoice?.documentNo}}</p>
+      <p><b>Description :</b> {{invoice?.description}}</p>
+    </p-panel>
+  </div>
+
+  <div class="ui-g-6">
+    <p-panel header="Address">
+      <p>{{invoice?.billAddress?.address1}}</p>
+      <p>{{invoice?.billAddress?.address2}}</p>
+      <p>{{invoice?.billAddress?.postal}} {{invoice?.billAddress?.city}}</p>
+    </p-panel>
+  </div>
+</div>
+
+
+
+  <p-table [value]="invoice?.lines">
+    <ng-template pTemplate="header" let>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Line Net Amt</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-line>
+        <tr>
+            <td>{{line.name}}</td>
+            <td>{{line.description}}</td>
+            <td>{{line.qty}}</td>
+            <td>{{line.price}}</td>
+            <td>{{line.lineNetAmt}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+
+
+
+  <p-footer>
+    <button pButton type="button" label="Back" class="ui-button-secondary prime-button" (click)="back()"></button>
+  </p-footer>
+</p-panel>
