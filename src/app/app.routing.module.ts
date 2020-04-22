@@ -29,6 +29,11 @@ const appRoutes: Routes = [
             loadChildren: () => import('src/app/features/invoices/invoice-detail/invoice-detail.module').then(m => m.InvoiceDetailModule),
             canActivate: [AuthGuard]
         },
+        {
+            path: 'payments',
+            loadChildren: () => import('src/app/features/payments/payments.module').then(m => m.PaymentsModule),
+            canActivate: [AuthGuard]
+        },
     ]
     },
     {

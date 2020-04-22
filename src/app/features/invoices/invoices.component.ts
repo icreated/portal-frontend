@@ -23,14 +23,6 @@ export class InvoicesComponent implements OnInit {
 
     this.pageSize = 10;
 
-    this.columns = [
-      { field: 'documentNo', header: '#' },
-      { field: 'description', header: 'Description' },
-      { field: 'docStatusName', header: 'Status' },
-      { field: 'date', header: 'Date' },
-      { field: 'grandTotal', header: 'Price'}
-    ];
-
     this.invoiceService.getInvoicesList().subscribe(
       data => {
         this.invoices = data;

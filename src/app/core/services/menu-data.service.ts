@@ -19,6 +19,9 @@ export class MenuDataService {
             },
             {
                 Label: 'Invoices', Icon: 'fa-handshake', RouterLink: '/main/invoices', Childs: null, IsChildVisible: false
+            },
+            {
+                Label: 'Payments', Icon: 'fa-credit-card', RouterLink: '/main/payments', Childs: null, IsChildVisible: false
             }
         ];
     }

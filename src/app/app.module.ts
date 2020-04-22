@@ -20,6 +20,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { JwtInterceptor } from './core/interceptors/jwt-interceptor';
 import { ErrorInterceptor } from './core/interceptors/error-interceptor';
+import { PipeModule } from './core/pipes/pipe.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
