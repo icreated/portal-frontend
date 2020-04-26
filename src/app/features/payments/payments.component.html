@@ -22,8 +22,8 @@
                 <td>{{payment.tenderType | tenderType}}</td>
                 <td>{{payment.description}}</td>
                 <td>{{payment.docStatus | docStatus}}</td>
-                <td>{{payment.date | date: 'MM/dd/yyyy'}}</td>
-                <td>{{payment.payAmt | currency:'USD'}}</td>
+                <td>{{payment.date | date: env.dateFormat}}</td>
+                <td>{{payment.payAmt | currency: env.currencyISO}}</td>
             </tr>
         </ng-template>
     </p-table>

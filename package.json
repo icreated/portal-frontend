@@ -29,6 +29,7 @@
     "primeflex": "^1.0.0",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.5",
+    "@rxweb/reactive-form-validators": "^1.9.9-beta4",
     "rxjs": "^6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "^0.10.2"

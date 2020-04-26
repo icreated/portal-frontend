@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { InvoicesDataService } from 'src/app/features/invoices/invoices-data.service';
 import { RouteStateService } from 'src/app/core/services/route-state.service';
 import { DocumentItem } from 'src/app/core/models/document-item.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-invoices',
@@ -9,8 +10,9 @@ import { DocumentItem } from 'src/app/core/models/document-item.model';
   styleUrls: ['invoices.component.css']
 })
 export class InvoicesComponent implements OnInit {
+  
   columns: any[];
-
+  env = environment;
   invoices: DocumentItem[];
 
   pageSize: number;

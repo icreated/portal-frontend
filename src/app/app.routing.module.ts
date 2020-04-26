@@ -34,6 +34,11 @@ const appRoutes: Routes = [
             loadChildren: () => import('src/app/features/payments/payments.module').then(m => m.PaymentsModule),
             canActivate: [AuthGuard]
         },
+        {
+            path: 'payment',
+            loadChildren: () => import('src/app/features/payments/payment/payment.module').then(m => m.PaymentModule),
+            canActivate: [AuthGuard]
+        },
     ]
     },
     {

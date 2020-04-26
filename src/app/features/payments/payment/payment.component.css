@@ -1,0 +1,6 @@
+.ng-invalid.ng-touched , .ng-invalid.ng-dirty { 
+    border-bottom: 3px solid red;
+}
+.invalid-feedback {
+    color: red;
+}

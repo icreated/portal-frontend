@@ -19,8 +19,8 @@
                 <td><a (click)="goToInvoiceLines(invoice.id)">{{invoice.documentNo}}</a></td>
                 <td>{{invoice.description}}</td>
                 <td>{{invoice.docStatus | docStatus}}</td>
-                <td>{{invoice.date | date: 'MM/dd/yyyy'}}</td>
-                <td>{{invoice.grandTotal | currency:'USD'}}</td>
+                <td>{{invoice.date | date: env.dateFormat}}</td>
+                <td>{{invoice.grandTotal | currency: env.currencyISO}}</td>
             </tr>
         </ng-template>
     </p-table>

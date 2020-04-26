@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DashboardDataService } from './dashboard-data.service';
+import { OpenItem } from 'src/app/core/models/open-item.model';
+import { RouteStateService } from 'src/app/core/services/route-state.service';
+import { PaymentDataService } from '../payments/payment-data.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +13,22 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DashboardComponent implements OnInit {
 
+  currencyISO = environment.currencyISO;
+  openItems: OpenItem[];
+  openTotal: number;
+
   barChartData: any;
 
   doughnutChartData: any;
 
   msgs: any[];
 
-  constructor(translate: TranslateService) {
+
+  constructor(translate: TranslateService, 
+    private dashboardService: DashboardDataService,
+    private routeStateService: RouteStateService,
+    private paymentService: PaymentDataService) {
+
     this.barChartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
@@ -60,6 +74,16 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.dashboardService.getOpenItemList().subscribe( data =>{
+      this.paymentService.openItems = data;
+      this.paymentService.openTotal = data.map(item => item.openAmt).reduce((a, b) => a + b, 0);
+    })
+
+  }
+
+  goToPayment() {
+    this.routeStateService.add("Credit Card Payment", "/main/payment", 0, false);
   }
 
 }

@@ -6,12 +6,13 @@ import { PaymentsRoutingModule } from './payments.routing';
 import { PaymentsComponent } from './payments.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     PaymentsRoutingModule,
     AppCommonModule,
-    HeaderBreadCrumbModule
+    HeaderBreadCrumbModule,
   ],
   declarations: [
     PaymentsComponent

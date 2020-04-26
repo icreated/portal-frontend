@@ -4,21 +4,21 @@
 <div class="ui-g">
   <div class="ui-g-6">
     <p-panel header="Header">
-      <p><b>DocumentNo :</b> {{invoice?.documentNo}}</p>
-      <p><b>Description :</b> {{invoice?.description}}</p>
-      <p><b>Status :</b> {{invoice?.docStatus | docStatus}}</p>
-      <p><b>Date :</b> {{invoice?.date | date: 'MM/dd/yyyy'}}</p>
-      <p><b>Total :</b> {{invoice?.grandTotal | currency:'USD'}}</p>
+      <p><b>DocumentNo :</b> {{invoice.documentNo}}</p>
+      <p><b>Description :</b> {{invoice.description}}</p>
+      <p><b>Status :</b> {{invoice.docStatus | docStatus}}</p>
+      <p><b>Date :</b> {{invoice.date | date: env.dateFormat}}</p>
+      <p><b>Total :</b> {{invoice.grandTotal | currency: env.currencyISO}}</p>
     </p-panel>
   </div>
 
   <div class="ui-g-6">
     <p-panel header="Address">
       <p>&nbsp;</p>
-      <p>{{invoice?.billAddress?.address1}}</p>
-      <p>{{invoice?.billAddress?.address2}}</p>
-      <p>{{invoice?.billAddress?.postal}} {{invoice?.billAddress?.city}}</p>
-      <p>{{invoice?.billAddress?.countryName}}</p>
+      <p>{{invoice.billAddress?.address1}}</p>
+      <p>{{invoice.billAddress?.address2}}</p>
+      <p>{{invoice.billAddress?.postal}} {{invoice.billAddress?.city}}</p>
+      <p>{{invoice.billAddress?.countryName}}</p>
       <p>&nbsp;</p>
     </p-panel>
   </div>
@@ -41,8 +41,8 @@
             <td>{{line.name}}</td>
             <td>{{line.description}}</td>
             <td>{{line.qty}}</td>
-            <td>{{line.price | currency:'USD'}}</td>
-            <td>{{line.lineNetAmt | currency:'USD'}}</td>
+            <td>{{line.price | currency: env.currencyISO}}</td>
+            <td>{{line.lineNetAmt | currency: env.currencyISO}}</td>
         </tr>
     </ng-template>
 </p-table>
@@ -60,7 +60,7 @@
       <ng-template pTemplate="body" let-tax>
           <tr>
               <td>{{tax.name}}</td>
-              <td>{{tax.tax | currency:'USD'}}</td>
+              <td>{{tax.tax | currency: env.currencyISO}}</td>
           </tr>
       </ng-template>
   </p-table>

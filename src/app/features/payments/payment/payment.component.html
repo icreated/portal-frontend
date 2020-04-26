@@ -1,0 +1,81 @@
+<app-header-breadcrumb></app-header-breadcrumb>
+
+<form [formGroup]="cardFormGroup" (ngSubmit)="onSubmit()">
+<p-panel header="Credit Card Payment">
+
+    <div class="p-grid p-justify-center p-align-center">
+      <div class="ui-g-6">
+          <div class="p-col"></div>
+          <div class="p-col">
+            <div class="ui-inputgroup">
+              <p-dropdown [options]="creditCardTypes" formControlName="cardType" placeholder="Choose Credit Card Type"> </p-dropdown>
+            </div>
+            <div *ngIf="submitted && f.cardType.errors" class="invalid-feedback">
+              <div *ngIf="f.cardType.errors.required">Credit Card Type is required</div>
+            </div>             
+          </div>
+          <div class="p-col">
+            <div class="ui-inputgroup">
+              <input pInputText formControlName="creditCard" placeholder="Card Number" />
+            </div>
+            <div *ngIf="submitted && f.creditCard.errors" class="invalid-feedback">
+              <div *ngIf="f.creditCard.errors.required">Credit Card Number is required</div>
+            </div>              
+          </div>
+          <div class="p-col">
+            <div class="ui-inputgroup">
+              <input pInputText formControlName="holderName" placeholder="Card Holder Name" />
+            </div>
+            <div *ngIf="submitted && f.holderName.errors" class="invalid-feedback">
+              <div *ngIf="f.holderName.errors.required">Holder Name is required</div>
+            </div>            
+          </div> 
+
+          <div class="ui-fluid">
+            <div class="ui-g-4">
+              <span>Expiration Month</span>
+              <div class="ui-inputgroup">
+                <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;"></p-dropdown>
+              </div>
+              <div *ngIf="submitted && f.expirationMonth.errors" class="invalid-feedback">
+                <div *ngIf="f.expirationMonth.errors.required">required</div>
+              </div>              
+            </div>
+            <div class="ui-g-4">
+              <span>Expiration Year</span>
+              <div class="ui-inputgroup">
+                <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;"></p-dropdown>
+              </div>
+              <div *ngIf="submitted && f.expirationYear.errors" class="invalid-feedback">
+                <div *ngIf="f.expirationYear.errors.required">required</div>
+              </div>                  
+            </div>
+            <div class="ui-g-1"></div>
+            <div class="ui-g-3">
+             CVC
+              <div class="ui-inputgroup">
+                <input pInputText formControlName="cvc" placeholder="" maxlength="3"/>
+              </div>
+              <div *ngIf="submitted && f.cvc.errors" class="invalid-feedback">
+                <div *ngIf="f.cvc.errors.required">required</div>
+              </div>                  
+            </div>     
+          </div>
+
+      </div>
+    </div>
+
+
+  <p-footer>
+    <div class="p-grid p-justify-center p-align-center">
+      <div class="p-col-2">
+        <button pButton type="button" label="Back" class="ui-button-secondary" (click)="back()" style="margin-right: .25em"></button>
+      </div>
+      <div class="p-col"></div>
+      <div class="p-col-2">
+        <button pButton type="submit" label="PAY {{paymentService.openTotal | currency: env.currencyISO}}" icon="pi pi-check"  class="ui-button-success"  [disabled]="loading"></button>
+      </div>
+    </div>
+  </p-footer>
+</p-panel>
+</form>

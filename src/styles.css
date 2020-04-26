@@ -76,6 +76,11 @@ html, body {
 .overview-box-1 .ui-card-body {
     background-color: #F39611;
 }
+.overview-box-1 .ui-card-body:hover {
+    color: var(--active-menu-color);
+    background-color: coral !important;
+    cursor: pointer;
+}
 
 .overview-box-2 .ui-card-body {
     background-color: #326DDF;
