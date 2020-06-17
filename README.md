@@ -47,6 +47,8 @@ Change constant `ApiUrl` in `environments/environments.ts` if different
 ### Deploying / Publishing / Testing
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You are redirected to login page. To get started fill in the form with: gardenusr/GardenUser
+
 
 
 ## Contributing
