@@ -1,5 +1,7 @@
 # &int; created
 > Integration created
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/icreated?locale.x=fr_FR)
+
 
 # Idempiere Portal Frontend
 > 
