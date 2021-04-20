@@ -3,6 +3,7 @@
 
       <div class="p-xl-3 p-lg-6 p-md-8 p-sm-10">
         <p-panel header="{{ 'login-msg' | translate}}">
+          <img src="assets/images/logo.jpg" height="100px"/>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="p-col-12">
               <p-messages [(value)]="msgs"></p-messages>
