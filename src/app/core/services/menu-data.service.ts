@@ -22,6 +22,9 @@ export class MenuDataService {
             },
             {
                 Label: 'Payments', Icon: 'fa-credit-card', RouterLink: '/main/payments', Childs: null, IsChildVisible: false
+            },
+            {
+                Label: 'Settings', Icon: 'fa-cogs', RouterLink: '/main/settings', Childs: null, IsChildVisible: false
             }
         ];
     }

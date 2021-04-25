@@ -37,4 +37,13 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    forgotPassword(email: string) {
+        return this.http.post<any>(`${environment.apiUrl}/user/password/emaillink`, {token: email});
+    }
+
+    passwordValidate(token: string, password: string, confirmPassword: string) {
+        return this.http.post<any>(`${environment.apiUrl}/user/password/validate`, 
+        {password: token, newPassword:password, confirmPassword:confirmPassword});
+    }
 }

@@ -2,6 +2,15 @@
     "login-msg": "Connection",
     "Login": "Login",
     "WelcomeMessage": "Welcome to Idempiere Portal.",
-    "Home": "Home"
+    "Home": "Home",
+
+    "send-email-msg" : "Send email",
+    "required-email-msg" : "Email is required",
+    "back-login-page-msg" : "Back to login page",
+    "forgot-password-msg": "Forgot Password",
+
+    "required-password-msg" : "Password",
+    "required-password-confirm-msg" : "Confirm password",
+    "change-password-msg" : "Change password"
 
 }

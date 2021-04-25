@@ -10,6 +10,14 @@ const appRoutes: Routes = [
         path: 'login',
         loadChildren: () => import('src/app/features/login/login.module').then(m => m.LoginModule)
     },
+    {
+        path: 'forgot-password',
+        loadChildren: () => import('src/app/features/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+    },
+    {
+        path: 'update-password/:token',
+        loadChildren: () => import('src/app/features/update-password/update-password.module').then(m => m.UpdatePasswordModule)
+    },
 
     {
         path: 'main',
@@ -37,6 +45,11 @@ const appRoutes: Routes = [
         {
             path: 'payment',
             loadChildren: () => import('src/app/features/payments/payment/payment.module').then(m => m.PaymentModule),
+            canActivate: [AuthGuard]
+        },
+        {
+            path: 'settings',
+            loadChildren: () => import('src/app/features/settings/settings.module').then(m => m.SettingsModule),
             canActivate: [AuthGuard]
         },
     ]

@@ -34,6 +34,11 @@
               <div class="p-col-12 right">
                 <button pButton [disabled]="loading"  label="{{ 'Login' | translate}}" class="ui-button-raised"></button>
               </div>
+              <div class="p-grid">
+                <div class="p-col-12 right">
+                  <a [routerLink]="['/forgot-password']">Forgot Password</a>
+                </div>
+              </div>              
             </div>
         </form>
         </p-panel>
