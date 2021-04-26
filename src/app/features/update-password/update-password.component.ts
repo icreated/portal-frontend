@@ -76,7 +76,7 @@ export class UpdatePasswordComponent implements OnInit {
         }
  
         this.loading = true;
-        this.authenticationService.passwordValidate(this.token, this.f.password.value, this.f.confirmPassword.value)
+        this.authenticationService.passwordValidate(this.token, this.f.newPassword.value, this.f.confirmPassword.value)
             .subscribe(
                 data => {
                   this.forgotForm.reset();
