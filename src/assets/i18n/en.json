@@ -9,8 +9,14 @@
     "back-login-page-msg" : "Back to login page",
     "forgot-password-msg": "Forgot Password",
 
-    "required-password-msg" : "Password",
-    "required-password-confirm-msg" : "Confirm password",
+    "password-required-msg" : "Password is required",
+    "password-has-number-msg" : "Must contain at least 1 number!",
+    "password-has-capitalcase-msg" : "Must contain at least 1 in Capital Case!",
+    "password-minlength-msg" : "Must be at least 8 characters!",
+    "password-not-match-msg" : "Password do not match",
+
+
+    "password-confirm-required-msg" : "Confirm password is required",
     "change-password-msg" : "Change password"
 
 }
