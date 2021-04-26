@@ -46,4 +46,14 @@ export class AuthenticationService {
         return this.http.post<any>(`${environment.apiUrl}/user/password/validate`, 
         {password: token, newPassword:password, confirmPassword:confirmPassword});
     }
+
+    changePassword(password: string, newPassword: string, confirmPassword: string) {
+        return this.http.post<any>(`${environment.apiUrl}/user/password/change`, 
+        {password: password, newPassword: newPassword, confirmPassword: confirmPassword})
+        .pipe(map(user => {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return user;
+        }));
+    }
 }

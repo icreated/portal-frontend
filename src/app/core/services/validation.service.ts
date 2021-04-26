@@ -23,7 +23,7 @@ export class ValidationService {
 
 
   static passwordMatchValidator(control: AbstractControl) {
-    const password: string = control.get('password').value; // get password from our password form control
+    const password: string = control.get('newPassword').value; // get password from our password form control
     const confirmPassword: string = control.get('confirmPassword').value; // get password from our confirmPassword form control
     // compare is the password math
     if (password !== confirmPassword) {

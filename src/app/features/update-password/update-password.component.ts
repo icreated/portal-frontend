@@ -39,7 +39,7 @@ export class UpdatePasswordComponent implements OnInit {
 
     this.forgotForm = this.formBuilder.group({
 
-      password: [ null, Validators.compose([
+      newPassword: [ null, Validators.compose([
           // 1. Password Field is Required
           Validators.required,
           // 2. check whether the entered password has a number
