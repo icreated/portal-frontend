@@ -47,7 +47,7 @@ html, body {
 }
 
 .ng-content {
-    overflow: auto;
+/*    overflow: auto;    */
     height: calc(100% - 100px);
     padding: 10px;
     padding-left: 240px;
@@ -307,7 +307,7 @@ a {
         padding-left: 10px;
     }
     .ng-header-left {
-        width: 100px;
+
     }
 }
 
