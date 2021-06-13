@@ -18,7 +18,7 @@ export class RouteStateService {
      * get current route data
      */
     getCurrent(): RouteState {
-        var routeStates = this.getFromStorage();
+        const routeStates = this.getFromStorage();
         return routeStates[routeStates.length - 1];
     }
 
@@ -26,8 +26,7 @@ export class RouteStateService {
      * get all route data
      */
     getAll(): RouteState[] {
-        var routeStates = this.getFromStorage();
-        return routeStates;
+        return this.getFromStorage();
     }
 
     /**
@@ -42,9 +41,9 @@ export class RouteStateService {
             this.removeAll();
         }
 
-        var routeStates = this.getFromStorage();
+        let routeStates = this.getFromStorage();
 
-        var routeState = new RouteState();
+        let routeState = new RouteState();
         routeState.title = title;
         routeState.path = path;
         routeState.data = data;
@@ -58,21 +57,21 @@ export class RouteStateService {
      * load previous route
      */
     loadPrevious() {
-        var routeStates = this.getFromStorage();
+        const routeStates = this.getFromStorage();
         routeStates.pop();
         this.saveToStorage(routeStates);
-        var currentViewState = this.getCurrent();
+        const currentViewState = this.getCurrent();
         this.navigate(currentViewState.path);
     }
 
     /**
-     * 
+     *
      * @param id load route route id
      */
     loadById(id: number) {
-        var result = [];
-        var isFound = false;
-        var routeStates = this.getFromStorage();
+        let result = [];
+        let isFound = false;
+        let routeStates = this.getFromStorage();
         routeStates.forEach(route => {
             if (isFound) {
                 return;
@@ -84,7 +83,7 @@ export class RouteStateService {
         });
         routeStates = result;
         this.saveToStorage(routeStates);
-        var currentViewState = this.getCurrent();
+        const currentViewState = this.getCurrent();
         this.navigate(currentViewState.path);
     }
 
@@ -100,7 +99,7 @@ export class RouteStateService {
     }
 
     private getFromStorage() {
-        var routeStates = JSON.parse(localStorage.getItem("routeState"));
+        const routeStates = JSON.parse(localStorage.getItem("routeState"));
         return (routeStates === undefined || routeStates === null) ? [] : routeStates;
     }
 

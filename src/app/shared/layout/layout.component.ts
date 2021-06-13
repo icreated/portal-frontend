@@ -16,18 +16,14 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    var that = this;
+    const that = this;
     this.menuDataService.toggleMenuBar.subscribe(function (data: any) {
-      if (data && data != null) {
+      if (data) {
         that.isMenuVisible = !that.isMenuVisible;
       }
     });
 
-    if (this.applicationStateService.getIsMobileResolution()) {
-      this.isMenuVisible = false;
-    } else {
-      this.isMenuVisible = true;
-    }
+    this.isMenuVisible = !this.applicationStateService.getIsMobileResolution();
   }
 
   ngOnDestroy() {

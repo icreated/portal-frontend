@@ -24,25 +24,16 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
         this.items = this.menuDataService.getMenuList();
 
-        var that = this;
+        let that = this;
         this.menuDataService.toggleMenuBar.subscribe(function (data: any) {
-            if (data && data != null) {
+            if (data) {
                 that.visible = !that.visible;
             }
         });
 
-        if (this.applicationStateService.getIsMobileResolution()) {
-            this.visible = false;
-        } else {
-            this.visible = true;
-        }
-
-        var activeMenu = this.sessionService.getItem("active-menu");
-        if (activeMenu) {
-            this.selectedItem = activeMenu;
-        } else {
-            this.selectedItem = "Home";
-        }
+        this.visible = !this.applicationStateService.getIsMobileResolution();
+        const activeMenu = this.sessionService.getItem("active-menu");
+        this.selectedItem = activeMenu ? activeMenu : "Home"
     }
 
     ngOnDestroy() {
@@ -56,14 +47,14 @@ export class MenuComponent implements OnInit {
             this.toggleSubMenu(menu);
             return;
         }
-        if (menu.RouterLink == undefined || menu.RouterLink == null || menu.RouterLink == "") {
+        if (menu.RouterLink == undefined || menu.RouterLink == "") {
             this.routeStateService.add("Error 404", "/error", null, false);
             return;
         }
         this.selectedItem = menu.Label;
         this.sessionService.setItem("active-menu", menu.Label);
         this.routeStateService.add(menu.Label, menu.RouterLink, null, true);
-        // hide menu bar after menu click for mobile layout        
+        // hide menu bar after menu click for mobile layout
         setTimeout(() => {
             if (this.applicationStateService.getIsMobileResolution()) {
                 this.visible = false;

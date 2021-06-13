@@ -12,9 +12,9 @@ import { User } from './core/models/user';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Ng-Prime';
+  title = 'Idempiere Portal';
   showLoader: boolean;
-  theme = 'theme-light';
+  theme = 'theme-turquoise ';
 
   currentUser: User;
 
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
       // this language will be used as a fallback when a translation isn't found in the current language
       translate.setDefaultLang('en');
-      var language = this.sessionService.getItem("ng-prime-language");
+      const language = this.sessionService.getItem("ng-prime-language");
       if (language != null && language.length > 0) {
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         translate.use(language);

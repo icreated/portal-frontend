@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { RouteStateService } from 'src/app/core/services/route-state.service';
-import { Invoice } from 'src/app/core/models/invoice.model';
-import { PaymentDataService } from '../payment-data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { Router } from '@angular/router';
-import { CreditCard } from 'src/app/core/models/credit-card.model';
-import { CommonService } from 'src/app/core/services/common.service';
-import { ValueLabel } from 'src/app/core/models/value-label.model';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {PaymentDataService} from '../payment-data.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {CreditCard} from 'src/app/core/models/credit-card.model';
+import {CommonService} from 'src/app/core/services/common.service';
+import {ValueLabel} from 'src/app/core/models/value-label.model';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment',
@@ -56,8 +54,6 @@ export class PaymentComponent implements OnInit {
     {label: "2024", value: 2024},
   ]
 
-  selected: string;
-
   constructor(
     private formBuilder: FormBuilder,
     private paymentService: PaymentDataService,
@@ -79,7 +75,7 @@ export class PaymentComponent implements OnInit {
       holderName: ['', Validators.required],
       expirationMonth: ['', Validators.required],
       expirationYear: ['', Validators.required],
-      cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]] 
+      cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
 
     });
 
@@ -87,9 +83,6 @@ export class PaymentComponent implements OnInit {
       this.creditCardTypes = data;
     });
 
-    
-    var routeState = this.routeStateService.getCurrent();
-   // this.paymentService.
   }
 
     // convenience getter for easy access to form fields
@@ -103,7 +96,7 @@ export class PaymentComponent implements OnInit {
         return;
     }
     this.loading = true;
-    
+
     let creditCard = <CreditCard>{};
     creditCard.cardType = this.f.cardType.value;
     creditCard.creditCard = this.f.creditCard.value;
@@ -113,7 +106,7 @@ export class PaymentComponent implements OnInit {
     creditCard.cvc = this.f.cvc.value;
     creditCard.amt = this.paymentService.openTotal;
 
-    this.paymentService.pay(creditCard).subscribe(data=>{
+    this.paymentService.pay(creditCard).subscribe(data => {
       this.loading = false;
       creditCard = <CreditCard>{};
       this.back();

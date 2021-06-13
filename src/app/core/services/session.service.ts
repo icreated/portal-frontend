@@ -10,8 +10,8 @@ import { Injectable } from '@angular/core';
 export class SessionService {
     /**
      * set session storage item
-     * @param key 
-     * @param value 
+     * @param key
+     * @param value
      */
     setItem(key: string, value: any) {
         sessionStorage.setItem(key, JSON.stringify(value));
@@ -19,10 +19,10 @@ export class SessionService {
 
     /**
      * get session storage item
-     * @param key 
+     * @param key
      */
     getItem(key: string): any {
-        var value = sessionStorage.getItem(key);
+        const value = sessionStorage.getItem(key);
         return JSON.parse(value);
     }
 

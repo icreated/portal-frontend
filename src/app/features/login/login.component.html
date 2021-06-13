@@ -3,30 +3,30 @@
 
       <div class="p-xl-3 p-lg-6 p-md-8 p-sm-10">
         <p-panel header="{{ 'login-msg' | translate}}">
-          <img src="assets/images/logo.jpg" height="100px"/>
+          <img src="assets/images/logo-login.jpg" height="100px" alt="login logo"/>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="p-col-12">
               <p-messages [(value)]="msgs"></p-messages>
             </div>
             <div class="p-grid p-justify-center p-align-center">
               <div class="p-col-12">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" formControlName="username" size="30"  pInputText [ngClass]="{ 'is-invalid': submitted && f.username.errors }" 
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="fa fa-user"></i></span>
+                  <input type="text" formControlName="username" size="30"  pInputText [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
                   placeholder="Enter User name" autocomplete="username"/>
                   <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                     <div *ngIf="f.username.errors.required">Username is required</div>
-                  </div>              
+                  </div>
                 </div>
               </div>
               <div class="p-col-12">
-                <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
-                  <input type="password" formControlName="password" size="30" pInputText [ngClass]="{ 'is-invalid': submitted && f.password.errors }" 
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="fa fa-key"></i></span>
+                  <input type="password" formControlName="password" size="30" pInputText [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                   placeholder="Enter Password" autocomplete="current-password"/>
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                       <div *ngIf="f.password.errors.required">Password is required</div>
-                  </div> 
+                  </div>
                 </div>
               </div>
             </div>
@@ -34,11 +34,9 @@
               <div class="p-col-12 right">
                 <button pButton [disabled]="loading"  label="{{ 'Login' | translate}}" class="ui-button-raised"></button>
               </div>
-              <div class="p-grid">
-                <div class="p-col-12 right">
-                  <a [routerLink]="['/forgot-password']">Forgot Password</a>
-                </div>
-              </div>              
+              <div class="p-col-12 p-text-right">
+                <a [routerLink]="['/forgot-password']">Forgot Password</a>
+              </div>
             </div>
         </form>
         </p-panel>

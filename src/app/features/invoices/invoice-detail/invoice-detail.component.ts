@@ -19,7 +19,7 @@ export class InvoiceDetailComponent implements OnInit {
     private routeStateService: RouteStateService) { }
 
   ngOnInit() {
-    var routeState = this.routeStateService.getCurrent();
+    const routeState = this.routeStateService.getCurrent();
     this.invoiceService.getInvoiceById(routeState.data).subscribe(
       data => {
         this.invoice = data;

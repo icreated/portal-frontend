@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/portal/api',
+  apiUrl: 'http://localhost:8888/portal/api',
   dateFormat: 'dd/MM/yyyy',
   currencyISO: 'USD',
   version: '1.0.0'

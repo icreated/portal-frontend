@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppCommonModule } from 'src/app/app.common.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {HeaderBreadCrumbModule} from '../../shared/layout/header-breadcrumb/header-breadcrumb.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -17,20 +18,21 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [SettingsComponent, ChangePasswordComponent],
-  imports: [
-    PanelModule,
-    CommonModule,
-    SettingsRoutingModule,
-    AppCommonModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      isolate: false
-    })
-  ],
+    imports: [
+        PanelModule,
+        CommonModule,
+        SettingsRoutingModule,
+        AppCommonModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            },
+            isolate: false
+        }),
+        HeaderBreadCrumbModule
+    ],
   exports: [TranslateModule]
 
 })

@@ -1,12 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouteStateService } from 'src/app/core/services/route-state.service';
-import { SessionService } from 'src/app/core/services/session.service';
-import { User } from 'src/app/core/models/user';
-import { notification } from 'src/app/core/models/notification.model';
-import { UserIdleService } from 'angular-user-idle';
-import { MenuDataService } from 'src/app/core/services/menu-data.service';
-import { AuthenticationService } from 'src/app/core/services/authentication-service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {SessionService} from 'src/app/core/services/session.service';
+import {User} from 'src/app/core/models/user';
+import {notification} from 'src/app/core/models/notification.model';
+import {UserIdleService} from 'angular-user-idle';
+import {MenuDataService} from 'src/app/core/services/menu-data.service';
+import {AuthenticationService} from 'src/app/core/services/authentication-service';
 
 @Component({
   selector: 'app-header',
@@ -36,8 +36,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.user = this.sessionService.getItem("currentUser");
     this.notifications = [];
-    for (var i = 1; i <= 5; i++) {
-      var notificationObj = new notification("Message " + i, new Date(), null)
+    for (let i = 1; i <= 5; i++) {
+      const notificationObj = new notification("Message " + i, new Date(), null)
       this.notifications.push(notificationObj);
     }
 

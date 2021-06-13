@@ -1,17 +1,77 @@
 .theme-light {
-    --main-background: #F5F5F5;
+    --main-background: #ffffff;
     --header-footer-color: #000000;
     --header-footer-bg-color: #d9d9d9;
     --header-footer-bg-color2: #a6a6a6;
-    --menubar-background: #E8E8E8;
+    --menubar-background: #878787;
     --menubar-color: #000000;
-    --active-menu-color: #212A59;
+    --active-menu-color: #cccccc;
 }
 
+.theme-dark {
+    --main-background: #f5f5f5;
+    --header-footer-color: #ffffff;
+    --header-footer-bg-color: #6f6f88;
+    --header-footer-bg-color2: #3b3b48;
+    --menubar-background: #525262;
+    --menubar-color: #f5f5f5;
+    --active-menu-color: #919191;
+}
+
+.theme-turquoise {
+    --main-background: #f5f5f5;
+    --header-footer-color: #ffffff;
+    --header-footer-bg-color: #6cc7cf;
+    --header-footer-bg-color2: #03767e;
+    --menubar-background: #2ab1be;
+    --menubar-color: #f5f5f5;
+    --active-menu-color: #ffffff;
+}
+
+.theme-green {
+    --main-background: #f5f5f5;
+    --header-footer-color: #ffffff;
+    --header-footer-bg-color: #73dfae;
+    --header-footer-bg-color2: #1e8455;
+    --menubar-background: #32b67a;
+    --menubar-color: #135436;
+    --active-menu-color: #b3eed3;
+}
+
+.theme-blue {
+    --main-background: #f5f5f5;
+    --header-footer-color: #ffffff;
+    --header-footer-bg-color: #2d5394;
+    --header-footer-bg-color2: #2d5394;
+    --menubar-background: #839de2;
+    --menubar-color: #f5f5f5;
+    --active-menu-color: #ffffff;
+}
+
+.theme-rose {
+    --main-background: #f5f5f5;
+    --header-footer-color: #ffffff;
+    --header-footer-bg-color: #79425a;
+    --header-footer-bg-color2: #79425a;
+    --menubar-background: #935b74;
+    --menubar-color: #f5f5f5;
+    --active-menu-color: #ffffff;
+}
+
+.theme-teal {
+    --main-background: #f5f5f5;
+    --header-footer-color: #ffffff;
+    --header-footer-bg-color: #427976;
+    --header-footer-bg-color2: #427976;
+    --menubar-background: #599592;
+    --menubar-color: #f5f5f5;
+    --active-menu-color: #003331;
+}
 
 html, body {
     height: 100%;
     margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .ng-main {
@@ -47,19 +107,18 @@ html, body {
 }
 
 .ng-content {
-/*    overflow: auto;    */
+    overflow: auto;
     height: calc(100% - 100px);
     padding: 10px;
-    padding-left: 240px;
+    padding-left: 340px;
 }
 
 .hidden-menu-content {
     padding-left: 10px;
 }
 
-.ng-content .ui-card {
-    min-height: 100%;
-    background: #f7f9fa;
+.dashboard-card {
+
 }
 
 .icon {
@@ -73,24 +132,24 @@ html, body {
     width: 150px !important;
 }
 
-.overview-box-1 .ui-card-body {
+.overview-box-1 {
     background-color: #F39611;
 }
-.overview-box-1 .ui-card-body:hover {
+.overview-box-1:hover {
     color: var(--active-menu-color);
     background-color: coral !important;
     cursor: pointer;
 }
 
-.overview-box-2 .ui-card-body {
+.overview-box-2 {
     background-color: #326DDF;
 }
 
-.overview-box-3 .ui-card-body {
+.overview-box-3 {
     background-color: #E02364;
 }
 
-.overview-box-4 .ui-card-body {
+.overview-box-4 {
     background-color: #7DC931;
 }
 
@@ -142,7 +201,7 @@ html, body {
 .logo-large {
     display: block;
     height: 50px;
-    width: 180px;
+    width: 143px;
 }
 
 .logo-small {
@@ -169,7 +228,7 @@ html, body {
     z-index: 1100;
     height: 2em;
     width: 2em;
-    overflow: show;
+    overflow: visible;
     margin: auto;
     top: 0;
     left: 0;
@@ -209,13 +268,13 @@ html, body {
     height: calc(100% - 100px);
     overflow: auto;
     border: none !important;
-    padding: 0px !important;
+    padding: 0 !important;
     margin-top: 50px;
     width: 230px;
 }
 
 .np-sub-menu {
-    padding: 0px;
+    padding: 0;
     width: 100%;
     list-style: none;
     position: relative;
@@ -223,7 +282,8 @@ html, body {
 
 .np-menu {
     padding: 5px;
-    margin: 0px;
+    margin: 0;
+    list-style: none;
 }
 
 .np-menu li a {
@@ -269,7 +329,7 @@ a {
 
 .extra-page-footer {
     position: relative;
-    bottom: 0px;
+    bottom: 0;
     padding: 10px;
     height: 50px;
     text-align: center;
@@ -307,7 +367,7 @@ a {
         padding-left: 10px;
     }
     .ng-header-left {
-
+        width: 100px;
     }
 }
 

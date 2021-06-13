@@ -1,36 +1,38 @@
 <p-messages [(value)]="msgs"></p-messages>
-<div class="ui-g dashboard-card">
-  <div class="ui-g-6 ui-md-3">
+<div class="p-grid">
+  <div class="p-col-12 p-md-6 p-lg-3">
     <a (click)="goToPayment()" *ngIf="paymentService.openTotal > 0">
       <p-card styleClass="overview-box-1">
         <div>CLICK TO PAY</div>
-        <h1>{{paymentService.openTotal | currency: currencyISO}}</h1>   
+        <h1>{{paymentService.openTotal | currency: currencyISO}}</h1>
       </p-card>
     </a>
     <p-card styleClass="overview-box-1"  *ngIf="paymentService.openTotal <= 0">
       <div>&nbsp;</div>
-      <h1>PAID OFF</h1>   
+      <h1>PAID OFF</h1>
     </p-card>
   </div>
-  <div class="ui-g-6 ui-md-3">
+  <div class="p-col-12 p-md-6 p-lg-3">
     <p-card styleClass="overview-box-2">
       &nbsp;
       <h1>&nbsp;</h1>
     </p-card>
   </div>
-  <div class="ui-g-6 ui-md-3">
+  <div class="p-col-12 p-md-6 p-lg-3">
     <p-card styleClass="overview-box-3">
       &nbsp;
       <h1>&nbsp;</h1>
     </p-card>
   </div>
-  <div class="ui-g-6 ui-md-3">
+  <div class="p-col-12 p-md-6 p-lg-3">
     <p-card styleClass="overview-box-4">
       &nbsp;
       <h1>&nbsp;</h1>
     </p-card>
   </div>
 </div>
+
+
 <div class="ui-g">
   <div class="ui-g-12 ui-md-6">
     <p-card>

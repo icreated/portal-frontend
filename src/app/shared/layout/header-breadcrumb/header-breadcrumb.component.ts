@@ -19,12 +19,12 @@ export class HeaderBreadcrumbComponent implements OnInit {
   }
 
   ngOnInit() {
-    var routes = this.routeStateService.getAll();
+    const routes = this.routeStateService.getAll();
     routes.forEach(route => {
       this.items.push({ label: route.title, command: () => { this.onClickBreadcrumb(route.id); } });
     });
 
-    this.home = { icon: 'pi pi-home' };
+    this.home = { icon: 'pi pi-home', routerLink: ['/main/dashboard']};
   }
 
   onClickBreadcrumb(id: number) {
