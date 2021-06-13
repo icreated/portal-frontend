@@ -4,64 +4,62 @@
 <p-panel header="Credit Card Payment">
 
     <div class="p-grid p-justify-center p-align-center">
-      <div class="ui-g">
-          <div class="p-col">
+        <div class="p-col-12 p-md-8 p-lg-8">
             <div class="p-inputgroup">
               <p-dropdown [options]="creditCardTypes" formControlName="cardType" placeholder="Choose Credit Card Type"> </p-dropdown>
             </div>
             <div *ngIf="submitted && f.cardType.errors" class="invalid-feedback">
               <div *ngIf="f.cardType.errors.required">Credit Card Type is required</div>
             </div>
-          </div>
-          <div class="p-col">
+        </div>
+        <div class="p-col-12 p-md-8 p-lg-8">
             <div class="p-inputgroup">
               <input pInputText formControlName="creditCard" placeholder="Card Number" />
             </div>
             <div *ngIf="submitted && f.creditCard.errors" class="invalid-feedback">
               <div *ngIf="f.creditCard.errors.required">Credit Card Number is required</div>
             </div>
-          </div>
-          <div class="p-col">
+        </div>
+        <div class="p-col-12 p-md-8 p-lg-8">
             <div class="p-inputgroup">
               <input pInputText formControlName="holderName" placeholder="Card Holder Name" />
             </div>
             <div *ngIf="submitted && f.holderName.errors" class="invalid-feedback">
               <div *ngIf="f.holderName.errors.required">Holder Name is required</div>
             </div>
-          </div>
-
-          <div class="ui-g">
-            <div class="p-col">
-              <span>Expiration Month</span>
-              <div class="p-inputgroup">
-                <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;"></p-dropdown>
-              </div>
-              <div *ngIf="submitted && f.expirationMonth.errors" class="invalid-feedback">
-                <div *ngIf="f.expirationMonth.errors.required">required</div>
-              </div>
-            </div>
-            <div class="p-col">
-              <span>Expiration Year</span>
-              <div class="p-inputgroup">
-                <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;"></p-dropdown>
-              </div>
-              <div *ngIf="submitted && f.expirationYear.errors" class="invalid-feedback">
-                <div *ngIf="f.expirationYear.errors.required">required</div>
-              </div>
-            </div>
-            <div class="p-col">
-             CVC
-              <div class="p-inputgroup">
-                <input pInputText formControlName="cvc" placeholder="" maxlength="3"/>
-              </div>
-              <div *ngIf="submitted && f.cvc.errors" class="invalid-feedback">
-                <div *ngIf="f.cvc.errors.required">required</div>
-              </div>
-            </div>
-          </div>
-
-      </div>
+        </div>
     </div>
+
+    <div class="p-grid p-fluid p-justify-center p-align-center">
+            <div class="p-col-12 p-md-3 p-lg-3">
+                  <span>Expiration Month</span>
+                  <div class="p-inputgroup">
+                    <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;"></p-dropdown>
+                  </div>
+                  <div *ngIf="submitted && f.expirationMonth.errors" class="invalid-feedback">
+                    <div *ngIf="f.expirationMonth.errors.required">required</div>
+                  </div>
+            </div>
+            <div class="p-col-12 p-md-3 p-lg-3">
+                  <span>Expiration Year</span>
+                  <div class="p-inputgroup">
+                    <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;"></p-dropdown>
+                  </div>
+                  <div *ngIf="submitted && f.expirationYear.errors" class="invalid-feedback">
+                    <div *ngIf="f.expirationYear.errors.required">required</div>
+                  </div>
+            </div>
+            <div class="p-col-12 p-md-2 p-lg-2">
+                 CVC
+                  <div class="p-inputgroup">
+                    <input pInputText formControlName="cvc" placeholder="" maxlength="3"/>
+                  </div>
+                  <div *ngIf="submitted && f.cvc.errors" class="invalid-feedback">
+                    <div *ngIf="f.cvc.errors.required">required</div>
+                  </div>
+            </div>
+    </div>
+
 
   <p-footer>
     <div class="p-grid p-justify-center p-align-center">
