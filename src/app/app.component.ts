@@ -4,6 +4,7 @@ import { SessionService } from 'src/app/core/services/session.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './core/services/authentication-service';
 import { User } from './core/models/user';
+import {ThemeService} from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,21 @@ export class AppComponent implements OnInit {
 
   title = 'Idempiere Portal';
   showLoader: boolean;
-  theme = 'theme-turquoise ';
+  theme: string;
 
   currentUser: User;
 
-  constructor(private loaderService: LoaderService,
-    private sessionService: SessionService,
-    private authenticationService: AuthenticationService,
+  constructor( private loaderService: LoaderService, private sessionService: SessionService,
+    private authenticationService: AuthenticationService, private themeService: ThemeService,
     translate: TranslateService) {
+
+      const theme = this.sessionService.getItem("selected-theme");
+      if (theme) {
+          this.theme = theme;
+          this.themeService.selectTheme(theme);
+      } else {
+          this.theme = "theme-teal";
+      }
 
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
 
@@ -41,9 +49,14 @@ export class AppComponent implements OnInit {
       this.showLoader = val;
     });
 
+    this.themeService.theme.subscribe((val: string) => {
+      this.theme = val;
+    });
+
   }
 
   ngOnDestroy() {
+    this.themeService.theme.observers.forEach(function (element) { element.complete(); });
     this.loaderService.status.observers.forEach(function (element) { element.complete(); });
   }
 }

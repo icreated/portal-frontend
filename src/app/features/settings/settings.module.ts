@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppCommonModule } from 'src/app/app.common.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {HeaderBreadCrumbModule} from '../../shared/layout/header-breadcrumb/header-breadcrumb.module';
+import { ThemeChooserComponent } from './theme-chooser/theme-chooser.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -17,7 +18,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [SettingsComponent, ChangePasswordComponent],
+  declarations: [SettingsComponent, ChangePasswordComponent, ThemeChooserComponent],
     imports: [
         PanelModule,
         CommonModule,

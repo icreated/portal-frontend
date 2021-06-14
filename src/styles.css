@@ -28,16 +28,6 @@
     --active-menu-color: #ffffff;
 }
 
-.theme-green {
-    --main-background: #f5f5f5;
-    --header-footer-color: #ffffff;
-    --header-footer-bg-color: #73dfae;
-    --header-footer-bg-color2: #1e8455;
-    --menubar-background: #32b67a;
-    --menubar-color: #135436;
-    --active-menu-color: #b3eed3;
-}
-
 .theme-blue {
     --main-background: #f5f5f5;
     --header-footer-color: #ffffff;
@@ -109,8 +99,7 @@ html, body {
 .ng-content {
     overflow: auto;
     height: calc(100% - 100px);
-    padding: 10px;
-    padding-left: 340px;
+    padding: 10px 10px 10px 13rem;
 }
 
 .hidden-menu-content {
@@ -270,7 +259,8 @@ html, body {
     border: none !important;
     padding: 0 !important;
     margin-top: 50px;
-    width: 230px;
+    width: 12rem !important;
+    box-shadow: none !important;
 }
 
 .np-sub-menu {
@@ -317,10 +307,6 @@ html, body {
     top: 0;
     bottom: 0;
     border-left: 1px solid var(--menubar-color);
-}
-
-.np-menubar {
-    box-shadow: none !important;
 }
 
 a {
