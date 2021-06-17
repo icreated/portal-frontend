@@ -8,7 +8,7 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>#</th>
-                <th>Description</th>
+                <th class="ui-table-hide-on-sm">Description</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>Grand Total</th>
@@ -17,7 +17,7 @@
         <ng-template pTemplate="body" let-invoice>
             <tr>
                 <td><a (click)="goToInvoiceLines(invoice.id)">{{invoice.documentNo}}</a></td>
-                <td>{{invoice.description}}</td>
+                <td class="ui-table-hide-on-sm">{{invoice.description}}</td>
                 <td>{{invoice.docStatus | docStatus}}</td>
                 <td>{{invoice.date | date: env.dateFormat}}</td>
                 <td>{{invoice.grandTotal | currency: env.currencyISO}}</td>

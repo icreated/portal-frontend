@@ -373,7 +373,11 @@ a {
 
 @media only screen and (max-width: 600px) {}
 
-
+@media (max-width: 767px) {
+  .ui-table-hide-on-sm {
+    display: none !important;
+  }
+}
 
 .invalid-feedback {
     color:firebrick;

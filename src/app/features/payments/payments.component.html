@@ -8,20 +8,20 @@
     <p-table [value]="payments" [paginator]="true" [rows]="pageSize">
         <ng-template pTemplate="header">
             <tr>
-                <th>#</th>
+                <th class="ui-table-hide-on-sm">#</th>
                 <th>Tender Type</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th class="ui-table-hide-on-sm">Description</th>
+                <th class="ui-table-hide-on-sm">Status</th>
                 <th>Date</th>
                 <th>Price</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-payment>
             <tr>
-                <td>{{payment.documentNo}}</td>
+                <td class="ui-table-hide-on-sm">{{payment.documentNo}}</td>
                 <td>{{payment.tenderType | tenderType}}</td>
-                <td>{{payment.description}}</td>
-                <td>{{payment.docStatus | docStatus}}</td>
+                <td class="ui-table-hide-on-sm">{{payment.description}}</td>
+                <td class="ui-table-hide-on-sm">{{payment.docStatus | docStatus}}</td>
                 <td>{{payment.date | date: env.dateFormat}}</td>
                 <td>{{payment.payAmt | currency: env.currencyISO}}</td>
             </tr>
