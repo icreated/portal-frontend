@@ -19,7 +19,7 @@ export class DocStatusFormat implements PipeTransform {
   transform(value:any) {
 
     if (value !== this.cachedValue) {
-      this.cachedData = null;        
+      this.cachedData = null;
       this.cachedValue = value
 
       this.commonService.getReferenceDocStatus(value).subscribe( result => {
@@ -27,7 +27,6 @@ export class DocStatusFormat implements PipeTransform {
       })
 
     }
-
     return this.cachedData;
   }
 

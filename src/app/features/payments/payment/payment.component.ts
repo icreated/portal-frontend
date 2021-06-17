@@ -56,7 +56,7 @@ export class PaymentComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private paymentService: PaymentDataService,
+    public paymentService: PaymentDataService,
     private commonService: CommonService,
     private router: Router,
     private routeStateService: RouteStateService) { }
@@ -106,7 +106,7 @@ export class PaymentComponent implements OnInit {
     creditCard.cvc = this.f.cvc.value;
     creditCard.amt = this.paymentService.openTotal;
 
-    this.paymentService.pay(creditCard).subscribe(data => {
+    this.paymentService.pay(creditCard).subscribe(() => {
       this.loading = false;
       creditCard = <CreditCard>{};
       this.back();

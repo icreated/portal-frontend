@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/core/services/authentication-service';
-import { RouteStateService } from 'src/app/core/services/route-state.service';
-import { ToastService } from 'src/app/core/services/toast.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationService} from 'src/app/core/services/authentication-service';
+import {ToastService} from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,15 +15,16 @@ export class ForgotPasswordComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
+  msgs: any[];
 
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
       private toastService: ToastService,
       private authenticationService: AuthenticationService
-  ) { 
+  ) {
       // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) { 
+      if (this.authenticationService.currentUserValue) {
           this.router.navigate(['/']);
       }
   }
@@ -52,7 +52,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.loading = true;
       this.authenticationService.forgotPassword(this.f.email.value)
           .subscribe(
-              data => {
+            () => {
                 this.forgotForm.reset();
                 this.toastService.addSingle('success', '', 'Email is sent.');
               },
@@ -62,7 +62,7 @@ export class ForgotPasswordComponent implements OnInit {
                   this.forgotForm.reset();
 
                   if (error === 'Precondition failed') {
-                    this.toastService.addSingle('warn', '', 'User dosen\'t exist');
+                    this.toastService.addSingle('warn', '', 'User doesn\'t exist');
                   } else {
                     this.toastService.addSingle('error', '', 'Email is not sent.');
                   }

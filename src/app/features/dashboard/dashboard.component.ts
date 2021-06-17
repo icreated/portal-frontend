@@ -24,10 +24,10 @@ export class DashboardComponent implements OnInit {
   msgs: any[];
 
 
-  constructor(translate: TranslateService, 
+  constructor(translate: TranslateService,
     private dashboardService: DashboardDataService,
     private routeStateService: RouteStateService,
-    private paymentService: PaymentDataService) {
+    public paymentService: PaymentDataService) {
 
     this.barChartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     };
 
     this.msgs = [];
-    
+
     translate.get("WelcomeMessage").subscribe((text: string) => {
       this.msgs.push({ severity: 'success', summary: '', detail: text });
     });

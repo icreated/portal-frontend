@@ -23,7 +23,9 @@ export class LayoutComponent implements OnInit {
       }
     });
 
-    this.isMenuVisible = !this.applicationStateService.getIsMobileResolution();
+    this.applicationStateService.getIsMobileResolution().subscribe(
+      isMobile => this.isMenuVisible = !isMobile
+    )
   }
 
   ngOnDestroy() {
