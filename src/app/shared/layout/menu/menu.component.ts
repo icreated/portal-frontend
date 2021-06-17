@@ -12,59 +12,64 @@ import { ApplicationStateService } from 'src/app/core/services/application-state
 })
 export class MenuComponent implements OnInit {
 
-    items: CustomMenuItem[];
-    selectedItem: string;
-    visible: boolean;
+  items: CustomMenuItem[];
+  selectedItem: string;
+  visible: boolean;
 
-    constructor(private routeStateService: RouteStateService,
-        private sessionService: SessionService,
-        private menuDataService: MenuDataService,
-        private applicationStateService: ApplicationStateService) { }
+  constructor(private routeStateService: RouteStateService,
+      private sessionService: SessionService,
+      private menuDataService: MenuDataService,
+      private applicationStateService: ApplicationStateService) { }
 
-    ngOnInit() {
-        this.items = this.menuDataService.getMenuList();
 
-        let that = this;
-        this.menuDataService.toggleMenuBar.subscribe(function (data: any) {
-            if (data) {
-                that.visible = !that.visible;
-            }
-        });
+  ngOnInit() {
+      this.items = this.menuDataService.getMenuList();
 
-        this.visible = !this.applicationStateService.getIsMobileResolution();
-        const activeMenu = this.sessionService.getItem("active-menu");
-        this.selectedItem = activeMenu ? activeMenu : "Home"
-    }
+      let that = this;
+      this.menuDataService.toggleMenuBar.subscribe(function (data: any) {
+          if (data) {
+              that.visible = !that.visible;
+          }
+      });
 
-    ngOnDestroy() {
-        this.menuDataService.toggleMenuBar.observers.forEach(function (element) { element.complete(); });
-    }
+      this.applicationStateService.getIsMobileResolution()
+        .subscribe(isMobile => this.visible = !isMobile);
 
-    // on menu click event
-    onMenuClick(menu: CustomMenuItem) {
-        // if child are available then open child
-        if (menu.Childs != undefined || menu.Childs != null) {
-            this.toggleSubMenu(menu);
-            return;
-        }
-        if (menu.RouterLink == undefined || menu.RouterLink == "") {
-            this.routeStateService.add("Error 404", "/error", null, false);
-            return;
-        }
-        this.selectedItem = menu.Label;
-        this.sessionService.setItem("active-menu", menu.Label);
-        this.routeStateService.add(menu.Label, menu.RouterLink, null, true);
-        // hide menu bar after menu click for mobile layout
-        setTimeout(() => {
-            if (this.applicationStateService.getIsMobileResolution()) {
-                this.visible = false;
-            }
-        }, 100);
-    }
+      const activeMenu = this.sessionService.getItem("active-menu");
+      this.selectedItem = activeMenu ? activeMenu : "Home"
+  }
 
-    // toggle sub menu on click
-    toggleSubMenu(menu: CustomMenuItem) {
-        menu.IsChildVisible = !menu.IsChildVisible;
-    }
+  // on menu click event
+  onMenuClick(menu: CustomMenuItem) {
+      // if child are available then open child
+      if (menu.Childs != undefined || menu.Childs != null) {
+          this.toggleSubMenu(menu);
+          return;
+      }
+      if (menu.RouterLink == undefined || menu.RouterLink == "") {
+          this.routeStateService.add("Error 404", "/error", null, false);
+          return;
+      }
+      this.selectedItem = menu.Label;
+      this.sessionService.setItem("active-menu", menu.Label);
+      this.routeStateService.add(menu.Label, menu.RouterLink, null, true);
+      // hide menu bar after menu click for mobile layout
+      setTimeout(() => {
+        this.applicationStateService.getIsMobileResolution()
+          .subscribe(isMobile => this.visible = !isMobile);
+      }, 100);
+  }
+
+
+  // toggle sub menu on click
+  toggleSubMenu(menu: CustomMenuItem) {
+      menu.IsChildVisible = !menu.IsChildVisible;
+  }
+
+
+  ngOnDestroy() {
+    this.menuDataService.toggleMenuBar.observers
+      .forEach(element => element.complete());
+  }
 
 }

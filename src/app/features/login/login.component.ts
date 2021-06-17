@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  msgs: any[];
 
   constructor(
       private formBuilder: FormBuilder,
@@ -26,9 +27,9 @@ export class LoginComponent implements OnInit {
       private toastService: ToastService,
       private routeStateService: RouteStateService,
       private authenticationService: AuthenticationService
-  ) { 
+  ) {
       // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) { 
+      if (this.authenticationService.currentUserValue) {
           this.router.navigate(['/']);
       }
   }
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.f.username.value, this.f.password.value)
           .pipe(first())
           .subscribe(
-              data => {
+            () => {
                   this.routeStateService.add("Dashboard", '/main/dashboard', null, true);
               },
               error => {

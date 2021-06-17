@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
+import {BehaviorSubject, fromEvent, Observable} from "rxjs";
+import {distinctUntilChanged, map} from "rxjs/operators";
+
 
 @Injectable({
   providedIn: 'root',
@@ -6,23 +9,35 @@ import { Injectable } from '@angular/core';
 /**
  * application state service
  */
-export class ApplicationStateService {
+export class ApplicationStateService implements OnInit {
 
-  private isMobileResolution: boolean;
+  windowSize$ = new BehaviorSubject(this.getWindowSize());
 
   constructor() {
-    if (window.innerWidth <= 992) {
-      this.isMobileResolution = true;
-    } else {
-      this.isMobileResolution = false;
-    }
+    this.windowSize$.pipe(
+      distinctUntilChanged());
+
+    fromEvent(window, 'resize')
+      .pipe(map(this.getWindowSize))
+      .subscribe(this.windowSize$);
   }
 
-  /**
-   * get is mobile resolution or desktop.
-   * need to refresh after changing website resolution
-   */
-  public getIsMobileResolution(): boolean {
-    return this.isMobileResolution;
+
+  ngOnInit(): void {
   }
+
+  getWindowSize() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+  };
+
+
+  public getIsMobileResolution(): Observable<boolean> {
+    return this.windowSize$.pipe(
+      map(win => win.width <= 992)
+    );
+  }
+
 }
