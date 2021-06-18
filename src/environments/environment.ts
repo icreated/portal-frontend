@@ -7,7 +7,9 @@ export const environment = {
   apiUrl: 'http://localhost:8888/portal/api',
   dateFormat: 'dd/MM/yyyy',
   currencyISO: 'USD',
-  version: '1.0.0'
+  version: '1.0.0',
+
+  pageSize: 10
 };
 
 /*

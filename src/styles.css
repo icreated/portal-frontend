@@ -367,17 +367,16 @@ a {
 
 /* Small devices (portrait tablets and large phones, 768px or less) */
 
-@media only screen and (max-width: 768px) {}
+@media only screen and (max-width: 768px) {
+  .ui-table-hide-sm {
+    display: none !important;
+  }
+}
 
 /* Extra small devices (phones, 600px or less) */
 
 @media only screen and (max-width: 600px) {}
 
-@media (max-width: 767px) {
-  .ui-table-hide-on-sm {
-    display: none !important;
-  }
-}
 
 .invalid-feedback {
     color:firebrick;

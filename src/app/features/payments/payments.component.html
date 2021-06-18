@@ -1,29 +1,24 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 <p-panel header="Payment List">
-    <div class="ui-g">
-        <div class="ui-g-10 ui-sm-8"><label style="float:right;">Page Size:</label></div>
-        <div class="ui-g-2 ui-sm-4"><input type="text" pInputText [(ngModel)]="pageSize"></div>
-    </div>
-
-    <p-table [value]="payments" [paginator]="true" [rows]="pageSize">
+    <p-table [value]="payments" [paginator]="true" [rows]="env.pageSize" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr>
-                <th class="ui-table-hide-on-sm">#</th>
-                <th>Tender Type</th>
-                <th class="ui-table-hide-on-sm">Description</th>
-                <th class="ui-table-hide-on-sm">Status</th>
-                <th>Date</th>
-                <th>Price</th>
+              <th pSortableColumn="documentNo" class="ui-table-hide-sm">#<p-sortIcon field="documentNo"></p-sortIcon></th>
+              <th pSortableColumn="tenderType">Tender Type<p-sortIcon field="tenderType"></p-sortIcon></th>
+              <th pSortableColumn="description" class="ui-table-hide-sm">Description<p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="docStatus" class="ui-table-hide-sm">Status<p-sortIcon field="docStatus"></p-sortIcon></th>
+              <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="payAmt">Price<p-sortIcon field="payAmt"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-payment>
             <tr>
-                <td class="ui-table-hide-on-sm">{{payment.documentNo}}</td>
-                <td>{{payment.tenderType | tenderType}}</td>
-                <td class="ui-table-hide-on-sm">{{payment.description}}</td>
-                <td class="ui-table-hide-on-sm">{{payment.docStatus | docStatus}}</td>
-                <td>{{payment.date | date: env.dateFormat}}</td>
-                <td>{{payment.payAmt | currency: env.currencyISO}}</td>
+                <td class="ui-table-hide-sm">{{ payment.documentNo }}</td>
+                <td>{{ payment.tenderType | tenderType }}</td>
+                <td class="ui-table-hide-sm">{{ payment.description }}</td>
+                <td class="ui-table-hide-sm">{{ payment.docStatus | docStatus }}</td>
+                <td>{{ payment.date | date: env.dateFormat }}</td>
+                <td>{{ payment.payAmt | currency: env.currencyISO }}</td>
             </tr>
         </ng-template>
     </p-table>

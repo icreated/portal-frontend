@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Payment } from 'src/app/core/models/payment.model';
-import { OpenItem } from 'src/app/core/models/open-item.model';
-import { CreditCard } from 'src/app/core/models/credit-card.model';
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Payment} from 'src/app/core/models/payment.model';
+import {OpenItem} from 'src/app/core/models/open-item.model';
+import {CreditCard} from 'src/app/core/models/credit-card.model';
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -11,22 +12,18 @@ import { CreditCard } from 'src/app/core/models/credit-card.model';
 })
 export class PaymentDataService {
 
-
   openItems: OpenItem[];
   openTotal: number;
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) { }
 
-    getPaymentsList() {
+    getPaymentsList(): Observable<Payment[]> {
         return this.http.get<Payment[]>(`${environment.apiUrl}/payments/all`);
     }
-
 
     pay(creditCard: CreditCard) {
         return this.http.post(`${environment.apiUrl}/payments/pay`, creditCard);
     }
 
-    
 }
 

@@ -1,26 +1,22 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 <p-panel header="Invoices List">
-    <div class="ui-g">
-        <div class="ui-g-10 ui-sm-8"><label style="float:right;">Page Size:</label></div>
-        <div class="ui-g-2 ui-sm-4"><input type="text" pInputText [(ngModel)]="pageSize"></div>
-    </div>
-    <p-table [value]="invoices" [paginator]="true" [rows]="pageSize">
+    <p-table selectionMode="single" [value]="invoices" [paginator]="true" [rows]="env.pageSize" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr>
-                <th>#</th>
-                <th class="ui-table-hide-on-sm">Description</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Grand Total</th>
+              <th pSortableColumn="id">#<p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="description" class="ui-table-hide-sm">Description<p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="docStatus">Status<p-sortIcon field="docStatus"></p-sortIcon></th>
+              <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="grandTotal">Grand Total<p-sortIcon field="grandTotal"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-invoice>
             <tr>
-                <td><a (click)="goToInvoiceLines(invoice.id)">{{invoice.documentNo}}</a></td>
-                <td class="ui-table-hide-on-sm">{{invoice.description}}</td>
-                <td>{{invoice.docStatus | docStatus}}</td>
-                <td>{{invoice.date | date: env.dateFormat}}</td>
-                <td>{{invoice.grandTotal | currency: env.currencyISO}}</td>
+                <td><a (click)="goToInvoiceLines(invoice.id)">{{ invoice.documentNo }}</a></td>
+                <td class="ui-table-hide-sm">{{ invoice.description }}</td>
+                <td>{{ invoice.docStatus | docStatus }}</td>
+                <td>{{ invoice.date | date: env.dateFormat }}</td>
+                <td>{{ invoice.grandTotal | currency: env.currencyISO }}</td>
             </tr>
         </ng-template>
     </p-table>
