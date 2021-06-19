@@ -4,7 +4,7 @@
 <p-panel header="Credit Card Payment">
 
     <div class="p-grid p-justify-center p-align-center">
-        <div class="p-col-12 p-md-8 p-lg-8">
+        <div class="p-col-12 p-md-8 p-lg-7">
             <div class="p-inputgroup">
               <p-dropdown [options]="creditCardTypes" formControlName="cardType" placeholder="Choose Credit Card Type"> </p-dropdown>
             </div>
@@ -12,7 +12,7 @@
               <div *ngIf="f.cardType.errors.required">Credit Card Type is required</div>
             </div>
         </div>
-        <div class="p-col-12 p-md-8 p-lg-8">
+        <div class="p-col-12 p-md-8 p-lg-7">
             <div class="p-inputgroup">
               <input pInputText formControlName="creditCard" placeholder="Card Number" />
             </div>
@@ -20,7 +20,7 @@
               <div *ngIf="f.creditCard.errors.required">Credit Card Number is required</div>
             </div>
         </div>
-        <div class="p-col-12 p-md-8 p-lg-8">
+        <div class="p-col-12 p-md-8 p-lg-7">
             <div class="p-inputgroup">
               <input pInputText formControlName="holderName" placeholder="Card Holder Name" />
             </div>
@@ -31,8 +31,8 @@
     </div>
 
     <div class="p-grid p-fluid p-justify-center p-align-center">
-            <div class="p-col-12 p-md-3 p-lg-3">
-                  <span>Expiration Month</span>
+            <div class="p-col-4 p-md-3 p-lg-3">
+                  <span>Exp. Month</span>
                   <div class="p-inputgroup">
                     <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;"></p-dropdown>
                   </div>
@@ -40,8 +40,8 @@
                     <div *ngIf="f.expirationMonth.errors.required">required</div>
                   </div>
             </div>
-            <div class="p-col-12 p-md-3 p-lg-3">
-                  <span>Expiration Year</span>
+            <div class="p-col-4 p-md-3 p-lg-3">
+                  <span>Exp. Year</span>
                   <div class="p-inputgroup">
                     <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;"></p-dropdown>
                   </div>
@@ -49,7 +49,7 @@
                     <div *ngIf="f.expirationYear.errors.required">required</div>
                   </div>
             </div>
-            <div class="p-col-12 p-md-2 p-lg-2">
+            <div class="p-col-4 p-md-2 p-lg-1">
                  CVC
                   <div class="p-inputgroup">
                     <input pInputText formControlName="cvc" placeholder="" maxlength="3"/>
@@ -63,10 +63,10 @@
 
   <p-footer>
     <div class="p-grid p-justify-center p-align-center">
-      <div class="p-col-12 p-md-6 p-lg-6">
+      <div class="p-col-6 p-md-6 p-lg-6">
         <button pButton type="button" label="Back" class="ui-button-secondary" (click)="back()" style="margin-right: .25em"></button>
       </div>
-      <div class="p-col-12 p-md-6 p-lg-6 p-text-md-right p-text-lg-right">
+      <div class="p-col-6 p-md-6 p-lg-6 p-text-md-right p-text-lg-right">
         <button pButton type="submit" label="PAY {{paymentService.openTotal | currency: env.currencyISO}}" icon="pi pi-check"  class="ui-button-success"  [disabled]="loading"></button>
       </div>
     </div>
