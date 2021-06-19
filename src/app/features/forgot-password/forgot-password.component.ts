@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
+import {Message} from "primeng/api";
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,24 +16,21 @@ export class ForgotPasswordComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
-  msgs: any[];
+  msgs: Message[] = [];
 
-  constructor(
-      private formBuilder: FormBuilder,
-      private router: Router,
-      private toastService: ToastService,
-      private authenticationService: AuthenticationService
-  ) {
-      // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
-          this.router.navigate(['/']);
-      }
+  constructor(private formBuilder: FormBuilder, private router: Router,
+      private toastService: ToastService, private authenticationService: AuthenticationService) {
+
+    this.forgotForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+    });
   }
 
   ngOnInit() {
-      this.forgotForm = this.formBuilder.group({
-          email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      });
+    // redirect to home if already logged in
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   // convenience getter for easy access to form fields
@@ -66,7 +64,6 @@ export class ForgotPasswordComponent implements OnInit {
                   } else {
                     this.toastService.addSingle('error', '', 'Email is not sent.');
                   }
-
               });
   }
 

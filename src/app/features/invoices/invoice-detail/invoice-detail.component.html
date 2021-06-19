@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <p-table [value]="invoice?.lines">
+  <p-table [value]="invoice!.lines">
       <ng-template pTemplate="header">
           <tr>
               <th>Name</th>
@@ -47,7 +47,7 @@
   <div class="p-grid">
     <div class="p-col-6 p-md-8 p-lg-8"></div>
     <div class="p-col-6 p-md-4 p-lg-4">
-      <p-table [value]="invoice?.taxes">
+      <p-table [value]="invoice!.taxes">
         <ng-template pTemplate="header">
           <tr>
               <th>Taxes</th>

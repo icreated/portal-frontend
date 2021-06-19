@@ -12,9 +12,9 @@ import { ApplicationStateService } from 'src/app/core/services/application-state
 })
 export class MenuComponent implements OnInit {
 
-  items: CustomMenuItem[];
-  selectedItem: string;
-  visible: boolean;
+  items: CustomMenuItem[] = [];
+  selectedItem: string = '';
+  visible = true;
 
   constructor(private routeStateService: RouteStateService,
       private sessionService: SessionService,

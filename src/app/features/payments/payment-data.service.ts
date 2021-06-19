@@ -12,8 +12,8 @@ import {Observable} from "rxjs";
 })
 export class PaymentDataService {
 
-  openItems: OpenItem[];
-  openTotal: number;
+  openItems: OpenItem[] = [];
+  openTotal = 0;
 
     constructor(private http: HttpClient) { }
 

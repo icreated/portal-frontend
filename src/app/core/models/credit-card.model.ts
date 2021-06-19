@@ -1,6 +1,6 @@
 export interface CreditCard {
 
-    cardType; string;
+    cardType: string;
     creditCard: number;
     holderName : string;
     expirationMonth: number;
@@ -8,4 +8,3 @@ export interface CreditCard {
     cvc: string;
     amt: number;
   }
-  

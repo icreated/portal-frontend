@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {User} from 'src/app/core/models/user';
-import {notification} from 'src/app/core/models/notification.model';
+import {Notification} from 'src/app/core/models/notification.model';
 import {UserIdleService} from 'angular-user-idle';
 import {MenuDataService} from 'src/app/core/services/menu-data.service';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
@@ -15,11 +15,9 @@ import {AuthenticationService} from 'src/app/core/services/authentication-servic
 })
 export class HeaderComponent implements OnInit {
 
-  user: User;
-
+  user!: User;
   displayNotifications: boolean;
-
-  notifications: notification[];
+  notifications: Notification[] = [];
 
   constructor(
     private router: Router,
@@ -37,8 +35,7 @@ export class HeaderComponent implements OnInit {
     this.user = this.sessionService.getItem("currentUser");
     this.notifications = [];
     for (let i = 1; i <= 5; i++) {
-      const notificationObj = new notification("Message " + i, new Date(), null)
-      this.notifications.push(notificationObj);
+      this.notifications.push(new Notification("Message " + i, new Date(), 0));
     }
 
     //Start watching for user inactivity.

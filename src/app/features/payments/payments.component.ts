@@ -13,8 +13,7 @@ import {environment} from 'src/environments/environment';
 export class PaymentsComponent implements OnInit {
 
   env = environment;
-  columns: any[];
-  payments: Payment[];
+  payments: Payment[] = [];
 
   constructor(
     private routeStateService: RouteStateService,

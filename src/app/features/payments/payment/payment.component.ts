@@ -20,17 +20,8 @@ export class PaymentComponent implements OnInit {
   submitted = false;
   cardFormGroup: FormGroup;
 
-  creditCardTypes: ValueLabel[];
+  creditCardTypes: ValueLabel[] = [];
 
-  // creditCardTypes = [
-  //   {label: "Visa", value: "VISA"},
-  //   {label: "AmericanExpress", value: "AMERICAN_EXPRESS"},
-  //   {label: "Maestro", value: "MAESTRO"},
-  //   {label: "JCB", value: "JCB"},
-  //   {label: "Discover", value: "DISCOVER"},
-  //   {label: "DinersClub", value: "DINERS_CLUB"},
-  //   {label: "MasterCard", value: "MASTERCARD"}
-  // ]
   months = [
     {label: "Jan", value: 1},
     {label: "Feb", value: 2},
@@ -47,27 +38,15 @@ export class PaymentComponent implements OnInit {
   ]
 
   years = [
-    {label: "2020", value: 2020},
     {label: "2021", value: 2021},
     {label: "2022", value: 2022},
     {label: "2023", value: 2023},
     {label: "2024", value: 2024},
+    {label: "2025", value: 2025},
   ]
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public paymentService: PaymentDataService,
-    private commonService: CommonService,
-    private router: Router,
-    private routeStateService: RouteStateService) { }
-
-  ngOnInit() {
-
-    if (isNaN(this.paymentService.openTotal) || this.paymentService.openTotal <=0) {
-      this.routeStateService.loadPrevious();
-      this.router.navigate(['/main/dashboard']);
-    }
-
+  constructor(private formBuilder: FormBuilder, public paymentService: PaymentDataService,
+    private commonService: CommonService, private router: Router, private routeStateService: RouteStateService) {
 
     this.cardFormGroup = this.formBuilder.group({
       cardType:['', Validators.required],
@@ -76,13 +55,17 @@ export class PaymentComponent implements OnInit {
       expirationMonth: ['', Validators.required],
       expirationYear: ['', Validators.required],
       cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
-
     });
+  }
 
+  ngOnInit() {
+    if (isNaN(this.paymentService.openTotal) || this.paymentService.openTotal <=0) {
+      this.routeStateService.loadPrevious();
+      this.router.navigate(['/main/dashboard']);
+    }
     this.commonService.getReferenceCreditCardTypes().subscribe(data=>{
       this.creditCardTypes = data;
     });
-
   }
 
     // convenience getter for easy access to form fields

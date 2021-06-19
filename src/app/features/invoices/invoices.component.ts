@@ -12,9 +12,8 @@ import {ApplicationStateService} from "../../core/services/application-state.ser
 })
 export class InvoicesComponent implements OnInit {
 
-  columns: any[];
   env = environment;
-  invoices: DocumentItem[];
+  invoices: DocumentItem[] = [];
 
   constructor(private routeStateService: RouteStateService, private invoiceService: InvoicesDataService,
               public state: ApplicationStateService) { }

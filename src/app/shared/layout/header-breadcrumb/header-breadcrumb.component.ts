@@ -9,22 +9,17 @@ import { RouteStateService } from 'src/app/core/services/route-state.service';
 })
 export class HeaderBreadcrumbComponent implements OnInit {
 
-  items: MenuItem[];
+  items: MenuItem[] = [];
+  home: MenuItem  = { icon: 'pi pi-home', routerLink: ['/main/dashboard']};
 
-  home: MenuItem;
 
-
-  constructor(private routeStateService: RouteStateService) {
-    this.items = [];
-  }
+  constructor(private routeStateService: RouteStateService) {}
 
   ngOnInit() {
     const routes = this.routeStateService.getAll();
     routes.forEach(route => {
       this.items.push({ label: route.title, command: () => { this.onClickBreadcrumb(route.id); } });
     });
-
-    this.home = { icon: 'pi pi-home', routerLink: ['/main/dashboard']};
   }
 
   onClickBreadcrumb(id: number) {

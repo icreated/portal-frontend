@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-    constructor(private authenticationService: AuthenticationService) { 
-        
+    constructor(private authenticationService: AuthenticationService) {
+
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -17,7 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
         const currentUser = this.authenticationService.currentUserValue;
         const isLoggedIn = currentUser && currentUser.token;
         const isApiUrl = request.url.startsWith(environment.apiUrl);
-        if (isLoggedIn && isApiUrl) {
+        if (currentUser && isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${currentUser.token}`

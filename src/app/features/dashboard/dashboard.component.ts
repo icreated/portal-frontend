@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
 
   currencyISO = environment.currencyISO;
-  openItems: OpenItem[];
-  openTotal: number;
+  openItems: OpenItem[] = [];
+  openTotal = 0;
 
   barChartData: any;
 

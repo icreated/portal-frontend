@@ -9,7 +9,7 @@ import { ApplicationStateService } from 'src/app/core/services/application-state
 })
 export class LayoutComponent implements OnInit {
 
-  isMenuVisible: boolean;
+  isMenuVisible = false;
 
   constructor(private menuDataService: MenuDataService,
     private applicationStateService: ApplicationStateService) {

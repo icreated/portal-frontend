@@ -14,10 +14,10 @@ import {ThemeService} from './core/services/theme.service';
 export class AppComponent implements OnInit {
 
   title = 'Idempiere Portal';
-  showLoader: boolean;
+  showLoader = false;
   theme: string;
 
-  currentUser: User;
+  currentUser: User | null = null;
 
   constructor( private loaderService: LoaderService, private sessionService: SessionService,
     private authenticationService: AuthenticationService, private themeService: ThemeService,
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
           this.theme = "theme-teal";
       }
 
-      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+      this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
 
       // this language will be used as a fallback when a translation isn't found in the current language
       translate.setDefaultLang('en');

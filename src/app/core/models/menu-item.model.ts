@@ -1,9 +1,9 @@
 export class CustomMenuItem {
     constructor() {
-        this.Label = null;
-        this.Icon = null;
-        this.RouterLink = null;
-        this.Childs = null;
+        this.Label = '';
+        this.Icon = '';
+        this.RouterLink = '';
+        this.Childs = [];
         this.IsChildVisible = false;
     }
     Label: string;

@@ -5,6 +5,7 @@ import {first} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
+import {Message} from "primeng/api";
 
 @Component({
   selector: 'app-change-password',
@@ -17,22 +18,14 @@ export class ChangePasswordComponent implements OnInit {
     loading = false;
     submitted = false;
     error = '';
-    msgs: any[];
+    msgs: Message[] = [];
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private router: Router,
-        private toastService: ToastService,
-        private authenticationService: AuthenticationService
-    ) {
-
-    }
-
-    ngOnInit(): void {
+    constructor(private formBuilder: FormBuilder, private router: Router, private toastService: ToastService,
+        private authenticationService: AuthenticationService) {
 
       this.passwordForm = this.formBuilder.group({
-        password: [null, Validators.compose([Validators.required])],
-        newPassword: [ null, Validators.compose([
+          password: [null, Validators.compose([Validators.required])],
+          newPassword: [ null, Validators.compose([
             // 1. Password Field is Required
             Validators.required,
             // 2. check whether the entered password has a number
@@ -41,15 +34,18 @@ export class ChangePasswordComponent implements OnInit {
             ValidationService.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
             // 4. Has a minimum length of 8 characters
             Validators.minLength(8)])
-        ],
+          ],
 
           confirmPassword: [null, Validators.compose([Validators.required])]
-      },
-      {
-        // check whether our password and confirm password match
-        validator: ValidationService.passwordMatchValidator
-     }
+        },
+        {
+          // check whether our password and confirm password match
+          validator: ValidationService.passwordMatchValidator
+        }
       );
+    }
+
+    ngOnInit(): void {
 
     }
 

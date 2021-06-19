@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
+import {Message} from "primeng/api";
 
 @Component({
   selector: 'app-update-password',
@@ -12,34 +13,19 @@ import {ValidationService} from 'src/app/core/services/validation.service';
 })
 export class UpdatePasswordComponent implements OnInit {
 
-  token: string
-
+  token = '';
   forgotForm: FormGroup;
   loading = false;
   submitted = false;
   error = '';
-  msgs: any[];
+  msgs: Message[] = [];
 
-  constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private toastService: ToastService,
-      private authenticationService: AuthenticationService
-  ) {
-      // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
-          this.router.navigate(['/']);
-      }
-  }
-
-  ngOnInit(): void {
-
-    this.token = this.route.snapshot.params['token'];
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+      private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService) {
 
     this.forgotForm = this.formBuilder.group({
 
-      newPassword: [ null, Validators.compose([
+        newPassword: [ null, Validators.compose([
           // 1. Password Field is Required
           Validators.required,
           // 2. check whether the entered password has a number
@@ -48,21 +34,29 @@ export class UpdatePasswordComponent implements OnInit {
           ValidationService.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
           // 4. Has a minimum length of 8 characters
           Validators.minLength(8)])
-      ],
+        ],
 
         confirmPassword: [null, Validators.compose([Validators.required])]
-    },
-    {
-      // check whether our password and confirm password match
-      validator: ValidationService.passwordMatchValidator
-   }
+      },
+      {
+        // check whether our password and confirm password match
+        validator: ValidationService.passwordMatchValidator
+      }
     );
+  }
+
+  ngOnInit(): void {
+    // redirect to home if already logged in
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+    this.token = this.route.snapshot.params['token'];
 
   }
 
 
-    // convenience getter for easy access to form fields
-    get f() { return this.forgotForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.forgotForm.controls; }
 
 
     update() {
