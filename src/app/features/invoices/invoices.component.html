@@ -1,13 +1,13 @@
 <app-header-breadcrumb></app-header-breadcrumb>
-<p-panel header="Invoices List">
+<p-panel [header]="'invoices-list' | translate">
     <p-table selectionMode="single" [value]="invoices" [paginator]="true" [rows]="env.pageSize" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="id">#<p-sortIcon field="id"></p-sortIcon></th>
-              <th pSortableColumn="description" class="ui-table-hide-sm">Description<p-sortIcon field="description"></p-sortIcon></th>
-              <th pSortableColumn="docStatus">Status<p-sortIcon field="docStatus"></p-sortIcon></th>
-              <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
-              <th pSortableColumn="grandTotal">Grand Total<p-sortIcon field="grandTotal"></p-sortIcon></th>
+              <th pSortableColumn="description" class="ui-table-hide-sm">{{ 'description' | translate }}<p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="docStatus">{{ 'status' | translate }}<p-sortIcon field="docStatus"></p-sortIcon></th>
+              <th pSortableColumn="date">{{ 'date' | translate }}<p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="grandTotal">{{ 'grand-total' | translate }}<p-sortIcon field="grandTotal"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-invoice>

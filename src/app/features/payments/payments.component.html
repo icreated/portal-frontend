@@ -1,14 +1,14 @@
 <app-header-breadcrumb></app-header-breadcrumb>
-<p-panel header="Payment List">
+<p-panel [header]="'payment-list' | translate">
     <p-table [value]="payments" [paginator]="true" [rows]="env.pageSize" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="documentNo" class="ui-table-hide-sm">#<p-sortIcon field="documentNo"></p-sortIcon></th>
-              <th pSortableColumn="tenderType">Tender Type<p-sortIcon field="tenderType"></p-sortIcon></th>
-              <th pSortableColumn="description" class="ui-table-hide-sm">Description<p-sortIcon field="description"></p-sortIcon></th>
-              <th pSortableColumn="docStatus" class="ui-table-hide-sm">Status<p-sortIcon field="docStatus"></p-sortIcon></th>
-              <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
-              <th pSortableColumn="payAmt">Price<p-sortIcon field="payAmt"></p-sortIcon></th>
+              <th pSortableColumn="tenderType">{{ 'tender-type' | translate }}<p-sortIcon field="tenderType"></p-sortIcon></th>
+              <th pSortableColumn="description" class="ui-table-hide-sm">{{ 'description' | translate }}<p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="docStatus" class="ui-table-hide-sm">{{ 'status' | translate }}<p-sortIcon field="docStatus"></p-sortIcon></th>
+              <th pSortableColumn="date">{{ 'date' | translate }}<p-sortIcon field="date"></p-sortIcon></th>
+              <th pSortableColumn="payAmt">{{ 'price' | translate }}<p-sortIcon field="payAmt"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-payment>

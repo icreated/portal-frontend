@@ -94,8 +94,6 @@ export class PaymentComponent implements OnInit {
       creditCard = <CreditCard>{};
       this.back();
     });
-
-
   }
 
   back() {

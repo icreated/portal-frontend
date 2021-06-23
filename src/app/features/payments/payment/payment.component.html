@@ -1,73 +1,72 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 
 <form [formGroup]="cardFormGroup" (ngSubmit)="onSubmit()">
-<p-panel header="Credit Card Payment">
+<p-panel [header]="'card-payment' | translate">
 
-    <div class="p-grid p-justify-center p-align-center">
-        <div class="p-col-12 p-md-8 p-lg-7">
-            <div class="p-inputgroup">
-              <p-dropdown [options]="creditCardTypes" formControlName="cardType" placeholder="Choose Credit Card Type"> </p-dropdown>
-            </div>
-            <div *ngIf="submitted && f.cardType.errors" class="invalid-feedback">
-              <div *ngIf="f.cardType.errors.required">Credit Card Type is required</div>
-            </div>
-        </div>
-        <div class="p-col-12 p-md-8 p-lg-7">
-            <div class="p-inputgroup">
-              <input pInputText formControlName="creditCard" placeholder="Card Number" />
-            </div>
-            <div *ngIf="submitted && f.creditCard.errors" class="invalid-feedback">
-              <div *ngIf="f.creditCard.errors.required">Credit Card Number is required</div>
-            </div>
-        </div>
-        <div class="p-col-12 p-md-8 p-lg-7">
-            <div class="p-inputgroup">
-              <input pInputText formControlName="holderName" placeholder="Card Holder Name" />
-            </div>
-            <div *ngIf="submitted && f.holderName.errors" class="invalid-feedback">
-              <div *ngIf="f.holderName.errors.required">Holder Name is required</div>
-            </div>
-        </div>
-    </div>
+  <div class="p-grid p-justify-center p-align-center">
+      <div class="p-col-12 p-md-8 p-lg-7">
+          <div class="p-inputgroup">
+            <p-dropdown [options]="creditCardTypes" formControlName="cardType" [placeholder]="'choose-card-type' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cardType.errors }"  aria-describedby="card-type-help"> </p-dropdown>
+          </div>
+          <small id='card-type-help' *ngIf="submitted && f.cardType.errors" class="p-error">
+            <div *ngIf="f.cardType.errors.required">{{ 'required-card-type' | translate }}</div>
+          </small>
+      </div>
+      <div class="p-col-12 p-md-8 p-lg-7">
+          <div class="p-inputgroup">
+            <input pInputText formControlName="creditCard" [placeholder]="'card-number' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.creditCard.errors }" aria-describedby="credit-card-help"/>
+          </div>
+          <small id='credit-card-help' *ngIf="submitted && f.creditCard.errors" class="p-error">
+            <div *ngIf="f.creditCard.errors.required">{{ 'required-card-number' | translate }}</div>
+          </small>
+      </div>
+      <div class="p-col-12 p-md-8 p-lg-7">
+          <div class="p-inputgroup">
+            <input pInputText formControlName="holderName" [placeholder]="'card-holder-name' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.holderName.errors }" aria-describedby="holder-name-help"/>
+          </div>
+          <small id='holder-name-help' *ngIf="submitted && f.holderName.errors" class="p-error">
+            <div *ngIf="f.holderName.errors.required">{{ 'required-holder-name' | translate }}</div>
+          </small>
+      </div>
+  </div>
 
-    <div class="p-grid p-fluid p-justify-center p-align-center">
-            <div class="p-col-4 p-md-3 p-lg-3">
-                  <span>Exp. Month</span>
-                  <div class="p-inputgroup">
-                    <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;"></p-dropdown>
-                  </div>
-                  <div *ngIf="submitted && f.expirationMonth.errors" class="invalid-feedback">
-                    <div *ngIf="f.expirationMonth.errors.required">required</div>
-                  </div>
-            </div>
-            <div class="p-col-4 p-md-3 p-lg-3">
-                  <span>Exp. Year</span>
-                  <div class="p-inputgroup">
-                    <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;"></p-dropdown>
-                  </div>
-                  <div *ngIf="submitted && f.expirationYear.errors" class="invalid-feedback">
-                    <div *ngIf="f.expirationYear.errors.required">required</div>
-                  </div>
-            </div>
-            <div class="p-col-4 p-md-2 p-lg-1">
-                 CVC
-                  <div class="p-inputgroup">
-                    <input pInputText formControlName="cvc" placeholder="" maxlength="3"/>
-                  </div>
-                  <div *ngIf="submitted && f.cvc.errors" class="invalid-feedback">
-                    <div *ngIf="f.cvc.errors.required">required</div>
-                  </div>
-            </div>
-    </div>
-
+  <div class="p-grid p-fluid p-justify-center p-align-center">
+          <div class="p-col-4 p-md-3 p-lg-3">
+                <span>{{ 'expiration-month' | translate }}</span>
+                <div class="p-inputgroup">
+                  <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationMonth.errors }" aria-describedby="exp-month-help"></p-dropdown>
+                </div>
+                <small id='exp-month-help' *ngIf="submitted && f.expirationMonth.errors" class="p-error">
+                  <div *ngIf="f.expirationMonth.errors.required">{{'required' | translate}}</div>
+                </small>
+          </div>
+          <div class="p-col-4 p-md-3 p-lg-3">
+                <span>{{ 'expiration-year' | translate }}</span>
+                <div class="p-inputgroup">
+                  <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationYear.errors }" aria-describedby="exp-year-help"></p-dropdown>
+                </div>
+                <small id="exp-year-help" class="p-error"  *ngIf="submitted && f.expirationYear.errors">
+                  <div *ngIf="f.expirationYear.errors.required">{{'required' | translate}}</div>
+                </small>
+          </div>
+          <div class="p-col-4 p-md-2 p-lg-1">
+               CVC
+                <div class="p-inputgroup">
+                  <input pInputText formControlName="cvc" placeholder="" maxlength="3" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cvc.errors }" aria-describedby="cvc-help"/>
+                </div>
+                <small id='cvc-help' *ngIf="submitted && f.cvc.errors" class="p-error">
+                  <div *ngIf="f.cvc.errors.required">{{'required' | translate}}</div>
+                </small>
+          </div>
+  </div>
 
   <p-footer>
     <div class="p-grid p-justify-center p-align-center">
       <div class="p-col-6 p-md-6 p-lg-6">
-        <button pButton type="button" label="Back" class="ui-button-secondary" (click)="back()" style="margin-right: .25em"></button>
+        <button pButton type="button" [label]="'back' | translate" class="ui-button-secondary" (click)="back()" style="margin-right: .25em"></button>
       </div>
       <div class="p-col-6 p-md-6 p-lg-6 p-text-md-right p-text-lg-right">
-        <button pButton type="submit" label="PAY {{paymentService.openTotal | currency: env.currencyISO}}" icon="pi pi-check"  class="ui-button-success"  [disabled]="loading"></button>
+        <button pButton type="submit" label="{{'pay' | translate }} {{paymentService.openTotal | currency: env.currencyISO}}" icon="pi pi-check"  class="ui-button-success"  [disabled]="loading"></button>
       </div>
     </div>
   </p-footer>

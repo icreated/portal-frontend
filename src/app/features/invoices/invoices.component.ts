@@ -27,6 +27,6 @@ export class InvoicesComponent implements OnInit {
   }
 
   goToInvoiceLines(invoiceId: number) {
-    this.routeStateService.add("Invoice Detail", "/main/invoice-detail", invoiceId, false);
+    this.routeStateService.add("invoice-detail", "/main/invoice-detail", invoiceId, false);
   }
 }

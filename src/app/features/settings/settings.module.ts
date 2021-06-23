@@ -11,6 +11,7 @@ import { AppCommonModule } from 'src/app/app.common.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {HeaderBreadCrumbModule} from '../../shared/layout/header-breadcrumb/header-breadcrumb.module';
 import { ThemeChooserComponent } from './theme-chooser/theme-chooser.component';
+import {DropdownModule} from "primeng/dropdown";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient) {
             },
             isolate: false
         }),
-        HeaderBreadCrumbModule
+        HeaderBreadCrumbModule,
+        DropdownModule
     ],
   exports: [TranslateModule]
 

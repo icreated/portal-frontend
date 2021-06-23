@@ -48,23 +48,23 @@ export class ForgotPasswordComponent implements OnInit {
       }
 
       this.loading = true;
-      this.authenticationService.forgotPassword(this.f.email.value)
-          .subscribe(
-            () => {
-                this.forgotForm.reset();
-                this.toastService.addSingle('success', '', 'Email is sent.');
+      this.authenticationService.forgotPassword(this.f.email.value).subscribe(
+        () => {
+              this.toastService.addSingle('success', '', 'email-sent', true);
+              this.f.email.setErrors(null);
+              this.router.navigate(['/']);
               },
-              error => {
-                  this.error = error;
-                  this.loading = false;
-                  this.forgotForm.reset();
+            error => {
+                this.error = error;
+                this.loading = false;
+                this.forgotForm.reset();
 
-                  if (error === 'Precondition failed') {
-                    this.toastService.addSingle('warn', '', 'User doesn\'t exist');
-                  } else {
-                    this.toastService.addSingle('error', '', 'Email is not sent.');
-                  }
-              });
+                if (error === 'Precondition failed') {
+                  this.toastService.addSingle('warn', '', 'user-not-exists', true);
+                } else {
+                  this.toastService.addSingle('error', '', 'email-not-sent', true);
+                }
+            });
   }
 
 }

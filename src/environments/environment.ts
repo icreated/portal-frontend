@@ -2,14 +2,20 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+export const environment: {[index: string]:any} = {
   production: false,
   apiUrl: 'http://localhost:8888/portal/api',
   dateFormat: 'dd/MM/yyyy',
   currencyISO: 'USD',
   version: '1.0.0',
 
-  pageSize: 10
+  pageSize: 10,
+
+  langMap: {
+    'en': 'en_US',
+    'fr': 'fr_FR',
+    'ru': 'ru_RU'
+  }
 };
 
 /*

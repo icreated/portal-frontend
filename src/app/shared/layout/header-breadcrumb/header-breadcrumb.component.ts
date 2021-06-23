@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { RouteStateService } from 'src/app/core/services/route-state.service';
+import {Component, OnInit} from '@angular/core';
+import {MenuItem} from 'primeng/api';
+import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {TranslateService} from "@ngx-translate/core";
+import {from} from "rxjs";
+import {map, mergeMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-header-breadcrumb',
@@ -13,12 +16,17 @@ export class HeaderBreadcrumbComponent implements OnInit {
   home: MenuItem  = { icon: 'pi pi-home', routerLink: ['/main/dashboard']};
 
 
-  constructor(private routeStateService: RouteStateService) {}
+  constructor(private routeStateService: RouteStateService, private translationService: TranslateService) {}
 
   ngOnInit() {
     const routes = this.routeStateService.getAll();
-    routes.forEach(route => {
-      this.items.push({ label: route.title, command: () => { this.onClickBreadcrumb(route.id); } });
+    from(routes).pipe(
+      mergeMap(route => {
+        return this.translationService.get(route.title).pipe(
+          map(title => ({id : route.id, title: title}))
+        ) }),
+    ).subscribe(route => {
+      this.items.push({ label: route.title, command: () => { this.onClickBreadcrumb(route.id); } })
     });
   }
 

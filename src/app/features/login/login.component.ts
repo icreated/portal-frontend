@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl = '/';
-  error = '';
   msgs: Message[] = [];
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
@@ -26,8 +25,8 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService) {
 
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
 
   }
@@ -50,7 +49,6 @@ export class LoginComponent implements OnInit {
       if (this.loginForm.invalid) {
           return;
       }
-
       this.loading = true;
       this.authenticationService.login(this.f.username.value, this.f.password.value)
           .pipe(first())
@@ -59,9 +57,10 @@ export class LoginComponent implements OnInit {
                   this.routeStateService.add("Dashboard", '/main/dashboard', null, true);
               },
               error => {
-                  this.error = error;
+                  this.toastService.clear();
+                  this.loginForm.reset();
                   this.loading = false;
-                  this.toastService.addSingle('error', '', 'Invalid user.');
+                  this.toastService.addSingle('error', '', 'login-invalid-user', true);
               });
   }
 }

@@ -35,12 +35,15 @@ export class AppComponent implements OnInit {
 
       // this language will be used as a fallback when a translation isn't found in the current language
       translate.setDefaultLang('en');
-      const language = this.sessionService.getItem("ng-prime-language");
-      if (language != null && language.length > 0) {
+      translate.addLangs(['en', 'fr']);
+      let language = this.sessionService.getItem("ng-prime-language");
+      if (language) {
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         translate.use(language);
       } else {
-        this.sessionService.setItem("ng-prime-language", "en");
+        const browserLang = translate.getBrowserLang();
+        language = translate.getLangs().includes(browserLang) ? browserLang : 'en'
+        this.sessionService.setItem("ng-prime-language", language);
       }
   }
 

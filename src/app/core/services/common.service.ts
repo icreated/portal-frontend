@@ -1,23 +1,31 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ValueLabel } from '../models/value-label.model';
+import {Injectable, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {ValueLabel} from '../models/value-label.model';
+import {TranslateService} from "@ngx-translate/core";
+
 
 @Injectable({
     providedIn: 'root',
 })
-export class CommonService {
+export class CommonService implements OnInit {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private translationService: TranslateService) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    public getLang(): string {
+      return environment.langMap[this.translationService.currentLang]
     }
 
     public getReferenceDocStatus(value: string) {
-        return this.http.get<string>(`${environment.apiUrl}/common/reference/docstatus/`+value);
+        return this.http.get<string>(`${environment.apiUrl}/common/reference/docstatus/${this.getLang()}/`+value);
     }
 
     public getReferenceTenderType(value: string) {
-        return this.http.get<string>(`${environment.apiUrl}/common/reference/tendertype/`+value);
+        return this.http.get<string>(`${environment.apiUrl}/common/reference/tendertype/${this.getLang()}/`+value);
     }
 
     public getReferenceCreditCardTypes() {
