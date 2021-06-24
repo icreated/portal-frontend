@@ -4,7 +4,7 @@
 
 
 # Idempiere Portal Frontend
-> 
+>
 
 Idempiere Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
 This project is inspired by PrimeNG seed that can be found [here](https://github.com/NilavPatel/Ng-Prime)
@@ -28,7 +28,9 @@ This plugin works in pair with server side Idempiere Portal API that can be foun
 
 ![Portal Credit Card](/src/assets/images/screen_creditcard.png?raw=true "Portal Credit Card")
 
+### Settings
 
+![Portal Credit Card](/src/assets/images/screen_settings.png?raw=true "Settings")
 
 
 ## Installing / Getting started
@@ -56,7 +58,7 @@ You are redirected to login page. To get started fill in the form with: gardenus
 ## Contributing
 
 If you'd like to contribute, please fork the repository and use a feature
-branch. 
+branch.
 
 Pull requests are warmly welcome
 
