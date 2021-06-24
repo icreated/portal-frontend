@@ -3,12 +3,12 @@ import {InvoicesDataService} from 'src/app/features/invoices/invoices-data.servi
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {DocumentItem} from 'src/app/core/models/document-item.model';
 import {environment} from 'src/environments/environment';
-import {ApplicationStateService} from "../../core/services/application-state.service";
+import {ApplicationStateService} from '../../core/services/application-state.service';
 
 @Component({
-  selector: 'app-invoices',
-  templateUrl: 'invoices.component.html',
-  styleUrls: ['invoices.component.css']
+    selector: 'app-invoices',
+    templateUrl: 'invoices.component.html',
+    styleUrls: ['invoices.component.css']
 })
 export class InvoicesComponent implements OnInit {
 
@@ -16,17 +16,18 @@ export class InvoicesComponent implements OnInit {
   invoices: DocumentItem[] = [];
 
   constructor(private routeStateService: RouteStateService, private invoiceService: InvoicesDataService,
-              public state: ApplicationStateService) { }
+              public state: ApplicationStateService) {
+  }
 
   ngOnInit() {
-    this.invoiceService.getInvoicesList().subscribe(
-      data => {
-        this.invoices = data;
-      }
-    );
+      this.invoiceService.getInvoicesList().subscribe(
+          data => {
+              this.invoices = data;
+          }
+      );
   }
 
   goToInvoiceLines(invoiceId: number) {
-    this.routeStateService.add("invoice-detail", "/main/invoice-detail", invoiceId, false);
+      this.routeStateService.add('invoice-detail', '/main/invoice-detail', invoiceId, false);
   }
 }

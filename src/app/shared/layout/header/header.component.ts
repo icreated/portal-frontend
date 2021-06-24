@@ -9,9 +9,9 @@ import {MenuDataService} from 'src/app/core/services/menu-data.service';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: 'header.component.html',
-  styleUrls: ['header.component.css']
+    selector: 'app-header',
+    templateUrl: 'header.component.html',
+    styleUrls: ['header.component.css']
 })
 export class HeaderComponent implements OnInit {
 
@@ -27,43 +27,43 @@ export class HeaderComponent implements OnInit {
     private menuDataService: MenuDataService,
     private authenticationService: AuthenticationService) {
 
-    this.displayNotifications = false;
+      this.displayNotifications = false;
 
   }
 
   ngOnInit() {
-    this.user = this.sessionService.getItem("currentUser");
-    this.notifications = [];
-    for (let i = 1; i <= 5; i++) {
-      this.notifications.push(new Notification("Message " + i, new Date(), 0));
-    }
+      this.user = this.sessionService.getItem('currentUser');
+      this.notifications = [];
+      for (let i = 1; i <= 5; i++) {
+          this.notifications.push(new Notification('Message ' + i, new Date(), 0));
+      }
 
-    //Start watching for user inactivity.
-    this.userIdle.startWatching();
+      // Start watching for user inactivity.
+      this.userIdle.startWatching();
 
-    // Start watching when user idle is starting.
-    this.userIdle.onTimerStart().subscribe();
+      // Start watching when user idle is starting.
+      this.userIdle.onTimerStart().subscribe();
 
-    // Start watch when time is up.
-    this.userIdle.onTimeout().subscribe(() => {
-      this.logout();
-    });
+      // Start watch when time is up.
+      this.userIdle.onTimeout().subscribe(() => {
+          this.logout();
+      });
   }
 
   logout() {
-    this.userIdle.stopWatching();
-    this.routeStateService.removeAll();
-    this.authenticationService.logout();
-    this.sessionService.removeItem('active-menu');
-    this.router.navigate(['/login']);
+      this.userIdle.stopWatching();
+      this.routeStateService.removeAll();
+      this.authenticationService.logout();
+      this.sessionService.removeItem('active-menu');
+      this.router.navigate(['/login']);
   }
 
   showNotificationSidebar() {
-    this.displayNotifications = true;
+      this.displayNotifications = true;
   }
 
   toggleMenu() {
-    this.menuDataService.toggleMenuBar.next(true);
+      this.menuDataService.toggleMenuBar.next(true);
   }
 
 

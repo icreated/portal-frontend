@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { RouteState } from 'src/app/core/models/route-state.model';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {RouteState} from 'src/app/core/models/route-state.model';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -12,6 +12,19 @@ import { Router } from '@angular/router';
 export class RouteStateService {
 
     constructor(private router: Router) {
+    }
+
+    private static saveToStorage(routeStates: any) {
+        localStorage.setItem('routeState', JSON.stringify(routeStates));
+    }
+
+    private static getFromStorage(): RouteState[] {
+        const value = localStorage.getItem('routeState');
+        return value ? JSON.parse(value) as RouteState[] : [];
+    }
+
+    private static removeFromStorage() {
+        localStorage.removeItem('routeState');
     }
 
     /**
@@ -31,37 +44,38 @@ export class RouteStateService {
 
     /**
      * add route data
+     *
      * @param title route name
      * @param path route path
      * @param data route data
      * @param isParent is parent route
      */
     add(title: string, path: string, data: any, isParent: boolean) {
-      if (isParent) {
-          this.removeAll();
-      }
+        if (isParent) {
+            this.removeAll();
+        }
 
-      let routeStates = RouteStateService.getFromStorage();
+        const routeStates = RouteStateService.getFromStorage();
 
-      let routeState = new RouteState();
-      routeState.title = title;
-      routeState.path = path;
-      routeState.data = data;
+        const routeState = new RouteState();
+        routeState.title = title;
+        routeState.path = path;
+        routeState.data = data;
 
-      routeStates.push(routeState);
-      RouteStateService.saveToStorage(routeStates);
-      this.navigate(routeState.path);
+        routeStates.push(routeState);
+        RouteStateService.saveToStorage(routeStates);
+        this.navigate(routeState.path);
     }
 
     /**
      * load previous route
      */
     loadPrevious() {
-      const routeStates = RouteStateService.getFromStorage();
-      routeStates.pop();
-      RouteStateService.saveToStorage(routeStates);
-      const currentViewState = this.getCurrent();
-      this.navigate(currentViewState.path);
+        const routeStates = RouteStateService.getFromStorage();
+        routeStates.pop();
+        RouteStateService.saveToStorage(routeStates);
+        const currentViewState = this.getCurrent();
+        this.navigate(currentViewState.path);
     }
 
     /**
@@ -69,42 +83,29 @@ export class RouteStateService {
      * @param id load route route id
      */
     loadById(id: number) {
-      let result: RouteState[] = [];
-      let isFound = false;
-      let routeStates = RouteStateService.getFromStorage();
-      routeStates.forEach(route => {
-          if (isFound) {
-              return;
-          }
-          result.push(route);
-          if (route.id === id) {
-              isFound = true;
-          }
-      });
-      routeStates = result;
-      RouteStateService.saveToStorage(routeStates);
-      const currentViewState = this.getCurrent();
-      this.navigate(currentViewState.path);
+        const result: RouteState[] = [];
+        let isFound = false;
+        let routeStates = RouteStateService.getFromStorage();
+        routeStates.forEach(route => {
+            if (isFound) {
+                return;
+            }
+            result.push(route);
+            if (route.id === id) {
+                isFound = true;
+            }
+        });
+        routeStates = result;
+        RouteStateService.saveToStorage(routeStates);
+        const currentViewState = this.getCurrent();
+        this.navigate(currentViewState.path);
     }
 
     /**
      * remove all route data
      */
     removeAll() {
-      RouteStateService.removeFromStorage();
-    }
-
-    private static saveToStorage(routeStates: any) {
-        localStorage.setItem("routeState", JSON.stringify(routeStates));
-    }
-
-    private static getFromStorage(): RouteState[] {
-      const value = localStorage.getItem("routeState");
-      return value ? JSON.parse(value) as RouteState[]: [];
-    }
-
-    private static removeFromStorage() {
-        localStorage.removeItem("routeState");
+        RouteStateService.removeFromStorage();
     }
 
     private navigate(path: string) {

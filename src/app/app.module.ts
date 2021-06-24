@@ -20,45 +20,42 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {JwtInterceptor} from './core/interceptors/jwt-interceptor';
 import {ErrorInterceptor} from './core/interceptors/error-interceptor';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    LayoutComponent,
-    MenuComponent,
-    HeaderComponent,
-    FooterComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    UserIdleModule.forRoot({ idle: 300, timeout: 1}),
-    HttpClientModule,
-    AppCommonModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      isolate : false
-    }),
-    AppCommonModule.forRoot()
-  ],
-  exports: [TranslateModule],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    MessageService,
-    AuthGuard
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+    declarations: [
+        AppComponent,
+        LayoutComponent,
+        MenuComponent,
+        HeaderComponent,
+        FooterComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        UserIdleModule.forRoot({idle: 300, timeout: 1}),
+        HttpClientModule,
+        AppCommonModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
+                deps: [HttpClient]
+            },
+            isolate: false
+        }),
+        AppCommonModule.forRoot()
+    ],
+    exports: [TranslateModule],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+        MessageService,
+        AuthGuard
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
-export class AppModule { }
+export class AppModule {
+}
 

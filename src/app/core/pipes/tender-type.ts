@@ -1,10 +1,10 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import { CommonService } from '../services/common.service';
+import {CommonService} from '../services/common.service';
 
 
 @Pipe({
-  name: 'tenderType',
-  pure: false
+    name: 'tenderType',
+    pure: false
 })
 export class TenderTypeFormat implements PipeTransform {
 
@@ -12,20 +12,20 @@ export class TenderTypeFormat implements PipeTransform {
   private cachedData: any = null;
 
 
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) {
+  }
 
-  transform(value:any) {
+  transform(value: any) {
 
-    if (value !== this.cachedValue) {
-      this.cachedData = null;
-      this.cachedValue = value
+      if (value !== this.cachedValue) {
+          this.cachedData = null;
+          this.cachedValue = value;
 
-      this.commonService.getReferenceTenderType(value).subscribe( result => {
-        this.cachedData = result;
-      })
+          this.commonService.getReferenceTenderType(value).subscribe(result => {
+              this.cachedData = result;
+          });
 
-    }
-
-    return this.cachedData;
+      }
+      return this.cachedData;
   }
 }

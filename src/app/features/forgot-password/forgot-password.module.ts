@@ -7,11 +7,12 @@ import {AppCommonModule} from 'src/app/app.common.module';
 
 
 @NgModule({
-  declarations: [ForgotPasswordComponent],
-  imports: [
-    CommonModule,
-    ForgotPasswordRoutingModule,
-    AppCommonModule,
-  ],
+    declarations: [ForgotPasswordComponent],
+    imports: [
+        CommonModule,
+        ForgotPasswordRoutingModule,
+        AppCommonModule,
+    ],
 })
-export class ForgotPasswordModule { }
+export class ForgotPasswordModule {
+}

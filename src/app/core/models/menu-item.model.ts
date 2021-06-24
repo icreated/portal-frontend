@@ -1,14 +1,16 @@
 export class CustomMenuItem {
-    constructor() {
-        this.Label = '';
-        this.Icon = '';
-        this.RouterLink = '';
-        this.Childs = [];
-        this.IsChildVisible = false;
-    }
-    Label: string;
-    Icon?: string;
-    RouterLink: string;
-    Childs: CustomMenuItem[];
-    IsChildVisible: boolean;
+
+  label: string;
+  icon?: string;
+  routerLink: string;
+  childs: CustomMenuItem[];
+  isChildVisible: boolean;
+
+  constructor() {
+      this.label = '';
+      this.icon = '';
+      this.routerLink = '';
+      this.childs = [];
+      this.isChildVisible = false;
+  }
 }

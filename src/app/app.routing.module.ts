@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
-import { LayoutComponent } from 'src/app/shared/layout/layout.component';
-import { ErrorComponent } from './shared/error/error.component';
+import {AuthGuard} from 'src/app/core/guards/auth.guard';
+import {LayoutComponent} from 'src/app/shared/layout/layout.component';
+import {ErrorComponent} from './shared/error/error.component';
 
 const appRoutes: Routes = [
     {
@@ -52,12 +52,12 @@ const appRoutes: Routes = [
             loadChildren: () => import('src/app/features/settings/settings.module').then(m => m.SettingsModule),
             canActivate: [AuthGuard]
         },
-    ]
+        ]
     },
     {
         path: 'error',
         component: ErrorComponent,
-        //loadChildren: () => import('src/app/shared/error/error.module').then(m => m.ErrorModule)
+    // loadChildren: () => import('src/app/shared/error/error.module').then(m => m.ErrorModule)
     },
     {
         path: '',
@@ -70,4 +70,5 @@ const appRoutes: Routes = [
     imports: [RouterModule.forRoot(appRoutes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

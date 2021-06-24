@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { DocumentItem } from 'src/app/core/models/document-item.model';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Invoice } from 'src/app/core/models/invoice.model';
+import {Injectable} from '@angular/core';
+import {DocumentItem} from 'src/app/core/models/document-item.model';
+import {environment} from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Invoice} from 'src/app/core/models/invoice.model';
 
 
 @Injectable({
@@ -18,6 +18,6 @@ export class InvoicesDataService {
     }
 
     getInvoiceById(invoiceId: number) {
-        return this.http.get<Invoice>(`${environment.apiUrl}/invoices/invoice/`+invoiceId);
+        return this.http.get<Invoice>(`${environment.apiUrl}/invoices/invoice/` + invoiceId);
     }
 }

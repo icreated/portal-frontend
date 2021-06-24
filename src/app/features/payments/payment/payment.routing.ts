@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PaymentComponent } from './payment.component';
-import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import { AppCommonModule } from 'src/app/app.common.module';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {PaymentComponent} from './payment.component';
+import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
+import {AppCommonModule} from 'src/app/app.common.module';
 
 const routes: Routes = [
     {
@@ -14,8 +14,9 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes),
         AppCommonModule,
-        RxReactiveFormsModule   
+        RxReactiveFormsModule
     ],
     exports: [RouterModule]
 })
-export class PaymentRoutingModule { }
+export class PaymentRoutingModule {
+}

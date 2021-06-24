@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { InvoicesComponent } from 'src/app/features/invoices/invoices.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {InvoicesComponent} from 'src/app/features/invoices/invoices.component';
 
 const routes: Routes = [
     {
@@ -13,4 +13,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class InvoicesRoutingModule { }
+export class InvoicesRoutingModule {
+}

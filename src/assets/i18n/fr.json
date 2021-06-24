@@ -9,6 +9,7 @@
   "login-invalid-user" : "Utilisateur incorrect",
 
   "welcome-message": "Bienvenue à Idempiere Portal.",
+  "credit-card-payment" : "Paiement avec la carte de crédit",
   "click-to-pay" : "CLICKER POUR PAYER",
   "paid-off" : "PAYE",
 
@@ -55,6 +56,8 @@
   "password-has-number-msg" : "Doit contenir au moins 1 chiffre!",
   "password-has-capitalcase-msg" : "Doit contenir au moins 1 MAJUSCULE!",
   "password-not-match-msg" : "Mot de passe ne correspond pas",
+  "password-updated" : "Mot de passe est mis à jour",
+  "password-not-updated": "Mot de passe n'est pas mis à jour",
 
 
   "change-password" : "Changer le mot de passe",

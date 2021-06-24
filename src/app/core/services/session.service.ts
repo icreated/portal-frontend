@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
     providedIn: 'root',
@@ -10,8 +10,6 @@ import { Injectable } from '@angular/core';
 export class SessionService {
     /**
      * set session storage item
-     * @param key
-     * @param value
      */
     setItem(key: string, value: any) {
         sessionStorage.setItem(key, JSON.stringify(value));
@@ -19,7 +17,6 @@ export class SessionService {
 
     /**
      * get session storage item
-     * @param key
      */
     getItem(key: string): any {
         const value = sessionStorage.getItem(key);
@@ -28,7 +25,6 @@ export class SessionService {
 
     /**
      * remove session storage item
-     * @param key
      */
     removeItem(key: string) {
         sessionStorage.removeItem(key);

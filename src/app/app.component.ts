@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { SessionService } from 'src/app/core/services/session.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,11 +7,11 @@ import { User } from './core/models/user';
 import {ThemeService} from './core/services/theme.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   title = 'Idempiere Portal';
   showLoader = false;
@@ -23,12 +23,12 @@ export class AppComponent implements OnInit {
     private authenticationService: AuthenticationService, private themeService: ThemeService,
     translate: TranslateService) {
 
-      const theme = this.sessionService.getItem("selected-theme");
+      const theme = this.sessionService.getItem('selected-theme');
       if (theme) {
           this.theme = theme;
           this.themeService.selectTheme(theme);
       } else {
-          this.theme = "theme-teal";
+          this.theme = 'theme-teal';
       }
 
       this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
@@ -36,30 +36,33 @@ export class AppComponent implements OnInit {
       // this language will be used as a fallback when a translation isn't found in the current language
       translate.setDefaultLang('en');
       translate.addLangs(['en', 'fr']);
-      let language = this.sessionService.getItem("ng-prime-language");
+      let language = this.sessionService.getItem('ng-prime-language');
       if (language) {
-        // the lang to use, if the lang isn't available, it will use the current loader to get them
-        translate.use(language);
+          // the lang to use, if the lang isn't available, it will use the current loader to get them
+          translate.use(language);
       } else {
-        const browserLang = translate.getBrowserLang();
-        language = translate.getLangs().includes(browserLang) ? browserLang : 'en'
-        this.sessionService.setItem("ng-prime-language", language);
+          const browserLang = translate.getBrowserLang();
+          language = translate.getLangs().includes(browserLang) ? browserLang : 'en';
+          this.sessionService.setItem('ng-prime-language', language);
       }
   }
 
   ngOnInit() {
-    this.loaderService.status.subscribe((val: boolean) => {
-      this.showLoader = val;
-    });
+      this.loaderService.status.subscribe((val: boolean) => {
+          this.showLoader = val;
+      });
 
-    this.themeService.theme.subscribe((val: string) => {
-      this.theme = val;
-    });
-
+      this.themeService.theme.subscribe((val: string) => {
+          this.theme = val;
+      });
   }
 
   ngOnDestroy() {
-    this.themeService.theme.observers.forEach(function (element) { element.complete(); });
-    this.loaderService.status.observers.forEach(function (element) { element.complete(); });
+      this.themeService.theme.observers.forEach(element => {
+          element.complete();
+      });
+      this.loaderService.status.observers.forEach(element => {
+          element.complete();
+      });
   }
 }

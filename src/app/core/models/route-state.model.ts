@@ -5,9 +5,8 @@ export class RouteState {
   title = '';
   data: any;
 
-
-  constructor(){
-      this.id = Math.floor(Math.random()*90000) + 10000;
+  constructor() {
+      this.id = Math.floor(Math.random() * 90000) + 10000;
   }
 
 }
