@@ -24,13 +24,17 @@ This plugin works in pair with server side Idempiere Portal API that can be foun
 
 ![Portal Invoices](/src/assets/images/screen_invoices.png?raw=true "Portal Invoices")
 
+### Invoice Detail page
+
+![Portal Invoice Detail](/src/assets/images/screen_invoice_detail.png?raw=true "Portal Invoice Detail")
+
 ### Credit Card Page
 
 ![Portal Credit Card](/src/assets/images/screen_creditcard.png?raw=true "Portal Credit Card")
 
 ### Settings
 
-![Portal Credit Card](/src/assets/images/screen_settings.png?raw=true "Settings")
+![Settings](/src/assets/images/screen_settings.png?raw=true "Settings")
 
 
 ## Installing / Getting started
