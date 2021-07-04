@@ -12,6 +12,9 @@ export class MenuDataService {
 
   public toggleMenuBar: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
+  /**
+   * Application Menu list
+   */
   getMenuList(): CustomMenuItem[] {
       return [
           {

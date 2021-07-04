@@ -1,17 +1,16 @@
-/**
- * Created by spok on 22/07/16.
- */
 import {Pipe, PipeTransform} from '@angular/core';
 import {CommonService} from '../services/common.service';
 
+
 @Pipe({
-    name: 'docStatus',
+    name: 'tenderType',
     pure: false
 })
-export class DocStatusFormat implements PipeTransform {
+export class TenderTypeFormatPipe implements PipeTransform {
 
   private cachedValue: any = null;
   private cachedData: any = null;
+
 
   constructor(private commonService: CommonService) {
   }
@@ -22,12 +21,11 @@ export class DocStatusFormat implements PipeTransform {
           this.cachedData = null;
           this.cachedValue = value;
 
-          this.commonService.getReferenceDocStatus(value).subscribe(result => {
+          this.commonService.getReferenceTenderType(value).subscribe(result => {
               this.cachedData = result;
           });
 
       }
       return this.cachedData;
   }
-
 }
