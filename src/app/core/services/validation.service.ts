@@ -33,8 +33,6 @@ export class ValidationService {
             return ({noPassswordMatch: true});
         }
         return null;
-
-
     }
 
 }

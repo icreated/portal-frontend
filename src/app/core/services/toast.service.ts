@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MessageService} from 'primeng/api';
+import {Message, MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
@@ -10,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
  * This class provides methods to add single, multiple alerts as a toast
  */
 export class ToastService {
+
     constructor(private messageService: MessageService, private translationService: TranslateService) {
     }
 
@@ -19,6 +20,7 @@ export class ToastService {
      * @param severity Severity level of the message, valid values are "success", "info", "warn" and "error"
      * @param summary Summary text of the message.
      * @param detail Detail text of the message.
+     * @param isI18nKey Optional translation key
      */
     addSingle(severity: string, summary: string, detail: string, isI18nKey?: boolean) {
         if (isI18nKey) {
@@ -28,7 +30,6 @@ export class ToastService {
         } else {
             this.messageService.add({severity, summary, detail});
         }
-
     }
 
     /**
@@ -37,7 +38,7 @@ export class ToastService {
      * @param messages
      * array of message type {severity:'success', summary:'Service Message', detail:'Via MessageService'}
      */
-    addMultiple(messages: any) {
+    addMultiple(messages: Message[]) {
         this.messageService.addAll(messages);
     }
 
