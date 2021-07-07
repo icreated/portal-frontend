@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { LoaderService } from 'src/app/core/services/loader.service';
-import { SessionService } from 'src/app/core/services/session.service';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthenticationService } from './core/services/authentication-service';
-import { User } from './core/models/user';
+import {Component, OnInit} from '@angular/core';
+import {LoaderService} from 'src/app/core/services/loader.service';
+import {SessionService} from 'src/app/core/services/session.service';
+import {TranslateService} from '@ngx-translate/core';
+import {AuthenticationService} from './core/services/authentication-service';
+import {User} from './core/models/user';
 import {ThemeService} from './core/services/theme.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {ThemeService} from './core/services/theme.service';
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
   title = 'Idempiere Portal';
   showLoader = false;
@@ -48,21 +48,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-      this.loaderService.status.subscribe((val: boolean) => {
-          this.showLoader = val;
-      });
+      this.loaderService.getStatus()
+          .subscribe((status) => this.showLoader = status);
 
-      this.themeService.theme.subscribe((val: string) => {
-          this.theme = val;
-      });
+      this.themeService.getTheme()
+          .subscribe((theme) => this.theme = theme);
   }
 
-  ngOnDestroy() {
-      this.themeService.theme.observers.forEach(element => {
-          element.complete();
-      });
-      this.loaderService.status.observers.forEach(element => {
-          element.complete();
-      });
-  }
 }

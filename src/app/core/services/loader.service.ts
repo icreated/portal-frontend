@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +9,8 @@ import {BehaviorSubject} from 'rxjs';
  * toggle loader gif in website
  */
 export class LoaderService {
-  public status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  private status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   show() {
       this.status.next(true);
@@ -17,5 +18,9 @@ export class LoaderService {
 
   hide() {
       this.status.next(false);
+  }
+
+  getStatus(): Observable<boolean> {
+      return this.status.asObservable();
   }
 }

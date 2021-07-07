@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -8,7 +8,8 @@ import {BehaviorSubject} from 'rxjs';
  * Theme provider service
  */
 export class ThemeService {
-  public theme: BehaviorSubject<string> = new BehaviorSubject<string>('theme-teal');
+
+  private theme: BehaviorSubject<string> = new BehaviorSubject<string>('theme-teal');
 
   /**
    *
@@ -16,5 +17,9 @@ export class ThemeService {
    */
   selectTheme(value: string) {
       this.theme.next(value);
+  }
+
+  getTheme(): Observable<string> {
+      return this.theme.asObservable();
   }
 }
