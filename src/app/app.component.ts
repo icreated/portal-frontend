@@ -49,10 +49,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
       this.loaderService.getStatus()
-          .subscribe(status => this.showLoader = status);
+          .subscribe((status) => this.showLoader = status);
 
       this.themeService.getTheme()
-          .subscribe(theme => this.theme = theme);
+          .subscribe((theme) => this.theme = theme);
   }
 
 }

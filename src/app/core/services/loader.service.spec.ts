@@ -17,13 +17,13 @@ describe('LoaderService', () => {
     it('should check the loader is loading', () => {
         service.show();
         service.getStatus()
-            .subscribe(status => expect(status).toBeTruthy());
+            .subscribe((status) => expect(status).toBeTruthy());
     });
 
     it('should check the loader is stopped', () => {
         service.hide();
         service.getStatus()
-            .subscribe(status => expect(status).toBeFalsy());
+            .subscribe((status) => expect(status).toBeFalsy());
     });
 
 });

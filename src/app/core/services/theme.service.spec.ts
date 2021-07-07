@@ -18,7 +18,7 @@ describe('ThemeService', () => {
         const themeName = 'toto';
         service.selectTheme(themeName);
         service.getTheme()
-            .subscribe(theme => expect(theme).toEqual(themeName));
+            .subscribe((theme) => expect(theme).toEqual(themeName));
     });
 
 });

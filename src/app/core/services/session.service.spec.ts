@@ -12,10 +12,10 @@ describe('SessionService', () => {
         TestBed.configureTestingModule({});
         service = TestBed.inject(SessionService);
         store = {} as any;
-        spyOn(sessionStorage, 'getItem').and.callFake((key) => store[key]);
-        spyOn(sessionStorage, 'setItem').and.callFake((key, value) => store[key] = value + '');
+        spyOn(sessionStorage, 'getItem').and.callFake((key) => store[`${key}`]);
+        spyOn(sessionStorage, 'setItem').and.callFake((key, value) => store[`${key}`] = value + '');
         spyOn(sessionStorage, 'removeItem').and.callFake((key) => {
-            delete store[key];
+            delete store[`${key}`];
         });
         spyOn(sessionStorage, 'clear').and.callFake(() => {
             store = {};
