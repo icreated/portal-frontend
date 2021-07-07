@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ToastService } from './toast.service';
+import {ToastService} from './toast.service';
 import {Message, MessageService} from 'primeng/api';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 import {of} from 'rxjs';
@@ -10,21 +10,21 @@ import {of} from 'rxjs';
 describe('ToastService', () => {
     let toastService: ToastService;
     let messageServiceSpy: SpyObj<MessageService>;
-    let translationServiceSpy: SpyObj<TranslateService>;
+    let translateService: TranslateService;
 
     beforeEach(() => {
-        const messageSpy = createSpyObj('MessageService',['add', 'addAll', 'clear']);
-        const translationSpy = createSpyObj('TranslateService', ['get']);
+        const messageSpy = createSpyObj('MessageService', ['add', 'addAll', 'clear']);
 
         TestBed.configureTestingModule({
-            providers: [ToastService, MessageService,
-                {provide: TranslateService, useValue: translationSpy},
+            imports: [TranslateModule.forRoot()],
+            providers: [
                 {provide: MessageService, useValue: messageSpy}
             ]
         });
         toastService = TestBed.inject(ToastService);
+        translateService = TestBed.inject(TranslateService);
+        spyOn(translateService, 'get').and.returnValue(of('Bonjour le monde'));
         messageServiceSpy = TestBed.inject(MessageService) as SpyObj<MessageService>;
-        translationServiceSpy = TestBed.inject(TranslateService) as SpyObj<TranslateService>;
     });
 
     it('should be created', () => {
@@ -33,19 +33,22 @@ describe('ToastService', () => {
 
     describe('addSingle', () => {
         it('should check that translation not called when isI18nKey is false', () => {
-            const msgInfo = {severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere',
-                isI18nKey: false};
+            const msgInfo = {
+                severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere',
+                isI18nKey: false
+            };
             toastService.addSingle(msgInfo.severity, msgInfo.summary, msgInfo.detail);
-            expect(translationServiceSpy.get.calls.count()).toBe(0);
+            expect(translateService.get).toHaveBeenCalledTimes(0);
             expect(messageServiceSpy.add.calls.count()).toBe(1);
         });
 
         it('should check that translation is called when isI18nKey is true', () => {
-            const msgInfo = {severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere',
-                isI18nKey: true};
-            translationServiceSpy.get.and.returnValue(of('Bonjour le monde'));
+            const msgInfo = {
+                severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere',
+                isI18nKey: true
+            };
             toastService.addSingle(msgInfo.severity, msgInfo.summary, msgInfo.detail, true);
-            expect(translationServiceSpy.get.calls.count()).toBe(1);
+            expect(translateService.get).toHaveBeenCalledTimes(1);
             expect(messageServiceSpy.add.calls.count()).toBe(1);
         });
     });
