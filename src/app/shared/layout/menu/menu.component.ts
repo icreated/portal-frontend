@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit, OnDestroy {
           }
       });
 
-      this.applicationStateService.getIsMobileResolution()
+      this.applicationStateService.isMobileResolution()
           .subscribe(isMobile => this.visible = !isMobile);
 
       const activeMenu = this.sessionService.getItem('active-menu');
@@ -55,7 +55,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       this.routeStateService.add(menu.label, menu.routerLink, null, true);
       // hide menu bar after menu click for mobile layout
       setTimeout(() => {
-          this.applicationStateService.getIsMobileResolution()
+          this.applicationStateService.isMobileResolution()
               .subscribe(isMobile => this.visible = !isMobile);
       }, 100);
   }

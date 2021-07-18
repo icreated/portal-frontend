@@ -28,7 +28,7 @@ export class ApplicationStateService {
     }
 
 
-    public getIsMobileResolution(): Observable<boolean> {
+    public isMobileResolution(): Observable<boolean> {
         return this.windowSize$.pipe(
             map(win => win.width <= 992)
         );
