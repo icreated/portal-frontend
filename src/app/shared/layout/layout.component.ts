@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
           }
       });
 
-      this.applicationStateService.getIsMobileResolution().subscribe(
+      this.applicationStateService.isMobileResolution().subscribe(
           isMobile => this.isMenuVisible = !isMobile
       );
   }
