@@ -1,11 +1,11 @@
 import {TestBed} from '@angular/core/testing';
-import {CommonService} from "./common.service";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {environment} from "../../../environments/environment";
-import {ValueLabel} from "../models/value-label.model";
+import {CommonService} from './common.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {environment} from '../../../environments/environment';
+import {ValueLabel} from '../models/value-label.model';
 
-describe("CommonService", () => {
+describe('CommonService', () => {
     let commonService: CommonService;
     let translateService: TranslateService;
     let httpMock: HttpTestingController;
@@ -36,7 +36,7 @@ describe("CommonService", () => {
                 .subscribe((result) => expect(result).toBe(expectedValue));
 
             const req = httpMock.expectOne(`${environment.apiUrl}/common/reference/docstatus/${commonService.getLang()}/` + value);
-            expect(req.request.method).toBe("GET");
+            expect(req.request.method).toBe('GET');
             req.flush(expectedValue);
         });
     });
@@ -50,7 +50,7 @@ describe("CommonService", () => {
                 .subscribe((result) => expect(result).toBe(expectedValue));
 
             const req = httpMock.expectOne(`${environment.apiUrl}/common/reference/tendertype/${commonService.getLang()}/` + value);
-            expect(req.request.method).toBe("GET");
+            expect(req.request.method).toBe('GET');
             req.flush(expectedValue);
         });
     });
@@ -66,7 +66,7 @@ describe("CommonService", () => {
                 .subscribe((result) => expect(result).toBe(values));
 
             const req = httpMock.expectOne(`${environment.apiUrl}/common/reference/creditcardtypes`);
-            expect(req.request.method).toBe("GET");
+            expect(req.request.method).toBe('GET');
             req.flush(values);
         });
     });
