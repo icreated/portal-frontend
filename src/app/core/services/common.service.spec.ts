@@ -20,6 +20,10 @@ describe('CommonService', () => {
         httpMock = TestBed.inject(HttpTestingController);
     });
 
+    afterEach(() => {
+        httpMock.verify();
+    });
+
     describe('getLang', () => {
         it('should convert en to en_US', () => {
             spyOnProperty(translateService, 'currentLang').and.returnValue('en');
