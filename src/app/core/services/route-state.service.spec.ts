@@ -60,8 +60,8 @@ describe('RouteStateService', () => {
             service.add(dummy3.title, dummy3.path, dummy3.data, true);
             const current = service.getCurrent();
             // id is generated in constructor, so we redefine it for tests
-            current.id = dummy2.id;
-            expect(current).toEqual(dummy2);
+            current.id = dummy3.id;
+            expect(current).toEqual(dummy3);
         });
     });
 
