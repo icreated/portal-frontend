@@ -63,6 +63,7 @@
     "typescript": "~4.2.3",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsdoc": "latest",
-    "eslint-plugin-prefer-arrow": "latest"
+    "eslint-plugin-prefer-arrow": "latest",
+    "socket.io-parser": ">=3.3.2"
   }
 }

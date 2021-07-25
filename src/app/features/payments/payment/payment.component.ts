@@ -7,6 +7,8 @@ import {CreditCard} from 'src/app/core/models/credit-card.model';
 import {CommonService} from 'src/app/core/services/common.service';
 import {ValueLabel} from 'src/app/core/models/value-label.model';
 import {environment} from 'src/environments/environment';
+import {DashboardDataService} from '../../dashboard/dashboard-data.service';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-payment',
@@ -19,6 +21,7 @@ export class PaymentComponent implements OnInit {
   loading = false;
   submitted = false;
   cardFormGroup: FormGroup;
+  openTotal = 0;
 
   creditCardTypes: ValueLabel[] = [];
 
@@ -45,7 +48,7 @@ export class PaymentComponent implements OnInit {
       {label: '2025', value: 2025},
   ];
 
-  constructor(private formBuilder: FormBuilder, public paymentService: PaymentDataService,
+  constructor(private formBuilder: FormBuilder, public paymentService: PaymentDataService, private dashboardService: DashboardDataService,
               private commonService: CommonService, private router: Router, private routeStateService: RouteStateService) {
 
       this.cardFormGroup = this.formBuilder.group({
@@ -59,10 +62,15 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-      if (isNaN(this.paymentService.openTotal) || this.paymentService.openTotal <= 0) {
-          this.routeStateService.loadPrevious();
-          this.router.navigate(['/main/dashboard']);
-      }
+      this.dashboardService.getOpenItemList().pipe(
+          map(openItems => openItems.map(item => item.openAmt).reduce((a, b) => a + b, 0))
+      ).subscribe(total => {
+          this.openTotal = total;
+          if (this.openTotal <= 0) {
+              this.routeStateService.loadPrevious();
+              this.router.navigate(['/main/dashboard']);
+          }
+      });
       this.commonService.getReferenceCreditCardTypes().subscribe(data => {
           this.creditCardTypes = data;
       });
@@ -75,7 +83,6 @@ export class PaymentComponent implements OnInit {
 
 
   onSubmit() {
-
       this.submitted = true;
       if (this.cardFormGroup.invalid) {
           return;
@@ -89,11 +96,12 @@ export class PaymentComponent implements OnInit {
       creditCard.expirationMonth = this.f.expirationMonth.value;
       creditCard.expirationYear = this.f.expirationYear.value;
       creditCard.cvc = this.f.cvc.value;
-      creditCard.amt = this.paymentService.openTotal;
+      creditCard.amt = this.openTotal;
 
       this.paymentService.pay(creditCard).subscribe(() => {
           this.loading = false;
           creditCard = {} as CreditCard;
+          // TODO show result message
           this.back();
       });
   }

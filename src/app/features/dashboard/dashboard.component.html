@@ -1,13 +1,13 @@
 <p-messages [(value)]="msgs"></p-messages>
 <div class="p-grid">
   <div class="p-col-12 p-md-6 p-lg-3">
-    <a (click)="goToPayment()" *ngIf="paymentService.openTotal > 0">
+    <a (click)="goToPayment()" *ngIf="openTotal > 0">
       <p-card styleClass="overview-box-1">
         <div>{{ 'click-to-pay' | translate}}</div>
-        <h1>{{paymentService.openTotal | currency: currencyISO}}</h1>
+        <h1>{{openTotal | currency: currencyISO}}</h1>
       </p-card>
     </a>
-    <p-card styleClass="overview-box-1"  *ngIf="paymentService.openTotal <= 0">
+    <p-card styleClass="overview-box-1"  *ngIf="openTotal <= 0">
       <div>&nbsp;</div>
       <h1>{{ 'paid-off' | translate }}</h1>
     </p-card>

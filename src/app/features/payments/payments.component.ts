@@ -15,10 +15,7 @@ export class PaymentsComponent implements OnInit {
   env = environment;
   payments: Payment[] = [];
 
-  constructor(
-    private routeStateService: RouteStateService,
-    private commonService: CommonService,
-    private paymentService: PaymentDataService) {
+  constructor(private paymentService: PaymentDataService) {
   }
 
   ngOnInit() {
