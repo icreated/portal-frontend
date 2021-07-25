@@ -40,7 +40,6 @@ export class ForgotPasswordComponent implements OnInit {
 
 
   send() {
-
       this.toastService.clear();
       this.submitted = true;
 
