@@ -17,6 +17,9 @@ describe("ForgotPasswordComponent", () => {
     let toastService: ToastService;
     let authenticationService: AuthenticationService;
 
+    const EMAIL_OK = 'george.orwell@bigbrother-1984.com';
+    const EMAIL_NOT_OK = 'winston.smith#bigbrother';
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [ForgotPasswordComponent],
@@ -39,7 +42,7 @@ describe("ForgotPasswordComponent", () => {
     describe('email form validation', () => {
         it('should render email input', () => {
             const compiled = fixture.debugElement.nativeElement;
-            const emailInput = compiled.querySelector('input[id="email"]');
+            const emailInput = compiled.querySelector('input[formControlName="email"]');
             expect(emailInput).toBeTruthy();
         });
 
@@ -47,39 +50,39 @@ describe("ForgotPasswordComponent", () => {
             const form = component.forgotForm;
             expect(form.valid).toBeFalsy();
             const emailInput = form.controls.email;
-            emailInput.setValue('George Orwell');
+            emailInput.setValue(EMAIL_NOT_OK);
             expect(form.valid).toBeFalsy();
-            emailInput.setValue('george.orwell@bigbrother-1984.com');
+            emailInput.setValue(EMAIL_OK);
             expect(form.valid).toBeTruthy();
         });
 
         it('should test input validity', () => {
             const emailInput = component.forgotForm.controls.email;
             expect(emailInput.valid).toBeFalsy();
-            emailInput.setValue('george.orwell@bigbrother-1984.com');
+            emailInput.setValue(EMAIL_OK);
             expect(emailInput.valid).toBeTruthy();
         });
 
         it('should test input errors', () => {
             const emailInput = component.forgotForm.controls.email;
             expect(emailInput.errors?.required).toBeTruthy();
-            emailInput.setValue('george.orwell@bigbrother-1984.com');
+            emailInput.setValue(EMAIL_OK);
             expect(emailInput.errors).toBeNull();
         });
     });
 
     describe('send', () => {
-        it('should not call backend if form is empty', () => {
+        it('should not call backend when form is empty', () => {
             spyOn(authenticationService, 'forgotPassword').and.returnValue(EMPTY);
-            component.f.email.setValue('George Orwell');
+            component.f.email.setValue(EMAIL_NOT_OK);
             component.send();
             expect(component.forgotForm.valid).toBeFalsy();
             expect(authenticationService.forgotPassword).not.toHaveBeenCalled();
         });
 
-        it('should call backend if email is provided', () => {
+        it('should call backend when email is provided', () => {
             spyOn(authenticationService, 'forgotPassword').and.returnValue(EMPTY);
-            component.f.email.setValue('george.orwell@bigbrother-1984.com');
+            component.f.email.setValue(EMAIL_OK);
             component.send();
             expect(component.forgotForm.valid).toBeTruthy();
             expect(authenticationService.forgotPassword).toHaveBeenCalled();
