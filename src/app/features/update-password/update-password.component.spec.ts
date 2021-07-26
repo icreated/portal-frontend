@@ -1,18 +1,18 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {UpdatePasswordComponent} from "./update-password.component";
-import {ToastService} from "../../core/services/toast.service";
-import {AuthenticationService} from "../../core/services/authentication-service";
-import {MessageService} from "primeng/api";
-import {AppCommonModule} from "../../app.common.module";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {TranslateModule} from "@ngx-translate/core";
-import {EMPTY} from "rxjs";
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {UpdatePasswordComponent} from './update-password.component';
+import {ToastService} from '../../core/services/toast.service';
+import {AuthenticationService} from '../../core/services/authentication-service';
+import {MessageService} from 'primeng/api';
+import {AppCommonModule} from '../../app.common.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {TranslateModule} from '@ngx-translate/core';
+import {EMPTY} from 'rxjs';
 
 
-describe("UpdatePasswordComponent", () => {
+describe('UpdatePasswordComponent', () => {
     let component: UpdatePasswordComponent;
     let fixture: ComponentFixture<UpdatePasswordComponent>;
     let toastService: ToastService;
@@ -106,7 +106,7 @@ describe("UpdatePasswordComponent", () => {
             spyOn(authenticationService, 'passwordValidate').and.returnValue(EMPTY);
             component.f.newPassword.setValue(PASSWORD_OK);
             component.f.confirmPassword.setValue('');
-            component.update()
+            component.update();
             expect(component.forgotForm.valid).toBeFalsy();
             expect(authenticationService.passwordValidate).not.toHaveBeenCalled();
         });
@@ -115,8 +115,8 @@ describe("UpdatePasswordComponent", () => {
             component.f.newPassword.setValue(PASSWORD_OK);
             component.f.confirmPassword.setValue(PASSWORD_OK);
             spyOn(authenticationService, 'passwordValidate').and.returnValue(EMPTY);
-            component.update()
+            component.update();
             expect(authenticationService.passwordValidate).toHaveBeenCalled();
         });
     });
-})
+});
