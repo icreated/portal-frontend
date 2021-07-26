@@ -12,7 +12,6 @@ export class SettingsComponent implements OnInit {
   selectedLang = 'en';
 
   constructor(public translate: TranslateService, private sessionService: SessionService) {
-
       const language = this.sessionService.getItem('ng-prime-language');
       if (language) {
           this.selectedLang = language;
