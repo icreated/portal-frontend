@@ -83,7 +83,7 @@ describe("UpdatePasswordComponent", () => {
             newPasswordInput.setValue(PASSWORD_WITHOUT_NUMBER);
             confirmPasswordInput.setValue(PASSWORD_WITHOUT_NUMBER);
             expect(confirmPasswordInput.valid).toBeTruthy();
-            expect(component.f.valid).toBeFalsy();
+            expect(component.forgotForm.valid).toBeFalsy();
 
             newPasswordInput.setValue(PASSWORD_OK);
             confirmPasswordInput.setValue(PASSWORD_OK);
