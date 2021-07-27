@@ -15,56 +15,49 @@ import {AuthenticationService} from 'src/app/core/services/authentication-servic
 })
 export class HeaderComponent implements OnInit {
 
-  user!: User;
-  displayNotifications: boolean;
-  notifications: Notification[] = [];
+    user!: User;
+    displayNotifications: boolean;
+    notifications: Notification[] = [];
 
-  constructor(
-    private router: Router,
-    private routeStateService: RouteStateService,
-    private sessionService: SessionService,
-    private userIdle: UserIdleService,
-    private menuDataService: MenuDataService,
-    private authenticationService: AuthenticationService) {
+    constructor(private router: Router, private routeStateService: RouteStateService,
+                private sessionService: SessionService, private userIdle: UserIdleService,
+                private menuDataService: MenuDataService, private authenticationService: AuthenticationService) {
+        this.displayNotifications = false;
+    }
 
-      this.displayNotifications = false;
+    ngOnInit() {
+        this.user = this.sessionService.getItem('currentUser');
+        this.notifications = [];
+        // Example Notification not implemented, no need for the moment
+        // for (let i = 1; i <= 5; i++) {
+        //     this.notifications.push(new Notification('Message ' + i, new Date(), 0));
+        // }
 
-  }
+        // Start watching for user inactivity.
+        this.userIdle.startWatching();
+        // Start watching when user idle is starting.
+        this.userIdle.onTimerStart().subscribe();
+        // Start watch when time is up.
+        this.userIdle.onTimeout().subscribe(() => {
+            this.logout();
+        });
+    }
 
-  ngOnInit() {
-      this.user = this.sessionService.getItem('currentUser');
-      this.notifications = [];
-      for (let i = 1; i <= 5; i++) {
-          this.notifications.push(new Notification('Message ' + i, new Date(), 0));
-      }
+    logout() {
+        this.userIdle.stopWatching();
+        this.routeStateService.removeAll();
+        this.authenticationService.logout();
+        this.sessionService.removeItem('active-menu');
+        this.router.navigate(['/login']);
+    }
 
-      // Start watching for user inactivity.
-      this.userIdle.startWatching();
+    showNotificationSidebar() {
+        this.displayNotifications = true;
+    }
 
-      // Start watching when user idle is starting.
-      this.userIdle.onTimerStart().subscribe();
-
-      // Start watch when time is up.
-      this.userIdle.onTimeout().subscribe(() => {
-          this.logout();
-      });
-  }
-
-  logout() {
-      this.userIdle.stopWatching();
-      this.routeStateService.removeAll();
-      this.authenticationService.logout();
-      this.sessionService.removeItem('active-menu');
-      this.router.navigate(['/login']);
-  }
-
-  showNotificationSidebar() {
-      this.displayNotifications = true;
-  }
-
-  toggleMenu() {
-      this.menuDataService.toggleMenuBar.next(true);
-  }
+    toggleMenu() {
+        this.menuDataService.toggleMenuBar.next(true);
+    }
 
 
 }
