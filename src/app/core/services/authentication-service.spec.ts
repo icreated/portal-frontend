@@ -10,7 +10,6 @@ describe('AuthenticationService', () => {
     let service: AuthenticationService;
     let httpMock: HttpTestingController;
     let store = {} as any;
-    let navigateSpy: jasmine.Func;
     const currentUser = {
         id: 100,
         username: 'orwell',

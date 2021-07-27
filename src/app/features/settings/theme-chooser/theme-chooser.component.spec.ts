@@ -1,12 +1,12 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {ThemeChooserComponent} from "./theme-chooser.component";
-import {ThemeService} from "../../../core/services/theme.service";
-import {SessionService} from "../../../core/services/session.service";
-import {TranslateModule} from "@ngx-translate/core";
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ThemeChooserComponent} from './theme-chooser.component';
+import {ThemeService} from '../../../core/services/theme.service';
+import {SessionService} from '../../../core/services/session.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 
-describe("ThemeChooserComponent", () => {
+describe('ThemeChooserComponent', () => {
     let component: ThemeChooserComponent;
     let fixture: ComponentFixture<ThemeChooserComponent>;
     let sessionService: SessionService;
@@ -41,4 +41,4 @@ describe("ThemeChooserComponent", () => {
             expect(themeService.selectTheme).toHaveBeenCalled();
         });
     });
-})
+});

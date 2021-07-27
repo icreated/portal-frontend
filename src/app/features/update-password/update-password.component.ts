@@ -24,19 +24,19 @@ export class UpdatePasswordComponent implements OnInit {
                 private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService) {
 
         this.forgotForm = this.formBuilder.group({
-                newPassword: [null, Validators.compose([
-                    // 1. Password Field is Required
-                    Validators.required,
-                    // 2. check whether the entered password has a number
-                    ValidationService.patternValidator(/\d/, {hasNumber: true}),
-                    // 3. check whether the entered password has upper case letter
-                    ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-                    // 4. Has a minimum length of 8 characters
-                    Validators.minLength(8)])
-                ],
-                confirmPassword: [null, Validators.compose([Validators.required])]
-            },
-            {validators: [ValidationService.passwordMatchValidator]}
+            newPassword: [null, Validators.compose([
+                // 1. Password Field is Required
+                Validators.required,
+                // 2. check whether the entered password has a number
+                ValidationService.patternValidator(/\d/, {hasNumber: true}),
+                // 3. check whether the entered password has upper case letter
+                ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+                // 4. Has a minimum length of 8 characters
+                Validators.minLength(8)])
+            ],
+            confirmPassword: [null, Validators.compose([Validators.required])]
+        },
+        {validators: [ValidationService.passwordMatchValidator]}
         );
     }
 
