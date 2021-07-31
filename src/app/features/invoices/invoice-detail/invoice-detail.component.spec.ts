@@ -34,17 +34,13 @@ describe('InvoiceDetailComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(InvoiceDetailComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
-
         invoiceService = TestBed.inject(InvoicesDataService);
         routeStateService = TestBed.inject(RouteStateService);
 
         spyOn(invoiceService, 'getInvoiceById').and.returnValue(of(invoice));
-
     });
 
     describe('onInit', () => {
-
 
         it('should call RouteStateService to get invoice Id', () => {
             const routeState = {data: 100} as RouteState;
@@ -53,6 +49,8 @@ describe('InvoiceDetailComponent', () => {
             expect(routeStateService.getCurrent).toHaveBeenCalled();
         });
         it('should get invoice by id', () => {
+            const routeState = {data: 100} as RouteState;
+            spyOn(routeStateService, 'getCurrent').and.returnValue(routeState);
             component.ngOnInit();
             expect(component).toBeTruthy();
             expect(component.invoice).toEqual(invoice);

@@ -36,7 +36,7 @@ describe('PaymentDataService', () => {
                     expect(items.length).toBe(2);
                     done();
                 });
-            const req = httpMock.expectOne(`${environment.apiUrl}/payments/all`);
+            const req = httpMock.expectOne(`${environment.apiUrl}/payments`);
             expect(req.request.method).toBe('GET');
             req.flush(paymentItems);
         });
