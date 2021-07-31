@@ -14,10 +14,10 @@ export class InvoicesDataService {
     }
 
     getInvoicesList() {
-        return this.http.get<DocumentItem[]>(`${environment.apiUrl}/invoices/all`);
+        return this.http.get<DocumentItem[]>(`${environment.apiUrl}/invoices`);
     }
 
     getInvoiceById(invoiceId: number) {
-        return this.http.get<Invoice>(`${environment.apiUrl}/invoices/invoice/` + invoiceId);
+        return this.http.get<Invoice>(`${environment.apiUrl}/invoices/` + invoiceId);
     }
 }

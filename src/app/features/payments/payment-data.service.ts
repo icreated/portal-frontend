@@ -15,7 +15,7 @@ export class PaymentDataService {
     }
 
     getPaymentsList(): Observable<Payment[]> {
-        return this.http.get<Payment[]>(`${environment.apiUrl}/payments/all`);
+        return this.http.get<Payment[]>(`${environment.apiUrl}/payments`);
     }
 
     pay(creditCard: CreditCard) {

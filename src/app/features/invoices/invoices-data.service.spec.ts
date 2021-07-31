@@ -36,7 +36,7 @@ describe('InvoicesDataService', () => {
                     expect(items.length).toBe(0);
                     done();
                 });
-            const req = httpMock.expectOne(`${environment.apiUrl}/invoices/all`);
+            const req = httpMock.expectOne(`${environment.apiUrl}/invoices`);
             expect(req.request.method).toBe('GET');
             req.flush([]);
         });
@@ -46,7 +46,7 @@ describe('InvoicesDataService', () => {
                     expect(items.length).toBe(2);
                     done();
                 });
-            const req = httpMock.expectOne(`${environment.apiUrl}/invoices/all`);
+            const req = httpMock.expectOne(`${environment.apiUrl}/invoices`);
             expect(req.request.method).toBe('GET');
             req.flush(invoiceItems);
         });
@@ -60,7 +60,7 @@ describe('InvoicesDataService', () => {
                     expect(item).toEqual(returnedInvoice);
                     done();
                 });
-            const req = httpMock.expectOne(`${environment.apiUrl}/invoices/invoice/` + invoiceId);
+            const req = httpMock.expectOne(`${environment.apiUrl}/invoices/` + invoiceId);
             expect(req.request.method).toBe('GET');
             req.flush(returnedInvoice);
         });
