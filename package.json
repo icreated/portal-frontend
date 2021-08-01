@@ -1,7 +1,7 @@
 {
   "name": "ng-prime",
   "version": "1.0.0",
-  "author": "nilav patel",
+  "author": "sergey polyarus, nilav patel with chuck boecking idea",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
