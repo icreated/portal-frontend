@@ -44,11 +44,12 @@ describe('ChangePasswordComponent', () => {
     describe('changePassword form validation', () => {
         it('should render changePassword input', () => {
             const compiled = fixture.debugElement.nativeElement;
-            const passwordInput = compiled.querySelector('input[formControlName="password"]');
+            const form = component.passwordForm;
+            const passwordInput = compiled.querySelectorAll('app-password')[0];
             expect(passwordInput).toBeTruthy();
-            const newPasswordInput = compiled.querySelector('input[formControlName="newPassword"]');
+            const newPasswordInput = compiled.querySelectorAll('app-password')[1];
             expect(newPasswordInput).toBeTruthy();
-            const confirmPasswordInput = compiled.querySelector('input[formControlName="confirmPassword"]');
+            const confirmPasswordInput = compiled.querySelectorAll('app-password')[2];
             expect(confirmPasswordInput).toBeTruthy();
         });
 

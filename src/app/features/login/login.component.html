@@ -8,26 +8,13 @@
             <div class="p-col-12">
               <p-messages [(value)]="msgs"></p-messages>
             </div>
-            <div class="p-grid p-justify-center p-align-center">
-              <div class="p-col-12">
-                <div class="p-inputgroup">
-                  <span class="p-inputgroup-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" formControlName="username" size="30"  pInputText [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.username.errors }"
-                  [placeholder]="'login-user-name' | translate" aria-describedby="username-help" autocomplete="username"/>
-                </div>
-                <small id="username-help" class="p-error" *ngIf="submitted && f.username.errors">
-                  <div *ngIf="f.username.errors.required">{{ 'username-required-msg' | translate }}</div>
-                </small>
+            <div class="p-fluid p-grid p-justify-center p-align-center p-mb-2">
+              <div class="p-field p-col-12">
+                <app-input icon="fa-user" [control]="f.username"  [label]="'login-user-name' | translate"
+                           [submitted]="submitted"> </app-input>
               </div>
-              <div class="p-col-12">
-                <div class="p-inputgroup">
-                  <span class="p-inputgroup-addon"><i class="fa fa-key"></i></span>
-                  <input type="password" formControlName="password" size="30" pInputText [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.password.errors }"
-                  [placeholder]="'login-user-password' | translate" aria-describedby="password-help" autocomplete="current-password" />
-                </div>
-                <small id="password-help" class="p-error" *ngIf="submitted && f.password.errors">
-                  <div *ngIf="f.password.errors.required">{{ 'password-required-msg' | translate }}</div>
-                </small>
+              <div class="p-field p-col-12">
+                <app-password icon="fa-key" [control]="f.password" toggleMask="true" [label]="'login-user-password' | translate"  [submitted]="submitted"> </app-password>
               </div>
             </div>
             <div class="p-grid">

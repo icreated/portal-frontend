@@ -381,3 +381,14 @@ a {
 .invalid-feedback {
     color:firebrick;
 }
+
+
+/* Components improvement */
+.input-icon-style {
+    border-radius: 0 2px 2px 0 !important;
+}
+.password-custom {
+    padding-right: 2rem;
+}
+
+

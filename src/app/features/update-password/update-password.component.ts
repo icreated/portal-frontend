@@ -5,6 +5,7 @@ import {AuthenticationService} from 'src/app/core/services/authentication-servic
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
 import {Message} from 'primeng/api';
+import FormUtils from '../../core/utils/FormUtils';
 
 @Component({
     selector: 'app-update-password',
@@ -32,7 +33,9 @@ export class UpdatePasswordComponent implements OnInit {
                 // 3. check whether the entered password has upper case letter
                 ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
                 // 4. Has a minimum length of 8 characters
-                Validators.minLength(8)])
+                Validators.minLength(8),
+                // 4. Has a maximum length of 20 characters
+                Validators.maxLength(20)])
             ],
             confirmPassword: [null, Validators.compose([Validators.required])]
         },
@@ -65,7 +68,8 @@ export class UpdatePasswordComponent implements OnInit {
         this.authenticationService.passwordValidate(this.token, this.f.newPassword.value, this.f.confirmPassword.value)
             .subscribe(
                 () => {
-                    this.forgotForm.reset();
+                    FormUtils.cleanForm(this.forgotForm);
+                    this.loading = false;
                     this.router.navigateByUrl('/');
                     this.toastService.addSingle('success', '', 'password-updated', true);
                 },

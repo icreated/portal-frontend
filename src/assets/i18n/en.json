@@ -45,16 +45,14 @@
   "back-login-page-msg" : "Back to login page",
   "forgot-password-msg": "Forgot Password",
   "email-required" : "Email is required",
-  "email-wrong" : "Email is wrong",
 
   "email" : "Email",
   "password" : "Password",
   "old-password" : "Old Password",
   "confirm-password" : "Confirm Password",
   "password-required-msg" : "Password is required",
-  "password-minlength-msg" : "Must be at least 6 characters!",
-  "password-has-number-msg" : "Must contain at least 1 number!",
-  "password-has-capitalcase-msg" : "Must contain at least 1 in Capital Case!",
+  "password-has-number-msg" : "At least 1 number!",
+  "password-has-capitalcase-msg" : "At least 1 upperCase!",
   "password-not-match-msg" : "Password do not match",
   "password-updated" : "Password is updated",
   "password-not-updated": "Password is not updated",
@@ -78,9 +76,12 @@
   "expiration-month" : "Exp. Month",
   "expiration-year" : "Exp. Year",
   "pay" : "PAY",
-  "required" : "Required",
 
   "language" : "Language",
-  "theme-chooser" : "Theme Chooser"
+  "theme-chooser" : "Theme Chooser",
 
+  "required" : "Required",
+  "minlength-msg" : "At least {{min}} characters",
+  "maxlength-msg" : "Maximum  {{max}} characters",
+  "format-wrong-msg" : "Format is wrong"
 }

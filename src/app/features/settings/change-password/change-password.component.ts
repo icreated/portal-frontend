@@ -6,6 +6,8 @@ import {AuthenticationService} from 'src/app/core/services/authentication-servic
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
 import {Message} from 'primeng/api';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import FormUtils from '../../../core/utils/FormUtils';
 
 @Component({
     selector: 'app-change-password',
@@ -19,9 +21,10 @@ export class ChangePasswordComponent implements OnInit {
     submitted = false;
     error = '';
     msgs: Message[] = [];
+    currentLang = 'en';
 
     constructor(private formBuilder: FormBuilder, private router: Router, private toastService: ToastService,
-                private authenticationService: AuthenticationService) {
+                private authenticationService: AuthenticationService, private translateService: TranslateService) {
 
         this.passwordForm = this.formBuilder.group({
             password: [null, Validators.compose([Validators.required])],
@@ -43,6 +46,7 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.translateService.onLangChange.subscribe((event: LangChangeEvent) => this.currentLang = event.lang);
     }
 
     // convenience getter for easy access to form fields
@@ -53,7 +57,6 @@ export class ChangePasswordComponent implements OnInit {
     update() {
         this.toastService.clear();
         this.submitted = true;
-
         // stop here if form is invalid
         if (this.passwordForm.invalid) {
             return;
@@ -64,8 +67,8 @@ export class ChangePasswordComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 () => {
-                    this.passwordForm.reset();
-                    this.router.navigateByUrl('main/dashboard');
+                    this.loading = false;
+                    FormUtils.cleanForm(this.passwordForm);
                     this.toastService.addSingle('success', '', 'password-updated', true);
                 },
                 error => {

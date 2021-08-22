@@ -7,10 +7,15 @@ import {CommonModule} from '@angular/common';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {InputComponent} from './shared/components/form/input/input.component';
+import {PasswordComponent} from './shared/components/form/password/password.component';
 
 @NgModule({
     imports: [
         CommonModule,
+        ReactiveFormsModule,
+        PipeModule,
+        NgPrimeModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
@@ -26,10 +31,12 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
         PipeModule,
         ReactiveFormsModule,
         CommonModule,
-        TranslateModule
+        TranslateModule,
+        InputComponent,
+        PasswordComponent
     ],
     declarations: [
-        ErrorComponent
+        ErrorComponent, InputComponent, PasswordComponent
     ]
 })
 

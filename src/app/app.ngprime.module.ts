@@ -16,10 +16,17 @@ import { SidebarModule } from 'primeng/sidebar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessagesModule } from 'primeng/messages';
+import {PasswordModule} from 'primeng/password';
+import {DividerModule} from 'primeng/divider';
+import {DropdownModule} from 'primeng/dropdown';
+import {HeaderBreadCrumbModule} from './shared/layout/header-breadcrumb/header-breadcrumb.module';
 
 @NgModule({
     exports: [
         InputTextModule,
+        PasswordModule,
+        DividerModule,
+        DropdownModule,
         ButtonModule,
         PanelModule,
         ToastModule,
@@ -35,7 +42,7 @@ import { MessagesModule } from 'primeng/messages';
         SidebarModule,
         DynamicDialogModule,
         InputTextareaModule,
-        MessagesModule
+        MessagesModule,
     ]
 })
 export class NgPrimeModule { }
