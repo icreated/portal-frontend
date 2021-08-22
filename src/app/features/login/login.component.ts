@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {Message} from 'primeng/api';
+import FormUtils from '../../core/utils/FormUtils';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
               private authenticationService: AuthenticationService) {
 
       this.loginForm = this.formBuilder.group({
-          username: ['', [Validators.required]],
+          username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
           password: ['', [Validators.required]]
       });
 
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
               },
               error => {
                   this.toastService.clear();
-                  this.loginForm.reset();
+                  FormUtils.cleanForm(this.loginForm);
                   this.loading = false;
                   this.toastService.addSingle('error', '', 'login-invalid-user', true);
               });

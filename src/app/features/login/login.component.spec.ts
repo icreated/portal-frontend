@@ -42,9 +42,9 @@ describe('LoginComponent', () => {
     describe('login form validation', () => {
         it('should render login input', () => {
             const compiled = fixture.debugElement.nativeElement;
-            const usernameInput = compiled.querySelector('input[formControlName="username"]');
+            const usernameInput = compiled.querySelector('app-input');
             expect(usernameInput).toBeTruthy();
-            const passwordInput = compiled.querySelector('input[formControlName="password"]');
+            const passwordInput = compiled.querySelector('app-password');
             expect(passwordInput).toBeTruthy();
         });
 

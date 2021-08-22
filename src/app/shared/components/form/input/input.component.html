@@ -1,0 +1,13 @@
+<div class="p-inputgroup">
+    <span class="p-inputgroup-addon" *ngIf="icon"><i class='fa' [class]="icon"></i></span>
+    <input [type]="type" [formControl]="control" size="30" pInputText class="p-inputtext"
+           [ngClass]="{ 'ng-invalid ng-dirty': submitted &&  control.errors}"
+           [placeholder]="label | translate" [autocomplete]="'control'+uniqueId" [attr.aria-describedby]="'v'+uniqueId"/>
+</div>
+<small [id]="'v'+uniqueId" class="p-error" *ngIf="submitted &&  control.errors">
+    <div *ngIf="control.errors.required || control.pristine">{{ 'required' | translate }}</div>
+    <div *ngIf="control.errors.pattern">{{ 'format-wrong-msg' | translate }}</div>
+    <div *ngIf="control.hasError('minlength')">{{ 'minlength-msg' | translate: {min: control.errors.minlength?.requiredLength} }}</div>
+    <div *ngIf="control.hasError('maxlength')">{{ 'maxlength-msg' | translate: {max: control.errors.maxlength?.requiredLength} }}</div>
+</small>
+

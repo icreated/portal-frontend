@@ -42,7 +42,7 @@ describe('ForgotPasswordComponent', () => {
     describe('email form validation', () => {
         it('should render email input', () => {
             const compiled = fixture.debugElement.nativeElement;
-            const emailInput = compiled.querySelector('input[formControlName="email"]');
+            const emailInput = compiled.querySelector('app-input');
             expect(emailInput).toBeTruthy();
         });
 

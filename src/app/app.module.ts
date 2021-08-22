@@ -32,9 +32,9 @@ import {ErrorInterceptor} from './core/interceptors/error-interceptor';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        UserIdleModule.forRoot({idle: 300, timeout: 1}),
         HttpClientModule,
-        AppCommonModule,
+        AppCommonModule.forRoot(),
+        UserIdleModule.forRoot({idle: 300, timeout: 1}),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -43,9 +43,8 @@ import {ErrorInterceptor} from './core/interceptors/error-interceptor';
             },
             isolate: false
         }),
-        AppCommonModule.forRoot()
     ],
-    exports: [TranslateModule],
+    exports: [],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

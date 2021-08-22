@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {Message} from 'primeng/api';
+import FormUtils from '../../core/utils/FormUtils';
 
 @Component({
     selector: 'app-forgot-password',
@@ -52,7 +53,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.authenticationService.forgotPassword(this.f.email.value).subscribe(
           () => {
               this.toastService.addSingle('success', '', 'email-sent', true);
-              this.f.email.setErrors(null);
+              FormUtils.cleanForm(this.forgotForm);
+              this.loading = false;
               this.router.navigate(['/']);
           },
           error => {

@@ -44,9 +44,9 @@ describe('UpdatePasswordComponent', () => {
     describe('updatePassword form validation', () => {
         it('should render updatePassword input', () => {
             const compiled = fixture.debugElement.nativeElement;
-            const newPasswordInput = compiled.querySelector('input[formControlName="newPassword"]');
+            const newPasswordInput = compiled.querySelectorAll('app-password')[0];
             expect(newPasswordInput).toBeTruthy();
-            const confirmPasswordInput = compiled.querySelector('input[formControlName="confirmPassword"]');
+            const confirmPasswordInput = compiled.querySelectorAll('app-password')[1];
             expect(confirmPasswordInput).toBeTruthy();
         });
 
