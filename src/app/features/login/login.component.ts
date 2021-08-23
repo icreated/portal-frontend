@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
               },
               error => {
                   this.toastService.clear();
-                  FormUtils.cleanForm(this.loginForm);
+                  this.loginForm.reset();
                   this.loading = false;
                   this.toastService.addSingle('error', '', 'login-invalid-user', true);
               });
