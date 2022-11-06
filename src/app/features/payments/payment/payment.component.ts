@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {PaymentDataService} from '../payment-data.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CreditCard} from 'src/app/core/models/credit-card.model';
 import {CommonService} from 'src/app/core/services/common.service';
@@ -20,7 +20,7 @@ export class PaymentComponent implements OnInit {
   env = environment;
   loading = false;
   submitted = false;
-  cardFormGroup: FormGroup;
+  cardFormGroup: UntypedFormGroup;
   openTotal = 0;
 
   creditCardTypes: ValueLabel[] = [];
@@ -48,8 +48,9 @@ export class PaymentComponent implements OnInit {
       {label: '2025', value: 2025},
   ];
 
-  constructor(private formBuilder: FormBuilder, public paymentService: PaymentDataService, private dashboardService: DashboardDataService,
-              private commonService: CommonService, private router: Router, private routeStateService: RouteStateService) {
+  constructor(private formBuilder: UntypedFormBuilder, public paymentService: PaymentDataService,
+              private dashboardService: DashboardDataService, private commonService: CommonService,
+              private router: Router, private routeStateService: RouteStateService) {
 
       this.cardFormGroup = this.formBuilder.group({
           cardType: ['', Validators.required],

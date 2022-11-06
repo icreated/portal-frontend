@@ -1,10 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 
 import {ValidationService} from './validation.service';
-import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, FormGroup} from '@angular/forms';
 
 describe('ValidationService', () => {
-    let formBuilder: FormBuilder;
+    let formBuilder: UntypedFormBuilder;
     let form: AbstractControl;
 
     const INPUT_WITH_NUMBER = 'inputWithNumber';
@@ -12,9 +12,9 @@ describe('ValidationService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [FormBuilder]
+            providers: [UntypedFormBuilder]
         });
-        formBuilder = TestBed.inject(FormBuilder);
+        formBuilder = TestBed.inject(UntypedFormBuilder);
         form = formBuilder.group({
             inputWithNumber : ['', [ValidationService.patternValidator(/\d/, {hasNumber: true})]],
             inputWithCapital : ['', [ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true})]],

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
@@ -16,14 +16,14 @@ import FormUtils from '../../../core/utils/FormUtils';
 })
 export class ChangePasswordComponent implements OnInit {
 
-    passwordForm: FormGroup;
+    passwordForm: UntypedFormGroup;
     loading = false;
     submitted = false;
     error = '';
     msgs: Message[] = [];
     currentLang = 'en';
 
-    constructor(private formBuilder: FormBuilder, private router: Router, private toastService: ToastService,
+    constructor(private formBuilder: UntypedFormBuilder, private router: Router, private toastService: ToastService,
                 private authenticationService: AuthenticationService, private translateService: TranslateService) {
 
         this.passwordForm = this.formBuilder.group({

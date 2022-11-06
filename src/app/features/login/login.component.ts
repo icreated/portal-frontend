@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
@@ -16,13 +16,13 @@ import FormUtils from '../../core/utils/FormUtils';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   loading = false;
   submitted = false;
   returnUrl = '/';
   msgs: Message[] = [];
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
               private router: Router, private toastService: ToastService, private routeStateService: RouteStateService,
               private authenticationService: AuthenticationService) {
 

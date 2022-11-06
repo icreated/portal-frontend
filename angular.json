@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "Ng-Prime"
+  "cli": {
+    "schematicCollections": ["@angular-eslint/schematics"],
+    "analytics": false
+  }
 }

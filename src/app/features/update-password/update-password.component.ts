@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
@@ -15,13 +15,13 @@ import FormUtils from '../../core/utils/FormUtils';
 export class UpdatePasswordComponent implements OnInit {
 
     token = '';
-    forgotForm: FormGroup;
+    forgotForm: UntypedFormGroup;
     loading = false;
     submitted = false;
     error = '';
     msgs: Message[] = [];
 
-    constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+    constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
                 private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService) {
 
         this.forgotForm = this.formBuilder.group({

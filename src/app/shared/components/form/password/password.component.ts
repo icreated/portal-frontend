@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -9,7 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class PasswordComponent implements OnInit, AfterViewInit {
 
-  @Input() control = new FormControl();
+  @Input() control = new UntypedFormControl();
   @Input() submitted = false;
   @Input() toggleMask = false;
   @Input() feedback = false;

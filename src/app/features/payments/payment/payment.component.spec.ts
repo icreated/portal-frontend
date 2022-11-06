@@ -6,7 +6,7 @@ import {PaymentDataService} from '../payment-data.service';
 import {RouteStateService} from '../../../core/services/route-state.service';
 import {CommonService} from '../../../core/services/common.service';
 import {OpenItem} from '../../../core/models/open-item.model';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
@@ -22,7 +22,7 @@ describe('PaymentComponent', () => {
     let paymentService: PaymentDataService;
     let routeStateService: RouteStateService;
     let commonService: CommonService;
-    let formBuilder: FormBuilder;
+    let formBuilder: UntypedFormBuilder;
     let router: Router;
 
     const item1 = {openAmt: 1984} as OpenItem;
@@ -43,7 +43,7 @@ describe('PaymentComponent', () => {
         fixture = TestBed.createComponent(PaymentComponent);
         component = fixture.componentInstance;
 
-        formBuilder = TestBed.inject(FormBuilder);
+        formBuilder = TestBed.inject(UntypedFormBuilder);
         paymentService = TestBed.inject(PaymentDataService);
         dashboardService = TestBed.inject(DashboardDataService);
         commonService = TestBed.inject(CommonService);

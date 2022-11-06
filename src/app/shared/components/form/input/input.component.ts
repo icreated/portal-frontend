@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -10,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class InputComponent implements OnInit {
 
-  @Input() control = new FormControl();
+  @Input() control = new UntypedFormControl();
   @Input() submitted = false;
   @Input() type = 'input';
   @Input() label = 'Name';
