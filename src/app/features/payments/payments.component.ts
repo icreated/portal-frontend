@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {PaymentDataService} from './payment-data.service';
-import {Payment} from 'src/app/core/models/payment.model';
-import {CommonService} from 'src/app/core/services/common.service';
 import {environment} from 'src/environments/environment';
+import {Payment} from "../../api/models/payment";
+import {PaymentsService} from "../../api/services/payments.service";
 
 @Component({
     selector: 'app-payments',
@@ -15,11 +13,11 @@ export class PaymentsComponent implements OnInit {
   env = environment;
   payments: Payment[] = [];
 
-  constructor(private paymentService: PaymentDataService) {
+  constructor(private paymentService: PaymentsService) {
   }
 
   ngOnInit() {
-      this.paymentService.getPaymentsList().subscribe(
+      this.paymentService.getPayments().subscribe(
           data => {
               this.payments = data;
           }

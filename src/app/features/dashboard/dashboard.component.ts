@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {DashboardDataService} from './dashboard-data.service';
-import {OpenItem} from 'src/app/core/models/open-item.model';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {PaymentDataService} from '../payments/payment-data.service';
 import {environment} from 'src/environments/environment';
+import {PaymentsService} from "../../api/services/payments.service";
+import {OpenItem} from "../../api/models/open-item";
+import {InvoicesService} from "../../api/services/invoices.service";
 
 @Component({
     selector: 'app-dashboard',
@@ -25,9 +25,9 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(translate: TranslateService,
-              private dashboardService: DashboardDataService,
+              private invoicesService: InvoicesService,
               private routeStateService: RouteStateService,
-              public paymentService: PaymentDataService) {
+              public paymentService: PaymentsService) {
 
       this.barChartData = {
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.dashboardService.getOpenItemList().subscribe(data => {
+      this.invoicesService.getOpenItems().subscribe(data => {
           this.openItems = data;
           this.openTotal = data.map(item => item.openAmt).reduce((a, b) => a + b, 0);
       });

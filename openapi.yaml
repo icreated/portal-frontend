@@ -1,0 +1,689 @@
+openapi: 3.0.3
+servers:
+  - url: 'http://localhost:8080/portal/api'
+info:
+  description: Icreated Web Portal OpenApi seed
+  version: 1.0.0
+  title: Web Portal
+  license:
+    name: Apache-2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+
+
+tags:
+  - name: common
+    description: Common operations
+  - name: users
+    description: Operations about users
+  - name: invoices
+    description: Operations about invoices
+  - name: payments
+    description: Operations about payments
+
+paths:
+  /common/reference/docstatus/{language}/{value}:
+    get:
+      tags:
+        - common
+      summary: Get document status
+      description: Get document status
+      operationId: getDocStatus
+      parameters:
+        - name: language
+          in: path
+          description: Language
+          example: en
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: path
+          description: Value
+          example: CO
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+  /common/reference/tendertype/{language}/{value}:
+    get:
+      tags:
+        - common
+      summary: Get tender type
+      description: Get tender type
+      operationId: getTenderType
+      parameters:
+        - name: language
+          in: path
+          description: Language
+          example: en
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: path
+          description: Value
+          example: C
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+  /common/reference/creditcardtypes:
+    get:
+      tags:
+        - common
+      summary: Get credit card types
+      description: Get credit card types
+      operationId: getCreditCardTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValueLabel'
+
+  /users/password/emaillink:
+    post:
+      tags:
+        - users
+      summary: Send email link
+      description: Send email link
+      operationId: sendEmailLink
+      requestBody:
+        description: Token
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommonString'
+      responses:
+        '200':
+          description: OK
+        '412':
+          description: Precondition Failed
+        '500':
+          description: Internal Server Error
+  /users/password/validate:
+    post:
+      tags:
+        - users
+      summary: Validate token
+      description: Validate token
+      operationId: validateToken
+      requestBody:
+        description: Validate new password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Password'
+      responses:
+        '200':
+          description: OK
+        '412':
+          description: Precondition Failed
+        '500':
+          description: Internal Server Error
+
+  /users/password/change:
+    post:
+      tags:
+        - users
+      summary: Change password
+      description: Change password
+      operationId: changePassword
+      requestBody:
+        description: Change password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Password'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '412':
+          description: Precondition Failed
+        '500':
+          description: Internal Server Error
+
+  /payments:
+    get:
+      tags:
+        - payments
+      summary: Get payments
+      description: Get user payments
+      operationId: getPayments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+    post:
+      tags:
+        - payments
+      summary: Create payment
+      description: Create payment
+      operationId: createPayment
+      requestBody:
+        description: Payment object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditCard'
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+
+  /invoices:
+    get:
+      tags:
+        - invoices
+      summary: Get invoices
+      description: Get user invoices
+      operationId: getInvoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+
+  /invoices/{id}:
+    get:
+      tags:
+        - invoices
+      summary: Get invoice
+      description: Get invoice by id
+      operationId: getInvoice
+      parameters:
+        - name: id
+          in: path
+          description: Invoice id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+
+  /invoices/openitems:
+    get:
+      tags:
+        - invoices
+      summary: Get open items
+      description: Get open items
+      operationId: getOpenItems
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OpenItem'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+
+
+components:
+  schemas:
+    ValueLabel:
+      type: object
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+    CommonString:
+      type: object
+      properties:
+        value:
+          type: string
+    Password:
+      type: object
+      properties:
+        password:
+          type: string
+        newPassword:
+          type: string
+        confirmPassword:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+        name:
+          type: string
+        token:
+          type: string
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 4
+        address1:
+          type: string
+          description: The first line of the address.
+          example: 123 Main Street
+        address2:
+          type: string
+          description: The second line of the address.
+          example: Apt 1
+        city:
+          type: string
+          description: The city of the address.
+          example: New York
+        postal:
+          type: string
+          description: The zip code of the address.
+          example: 10001
+        countryName:
+          type: string
+          description: The country name
+
+    CreditCard:
+      type: object
+      properties:
+        creditCardType:
+          type: string
+          description: The credit card type.
+          example: Visa
+        creditCardNumber:
+          type: string
+          description: The credit card number.
+          example: 4111111111111111
+        creditCardExpMM:
+          type: integer
+          format: int32
+          description: The credit card expiration month.
+          example: 12
+        creditCardExpYY:
+          type: integer
+          format: int32
+          description: The credit card expiration year.
+          example: 2020
+        creditCardName:
+          type: string
+          description: The credit card name.
+          example: John Doe
+        creditCardVV:
+          type: string
+          description: The credit card verification value.
+          example: 123
+        paymentAmount:
+          type: number
+          description: The payment amount.
+          format: double
+          example: 100.00
+
+    Document:
+      type: object
+      description: Order or Invoice for table display
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 4
+        documentNo:
+          type: string
+          description: The document number of the order / invoice.
+          example: 1000001
+        poReference:
+          type: string
+          description: The PO reference of the order / invoice.
+          example: 1000001
+        description:
+          type: string
+          description: The description of the order / invoice.
+          example: Invoice for order 1000001
+        docStatus:
+          type: string
+          description: The document status of the order / invoice.
+          example: CO
+        totalLines:
+          type: number
+          description: The total lines of the order / invoice.
+          format: double
+          example: 100.00
+        grandTotal:
+          type: number
+          description: The grand total of the order / invoice.
+          format: double
+          example: 100.00
+        currency:
+          type: string
+          description: The currency of the order / invoice.
+          example: USD
+        date:
+          type: string
+          format: date
+          description: The transaction date of the order / invoice.
+          example: 2021-01-01
+        bpartnerName:
+          type: string
+          description: The Business Partner of the order / invoice.
+          example: John Smith
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 4
+        documentNo:
+          type: string
+          description: The document number of the invoice.
+          example: 1000001
+        poReference:
+          type: string
+          description: The PO reference of the invoice.
+          example: 1000001
+        bpartnerName:
+          type: string
+          description: The Business Partner of the order / invoice.
+          example: John Smith
+        description:
+          type: string
+          description: The description of the invoice.
+          example: Invoice for order 1000001
+        docStatus:
+          type: string
+          description: The document status of the invoice.
+          example: CO
+        totalLines:
+          type: number
+          description: The total lines of the invoice.
+          format: double
+          example: 100.00
+        grandTotal:
+          type: number
+          description: The grand total of the invoice.
+          format: double
+          example: 100.00
+        currency:
+          type: string
+          description: The currency of the invoice.
+          example: USD
+        date:
+          type: string
+          format: date
+          description: The transaction date of the invoice.
+          example: 2021-01-01
+        billAddress:
+          $ref: '#/components/schemas/Address'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceLine'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        taxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tax'
+
+    InvoiceLine:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 4
+        line:
+          type: integer
+          format: int64
+          description: The line number of the invoice line.
+          example: 10
+        name:
+          type: string
+          description: The name of the invoice line.
+          example: Product 1
+        description:
+          type: string
+          description: The description of the invoice line.
+          example: Invoice line for order 1000001
+        qty:
+          type: number
+          description: The quantity of the invoice line.
+          format: double
+          example: 1.00
+        price:
+          type: number
+          description: The price of the invoice line.
+          format: double
+          example: 100.00
+        priceList:
+          type: number
+          description: The price list of the invoice line.
+          format: double
+          example: 100.00
+        lineNetAmt:
+          type: number
+          description: The line net amount of the invoice line.
+          format: double
+          example: 100.00
+
+    Payment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 4
+        documentNo:
+          type: string
+          description: The document number of the payment.
+          example: 1000001
+        description:
+          type: string
+          description: The description of the payment.
+          example: Payment for order 1000001
+        docStatus:
+          type: string
+          description: The document status of the payment.
+          example: CO
+        payAmt:
+          type: number
+          description: The amount of the payment.
+          format: double
+          example: 100.00
+        trxid:
+          type: string
+          description: The transaction ID of the payment.
+          example: 1000001
+        currency:
+          type: string
+          description: The currency of the payment.
+          example: USD
+        tenderType:
+          type: string
+          description: The tender type of the payment.
+          example: C
+        date:
+          type: string
+          format: date
+          description: The transaction date of the payment.
+          example: 2021-01-01
+
+    Tax:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the tax.
+          example: State Tax
+        tax:
+          type: number
+          description: The tax rate.
+          format: double
+          example: 0.05
+
+    OpenItem:
+        type: object
+        required:
+          - id
+          - documentNo
+          - totalLines
+          - grandTotal
+          - openAmt
+        properties:
+          invoiceId:
+            type: integer
+            format: int32
+            example: 4
+          orderId:
+            type: integer
+            format: int32
+            example: 4
+          bpartnerId:
+            type: integer
+            format: int32
+            example: 4
+          bpartnerLocationId:
+            type: integer
+            format: int32
+            example: 4
+          currencyId:
+            type: integer
+            format: int32
+            example: 4
+          documentNo:
+            type: string
+            description: The document number of the invoice.
+            example: 1000001
+          description:
+            type: string
+            description: The description of the invoice.
+            example: Invoice for order 1000001
+          docStatus:
+            type: string
+            description: The document status of the invoice.
+            example: CO
+          isSOTRX:
+            type: boolean
+            description: The transaction type is sale or purchase.
+            example: true
+          isActive:
+            type: boolean
+            description: The invoice is active.
+            example: true
+          dateOrdered:
+            type: string
+            format: date
+            description: The order date of the invoice.
+            example: 2021-01-01
+          dateInvoiced:
+            type: string
+            format: date
+            description: The invoice date of the invoice.
+            example: 2021-01-01
+          dueDate:
+            type: string
+            format: date
+            description: The due date of the invoice.
+            example: 2021-01-01
+          netDays:
+            type: integer
+            format: int32
+            example: 20
+          totalLines:
+            type: number
+            description: The total lines of the invoice.
+            format: double
+            example: 100.00
+          grandTotal:
+            type: number
+            description: The grand total of the invoice.
+            format: double
+            example: 100.00
+          openAmt:
+            type: number
+            description: The open amount of the invoice.
+            format: double
+            example: 100.00
+          paidAmt:
+            type: number
+            description: The paid amount of the invoice.
+            format: double
+            example: 100.00

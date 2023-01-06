@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
-import {ValueLabel} from '../models/value-label.model';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
+import {ValueLabel} from "../../api/models/value-label";
 
 
 

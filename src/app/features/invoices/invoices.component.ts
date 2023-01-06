@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoicesDataService} from 'src/app/features/invoices/invoices-data.service';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {DocumentItem} from 'src/app/core/models/document-item.model';
+import {Document} from 'src/app/api/models/document';
 import {environment} from 'src/environments/environment';
 import {ApplicationStateService} from '../../core/services/application-state.service';
+import {InvoicesService} from "../../api/services/invoices.service";
 
 @Component({
     selector: 'app-invoices',
@@ -13,14 +13,14 @@ import {ApplicationStateService} from '../../core/services/application-state.ser
 export class InvoicesComponent implements OnInit {
 
   env = environment;
-  invoices: DocumentItem[] = [];
+  invoices: Document[] = [];
 
-  constructor(private routeStateService: RouteStateService, private invoiceService: InvoicesDataService,
+  constructor(private routeStateService: RouteStateService, private invoiceService: InvoicesService,
               public state: ApplicationStateService) {
   }
 
   ngOnInit() {
-      this.invoiceService.getInvoicesList().subscribe(
+      this.invoiceService.getInvoices().subscribe(
           data => {
               this.invoices = data;
           }

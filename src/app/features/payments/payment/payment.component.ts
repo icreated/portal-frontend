@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {PaymentDataService} from '../payment-data.service';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {CreditCard} from 'src/app/core/models/credit-card.model';
 import {CommonService} from 'src/app/core/services/common.service';
-import {ValueLabel} from 'src/app/core/models/value-label.model';
 import {environment} from 'src/environments/environment';
 import {DashboardDataService} from '../../dashboard/dashboard-data.service';
 import {map} from 'rxjs/operators';
+import {ValueLabel} from "../../../api/models/value-label";
+import {PaymentsService} from "../../../api/services/payments.service";
+import {CreditCard} from "../../../api/models/credit-card";
+import {InvoicesService} from "../../../api/services/invoices.service";
 
 @Component({
     selector: 'app-payment',
@@ -21,7 +22,7 @@ export class PaymentComponent implements OnInit {
   loading = false;
   submitted = false;
   cardFormGroup: UntypedFormGroup;
-  openTotal = 0;
+  openTotal: number | undefined = 0;
 
   creditCardTypes: ValueLabel[] = [];
 
@@ -48,8 +49,8 @@ export class PaymentComponent implements OnInit {
       {label: '2025', value: 2025},
   ];
 
-  constructor(private formBuilder: UntypedFormBuilder, public paymentService: PaymentDataService,
-              private dashboardService: DashboardDataService, private commonService: CommonService,
+  constructor(private formBuilder: UntypedFormBuilder, public paymentService: PaymentsService,
+              private invoicesService: InvoicesService, private commonService: CommonService,
               private router: Router, private routeStateService: RouteStateService) {
 
       this.cardFormGroup = this.formBuilder.group({
@@ -63,11 +64,14 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.dashboardService.getOpenItemList().pipe(
-          map(openItems => openItems.map(item => item.openAmt).reduce((a, b) => a + b, 0))
+      this.invoicesService.getOpenItems().pipe(
+          map(openItems => openItems
+              .map(item => item.openAmt)
+              .reduce((a, b) => a + b, 0)
+          )
       ).subscribe(total => {
           this.openTotal = total;
-          if (this.openTotal <= 0) {
+          if (this.openTotal === 0) {
               this.routeStateService.loadPrevious();
               this.router.navigate(['/main/dashboard']);
           }
@@ -91,15 +95,15 @@ export class PaymentComponent implements OnInit {
       this.loading = true;
 
       let creditCard = {} as CreditCard;
-      creditCard.cardType = this.f.cardType.value;
-      creditCard.creditCard = this.f.creditCard.value;
-      creditCard.holderName = this.f.holderName.value;
-      creditCard.expirationMonth = this.f.expirationMonth.value;
-      creditCard.expirationYear = this.f.expirationYear.value;
-      creditCard.cvc = this.f.cvc.value;
-      creditCard.amt = this.openTotal;
+      creditCard.creditCardType = this.f.cardType.value;
+      creditCard.creditCardNumber = this.f.creditCard.value;
+      creditCard.creditCardName = this.f.holderName.value;
+      creditCard.creditCardExpMM = this.f.expirationMonth.value;
+      creditCard.creditCardExpYY = this.f.expirationYear.value;
+      creditCard.creditCardVV = this.f.cvc.value;
+      creditCard.paymentAmount = this.openTotal;
 
-      this.paymentService.pay(creditCard).subscribe(() => {
+      this.paymentService.createPayment({body: creditCard}).subscribe(() => {
           this.loading = false;
           creditCard = {} as CreditCard;
           // TODO show result message
