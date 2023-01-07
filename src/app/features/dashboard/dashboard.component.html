@@ -1,6 +1,6 @@
 <p-messages [(value)]="msgs"></p-messages>
-<div class="p-grid">
-  <div class="p-col-12 p-md-6 p-lg-3">
+<div class="grid">
+  <div class="col-12 md:col-6 lg:col-3">
     <a (click)="goToPayment()" *ngIf="openTotal > 0">
       <p-card styleClass="overview-box-1">
         <div>{{ 'click-to-pay' | translate}}</div>
@@ -12,19 +12,19 @@
       <h1>{{ 'paid-off' | translate }}</h1>
     </p-card>
   </div>
-  <div class="p-col-12 p-md-6 p-lg-3">
+  <div class="col-12 md:col-6 lg:col-3">
     <p-card styleClass="overview-box-2">
       &nbsp;
       <h1>&nbsp;</h1>
     </p-card>
   </div>
-  <div class="p-col-12 p-md-6 p-lg-3">
+  <div class="col-12 md:col-6 lg:col-3">
     <p-card styleClass="overview-box-3">
       &nbsp;
       <h1>&nbsp;</h1>
     </p-card>
   </div>
-  <div class="p-col-12 p-md-6 p-lg-3">
+  <div class="col-12 md:col-6 lg:col-3">
     <p-card styleClass="overview-box-4">
       &nbsp;
       <h1>&nbsp;</h1>
@@ -33,13 +33,13 @@
 </div>
 
 
-<div class="p-grid">
-  <div class="p-col-12 p-md-6 p-lg-6">
+<div class="grid">
+  <div class="col-12 md:col-6 lg:col-6">
     <p-card>
       <p-chart type="doughnut" [data]="doughnutChartData" height="200" width="200"></p-chart>
     </p-card>
   </div>
-  <div class="p-col-12 p-md-6 p-lg-6">
+  <div class="col-12 md:col-6 lg:col-6">
     <p-card>
       <p-chart type="bar" [data]="barChartData" height="200" width="200"></p-chart>
     </p-card>

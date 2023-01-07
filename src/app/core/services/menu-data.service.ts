@@ -10,7 +10,8 @@ import {CustomMenuItem} from '../models/menu-item.model';
  */
 export class MenuDataService {
 
-  public toggleMenuBar: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public toggleMenuBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public dockMenuBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   /**
    * Application Menu list

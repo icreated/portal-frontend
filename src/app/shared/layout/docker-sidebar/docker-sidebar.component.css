@@ -1,0 +1,63 @@
+.sidebar {
+  background-color: var(--menubar-background);
+  box-shadow: none;
+  overflow: auto;
+  border: none;
+  margin-top: 52px;
+  padding: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: calc(100%);
+  z-index: 1;
+}
+
+.np-menu {
+  padding: 5px;
+  margin: 0;
+  list-style: none;
+}
+
+.np-menu li a {
+  padding: 7px 7px 1rem 0;
+  color: var(--menubar-color);
+  display: block;
+  text-decoration: none !important;
+  position: relative;
+}
+
+.np-menu li a:hover, .np-menu .active {
+  color: var(--active-menu-color);
+  cursor: pointer;
+}
+
+.np-menu .fa {
+  width: 40px;
+  text-align: center;
+}
+
+.np-menu li ul {
+  display: block;
+}
+
+.np-sub-menu {
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  position: relative;
+}
+.margin-left {
+  margin-left: 20px;
+}
+
+.np-menu .icon-group {
+  color: var(--active-menu-color);
+  z-index: -1;
+}
+
+.menu-content-hidden {
+  padding-left: 10px;
+  display: none;
+}

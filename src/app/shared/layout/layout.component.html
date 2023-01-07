@@ -1,6 +1,5 @@
 <app-header></app-header>
-<div class="ng-content" [ngClass]="{'hidden-menu-content': !isMenuVisible}">
-  <app-menu></app-menu>
+<docker-sidebar (cssEvent)="setCss($event)"></docker-sidebar>
+<div [class]="css">
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>

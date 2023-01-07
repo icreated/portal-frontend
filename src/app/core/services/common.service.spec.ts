@@ -3,7 +3,7 @@ import {CommonService} from './common.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {environment} from '../../../environments/environment';
-import {ValueLabel} from '../models/value-label.model';
+import {ValueLabel} from "../../api/models/value-label";
 
 describe('CommonService', () => {
     let commonService: CommonService;
@@ -34,7 +34,7 @@ describe('CommonService', () => {
     describe('getReferenceDocStatus', () => {
         const value = 'DR';
         const expectedValue = 'DRAFT';
-        it('should convert DR to Draft from Idempiere Server', () => {
+        it('should convert DR to Draft from Server', () => {
             spyOn(commonService, 'getLang').and.returnValue('en_US');
             commonService.getReferenceDocStatus(value)
                 .subscribe((result) => expect(result).toBe(expectedValue));
@@ -48,7 +48,7 @@ describe('CommonService', () => {
     describe('getReferenceTenderType', () => {
         const value = 'C';
         const expectedValue = 'Credit Card';
-        it('should convert DR to Draft from Idempiere Server', () => {
+        it('should convert DR to Draft from Server', () => {
             spyOn(commonService, 'getLang').and.returnValue('en_US');
             commonService.getReferenceTenderType(value)
                 .subscribe((result) => expect(result).toBe(expectedValue));
@@ -64,7 +64,7 @@ describe('CommonService', () => {
         values.push({label: 'M', value: 'MasterCard'});
         values.push({label: 'V', value: 'Visa'});
         values.push({label: 'D', value: 'Discovery'});
-        it('should convert DR to Draft from Idempiere Server', () => {
+        it('should convert DR to Draft from Server', () => {
             spyOn(commonService, 'getLang').and.returnValue('en_US');
             commonService.getReferenceCreditCardTypes()
                 .subscribe((result) => expect(result).toBe(values));

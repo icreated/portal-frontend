@@ -19,7 +19,10 @@ import { MessagesModule } from 'primeng/messages';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
 import {DropdownModule} from 'primeng/dropdown';
-import {HeaderBreadCrumbModule} from './shared/layout/header-breadcrumb/header-breadcrumb.module';
+import {DataViewModule} from "primeng/dataview";
+import {ColorPickerModule} from "primeng/colorpicker";
+import {SplitterModule} from "primeng/splitter";
+import {FieldsetModule} from "primeng/fieldset";
 
 @NgModule({
     exports: [
@@ -43,6 +46,10 @@ import {HeaderBreadCrumbModule} from './shared/layout/header-breadcrumb/header-b
         DynamicDialogModule,
         InputTextareaModule,
         MessagesModule,
+        DataViewModule,
+        ColorPickerModule,
+        SplitterModule,
+        FieldsetModule,
     ]
 })
 export class NgPrimeModule { }

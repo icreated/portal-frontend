@@ -1,0 +1,26 @@
+<div [@openDocked]="isMenuDocked ? 'docked' : 'open'" class="sidebar" [ngClass]="{'menu-content-hidden': isMenuOpened}">
+    <ul class="np-menu">
+        <ng-template #recursiveList let-list>
+            <li *ngFor="let menu of list">
+                <a (click)="onMenuClick(menu)" [ngClass]="{'active': selectedItem === menu.label}">
+                    <span class="fa-stack" *ngIf="isMenuDocked && menu.childs && menu.childs.length > 0">
+                      <i class="fa fa-fw fa-inverse" [ngClass]="menu.icon" [title]="menu.label | translate"></i>
+                      <i class="fa fa-fw fa-square fa-stack-2x icon-group"></i>
+                    </span>
+                    <i class="fa fa-fw" [ngClass]="menu.icon" *ngIf="!menu.childs || !isMenuDocked" [title]="menu.label | translate"></i>
+                      <span *ngIf="isTitleShowed">{{ menu.label | translate }}</span>
+                    <i class="fa right" *ngIf="!isMenuDocked && menu.childs"
+                        [ngClass]="{'fa-angle-down': !menu.isChildVisible,'fa-angle-up': menu.isChildVisible }"></i>
+                </a>
+                <ul *ngIf="menu.childs && menu.childs.length > 0 && menu.isChildVisible" class="np-sub-menu" [ngClass]="{'margin-left': !isMenuDocked}">
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: menu.childs }">
+                    </ng-container>
+                </ul>
+            </li>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: items }"></ng-container>
+    </ul>
+ </div>
+
+
+

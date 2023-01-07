@@ -1,14 +1,15 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 
-<p-panel [header]="'language' | translate">
-  <div class="p-grid p-nogutter p-justify-center p-align-center">
-    <div class="p-col-2 p-md-1 p-lg-1">
-      <p-dropdown #langSelect [(ngModel)]="selectedLang" [options]="translate.getLangs()" (onChange)="onChangeLang($event)">
-      </p-dropdown>
+<div class="flex flex-column gap-3">
+  <p-panel [header]="'language' | translate">
+    <div class="flex justify-content-center gap-3">
+        <p-dropdown #langSelect [(ngModel)]="selectedLang" [options]="translate.getLangs()" (onChange)="onChangeLang($event)">
+        </p-dropdown>
     </div>
-  </div>
-</p-panel>
+  </p-panel>
 
+  <app-theme-chooser></app-theme-chooser>
 
-<app-theme-chooser></app-theme-chooser>
-<app-change-password></app-change-password>
+  <app-change-password></app-change-password>
+
+</div>

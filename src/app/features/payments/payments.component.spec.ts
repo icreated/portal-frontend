@@ -1,17 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaymentsComponent } from './payments.component';
-import {PaymentDataService} from './payment-data.service';
-import {Payment} from '../../core/models/payment.model';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
+import {PaymentsService} from "../../api/services/payments.service";
+import {Payment} from "../../api/models/payment";
 
 describe('PaymentsComponent', () => {
     let component: PaymentsComponent;
     let fixture: ComponentFixture<PaymentsComponent>;
-    let paymentService: PaymentDataService;
+    let paymentService: PaymentsService;
 
     const item1 = {} as Payment;
     const item2 = {} as Payment;
@@ -21,7 +21,7 @@ describe('PaymentsComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [PaymentsComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [PaymentDataService],
+            providers: [PaymentsService],
             imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule, TranslateModule.forRoot()]
         }).compileComponents();
     });
@@ -31,12 +31,12 @@ describe('PaymentsComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
 
-        paymentService = TestBed.inject(PaymentDataService);
+        paymentService = TestBed.inject(PaymentsService);
     });
 
     describe('onInit', () => {
         it('should have given number of payments on init', () => {
-            spyOn(paymentService, 'getPaymentsList').and.returnValue(of(paymentItems));
+            spyOn(paymentService, 'getPayments').and.returnValue(of(paymentItems));
             component.ngOnInit();
             expect(component).toBeTruthy();
             expect(component.payments.length).toBe(2);

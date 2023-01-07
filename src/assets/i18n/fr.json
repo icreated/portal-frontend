@@ -83,5 +83,16 @@
   "required" : "Obligatoire",
   "minlength-msg" : "{{min}} caractères minimum!",
   "maxlength-msg" : "{{max}} caractères maximum!",
-  "format-wrong-msg" : "Format n'est pas correct"
+  "format-wrong-msg" : "Format n'est pas correct",
+
+  "color_header_bg1": "First header background color",
+  "color_header_bg2": "Second header background color",
+  "color_header_color": "Header text color",
+  "color_menu_background": "Sidebar background color",
+  "color_menubar": "Sidebar color",
+  "color_main_background": "Main background color",
+  "color_active_menu": "Active menu color",
+  "color_button_background": "Button background color",
+  "color_button_text": "Button text color",
+  "font-text": "Police"
 }

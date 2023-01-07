@@ -13,9 +13,8 @@ import {ThemeService} from './core/services/theme.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Idempiere Portal';
+  title = 'Web Portal';
   showLoader = false;
-  theme: string;
 
   currentUser: User | null = null;
 
@@ -23,13 +22,9 @@ export class AppComponent implements OnInit {
     private authenticationService: AuthenticationService, private themeService: ThemeService,
     translate: TranslateService) {
 
-      const theme = this.sessionService.getItem('selected-theme');
-      if (theme) {
-          this.theme = theme;
-          this.themeService.selectTheme(theme);
-      } else {
-          this.theme = 'theme-teal';
-      }
+    const theme = this.sessionService.getItem('selected-theme');
+    theme ? this.themeService.selectTheme(theme) :
+      this.themeService.selectTheme(this.themeService.getThemes()[0]);
 
       this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
 
@@ -50,9 +45,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
       this.loaderService.getStatus()
           .subscribe((status) => this.showLoader = status);
-
-      this.themeService.getTheme()
-          .subscribe((theme) => this.theme = theme);
   }
 
 }

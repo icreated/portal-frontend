@@ -4,6 +4,7 @@ import {ThemeChooserComponent} from './theme-chooser.component';
 import {ThemeService} from '../../../core/services/theme.service';
 import {SessionService} from '../../../core/services/session.service';
 import {TranslateModule} from '@ngx-translate/core';
+import {DesignTemplate} from "../../../core/models/design-template.model";
 
 
 describe('ThemeChooserComponent', () => {
@@ -32,11 +33,11 @@ describe('ThemeChooserComponent', () => {
 
     describe('selectTheme', () => {
         it('should save theme in session', () => {
-            const THEME_NAME = 'BEAUTIFUL_THEME';
+            const theme = {fontFamily: 'Robotic'} as DesignTemplate;
             spyOn(sessionService, 'setItem');
             spyOn(themeService, 'selectTheme');
 
-            component.selectTheme(THEME_NAME);
+            component.selectTheme(theme);
             expect(sessionService.setItem).toHaveBeenCalled();
             expect(themeService.selectTheme).toHaveBeenCalled();
         });

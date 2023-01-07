@@ -4,7 +4,6 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CommonService} from 'src/app/core/services/common.service';
 import {environment} from 'src/environments/environment';
-import {DashboardDataService} from '../../dashboard/dashboard-data.service';
 import {map} from 'rxjs/operators';
 import {ValueLabel} from "../../../api/models/value-label";
 import {PaymentsService} from "../../../api/services/payments.service";

@@ -8,7 +8,7 @@
   "login-forgot-password" : "Forgot Password",
   "login-invalid-user" : "Invalid User",
 
-  "welcome-message": "Welcome to Idempiere Portal.",
+  "welcome-message": "Welcome to Web Portal.",
   "credit-card-payment" : "Credit Card Payment",
   "click-to-pay" : "CLICK TO PAY",
   "paid-off" : "PAID OFF",
@@ -83,5 +83,16 @@
   "required" : "Required",
   "minlength-msg" : "At least {{min}} characters",
   "maxlength-msg" : "Maximum  {{max}} characters",
-  "format-wrong-msg" : "Format is wrong"
+  "format-wrong-msg" : "Format is wrong",
+
+  "color_header_bg1": "First header background color",
+  "color_header_bg2": "Second header background color",
+  "color_header_color": "Header text color",
+  "color_menu_background": "Sidebar background color",
+  "color_menubar": "Sidebar color",
+  "color_main_background": "Main background color",
+  "color_active_menu": "Active menu color",
+  "color_button_background": "Button background color",
+  "color_button_text": "Button text color",
+  "font-text": "Font"
 }

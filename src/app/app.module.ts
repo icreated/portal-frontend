@@ -12,19 +12,20 @@ import {LayoutComponent} from 'src/app/shared/layout/layout.component';
 import {MenuComponent} from 'src/app/shared/layout/menu/menu.component';
 import {HeaderComponent} from 'src/app/shared/layout/header/header.component';
 import {FooterComponent} from 'src/app/shared/layout/footer/footer.component';
-import {UserIdleModule} from 'angular-user-idle';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppCommonModule} from 'src/app/app.common.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {JwtInterceptor} from './core/interceptors/jwt-interceptor';
 import {ErrorInterceptor} from './core/interceptors/error-interceptor';
+import {DockerSidebarComponent} from "./shared/layout/docker-sidebar/docker-sidebar.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         LayoutComponent,
         MenuComponent,
+        DockerSidebarComponent,
         HeaderComponent,
         FooterComponent
     ],
@@ -34,7 +35,6 @@ import {ErrorInterceptor} from './core/interceptors/error-interceptor';
         AppRoutingModule,
         HttpClientModule,
         AppCommonModule.forRoot(),
-        UserIdleModule.forRoot({idle: 300, timeout: 1}),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

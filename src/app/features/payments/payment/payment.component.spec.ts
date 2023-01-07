@@ -1,11 +1,8 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PaymentComponent} from './payment.component';
-import {DashboardDataService} from '../../dashboard/dashboard-data.service';
-import {PaymentDataService} from '../payment-data.service';
 import {RouteStateService} from '../../../core/services/route-state.service';
 import {CommonService} from '../../../core/services/common.service';
-import {OpenItem} from '../../../core/models/open-item.model';
 import {UntypedFormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -14,12 +11,15 @@ import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
+import {InvoicesService} from "../../../api/services/invoices.service";
+import {OpenItem} from "../../../api/models/open-item";
+import {PaymentsService} from "../../../api/services";
 
 describe('PaymentComponent', () => {
     let component: PaymentComponent;
     let fixture: ComponentFixture<PaymentComponent>;
-    let dashboardService: DashboardDataService;
-    let paymentService: PaymentDataService;
+    let invoiceService: InvoicesService;
+    let paymentService: PaymentsService;
     let routeStateService: RouteStateService;
     let commonService: CommonService;
     let formBuilder: UntypedFormBuilder;
@@ -33,7 +33,7 @@ describe('PaymentComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [PaymentComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [DashboardDataService],
+            providers: [InvoicesService],
             imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
                 HttpClientTestingModule, TranslateModule.forRoot()]
         }).compileComponents();
@@ -44,8 +44,8 @@ describe('PaymentComponent', () => {
         component = fixture.componentInstance;
 
         formBuilder = TestBed.inject(UntypedFormBuilder);
-        paymentService = TestBed.inject(PaymentDataService);
-        dashboardService = TestBed.inject(DashboardDataService);
+        paymentService = TestBed.inject(PaymentsService);
+        invoiceService = TestBed.inject(InvoicesService);
         commonService = TestBed.inject(CommonService);
         router = TestBed.inject(Router);
         routeStateService = TestBed.inject(RouteStateService);
@@ -53,13 +53,13 @@ describe('PaymentComponent', () => {
 
     describe('onInit', () => {
         it('should get given open items list and openItem total', () => {
-            spyOn(dashboardService, 'getOpenItemList').and.returnValue(of(openItems));
+            spyOn(invoiceService, 'getOpenItems').and.returnValue(of(openItems));
             component.ngOnInit();
             expect(component).toBeTruthy();
             expect(component.openTotal).toBe(4005);
         });
         it('should get 0 if empty list and navigate to dashboard', () => {
-            spyOn(dashboardService, 'getOpenItemList').and.returnValue(of([]));
+            spyOn(invoiceService, 'getOpenItems').and.returnValue(of([]));
             spyOn(routeStateService, 'loadPrevious');
             spyOn(router, 'navigate');
             component.ngOnInit();
