@@ -1,8 +1,8 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 <p-panel header="Invoice Details">
 
-  <div class="p-grid">
-    <div class="p-col-12 p-md-6 p-lg-6">
+  <div class="grid">
+    <div class="col-12 md:col-6 lg:col-6">
       <p-panel [header]="'header' | translate">
         <p><b>{{ 'documentNo' | translate }} :</b> {{ invoice.documentNo }}</p>
         <p><b>{{ 'description' | translate }}:</b> {{ invoice.description }}</p>
@@ -11,7 +11,7 @@
         <p><b>{{ 'total' | translate }} :</b> {{ invoice.grandTotal | currency: env.currencyISO }}</p>
       </p-panel>
     </div>
-    <div class="p-col-12 p-md-6 p-lg-6">
+    <div class="col-12 md:col-6 lg:col-6">
       <p-panel [header]="'address' | translate">
         <p>&nbsp;</p>
         <p>{{ invoice.billAddress?.address1 }}</p>
@@ -44,9 +44,9 @@
       </ng-template>
   </p-table>
 
-  <div class="p-grid">
-    <div class="p-col-6 p-md-8 p-lg-8"></div>
-    <div class="p-col-6 p-md-4 p-lg-4">
+  <div class="grid">
+    <div class="col-6 md:col-8 lg:col-8"></div>
+    <div class="col-6 md:col-4 lg:col-4">
       <p-table [value]="invoice!.taxes">
         <ng-template pTemplate="header">
           <tr>

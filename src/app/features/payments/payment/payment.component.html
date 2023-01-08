@@ -3,8 +3,8 @@
 <form [formGroup]="cardFormGroup" (ngSubmit)="onSubmit()">
 <p-panel [header]="'card-payment' | translate">
 
-  <div class="p-grid p-justify-center p-align-center">
-      <div class="p-col-12 p-md-8 p-lg-7">
+  <div class="grid justify-content-center align-items-center">
+      <div class="col-12 md:col-8 lg:col-7">
           <div class="p-inputgroup">
             <p-dropdown [options]="creditCardTypes" formControlName="cardType" [placeholder]="'choose-card-type' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cardType.errors }"  aria-describedby="card-type-help"> </p-dropdown>
           </div>
@@ -12,7 +12,7 @@
             <div *ngIf="f.cardType.errors.required">{{ 'required-card-type' | translate }}</div>
           </small>
       </div>
-      <div class="p-col-12 p-md-8 p-lg-7">
+      <div class="col-12 md:col-8 lg:col-7">
           <div class="p-inputgroup">
             <input pInputText formControlName="creditCard" [placeholder]="'card-number' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.creditCard.errors }" aria-describedby="credit-card-help"/>
           </div>
@@ -20,7 +20,7 @@
             <div *ngIf="f.creditCard.errors.required">{{ 'required-card-number' | translate }}</div>
           </small>
       </div>
-      <div class="p-col-12 p-md-8 p-lg-7">
+      <div class="col-12 md:col-8 lg:col-7">
           <div class="p-inputgroup">
             <input pInputText formControlName="holderName" [placeholder]="'card-holder-name' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.holderName.errors }" aria-describedby="holder-name-help"/>
           </div>
@@ -30,8 +30,8 @@
       </div>
   </div>
 
-  <div class="p-grid p-fluid p-justify-center p-align-center">
-          <div class="p-col-4 p-md-3 p-lg-3">
+  <div class="grid p-fluid justify-content-center align-items-center">
+          <div class="col-4 md:col-3 lg:col-3">
                 <span>{{ 'expiration-month' | translate }}</span>
                 <div class="p-inputgroup">
                   <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationMonth.errors }" aria-describedby="exp-month-help"></p-dropdown>
@@ -40,7 +40,7 @@
                   <div *ngIf="f.expirationMonth.errors.required">{{'required' | translate}}</div>
                 </small>
           </div>
-          <div class="p-col-4 p-md-3 p-lg-3">
+          <div class="col-4 md:col-3 lg:col-3">
                 <span>{{ 'expiration-year' | translate }}</span>
                 <div class="p-inputgroup">
                   <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationYear.errors }" aria-describedby="exp-year-help"></p-dropdown>
@@ -49,7 +49,7 @@
                   <div *ngIf="f.expirationYear.errors.required">{{'required' | translate}}</div>
                 </small>
           </div>
-          <div class="p-col-4 p-md-2 p-lg-1">
+          <div class="col-4 md:col-2 lg:col-1">
                CVC
                 <div class="p-inputgroup">
                   <input pInputText formControlName="cvc" placeholder="" maxlength="3" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cvc.errors }" aria-describedby="cvc-help"/>
@@ -61,11 +61,11 @@
   </div>
 
   <p-footer>
-    <div class="p-grid p-justify-center p-align-center">
-      <div class="p-col-6 p-md-6 p-lg-6">
+    <div class="grid justify-content-center align-items-center">
+      <div class="col-6 md:col-6 lg:col-6">
         <button pButton type="button" [label]="'back' | translate" class="ui-button-secondary" (click)="back()" style="margin-right: .25em"></button>
       </div>
-      <div class="p-col-6 p-md-6 p-lg-6 p-text-md-right p-text-lg-right">
+      <div class="col-6 md:col-6 lg:col-6 p-text-md-right p-text-lg-right">
         <button pButton type="submit" label="{{'pay' | translate }} {{openTotal | currency: env.currencyISO}}" icon="pi pi-check"  class="ui-button-success"  [disabled]="loading"></button>
       </div>
     </div>

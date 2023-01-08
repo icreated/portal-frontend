@@ -3,7 +3,8 @@
   <p-fieldset legend="Preconfigured Templates" class="m-2">
     <div class="grid grid-nogutter flex justify-content-center flex-wrap card-container m-2" style="height:100%">
       <div class="col-2 md:col-1 lg:col-1" *ngFor="let theme of themes">
-        <button pButton type="button" (click)="selectTheme(theme)" [style]="'background-color:' + theme.headerBgColor"></button>
+        <button pButton type="button" (click)="selectTheme(theme)" [style]="'background-color:' + theme.headerBgColor"
+        class="p-colorpicker-preview"></button>
       </div>
     </div>
   </p-fieldset>
