@@ -1,31 +1,24 @@
 <div class="login-panel">
-  <div class="p-grid p-nogutter p-justify-center p-align-center" style="height:100%">
-
-      <div class="p-xl-3 p-lg-6 p-md-8 p-sm-10">
+  <div class="grid grid-nogutter align-items-center justify-content-center" style="height:100%">
+      <div class="xl:col-3 lg:col-6 md:col-8 sm:col-10">
         <p-panel header="{{ 'login-msg' | translate}}">
-          <img src="assets/images/logo-login.jpg" height="100px" alt="login logo"/>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="p-col-12">
-              <p-messages [(value)]="msgs"></p-messages>
-            </div>
-            <div class="p-fluid p-grid p-justify-center p-align-center p-mb-2">
-              <div class="p-field p-col-12">
-                <app-input icon="fa-user" [control]="f.username"  [label]="'login-user-name' | translate"
-                           [submitted]="submitted"> </app-input>
+          <div class="flex flex-column align-items-center">
+            <img src="assets/images/logo-login.png" width="100px" alt="login logo"/>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="flex flex-column gap-2">
+                  <p-messages [(value)]="msgs"></p-messages>
+                  <app-input icon="fa-user" [control]="f.username"  [label]="'login-user-name' | translate"
+                             [submitted]="submitted"> </app-input>
+                  <app-password icon="fa-key" [control]="f.password" toggleMask="true" [label]="'login-user-password' | translate"  [submitted]="submitted"> </app-password>
               </div>
-              <div class="p-field p-col-12">
-                <app-password icon="fa-key" [control]="f.password" toggleMask="true" [label]="'login-user-password' | translate"  [submitted]="submitted"> </app-password>
+              <div class="flex flex-column align-items-start mt-2">
+                  <button pButton [disabled]="loading"  label="{{ 'login' | translate}}" class="ui-button-raised"></button>
               </div>
-            </div>
-            <div class="p-grid">
-              <div class="p-col-12 right">
-                <button pButton [disabled]="loading"  label="{{ 'login' | translate}}" class="ui-button-raised"></button>
+              <div class="flex flex-column align-items-end mt-1">
+                  <a [routerLink]="['/forgot-password']">{{ 'login-forgot-password' | translate}}</a>
               </div>
-              <div class="p-col-12 p-text-right">
-                <a [routerLink]="['/forgot-password']">{{ 'login-forgot-password' | translate}}</a>
-              </div>
-            </div>
-        </form>
+            </form>
+          </div>
         </p-panel>
       </div>
   </div>

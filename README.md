@@ -3,14 +3,14 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7TYVAGLZ7XATQ&source=url)
 
 
-# Idempiere Portal Frontend
+# Web Portal Frontend
 >
 
-Idempiere Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
+Web Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
 This project is inspired by PrimeNG seed that can be found [here](https://github.com/NilavPatel/Ng-Prime)
 
 
-This plugin works in pair with server side Idempiere Portal API that can be found here:
+This plugin works in pair with server side Web Portal API that can be found here:
 
 [https://github.com/icreated/portal-api](https://github.com/icreated/portal-api)
 
@@ -44,7 +44,7 @@ Run `npm install`.
 This will create the node_modules directory in your current directory (if one doesn’t exist yet) and will download packages to that directory.
 
 
-By default, Idempiere Portal API REST endpoints are installed here:
+By default, Web Portal API REST endpoints are installed here:
 
 [http://localhost:8080/portal/api/](http://localhost:8080/portal/api/)
 

@@ -30,6 +30,10 @@ html, body {
   font-weight: normal;
 }
 
+app-password .p-inputwrapper {
+  width: 100%!important;
+}
+
 .ng-main {
   background-color: var(--main-background);
   height: calc(100% - 50px);

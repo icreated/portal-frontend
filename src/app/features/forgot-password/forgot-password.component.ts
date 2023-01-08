@@ -30,6 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) {
+        console.log('redirect to home if already logged in', this.authenticationService.currentUserValue);
           this.router.navigate(['/']);
       }
   }

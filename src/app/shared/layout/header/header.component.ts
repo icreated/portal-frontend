@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {MenuDataService} from 'src/app/core/services/menu-data.service';
+import {AuthenticationService} from "../../../core/services/authentication-service";
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private routeStateService: RouteStateService,
               private sessionService: SessionService,
-              private menuDataService: MenuDataService) {
+              private menuDataService: MenuDataService, private authenticationService: AuthenticationService) {
     this.displayNotifications = false;
   }
 
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.routeStateService.removeAll();
+    this.authenticationService.logout();
     this.sessionService.removeItem('active-menu');
     this.router.navigate(['/login']);
   }

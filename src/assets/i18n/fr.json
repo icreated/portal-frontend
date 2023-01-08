@@ -1,5 +1,5 @@
 {
-  "login-msg": "Connexion",
+  "login-msg": "Connexion au Web Portal",
   "login": "Login",
   "login-user-name" : "Entrer le nom d'utilisateur",
   "login-user-password" : "Entrer le mot de passe",
@@ -8,7 +8,7 @@
   "login-forgot-password" : "Mot de passe oublié",
   "login-invalid-user" : "Utilisateur incorrect",
 
-  "welcome-message": "Bienvenue à Idempiere Portal.",
+  "welcome-message": "Bienvenue à Web Portal.",
   "credit-card-payment" : "Paiement avec la carte de crédit",
   "click-to-pay" : "CLICKER POUR PAYER",
   "paid-off" : "PAYE",

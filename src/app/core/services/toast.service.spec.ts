@@ -34,7 +34,7 @@ describe('ToastService', () => {
     describe('addSingle', () => {
         it('should check that translation not called when isI18nKey is false', () => {
             const msgInfo = {
-                severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere',
+                severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Web Portal',
                 isI18nKey: false
             };
             toastService.addSingle(msgInfo.severity, msgInfo.summary, msgInfo.detail);
@@ -44,7 +44,7 @@ describe('ToastService', () => {
 
         it('should check that translation is called when isI18nKey is true', () => {
             const msgInfo = {
-                severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere',
+                severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Web Portal',
                 isI18nKey: true
             };
             toastService.addSingle(msgInfo.severity, msgInfo.summary, msgInfo.detail, true);
@@ -55,7 +55,7 @@ describe('ToastService', () => {
 
     it('should check that messageService.addMultiple is called', () => {
         const messages = [];
-        messages.push({severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Portal Idempiere'} as Message);
+        messages.push({severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Web Portal'} as Message);
         messages.push({severity: 'error', summary: 'error', detail: 'Strange error is here'} as Message);
 
         toastService.addMultiple(messages);

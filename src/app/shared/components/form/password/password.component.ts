@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-password',
     templateUrl: './password.component.html',
-    styleUrls: ['./password.component.css']
+    styleUrls: ['./password.component.css'],
 })
 export class PasswordComponent implements OnInit, AfterViewInit {
 
