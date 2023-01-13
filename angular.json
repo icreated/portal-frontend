@@ -18,6 +18,12 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "optimization": false,
+            "sourceMap": true,
+            "namedChunks": true,
+            "extractLicenses": false,
+            "vendorChunk": false,
+            "buildOptimizer": false,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -57,9 +63,10 @@
             "development": {
               "buildOptimizer": false,
               "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
               "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true
+              "extractLicenses": false
             }
           }
         },
