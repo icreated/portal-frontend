@@ -5,6 +5,8 @@ import {AuthenticationService} from 'src/app/core/services/authentication-servic
 import {ToastService} from 'src/app/core/services/toast.service';
 import {Message} from 'primeng/api';
 import FormUtils from '../../core/utils/FormUtils';
+import {UsersService} from '../../api/services/users.service';
+import {handleAutoChangeDetectionStatus} from '@angular/cdk/testing';
 
 @Component({
     selector: 'app-forgot-password',
@@ -20,17 +22,17 @@ export class ForgotPasswordComponent implements OnInit {
   msgs: Message[] = [];
 
   constructor(private formBuilder: UntypedFormBuilder, private router: Router,
-              private toastService: ToastService, private authenticationService: AuthenticationService) {
+              private toastService: ToastService, private authenticationService: AuthenticationService,
+              private userService: UsersService) {
 
       this.forgotForm = this.formBuilder.group({
-          email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+          email: ['', []],
       });
   }
 
   ngOnInit() {
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) {
-        console.log('redirect to home if already logged in', this.authenticationService.currentUserValue);
           this.router.navigate(['/']);
       }
   }
@@ -51,24 +53,21 @@ export class ForgotPasswordComponent implements OnInit {
       }
 
       this.loading = true;
-      this.authenticationService.forgotPassword(this.f.email.value).subscribe(
-          () => {
-              this.toastService.addSingle('success', '', 'email-sent', true);
-              FormUtils.cleanForm(this.forgotForm);
-              this.loading = false;
-              this.router.navigate(['/']);
-          },
-          error => {
-              this.error = error;
-              this.loading = false;
-              this.forgotForm.reset();
+      this.userService.sendEmailToken({body: { value: this.f.email.value}}).subscribe(
+        () => {
+          this.toastService.addSingle('success', '', 'email-sent', true);
+          FormUtils.cleanForm(this.forgotForm);
+          this.loading = false;
+          this.router.navigate(['/']);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+          this.forgotForm.reset();
 
-              if (error === 'Precondition failed') {
-                  this.toastService.addSingle('warn', '', 'user-not-exists', true);
-              } else {
-                  this.toastService.addSingle('error', '', 'email-not-sent', true);
-              }
-          });
+          this.toastService.handleCommonErrorMessages(error);
+        });
+
   }
 
 }

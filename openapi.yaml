@@ -11,20 +11,20 @@ info:
 
 
 tags:
-  - name: common
+  - name: Common
     description: Common operations
-  - name: users
+  - name: Users
     description: Operations about users
-  - name: invoices
+  - name: Invoices
     description: Operations about invoices
-  - name: payments
+  - name: Payments
     description: Operations about payments
 
 paths:
   /common/reference/docstatus/{language}/{value}:
     get:
       tags:
-        - common
+        - Common
       summary: Get document status
       description: Get document status
       operationId: getDocStatus
@@ -50,12 +50,17 @@ paths:
             application/json:
               schema:
                 type: string
-        '404':
-          description: Not Found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
+
   /common/reference/tendertype/{language}/{value}:
     get:
       tags:
-        - common
+        - Common
       summary: Get tender type
       description: Get tender type
       operationId: getTenderType
@@ -81,12 +86,17 @@ paths:
             application/json:
               schema:
                 type: string
-        '404':
-          description: Not Found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
+
   /common/reference/creditcardtypes:
     get:
       tags:
-        - common
+        - Common
       summary: Get credit card types
       description: Get credit card types
       operationId: getCreditCardTypes
@@ -100,58 +110,70 @@ paths:
                 items:
                   $ref: '#/components/schemas/ValueLabel'
 
-  /users/password/emaillink:
+  /users/email/token:
     post:
       tags:
-        - users
-      summary: Send email link
-      description: Send email link
-      operationId: sendEmailLink
+        - Users
+      summary: Send email token
+      description: Send email with a token to reset password
+      operationId: sendEmailToken
       requestBody:
-        description: Token
+        description: User mail to send link
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CommonString'
+              $ref: '#/components/schemas/Email'
       responses:
         '200':
           description: OK
-        '412':
-          description: Precondition Failed
-        '500':
-          description: Internal Server Error
-  /users/password/validate:
-    post:
-      tags:
-        - users
-      summary: Validate token
-      description: Validate token
-      operationId: validateToken
-      requestBody:
-        description: Validate new password
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Password'
-      responses:
-        '200':
-          description: OK
-        '412':
-          description: Precondition Failed
-        '500':
-          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
 
-  /users/password/change:
+  /users/password/{token}:
+    put:
+      tags:
+        - Users
+      summary: Update forgotten password
+      description: Update forgotten password with given token
+      operationId: updateForgottenPassword
+      parameters:
+        - name: token
+          in: path
+          description: Token given by email
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Password object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgottenPassword'
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
+
+  /users/password:
     post:
       tags:
-        - users
-      summary: Change password
-      description: Change password
-      operationId: changePassword
+        - Users
+      summary: Update password
+      description: Update password of current user
+      operationId: updatePassword
       requestBody:
-        description: Change password
+        description: Password object
         required: true
         content:
           application/json:
@@ -164,15 +186,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '412':
-          description: Precondition Failed
-        '500':
-          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
 
   /payments:
     get:
       tags:
-        - payments
+        - Payments
       summary: Get payments
       description: Get user payments
       operationId: getPayments
@@ -187,7 +211,7 @@ paths:
                   $ref: '#/components/schemas/Payment'
     post:
       tags:
-        - payments
+        - Payments
       summary: Create payment
       description: Create payment
       operationId: createPayment
@@ -201,19 +225,17 @@ paths:
       responses:
         '200':
           description: successful operation
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
 
   /invoices:
     get:
       tags:
-        - invoices
+        - Invoices
       summary: Get invoices
       description: Get user invoices
       operationId: getInvoices
@@ -226,21 +248,17 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Document'
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
 
   /invoices/{id}:
     get:
       tags:
-        - invoices
+        - Invoices
       summary: Get invoice
       description: Get invoice by id
       operationId: getInvoice
@@ -259,21 +277,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Invoice'
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
 
   /invoices/openitems:
     get:
       tags:
-        - invoices
+        - Invoices
       summary: Get open items
       description: Get open items
       operationId: getOpenItems
@@ -286,43 +300,78 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OpenItem'
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalError'
+
 
 
 components:
   schemas:
+    PortalError:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
     ValueLabel:
       type: object
+      required:
+        - value
+        - label
       properties:
         label:
           type: string
         value:
           type: string
-    CommonString:
+    Email:
       type: object
+      required:
+        - value
       properties:
         value:
           type: string
-    Password:
+          format: email
+    ForgottenPassword:
       type: object
+      description: ForgottenPassword object
+      required:
+        - newPassword
+        - confirmPassword
       properties:
-        password:
-          type: string
         newPassword:
           type: string
         confirmPassword:
           type: string
+    Password:
+      allOf:
+        - $ref: '#/components/schemas/ForgottenPassword'
+        - type: object
+          description: Password object
+          required:
+            - password
+          properties:
+            password:
+              type: string
+              format: password
+
     User:
       type: object
+      description: User object
+      required:
+        - id
+        - username
+        - name
       properties:
         id:
           type: integer
@@ -335,6 +384,13 @@ components:
           type: string
     Address:
       type: object
+      description: Address object
+      required:
+        - id
+        - address1
+        - city
+        - postal
+        - countryName
       properties:
         id:
           type: integer
@@ -342,6 +398,7 @@ components:
           example: 4
         address1:
           type: string
+          minLength: 1
           description: The first line of the address.
           example: 123 Main Street
         address2:
@@ -350,10 +407,12 @@ components:
           example: Apt 1
         city:
           type: string
+          minLength: 1
           description: The city of the address.
           example: New York
         postal:
           type: string
+          minLength: 5
           description: The zip code of the address.
           example: 10001
         countryName:
@@ -362,6 +421,15 @@ components:
 
     CreditCard:
       type: object
+      description: Credit card object
+      required:
+        - creditCardType
+        - creditCardNumber
+        - creditCardExpMM
+        - creditCardExpYY
+        - creditCardName
+        - creditCardVV
+        - paymentAmount
       properties:
         creditCardType:
           type: string
@@ -369,6 +437,7 @@ components:
           example: Visa
         creditCardNumber:
           type: string
+          maxLength: 16
           description: The credit card number.
           example: 4111111111111111
         creditCardExpMM:
@@ -398,6 +467,14 @@ components:
     Document:
       type: object
       description: Order or Invoice for table display
+      required:
+        - id
+        - documentNo
+        - docStatus
+        - totalLines
+        - grandTotal
+        - currency
+        - bpartnerName
       properties:
         id:
           type: integer
@@ -431,6 +508,7 @@ components:
           example: 100.00
         currency:
           type: string
+          maxLength: 3
           description: The currency of the order / invoice.
           example: USD
         date:
@@ -444,6 +522,16 @@ components:
           example: John Smith
     Invoice:
       type: object
+      description: Object Invoice
+      required:
+        - id
+        - documentNo
+        - bpartnerName
+        - docStatus
+        - totalLines
+        - grandTotal
+        - currency
+        - date
       properties:
         id:
           type: integer
@@ -505,6 +593,14 @@ components:
 
     InvoiceLine:
       type: object
+      required:
+        - id
+        - line
+        - name
+        - qty
+        - price
+        - priceList
+        - lineNetAmt
       properties:
         id:
           type: integer
@@ -546,6 +642,12 @@ components:
 
     Payment:
       type: object
+      required:
+        - documentNo
+        - payAmt
+        - currency
+        - tenderType
+        - date
       properties:
         id:
           type: integer
@@ -588,6 +690,9 @@ components:
 
     Tax:
       type: object
+      required:
+        - name
+        - tax
       properties:
         name:
           type: string
@@ -600,90 +705,91 @@ components:
           example: 0.05
 
     OpenItem:
-        type: object
-        required:
-          - id
-          - documentNo
-          - totalLines
-          - grandTotal
-          - openAmt
-        properties:
-          invoiceId:
-            type: integer
-            format: int32
-            example: 4
-          orderId:
-            type: integer
-            format: int32
-            example: 4
-          bpartnerId:
-            type: integer
-            format: int32
-            example: 4
-          bpartnerLocationId:
-            type: integer
-            format: int32
-            example: 4
-          currencyId:
-            type: integer
-            format: int32
-            example: 4
-          documentNo:
-            type: string
-            description: The document number of the invoice.
-            example: 1000001
-          description:
-            type: string
-            description: The description of the invoice.
-            example: Invoice for order 1000001
-          docStatus:
-            type: string
-            description: The document status of the invoice.
-            example: CO
-          isSOTRX:
-            type: boolean
-            description: The transaction type is sale or purchase.
-            example: true
-          isActive:
-            type: boolean
-            description: The invoice is active.
-            example: true
-          dateOrdered:
-            type: string
-            format: date
-            description: The order date of the invoice.
-            example: 2021-01-01
-          dateInvoiced:
-            type: string
-            format: date
-            description: The invoice date of the invoice.
-            example: 2021-01-01
-          dueDate:
-            type: string
-            format: date
-            description: The due date of the invoice.
-            example: 2021-01-01
-          netDays:
-            type: integer
-            format: int32
-            example: 20
-          totalLines:
-            type: number
-            description: The total lines of the invoice.
-            format: double
-            example: 100.00
-          grandTotal:
-            type: number
-            description: The grand total of the invoice.
-            format: double
-            example: 100.00
-          openAmt:
-            type: number
-            description: The open amount of the invoice.
-            format: double
-            example: 100.00
-          paidAmt:
-            type: number
-            description: The paid amount of the invoice.
-            format: double
-            example: 100.00
+      type: object
+      required:
+        - id
+        - documentNo
+        - openAmt
+        - totalLines
+        - grandTotal
+        - currency
+      properties:
+        invoiceId:
+          type: integer
+          format: int32
+          example: 4
+        orderId:
+          type: integer
+          format: int32
+          example: 4
+        bpartnerId:
+          type: integer
+          format: int32
+          example: 4
+        bpartnerLocationId:
+          type: integer
+          format: int32
+          example: 4
+        currencyId:
+          type: integer
+          format: int32
+          example: 4
+        documentNo:
+          type: string
+          description: The document number of the invoice.
+          example: 1000001
+        description:
+          type: string
+          description: The description of the invoice.
+          example: Invoice for order 1000001
+        docStatus:
+          type: string
+          description: The document status of the invoice.
+          example: CO
+        isSOTRX:
+          type: boolean
+          description: The transaction type is sale or purchase.
+          example: true
+        isActive:
+          type: boolean
+          description: The invoice is active.
+          example: true
+        dateOrdered:
+          type: string
+          format: date
+          description: The order date of the invoice.
+          example: 2021-01-01
+        dateInvoiced:
+          type: string
+          format: date
+          description: The invoice date of the invoice.
+          example: 2021-01-01
+        dueDate:
+          type: string
+          format: date
+          description: The due date of the invoice.
+          example: 2021-01-01
+        netDays:
+          type: integer
+          format: int32
+          example: 20
+        totalLines:
+          type: number
+          description: The total lines of the invoice.
+          format: double
+          example: 100.00
+        grandTotal:
+          type: number
+          description: The grand total of the invoice.
+          format: double
+          example: 100.00
+        openAmt:
+          type: number
+          description: The open amount of the invoice.
+          format: double
+          example: 100.00
+        paidAmt:
+          type: number
+          description: The paid amount of the invoice.
+          format: double
+          example: 100.00

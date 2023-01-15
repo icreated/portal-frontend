@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface ValueLabel {
-  label: string;
+export interface Email {
   value: string;
 }

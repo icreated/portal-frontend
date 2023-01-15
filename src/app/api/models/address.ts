@@ -1,11 +1,15 @@
 /* tslint:disable */
 /* eslint-disable */
+
+/**
+ * Address object
+ */
 export interface Address {
 
   /**
    * The first line of the address.
    */
-  address1?: string;
+  address1: string;
 
   /**
    * The second line of the address.
@@ -15,16 +19,16 @@ export interface Address {
   /**
    * The city of the address.
    */
-  city?: string;
+  city: string;
 
   /**
    * The country name
    */
-  countryName?: string;
-  id?: number;
+  countryName: string;
+  id: number;
 
   /**
    * The zip code of the address.
    */
-  postal?: string;
+  postal: string;
 }

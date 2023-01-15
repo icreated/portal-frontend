@@ -1,5 +1,7 @@
+export { PortalError } from './models/portal-error';
 export { ValueLabel } from './models/value-label';
-export { CommonString } from './models/common-string';
+export { Email } from './models/email';
+export { ForgottenPassword } from './models/forgotten-password';
 export { Password } from './models/password';
 export { User } from './models/user';
 export { Address } from './models/address';

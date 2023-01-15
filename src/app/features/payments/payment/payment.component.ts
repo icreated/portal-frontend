@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {CommonService} from 'src/app/core/services/common.service';
+import {RegularService} from 'src/app/core/services/regular.service';
 import {environment} from 'src/environments/environment';
 import {map} from 'rxjs/operators';
 import {ValueLabel} from "../../../api/models/value-label";
 import {PaymentsService} from "../../../api/services/payments.service";
 import {CreditCard} from "../../../api/models/credit-card";
 import {InvoicesService} from "../../../api/services/invoices.service";
+import {CommonService} from '../../../api/services/common.service';
 
 @Component({
     selector: 'app-payment',
@@ -21,7 +22,7 @@ export class PaymentComponent implements OnInit {
   loading = false;
   submitted = false;
   cardFormGroup: UntypedFormGroup;
-  openTotal: number | undefined = 0;
+  openTotal: number = 0;
 
   creditCardTypes: ValueLabel[] = [];
 
@@ -41,11 +42,11 @@ export class PaymentComponent implements OnInit {
   ];
 
   years = [
-      {label: '2021', value: 2021},
-      {label: '2022', value: 2022},
       {label: '2023', value: 2023},
       {label: '2024', value: 2024},
       {label: '2025', value: 2025},
+      {label: '2026', value: 2026},
+      {label: '2027', value: 2027},
   ];
 
   constructor(private formBuilder: UntypedFormBuilder, public paymentService: PaymentsService,
@@ -75,7 +76,7 @@ export class PaymentComponent implements OnInit {
               this.router.navigate(['/main/dashboard']);
           }
       });
-      this.commonService.getReferenceCreditCardTypes().subscribe(data => {
+      this.commonService.getCreditCardTypes().subscribe(data => {
           this.creditCardTypes = data;
       });
   }

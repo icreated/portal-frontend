@@ -1,5 +1,5 @@
 import {TenderTypeFormatPipe} from './tender-type.pipe';
-import {CommonService} from '../services/common.service';
+import {RegularService} from '../services/regular.service';
 import {TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -7,15 +7,15 @@ import {of} from 'rxjs';
 
 describe('TenderTypeFormatPipe', () => {
 
-    let commonService: CommonService;
+    let commonService: RegularService;
     let pipe: TenderTypeFormatPipe;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [CommonService, TranslateService],
+            providers: [RegularService, TranslateService],
             imports: [HttpClientTestingModule, TranslateModule.forRoot()]
         });
-        commonService = TestBed.inject(CommonService);
+        commonService = TestBed.inject(RegularService);
         pipe = new TenderTypeFormatPipe(commonService);
     });
 

@@ -2,7 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PaymentComponent} from './payment.component';
 import {RouteStateService} from '../../../core/services/route-state.service';
-import {CommonService} from '../../../core/services/common.service';
+import {RegularService} from '../../../core/services/regular.service';
 import {UntypedFormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -21,7 +21,7 @@ describe('PaymentComponent', () => {
     let invoiceService: InvoicesService;
     let paymentService: PaymentsService;
     let routeStateService: RouteStateService;
-    let commonService: CommonService;
+    let commonService: RegularService;
     let formBuilder: UntypedFormBuilder;
     let router: Router;
 
@@ -46,7 +46,7 @@ describe('PaymentComponent', () => {
         formBuilder = TestBed.inject(UntypedFormBuilder);
         paymentService = TestBed.inject(PaymentsService);
         invoiceService = TestBed.inject(InvoicesService);
-        commonService = TestBed.inject(CommonService);
+        commonService = TestBed.inject(RegularService);
         router = TestBed.inject(Router);
         routeStateService = TestBed.inject(RouteStateService);
     });

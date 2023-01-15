@@ -3,8 +3,8 @@ import {LoaderService} from 'src/app/core/services/loader.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from './core/services/authentication-service';
-import {User} from './core/models/user';
 import {ThemeService} from './core/services/theme.service';
+import {User} from './api/models/user';
 
 @Component({
     selector: 'app-root',

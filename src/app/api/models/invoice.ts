@@ -4,23 +4,27 @@ import { Address } from './address';
 import { InvoiceLine } from './invoice-line';
 import { Payment } from './payment';
 import { Tax } from './tax';
+
+/**
+ * Object Invoice
+ */
 export interface Invoice {
   billAddress?: Address;
 
   /**
    * The Business Partner of the order / invoice.
    */
-  bpartnerName?: string;
+  bpartnerName: string;
 
   /**
    * The currency of the invoice.
    */
-  currency?: string;
+  currency: string;
 
   /**
    * The transaction date of the invoice.
    */
-  date?: string;
+  date: string;
 
   /**
    * The description of the invoice.
@@ -30,18 +34,18 @@ export interface Invoice {
   /**
    * The document status of the invoice.
    */
-  docStatus?: string;
+  docStatus: string;
 
   /**
    * The document number of the invoice.
    */
-  documentNo?: string;
+  documentNo: string;
 
   /**
    * The grand total of the invoice.
    */
-  grandTotal?: number;
-  id?: number;
+  grandTotal: number;
+  id: number;
   lines?: Array<InvoiceLine>;
   payments?: Array<Payment>;
 
@@ -54,5 +58,5 @@ export interface Invoice {
   /**
    * The total lines of the invoice.
    */
-  totalLines?: number;
+  totalLines: number;
 }

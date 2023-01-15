@@ -74,7 +74,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
       this.invoicesService.getOpenItems().subscribe(data => {
           this.openItems = data;
-          this.openTotal = data.map(item => item.openAmt).reduce((a, b) => a + b, 0);
+          this.openTotal = data
+            .map(item => item.openAmt)
+            .reduce((a, b) => a + b, 0);
       });
   }
 

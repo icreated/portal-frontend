@@ -83,7 +83,10 @@
   "required" : "Required",
   "minlength-msg" : "At least {{min}} characters",
   "maxlength-msg" : "Maximum  {{max}} characters",
-  "format-wrong-msg" : "Format is wrong",
+
+  "format-wrong" : "Format or Input Data are wrong",
+  "data-not-found" : "Data not found",
+  "server-error" : "Server Error",
 
   "color_header_bg1": "First header background color",
   "color_header_bg2": "Second header background color",

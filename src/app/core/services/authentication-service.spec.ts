@@ -2,8 +2,8 @@ import {TestBed} from '@angular/core/testing';
 
 import {AuthenticationService} from './authentication-service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {User} from '../models/user';
 import {environment} from '../../../environments/environment';
+import {User} from '../../api/models/user';
 
 
 describe('AuthenticationService', () => {
@@ -13,10 +13,7 @@ describe('AuthenticationService', () => {
     const currentUser = {
         id: 100,
         username: 'orwell',
-        firstName: 'George',
-        lastName: 'Orwell',
-        password: 'orwell',
-        token: 'qwerty123456789'
+        name: 'George',
     } as User;
     let currentUserSubject;
 
@@ -46,7 +43,7 @@ describe('AuthenticationService', () => {
 
     describe('login', () => {
         it('should login and put User to localStorage', () => {
-            service.login(currentUser.username, currentUser.password).subscribe(user => {
+            service.login(currentUser.username, "orwell").subscribe(user => {
                 expect(user).toEqual(currentUser);
                 expect(localStorage.getItem('currentUser')).toEqual(JSON.stringify(currentUser));
                 expect(service.currentUserValue).toEqual(currentUser);
@@ -59,7 +56,7 @@ describe('AuthenticationService', () => {
 
     describe('logout', () => {
         it('should clean Observable currentUser', () => {
-            service.login(currentUser.username, currentUser.password).subscribe(user => {
+            service.login(currentUser.username, "orwell").subscribe(user => {
                 expect(user).toEqual(currentUser);
             });
             const req = httpMock.expectOne(`${environment.apiUrl}/login`);
@@ -78,48 +75,5 @@ describe('AuthenticationService', () => {
             expect(localStorage.getItem('currentUser')).toBeUndefined();
         });
     });
-
-    describe('forgotPassword', () => {
-        it('should call http and return empty body', () => {
-            const email = 'george.orwell@example.com';
-            service.forgotPassword(email)
-                .subscribe((res: any) => {
-                    expect(res).toEqual('');
-                });
-            const req = httpMock.expectOne(`${environment.apiUrl}/user/password/emaillink`);
-            expect(req.request.method).toBe('POST');
-            req.flush('');
-        });
-    });
-
-    describe('passwordValidate', () => {
-        it('should call http and return empty body', () => {
-            const email = 'george.orwell@example.com';
-            service.forgotPassword(email)
-                .subscribe((res: any) => {
-                    expect(res).toEqual('');
-                });
-            const req = httpMock.expectOne(`${environment.apiUrl}/user/password/emaillink`);
-            expect(req.request.method).toBe('POST');
-            req.flush('');
-        });
-    });
-
-    describe('changePassword', () => {
-        it('should call http and return connected User', () => {
-            const password = 'GardenUser';
-            const newPassword = 'GardenAdmin';
-            service.changePassword(password, newPassword, newPassword)
-                .subscribe((user: User) => {
-                    expect(user).toEqual(currentUser);
-                    expect(localStorage.getItem('currentUser')).toEqual(JSON.stringify(currentUser));
-                    expect(service.currentUserValue).toEqual(currentUser);
-                });
-            const req = httpMock.expectOne(`${environment.apiUrl}/user/password/change`);
-            expect(req.request.method).toBe('POST');
-            req.flush(currentUser);
-        });
-    });
-
 
 });

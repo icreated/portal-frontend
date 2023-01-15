@@ -2,16 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-
-
-import {User} from '../models/user';
 import {environment} from 'src/environments/environment';
+import {User} from '../../api/models/user';
 
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
 
-    private currentUserSubject: BehaviorSubject<User | null>;
+    public currentUserSubject: BehaviorSubject<User | null>;
 
     constructor(private http: HttpClient) {
         const storageUser = localStorage.getItem('currentUser');
@@ -40,24 +38,5 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
-    }
-
-    forgotPassword(email: string) {
-        return this.http.post<any>(`${environment.apiUrl}/user/password/emaillink`, {token: email});
-    }
-
-    passwordValidate(token: string, password: string, confirmPassword: string) {
-        return this.http.post<any>(`${environment.apiUrl}/user/password/validate`,
-            {password: token, newPassword: password, confirmPassword});
-    }
-
-    changePassword(password: string, newPassword: string, confirmPassword: string): Observable<User> {
-        return this.http.post<any>(`${environment.apiUrl}/user/password/change`,
-            {password, newPassword, confirmPassword})
-            .pipe(map(user => {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                return user;
-            }));
     }
 }

@@ -6,6 +6,7 @@ import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
 import {Message} from 'primeng/api';
 import FormUtils from '../../core/utils/FormUtils';
+import {UsersService} from '../../api/services/users.service';
 
 @Component({
     selector: 'app-update-password',
@@ -22,7 +23,8 @@ export class UpdatePasswordComponent implements OnInit {
     msgs: Message[] = [];
 
     constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
-                private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService) {
+                private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService,
+                private userService: UsersService) {
 
         this.forgotForm = this.formBuilder.group({
             newPassword: [null, Validators.compose([
@@ -65,7 +67,7 @@ export class UpdatePasswordComponent implements OnInit {
             return;
         }
         this.loading = true;
-        this.authenticationService.passwordValidate(this.token, this.f.newPassword.value, this.f.confirmPassword.value)
+        this.userService.updateForgottenPassword({token: this.token, body: this.forgotForm.value})
             .subscribe(
                 () => {
                     FormUtils.cleanForm(this.forgotForm);
@@ -78,7 +80,8 @@ export class UpdatePasswordComponent implements OnInit {
                     this.loading = false;
                     this.forgotForm.reset();
                     this.toastService.addSingle('error', '', 'password-not-updated', true);
-                });
+                }
+            );
     }
 
 }

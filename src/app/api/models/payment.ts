@@ -5,12 +5,12 @@ export interface Payment {
   /**
    * The currency of the payment.
    */
-  currency?: string;
+  currency: string;
 
   /**
    * The transaction date of the payment.
    */
-  date?: string;
+  date: string;
 
   /**
    * The description of the payment.
@@ -25,18 +25,18 @@ export interface Payment {
   /**
    * The document number of the payment.
    */
-  documentNo?: string;
+  documentNo: string;
   id?: number;
 
   /**
    * The amount of the payment.
    */
-  payAmt?: number;
+  payAmt: number;
 
   /**
    * The tender type of the payment.
    */
-  tenderType?: string;
+  tenderType: string;
 
   /**
    * The transaction ID of the payment.

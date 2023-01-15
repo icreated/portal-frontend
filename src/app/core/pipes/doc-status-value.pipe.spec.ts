@@ -2,20 +2,20 @@ import {DocStatusFormatPipe} from './doc-status-value.pipe';
 import {TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {CommonService} from '../services/common.service';
+import {RegularService} from '../services/regular.service';
 import {of} from 'rxjs';
 
 describe('DocStatusFormatPipe', () => {
 
-    let commonService: CommonService;
+    let commonService: RegularService;
     let pipe: DocStatusFormatPipe;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [CommonService, TranslateService],
+            providers: [RegularService, TranslateService],
             imports: [HttpClientTestingModule, TranslateModule.forRoot()]
         });
-        commonService = TestBed.inject(CommonService);
+        commonService = TestBed.inject(RegularService);
         pipe = new DocStatusFormatPipe(commonService);
     });
 

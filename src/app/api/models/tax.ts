@@ -5,10 +5,10 @@ export interface Tax {
   /**
    * The name of the tax.
    */
-  name?: string;
+  name: string;
 
   /**
    * The tax rate.
    */
-  tax?: number;
+  tax: number;
 }

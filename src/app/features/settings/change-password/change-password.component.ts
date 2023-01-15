@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {first} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
 import {Message} from 'primeng/api';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import FormUtils from '../../../core/utils/FormUtils';
+import {UsersService} from '../../../api/services/users.service';
 
 @Component({
     selector: 'app-change-password',
@@ -24,7 +25,8 @@ export class ChangePasswordComponent implements OnInit {
     currentLang = 'en';
 
     constructor(private formBuilder: UntypedFormBuilder, private router: Router, private toastService: ToastService,
-                private authenticationService: AuthenticationService, private translateService: TranslateService) {
+                private userService: UsersService, private authenticationService: AuthenticationService,
+                private translateService: TranslateService) {
 
         this.passwordForm = this.formBuilder.group({
             password: [null, Validators.compose([Validators.required])],
@@ -63,8 +65,13 @@ export class ChangePasswordComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.changePassword(this.f.password.value, this.f.newPassword.value, this.f.confirmPassword.value)
+        this.userService.updatePassword(this.passwordForm.value)
             .pipe(first())
+            .pipe(map(user => {
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              this.authenticationService.currentUserSubject.next(user);
+              return user;
+            }))
             .subscribe(
                 () => {
                     this.loading = false;

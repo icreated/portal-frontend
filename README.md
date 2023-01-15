@@ -7,8 +7,6 @@
 >
 
 Web Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
-This project is inspired by PrimeNG seed that can be found [here](https://github.com/NilavPatel/Ng-Prime)
-
 
 This plugin works in pair with server side Web Portal API that can be found here:
 

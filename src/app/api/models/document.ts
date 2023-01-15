@@ -9,12 +9,12 @@ export interface Document {
   /**
    * The Business Partner of the order / invoice.
    */
-  bpartnerName?: string;
+  bpartnerName: string;
 
   /**
    * The currency of the order / invoice.
    */
-  currency?: string;
+  currency: string;
 
   /**
    * The transaction date of the order / invoice.
@@ -29,18 +29,18 @@ export interface Document {
   /**
    * The document status of the order / invoice.
    */
-  docStatus?: string;
+  docStatus: string;
 
   /**
    * The document number of the order / invoice.
    */
-  documentNo?: string;
+  documentNo: string;
 
   /**
    * The grand total of the order / invoice.
    */
-  grandTotal?: number;
-  id?: number;
+  grandTotal: number;
+  id: number;
 
   /**
    * The PO reference of the order / invoice.
@@ -50,5 +50,5 @@ export interface Document {
   /**
    * The total lines of the order / invoice.
    */
-  totalLines?: number;
+  totalLines: number;
 }

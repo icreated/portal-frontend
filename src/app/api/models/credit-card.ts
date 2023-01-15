@@ -1,39 +1,43 @@
 /* tslint:disable */
 /* eslint-disable */
+
+/**
+ * Credit card object
+ */
 export interface CreditCard {
 
   /**
    * The credit card expiration month.
    */
-  creditCardExpMM?: number;
+  creditCardExpMM: number;
 
   /**
    * The credit card expiration year.
    */
-  creditCardExpYY?: number;
+  creditCardExpYY: number;
 
   /**
    * The credit card name.
    */
-  creditCardName?: string;
+  creditCardName: string;
 
   /**
    * The credit card number.
    */
-  creditCardNumber?: string;
+  creditCardNumber: string;
 
   /**
    * The credit card type.
    */
-  creditCardType?: string;
+  creditCardType: string;
 
   /**
    * The credit card verification value.
    */
-  creditCardVV?: string;
+  creditCardVV: string;
 
   /**
    * The payment amount.
    */
-  paymentAmount?: number;
+  paymentAmount: number;
 }

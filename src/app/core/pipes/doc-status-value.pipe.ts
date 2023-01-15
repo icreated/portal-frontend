@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {CommonService} from '../services/common.service';
+import {RegularService} from '../services/regular.service';
+import {CommonService} from '../../api/services/common.service';
 
 @Pipe({
     name: 'docStatus',
@@ -19,7 +20,7 @@ export class DocStatusFormatPipe implements PipeTransform {
           this.cachedData = null;
           this.cachedValue = value;
 
-          this.commonService.getReferenceDocStatus(value).subscribe(result => {
+          this.commonService.getDocStatus(value).subscribe(result => {
               this.cachedData = result;
           });
 

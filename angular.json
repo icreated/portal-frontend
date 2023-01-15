@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Ng-Prime": {
+    "portal-frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Ng-Prime",
+            "outputPath": "dist/portal-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Ng-Prime:build"
+            "browserTarget": "portal-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Ng-Prime:build:production"
+              "browserTarget": "portal-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Ng-Prime:build"
+            "browserTarget": "portal-frontend:build"
           }
         },
         "test": {
@@ -114,7 +114,7 @@
         }
       }
     },
-    "Ng-Prime-e2e": {
+    "portal-frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -122,11 +122,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Ng-Prime:serve"
+            "devServerTarget": "portal-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Ng-Prime:serve:production"
+              "devServerTarget": "portal-frontend:serve:production"
             }
           }
         }

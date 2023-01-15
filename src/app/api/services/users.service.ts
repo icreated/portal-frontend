@@ -9,7 +9,8 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { CommonString } from '../models/common-string';
+import { Email } from '../models/email';
+import { ForgottenPassword } from '../models/forgotten-password';
 import { Password } from '../models/password';
 import { User } from '../models/user';
 
@@ -29,31 +30,31 @@ export class UsersService extends BaseService {
   }
 
   /**
-   * Path part for operation sendEmailLink
+   * Path part for operation sendEmailToken
    */
-  static readonly SendEmailLinkPath = '/users/password/emaillink';
+  static readonly SendEmailTokenPath = '/users/email/token';
 
   /**
-   * Send email link.
+   * Send email token.
    *
-   * Send email link
+   * Send email with a token to reset password
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `sendEmailLink()` instead.
+   * To access only the response body, use `sendEmailToken()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  sendEmailLink$Response(params: {
+  sendEmailToken$Response(params: {
     context?: HttpContext
 
     /**
-     * Token
+     * User mail to send link
      */
-    body: CommonString
+    body: Email
   }
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UsersService.SendEmailLinkPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, UsersService.SendEmailTokenPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -71,57 +72,63 @@ export class UsersService extends BaseService {
   }
 
   /**
-   * Send email link.
+   * Send email token.
    *
-   * Send email link
+   * Send email with a token to reset password
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `sendEmailLink$Response()` instead.
+   * To access the full response (for headers, for example), `sendEmailToken$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  sendEmailLink(params: {
+  sendEmailToken(params: {
     context?: HttpContext
 
     /**
-     * Token
+     * User mail to send link
      */
-    body: CommonString
+    body: Email
   }
 ): Observable<void> {
 
-    return this.sendEmailLink$Response(params).pipe(
+    return this.sendEmailToken$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation validateToken
+   * Path part for operation updateForgottenPassword
    */
-  static readonly ValidateTokenPath = '/users/password/validate';
+  static readonly UpdateForgottenPasswordPath = '/users/password/{token}';
 
   /**
-   * Validate token.
+   * Update forgotten password.
    *
-   * Validate token
+   * Update forgotten password with given token
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `validateToken()` instead.
+   * To access only the response body, use `updateForgottenPassword()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  validateToken$Response(params: {
+  updateForgottenPassword$Response(params: {
+
+    /**
+     * Token given by email
+     */
+    token: string;
     context?: HttpContext
 
     /**
-     * Validate new password
+     * Password object
      */
-    body: Password
+    body: ForgottenPassword
   }
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UsersService.ValidateTokenPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, UsersService.UpdateForgottenPasswordPath, 'put');
     if (params) {
+      rb.path('token', params.token, {});
       rb.body(params.body, 'application/json');
     }
 
@@ -138,56 +145,61 @@ export class UsersService extends BaseService {
   }
 
   /**
-   * Validate token.
+   * Update forgotten password.
    *
-   * Validate token
+   * Update forgotten password with given token
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `validateToken$Response()` instead.
+   * To access the full response (for headers, for example), `updateForgottenPassword$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  validateToken(params: {
+  updateForgottenPassword(params: {
+
+    /**
+     * Token given by email
+     */
+    token: string;
     context?: HttpContext
 
     /**
-     * Validate new password
+     * Password object
      */
-    body: Password
+    body: ForgottenPassword
   }
 ): Observable<void> {
 
-    return this.validateToken$Response(params).pipe(
+    return this.updateForgottenPassword$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation changePassword
+   * Path part for operation updatePassword
    */
-  static readonly ChangePasswordPath = '/users/password/change';
+  static readonly UpdatePasswordPath = '/users/password';
 
   /**
-   * Change password.
+   * Update password.
    *
-   * Change password
+   * Update password of current user
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `changePassword()` instead.
+   * To access only the response body, use `updatePassword()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  changePassword$Response(params: {
+  updatePassword$Response(params: {
     context?: HttpContext
 
     /**
-     * Change password
+     * Password object
      */
     body: Password
   }
 ): Observable<StrictHttpResponse<User>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UsersService.ChangePasswordPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, UsersService.UpdatePasswordPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -205,26 +217,26 @@ export class UsersService extends BaseService {
   }
 
   /**
-   * Change password.
+   * Update password.
    *
-   * Change password
+   * Update password of current user
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `changePassword$Response()` instead.
+   * To access the full response (for headers, for example), `updatePassword$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  changePassword(params: {
+  updatePassword(params: {
     context?: HttpContext
 
     /**
-     * Change password
+     * Password object
      */
     body: Password
   }
 ): Observable<User> {
 
-    return this.changePassword$Response(params).pipe(
+    return this.updatePassword$Response(params).pipe(
       map((r: StrictHttpResponse<User>) => r.body as User)
     );
   }

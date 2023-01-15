@@ -48,4 +48,16 @@ export class ToastService {
     clear() {
         this.messageService.clear();
     }
+
+  public handleCommonErrorMessages(error: any): void {
+
+    switch (error) {
+      case 'Bad Request': this.addSingle('warn', '', 'format-wrong-msg', true);
+        break;
+      case 'Not Found': this.addSingle('warn', '', 'data-not-found', true);
+        break;
+      case 'Server Error': this.addSingle('error', '', 'server-error', true);
+        break;
+    }
+  }
 }
