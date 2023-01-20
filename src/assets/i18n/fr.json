@@ -1,5 +1,5 @@
 {
-  "login-msg": "Connexion au Web Portal",
+  "login-msg": "Connexion à Icreated Web Portal",
   "login": "Login",
   "login-user-name" : "Entrer le nom d'utilisateur",
   "login-user-password" : "Entrer le mot de passe",
@@ -12,7 +12,7 @@
   "data-not-found" : "Données non trouvées",
   "server-error" : "Erreur serveur",
 
-  "welcome-message": "Bienvenue à Web Portal.",
+  "welcome-message": "Bienvenue à Icreated Web Portal.",
   "credit-card-payment" : "Paiement avec la carte de crédit",
   "click-to-pay" : "CLICKER POUR PAYER",
   "paid-off" : "PAYE",

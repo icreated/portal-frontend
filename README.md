@@ -3,10 +3,10 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7TYVAGLZ7XATQ&source=url)
 
 
-# Web Portal Frontend
+# Icreated Web Portal Frontend
 >
 
-Web Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
+Icreated Web Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
 
 This plugin works in pair with server side Web Portal API that can be found here:
 
@@ -26,9 +26,6 @@ This plugin works in pair with server side Web Portal API that can be found here
 
 ![Portal Invoice Detail](/src/assets/images/screen_invoice_detail.png?raw=true "Portal Invoice Detail")
 
-### Credit Card Page
-
-![Portal Credit Card](/src/assets/images/screen_creditcard.png?raw=true "Portal Credit Card")
 
 ### Settings
 

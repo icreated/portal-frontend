@@ -1,5 +1,5 @@
 {
-  "login-msg": "Connection to Web Portal",
+  "login-msg": "Connection to Icreated Web Portal",
   "login": "Login",
   "login-user-name" : "Enter User Name",
   "login-user-password" : "Enter Password",
@@ -8,7 +8,7 @@
   "login-forgot-password" : "Forgot Password",
   "login-invalid-user" : "Invalid User",
 
-  "welcome-message": "Welcome to Web Portal.",
+  "welcome-message": "Welcome to Icreated Web Portal.",
   "credit-card-payment" : "Credit Card Payment",
   "click-to-pay" : "CLICK TO PAY",
   "paid-off" : "PAID OFF",

@@ -12,7 +12,7 @@
                   <app-password icon="fa-key" [control]="f.password" toggleMask="true" [label]="'login-user-password' | translate"  [submitted]="submitted"> </app-password>
               </div>
               <div class="flex flex-column align-items-start mt-2">
-                  <button pButton [disabled]="loading"  label="{{ 'login' | translate}}" class="ui-button-raised"></button>
+                  <button pButton [disabled]="loading"  label="{{ 'login' | translate}}" class="p-button-raised"></button>
               </div>
               <div class="flex flex-column align-items-end mt-1">
                   <a [routerLink]="['/forgot-password']">{{ 'login-forgot-password' | translate}}</a>

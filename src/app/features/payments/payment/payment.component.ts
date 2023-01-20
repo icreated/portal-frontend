@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {RegularService} from 'src/app/core/services/regular.service';
 import {environment} from 'src/environments/environment';
 import {map} from 'rxjs/operators';
 import {ValueLabel} from "../../../api/models/value-label";
