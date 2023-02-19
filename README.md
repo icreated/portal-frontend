@@ -2,10 +2,9 @@
 > Integration created
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7TYVAGLZ7XATQ&source=url)
 
-**Attention**: The full information about the project can be found on the [project website](https://icreated.co/projects/webportal).
-
 # Icreated Web Portal Frontend
->
+>**Attention**: The full information about the project can be found on the [project website](https://icreated.co/projects/webportal).
+
 
 Icreated Web Portal Frontend is a frontend application created as responsive angular / PrimeNG seed for your projects.
 
