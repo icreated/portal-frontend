@@ -2,6 +2,7 @@
 > Integration created
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7TYVAGLZ7XATQ&source=url)
 
+**Attention**: The full information about the project can be found on the [project website](https://icreated.co/projects/webportal).
 
 # Icreated Web Portal Frontend
 >
@@ -16,20 +17,20 @@ This plugin works in pair with server side Web Portal API that can be found here
 
 ### Home page
 
-![Portal Home](/src/assets/images/screen_home.png?raw=true "Portal Home")
+![Portal Home](https://icreated.co/assets/images/projects/webportal/screenshot_home.png?raw=true "Portal Home")
 
 ### Invoices page
 
-![Portal Invoices](/src/assets/images/screen_invoices.png?raw=true "Portal Invoices")
+![Portal Invoices](https://icreated.co/assets/images/projects/webportal/screenshot_invoices.png?raw=true "Portal Invoices")
 
 ### Invoice Detail page
 
-![Portal Invoice Detail](/src/assets/images/screen_invoice_detail.png?raw=true "Portal Invoice Detail")
+![Portal Invoice Detail](https://icreated.co/assets/images/projects/webportal/screenshot_invoice_detail.png?raw=true "Portal Invoice Detail")
 
 
 ### Settings
 
-![Settings](/src/assets/images/screen_settings.png?raw=true "Settings")
+![Settings](https://icreated.co/assets/images/projects/webportal/screenshot_settings.png?raw=true "Settings")
 
 
 ## Installing / Getting started
