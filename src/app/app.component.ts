@@ -10,7 +10,7 @@ import {User} from './api/models/user';
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css']
-})
+    })
 export class AppComponent implements OnInit {
 
   title = 'Web Portal';
@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
     private authenticationService: AuthenticationService, private themeService: ThemeService,
     translate: TranslateService) {
 
-    const theme = this.sessionService.getItem('selected-theme');
-    theme ? this.themeService.selectTheme(theme) :
-      this.themeService.selectTheme(this.themeService.getThemes()[0]);
+      const theme = this.sessionService.getItem('selected-theme');
+      theme ? this.themeService.selectTheme(theme) :
+          this.themeService.selectTheme(this.themeService.getThemes()[0]);
 
       this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
 
@@ -37,7 +37,9 @@ export class AppComponent implements OnInit {
           translate.use(language);
       } else {
           const browserLang = translate.getBrowserLang();
-          language = translate.getLangs().includes(browserLang) ? browserLang : 'en';
+          if (browserLang != null) {
+              language = translate.getLangs().includes(browserLang) ? browserLang : 'en';
+          }
           this.sessionService.setItem('ng-prime-language', language);
       }
   }
