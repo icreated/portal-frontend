@@ -2,6 +2,11 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {CustomMenuItem} from '../models/menu-item.model';
 
+export interface MenuState {
+    isMenuOpened: boolean;
+    isMenuDocked: boolean;
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -10,8 +15,8 @@ import {CustomMenuItem} from '../models/menu-item.model';
  */
 export class MenuDataService {
 
-  public toggleMenuBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public dockMenuBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  public toggleMenuBar: BehaviorSubject<MenuState> = new BehaviorSubject<MenuState>({isMenuOpened: false, isMenuDocked: true});
 
   /**
    * Application Menu list

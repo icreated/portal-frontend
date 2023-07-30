@@ -12,17 +12,17 @@ import {filter} from 'rxjs/operators';
     templateUrl: 'docker-sidebar.component.html',
     styleUrls: ['docker-sidebar.component.css'],
     animations: [
-    trigger('openDocked', [
-        state('docked', style({
+    trigger('dockedOpen', [
+        state('true', style({
             width: '50px',
             })),
-        state('open', style({
+        state('false', style({
             width: '12rem',
             })),
-        transition('docked => open', [
+        transition('true => false', [
             animate('.1s')
             ]),
-        transition('open => docked', [
+        transition('false => true', [
             animate('.1s')
             ]),
         ]),
@@ -46,28 +46,25 @@ export class DockerSidebarComponent implements OnInit {
   ngOnInit() {
       this.items = this.menuDataService.getMenuList();
 
-      this.menuDataService.toggleMenuBar.subscribe(isMenuOpened => {
-          this.isMenuDocked = false;
-          this.isTitleShowed = true;
-          this.isMenuOpened = isMenuOpened;
-          this.cssEvent.next(isMenuOpened ? 'ng-content-hidden' : 'ng-content-overlay');
-      });
-
-      this.menuDataService.dockMenuBar.subscribe(isMenuDocked => {
+      this.menuDataService.toggleMenuBar.subscribe(menuState => {
           if (this.isMobile) {
-              this.isMenuOpened = true;
+            this.isMenuOpened = !menuState.isMenuOpened;
+            this.isMenuDocked = false;
+            this.cssEvent.next(this.isMenuOpened ? 'ng-content-hidden' : 'ng-content-overlay');
           } else {
-              this.isMenuOpened = false;
-              this.cssEvent.next( isMenuDocked ? 'ng-content-docked' : 'ng-content');
+            this.isMenuOpened = menuState.isMenuOpened;
+            this.isMenuDocked = menuState.isMenuDocked;
+            this.cssEvent.next( menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
           }
-          this.isMenuDocked = isMenuDocked;
+
           this.isTitleShowed = false;
           if (!this.isMenuDocked) {
-              setTimeout(() => {
-                  this.isTitleShowed = true;
-              }, 100);
+            setTimeout(() => {
+              this.isTitleShowed = true;
+            }, 100);
           }
       });
+
 
       this.applicationStateService.isMobileResolution().subscribe(isMobile => {
           this.isMobile = isMobile;
@@ -78,11 +75,10 @@ export class DockerSidebarComponent implements OnInit {
               this.cssEvent.next('ng-content-hidden');
           } else {
               if (this.isMenuOpened) {
-                  this.menuDataService.dockMenuBar.next(true);
+                  this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: false});
               }
               this.isMenuOpened = false;
               this.isTitleShowed = !this.isMenuDocked;
-              this.isMenuDocked = true;
               this.cssEvent.next(this.isMenuDocked ? 'ng-content-docked' : 'ng-content');
           }
       });
@@ -111,7 +107,8 @@ export class DockerSidebarComponent implements OnInit {
               .pipe(
                   filter(isMobile => isMobile)
               ).subscribe(isMobile => {
-                  this.menuDataService.toggleMenuBar.next(true);
+                  const menuState = { isMenuOpened: false, isMenuDocked: this.isMenuDocked };
+                  this.menuDataService.toggleMenuBar.next(menuState);
               });
       }, 100);
   }

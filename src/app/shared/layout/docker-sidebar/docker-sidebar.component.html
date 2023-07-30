@@ -1,4 +1,4 @@
-<div [@openDocked]="isMenuDocked ? 'docked' : 'open'" class="sidebar" [ngClass]="{'menu-content-hidden': isMenuOpened}">
+<div [@dockedOpen]="isMenuDocked" class="sidebar" [ngClass]="{'menu-content-hidden': isMenuOpened}">
     <ul class="np-menu">
         <ng-template #recursiveList let-list>
             <li *ngFor="let menu of list">
