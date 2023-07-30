@@ -20,7 +20,7 @@ export class RegularService {
     }
 
     public getLang(): string {
-        return environment.langMap[this.translationService.currentLang];
+        return (environment.langMap as any)[this.translationService.currentLang];
     }
 
 
