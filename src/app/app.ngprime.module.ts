@@ -7,7 +7,6 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { TableModule } from 'primeng/table';
 import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
-import { ChartModule } from 'primeng/chart';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -37,7 +36,6 @@ import {FieldsetModule} from "primeng/fieldset";
         TableModule,
         MessageModule,
         CardModule,
-        ChartModule,
         ProgressSpinnerModule,
         OverlayPanelModule,
         BreadcrumbModule,
