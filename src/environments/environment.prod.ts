@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
     version: '1.0.0',
-    apiUrl: 'http://portal-json-server.icreated.co',
+    apiUrl: 'https://portal-json-server.icreated.co',
     dateFormat: 'MM/dd/yyyy',
     currencyISO: 'USD',
 
