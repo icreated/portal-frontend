@@ -14,7 +14,7 @@
   "private": false,
   "dependencies": {
     "@angular/animations": "^16.1.7",
-    "@angular/cdk": "^15.1.0",
+    "@angular/cdk": "^16.1.6",
     "@angular/common": "^16.1.7",
     "@angular/compiler": "^16.1.7",
     "@angular/core": "^16.1.7",
@@ -26,7 +26,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@rxweb/reactive-form-validators": "^13.0.1",
-    "chart.js": "^4.1.2",
+    "chart.js": "^4.3.2",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primeng": "^16.1.0",
