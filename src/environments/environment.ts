@@ -4,7 +4,8 @@
 
 export const environment: { [index: string]: any } = {
     production: false,
-    apiUrl: 'http://localhost:8080/portal/api',
+    apiUrl: 'http://localhost:3000', // for json-server
+    // apiUrl: 'http://localhost:8080/portal/api', // for Idempiere localhost
     dateFormat: 'dd/MM/yyyy',
     currencyISO: 'USD',
     version: '8.2.0',
