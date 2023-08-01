@@ -10,6 +10,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {InputComponent} from './shared/components/form/input/input.component';
 import {PasswordComponent} from './shared/components/form/password/password.component';
 
+
 @NgModule({
     imports: [
         CommonModule,

@@ -54,7 +54,7 @@ export class CommonService extends BaseService {
     value: string;
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<string>> {
+): Observable<StrictHttpResponse<ValueLabel>> {
 
     const rb = new RequestBuilder(this.rootUrl, CommonService.GetDocStatusPath, 'get');
     if (params) {
@@ -69,7 +69,7 @@ export class CommonService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
+        return r as StrictHttpResponse<ValueLabel>;
       })
     );
   }
@@ -97,10 +97,10 @@ export class CommonService extends BaseService {
     value: string;
     context?: HttpContext
   }
-): Observable<string> {
+): Observable<ValueLabel> {
 
     return this.getDocStatus$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<ValueLabel>) => r.body as ValueLabel)
     );
   }
 
@@ -132,7 +132,7 @@ export class CommonService extends BaseService {
     value: string;
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<string>> {
+): Observable<StrictHttpResponse<ValueLabel>> {
 
     const rb = new RequestBuilder(this.rootUrl, CommonService.GetTenderTypePath, 'get');
     if (params) {
@@ -147,7 +147,7 @@ export class CommonService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
+        return r as StrictHttpResponse<ValueLabel>;
       })
     );
   }
@@ -175,10 +175,10 @@ export class CommonService extends BaseService {
     value: string;
     context?: HttpContext
   }
-): Observable<string> {
+): Observable<ValueLabel> {
 
     return this.getTenderType$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<ValueLabel>) => r.body as ValueLabel)
     );
   }
 

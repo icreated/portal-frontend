@@ -18,42 +18,44 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {JwtInterceptor} from './core/interceptors/jwt-interceptor';
 import {ErrorInterceptor} from './core/interceptors/error-interceptor';
 import {DockerSidebarComponent} from './shared/layout/docker-sidebar/docker-sidebar.component';
+import {ApiModule} from './api/api.module';
+import {environment} from '../environments/environment';
 
 @NgModule({
-    declarations:
-    [
-    AppComponent,
-    LayoutComponent,
-    DockerSidebarComponent,
-    HeaderComponent,
-    FooterComponent
+    declarations: [
+      AppComponent,
+      LayoutComponent,
+      DockerSidebarComponent,
+      HeaderComponent,
+      FooterComponent
     ],
     imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AppCommonModule.forRoot(),
-    TranslateModule.forRoot({
-        loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
-        deps: [HttpClient]
-        },
-        isolate: false
-        }),
+      BrowserModule,
+      BrowserAnimationsModule,
+      AppRoutingModule,
+      HttpClientModule,
+      AppCommonModule.forRoot(),
+      ApiModule.forRoot({rootUrl: environment.apiUrl}),
+      TranslateModule.forRoot({
+          loader: {
+          provide: TranslateLoader,
+          useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
+          deps: [HttpClient]
+          },
+          isolate: false
+          }),
     ],
     exports: [],
     providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    MessageService,
-    AuthGuard
+      {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+      MessageService,
+      AuthGuard
     ],
     bootstrap: [
-    AppComponent
+      AppComponent
     ]
-    })
+})
 export class AppModule {
 }
 

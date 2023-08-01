@@ -49,7 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ValueLabel'
         default:
           description: Unexpected error
           content:
@@ -85,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ValueLabel'
         default:
           description: Unexpected error
           content:

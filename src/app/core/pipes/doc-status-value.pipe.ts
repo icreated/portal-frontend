@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {RegularService} from '../services/regular.service';
 import {CommonService} from '../../api/services/common.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Pipe({
     name: 'docStatus',
@@ -11,21 +11,20 @@ export class DocStatusFormatPipe implements PipeTransform {
   private cachedValue: any = null;
   private cachedData: any = null;
 
-  constructor(private commonService: CommonService) {
+  constructor(private commonService: CommonService, private translate: TranslateService) {
   }
 
   transform(value: any) {
+    if (value !== this.cachedValue) {
+      this.cachedData = null;
+      this.cachedValue = value;
 
-      if (value !== this.cachedValue) {
-          this.cachedData = null;
-          this.cachedValue = value;
-
-          this.commonService.getDocStatus(value).subscribe(result => {
-              this.cachedData = result;
-          });
-
-      }
-      return this.cachedData;
+      this.commonService.getDocStatus({language: this.translate.currentLang, value })
+        .subscribe(result => {
+          this.cachedData = result.label;
+      });
+    }
+    return this.cachedData;
   }
 
 }
