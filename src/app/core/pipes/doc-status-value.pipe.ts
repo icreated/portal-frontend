@@ -19,7 +19,7 @@ export class DocStatusFormatPipe implements PipeTransform {
       this.cachedData = null;
       this.cachedValue = value;
 
-      this.commonService.getDocStatus({language: this.translate.currentLang, value })
+      this.commonService.getDocStatus({language: this.translate.currentLang || 'en', value })
         .subscribe(result => {
           this.cachedData = result.label;
       });

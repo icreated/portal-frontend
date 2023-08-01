@@ -1,6 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {RegularService} from '../services/regular.service';
 import {CommonService} from '../../api/services/common.service';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Pipe({
@@ -13,7 +14,7 @@ export class TenderTypeFormatPipe implements PipeTransform {
   private cachedData: any = null;
 
 
-  constructor(private commonService: CommonService) {
+  constructor(private commonService: CommonService, private translate: TranslateService) {
   }
 
   transform(value: any) {
@@ -22,8 +23,8 @@ export class TenderTypeFormatPipe implements PipeTransform {
           this.cachedData = null;
           this.cachedValue = value;
 
-          this.commonService.getTenderType(value).subscribe(result => {
-              this.cachedData = result;
+          this.commonService.getTenderType({language: this.translate.currentLang || 'en', value }).subscribe(result => {
+              this.cachedData = result.label;
           });
 
       }

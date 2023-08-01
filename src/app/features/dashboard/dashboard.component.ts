@@ -17,53 +17,12 @@ export class DashboardComponent implements OnInit {
   openItems: OpenItem[] = [];
   openTotal = 0;
 
-  barChartData: any;
-
-  doughnutChartData: any;
 
   msgs: any[];
 
-
   constructor(translate: TranslateService,
               private invoicesService: InvoicesService,
-              private routeStateService: RouteStateService,
-              public paymentService: PaymentsService) {
-
-      this.barChartData = {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-          datasets: [
-              {
-                  label: 'Rejected',
-                  backgroundColor: '#42A5F5',
-                  borderColor: '#1E88E5',
-                  data: [65, 59, 80, 81, 56, 55, 40]
-              },
-              {
-                  label: 'Approved',
-                  backgroundColor: '#9CCC65',
-                  borderColor: '#7CB342',
-                  data: [28, 48, 40, 19, 86, 27, 90]
-              }
-          ]
-      };
-
-      this.doughnutChartData = {
-          labels: ['Active', 'Inactive', 'Deleted'],
-          datasets: [
-              {
-                  data: [300, 50, 100],
-                  backgroundColor: [
-                      '#FF6384',
-                      '#36A2EB',
-                      '#FFCE56'
-                  ],
-                  hoverBackgroundColor: [
-                      '#FF6384',
-                      '#36A2EB',
-                      '#FFCE56'
-                  ]
-              }]
-      };
+              private routeStateService: RouteStateService) {
 
       this.msgs = [];
       translate.get('welcome-message').subscribe((text: string) => {
@@ -73,10 +32,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
       this.invoicesService.getOpenItems().subscribe(data => {
+        if (data) {
           this.openItems = data;
           this.openTotal = data
             .map(item => item.openAmt)
             .reduce((a, b) => a + b, 0);
+        }
+
       });
   }
 

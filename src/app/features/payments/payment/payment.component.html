@@ -7,7 +7,7 @@
 
 <p-panel [header]="'card-payment' | translate">
       <div class="col-12">
-        <p-dropdown style="width:100%" [options]="creditCardTypes" formControlName="cardType" [placeholder]="'choose-card-type' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cardType.errors }"  aria-describedby="card-type-help"> </p-dropdown>
+        <p-dropdown [options]="creditCardTypes" formControlName="cardType" [placeholder]="'choose-card-type' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cardType.errors }"  aria-describedby="card-type-help"> </p-dropdown>
         <small id='card-type-help' *ngIf="submitted && f.cardType.errors" class="p-error">
           <div *ngIf="f.cardType.errors.required">{{ 'required-card-type' | translate }}</div>
         </small>
