@@ -1,11 +1,11 @@
-<div class="p-inputgroup">
+<p-inputgroup>
   @if (icon) {
-    <span class="p-inputgroup-addon"><i class='fa' [class]="icon"></i></span>
+    <p-inputgroup-addon><i class='fa' [class]="icon"></i></p-inputgroup-addon>
   }
   <input [type]="type" [formControl]="control" size="30" pInputText class="p-inputtext"
     [ngClass]="{ 'ng-invalid ng-dirty': submitted &&  control.errors}"
     [placeholder]="label | translate" [autocomplete]="'control'+uniqueId" [attr.aria-describedby]="'v'+uniqueId"/>
-</div>
+</p-inputgroup>
 @if (submitted &&  control.errors) {
   <small [id]="'v'+uniqueId" class="p-error">
     @if (control.errors.required || control.pristine) {

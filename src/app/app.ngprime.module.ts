@@ -21,10 +21,14 @@ import {DataViewModule} from "primeng/dataview";
 import {ColorPickerModule} from "primeng/colorpicker";
 import {SplitterModule} from "primeng/splitter";
 import {FieldsetModule} from "primeng/fieldset";
+import {InputGroupModule} from "primeng/inputgroup";
+import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 
 @NgModule({
     exports: [
         InputTextModule,
+        InputGroupModule,
+        InputGroupAddonModule,
         PasswordModule,
         DividerModule,
         SelectModule,
