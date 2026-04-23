@@ -12,22 +12,23 @@ import {filter} from 'rxjs/operators';
     templateUrl: 'docker-sidebar.component.html',
     styleUrls: ['docker-sidebar.component.css'],
     animations: [
-    trigger('dockedOpen', [
-        state('true', style({
-            width: '50px',
+        trigger('dockedOpen', [
+            state('true', style({
+                width: '50px',
             })),
-        state('false', style({
-            width: '12rem',
+            state('false', style({
+                width: '12rem',
             })),
-        transition('true => false', [
-            animate('.1s')
+            transition('true => false', [
+                animate('.1s')
             ]),
-        transition('false => true', [
-            animate('.1s')
+            transition('false => true', [
+                animate('.1s')
             ]),
         ]),
     ],
-    })
+    standalone: false
+})
 export class DockerSidebarComponent implements OnInit {
 
   @Input() isMobile = false;

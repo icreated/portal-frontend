@@ -4,9 +4,10 @@ import {ThemeService} from '../../../core/services/theme.service';
 import {DesignTemplate} from "../../../core/models/design-template.model";
 
 @Component({
-  selector: 'app-theme-chooser',
-  templateUrl: './theme-chooser.component.html',
-  styleUrls: ['./theme-chooser.component.css']
+    selector: 'app-theme-chooser',
+    templateUrl: './theme-chooser.component.html',
+    styleUrls: ['./theme-chooser.component.css'],
+    standalone: false
 })
 export class ThemeChooserComponent implements OnInit {
 

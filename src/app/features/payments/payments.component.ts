@@ -6,7 +6,8 @@ import {PaymentsService} from "../../api/services/payments.service";
 @Component({
     selector: 'app-payments',
     templateUrl: 'payments.component.html',
-    styleUrls: ['payments.component.css']
+    styleUrls: ['payments.component.css'],
+    standalone: false
 })
 export class PaymentsComponent implements OnInit {
 

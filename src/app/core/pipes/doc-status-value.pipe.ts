@@ -4,7 +4,8 @@ import {TranslateService} from '@ngx-translate/core';
 
 @Pipe({
     name: 'docStatus',
-    pure: false
+    pure: false,
+    standalone: false
 })
 export class DocStatusFormatPipe implements PipeTransform {
 

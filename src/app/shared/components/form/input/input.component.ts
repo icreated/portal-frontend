@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
     selector: 'app-input',
     templateUrl: './input.component.html',
     styleUrls: ['./input.component.css'],
-
+    standalone: false
 })
 export class InputComponent implements OnInit {
 

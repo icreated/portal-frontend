@@ -8,7 +8,8 @@ import {InvoicesService} from "../../api/services/invoices.service";
 @Component({
     selector: 'app-invoices',
     templateUrl: 'invoices.component.html',
-    styleUrls: ['invoices.component.css']
+    styleUrls: ['invoices.component.css'],
+    standalone: false
 })
 export class InvoicesComponent implements OnInit {
 

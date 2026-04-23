@@ -7,7 +7,8 @@ import {Invoice} from "../../../api/models/invoice";
 @Component({
     selector: 'app-invoice-detail',
     templateUrl: 'invoice-detail.component.html',
-    styleUrls: ['invoice-detail.component.css']
+    styleUrls: ['invoice-detail.component.css'],
+    standalone: false
 })
 export class InvoiceDetailComponent implements OnInit {
 

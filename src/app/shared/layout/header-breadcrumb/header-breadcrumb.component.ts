@@ -8,7 +8,8 @@ import {map, mergeMap} from 'rxjs/operators';
 @Component({
     selector: 'app-header-breadcrumb',
     templateUrl: 'header-breadcrumb.component.html',
-    styleUrls: ['header-breadcrumb.component.css']
+    styleUrls: ['header-breadcrumb.component.css'],
+    standalone: false
 })
 export class HeaderBreadcrumbComponent implements OnInit {
 

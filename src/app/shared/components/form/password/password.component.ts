@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
     selector: 'app-password',
     templateUrl: './password.component.html',
     styleUrls: ['./password.component.css'],
+    standalone: false
 })
 export class PasswordComponent implements OnInit, AfterViewInit {
 

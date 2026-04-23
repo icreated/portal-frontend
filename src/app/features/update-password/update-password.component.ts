@@ -11,7 +11,8 @@ import {UsersService} from '../../api/services/users.service';
 @Component({
     selector: 'app-update-password',
     templateUrl: './update-password.component.html',
-    styleUrls: ['./update-password.component.css']
+    styleUrls: ['./update-password.component.css'],
+    standalone: false
 })
 export class UpdatePasswordComponent implements OnInit {
 

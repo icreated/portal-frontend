@@ -6,7 +6,8 @@ import {TranslateService} from '@ngx-translate/core';
 
 @Pipe({
     name: 'tenderType',
-    pure: false
+    pure: false,
+    standalone: false
 })
 export class TenderTypeFormatPipe implements PipeTransform {
 
