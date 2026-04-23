@@ -7,7 +7,6 @@
             <img src="assets/images/logo-login.png" width="100px" alt="login logo"/>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div class="flex flex-column gap-2">
-                  <p-messages [(value)]="msgs"></p-messages>
                   <app-input icon="fa-user" [control]="f.username"  [label]="'login-user-name' | translate"
                              [submitted]="submitted"> </app-input>
                   <app-password icon="fa-key" [control]="f.password" toggleMask="true" [label]="'login-user-password' | translate"  [submitted]="submitted"> </app-password>

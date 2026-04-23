@@ -5,7 +5,6 @@ import {first, map} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
-import {ToastMessageOptions} from 'primeng/api';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import FormUtils from '../../../core/utils/FormUtils';
 import {UsersService} from '../../../api/services/users.service';
@@ -22,7 +21,6 @@ export class ChangePasswordComponent implements OnInit {
     loading = false;
     submitted = false;
     error = '';
-    msgs: ToastMessageOptions[] = [];
     currentLang = 'en';
 
     constructor(private formBuilder: UntypedFormBuilder, private router: Router, private toastService: ToastService,

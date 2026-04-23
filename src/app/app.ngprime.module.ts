@@ -8,16 +8,15 @@ import { TableModule } from 'primeng/table';
 import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PopoverModule } from 'primeng/popover';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { CalendarModule } from 'primeng/calendar';
-import { SidebarModule } from 'primeng/sidebar';
+import { DatePickerModule } from 'primeng/datepicker';
+import { DrawerModule } from 'primeng/drawer';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { Textarea } from 'primeng/inputtextarea';
-import { MessagesModule } from 'primeng/messages';
+import { TextareaModule } from 'primeng/textarea';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
-import {DropdownModule} from 'primeng/dropdown';
+import {SelectModule} from 'primeng/select';
 import {DataViewModule} from "primeng/dataview";
 import {ColorPickerModule} from "primeng/colorpicker";
 import {SplitterModule} from "primeng/splitter";
@@ -28,7 +27,7 @@ import {FieldsetModule} from "primeng/fieldset";
         InputTextModule,
         PasswordModule,
         DividerModule,
-        DropdownModule,
+        SelectModule,
         ButtonModule,
         PanelModule,
         ToastModule,
@@ -37,13 +36,12 @@ import {FieldsetModule} from "primeng/fieldset";
         MessageModule,
         CardModule,
         ProgressSpinnerModule,
-        OverlayPanelModule,
+        PopoverModule,
         BreadcrumbModule,
-        CalendarModule,
-        SidebarModule,
+        DatePickerModule,
+        DrawerModule,
         DynamicDialogModule,
-        Textarea,
-        MessagesModule,
+        TextareaModule,
         DataViewModule,
         ColorPickerModule,
         SplitterModule,

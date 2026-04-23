@@ -7,7 +7,7 @@
 
 <p-panel [header]="'card-payment' | translate">
       <div class="col-12">
-        <p-dropdown [options]="creditCardTypes" formControlName="cardType" [placeholder]="'choose-card-type' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cardType.errors }"  aria-describedby="card-type-help"> </p-dropdown>
+        <p-select [options]="creditCardTypes" formControlName="cardType" [placeholder]="'choose-card-type' | translate" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.cardType.errors }"  aria-describedby="card-type-help"> </p-select>
         <small id='card-type-help' *ngIf="submitted && f.cardType.errors" class="p-error">
           <div *ngIf="f.cardType.errors.required">{{ 'required-card-type' | translate }}</div>
         </small>
@@ -28,14 +28,14 @@
         <div class="grid">
               <div class="field col-4 md:col-3 lg:col-4" style="width: 10em">
                     <span>{{ 'expiration-month' | translate }}</span>
-                    <p-dropdown [options]="months" formControlName="expirationMonth" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationMonth.errors }" aria-describedby="exp-month-help"></p-dropdown>
+                    <p-select [options]="months" formControlName="expirationMonth" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationMonth.errors }" aria-describedby="exp-month-help"></p-select>
                     <small id='exp-month-help' *ngIf="submitted && f.expirationMonth.errors" class="p-error">
                       <div *ngIf="f.expirationMonth.errors.required">{{'required' | translate}}</div>
                     </small>
               </div>
               <div class="field col-4 md:col-3 lg:col-4" style="width: 10em">
                     <span>{{ 'expiration-year' | translate }}</span>
-                    <p-dropdown [options]="years" formControlName="expirationYear" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationYear.errors }" aria-describedby="exp-year-help"></p-dropdown>
+                    <p-select [options]="years" formControlName="expirationYear" placeholder="&nbsp;" [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.expirationYear.errors }" aria-describedby="exp-year-help"></p-select>
                     <small id="exp-year-help" class="p-error"  *ngIf="submitted && f.expirationYear.errors">
                       <div *ngIf="f.expirationYear.errors.required">{{'required' | translate}}</div>
                     </small>

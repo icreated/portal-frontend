@@ -25,7 +25,7 @@
       </div>
       <div class="lg:col-4 md:col-12 sm:col-12">
         <label class="mr-2">{{ 'font-text' | translate }}</label>
-        <p-dropdown [options]="fonts" [(ngModel)]="theme.fontFamily" (onChange)="updateTheme()"></p-dropdown>
+        <p-select [options]="fonts" [(ngModel)]="theme.fontFamily" (onChange)="updateTheme()"></p-select>
       </div>
     </div>
   </p-fieldset>

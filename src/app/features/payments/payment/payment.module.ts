@@ -4,7 +4,7 @@ import {AppCommonModule} from 'src/app/app.common.module';
 import {HeaderBreadCrumbModule} from 'src/app/shared/layout/header-breadcrumb/header-breadcrumb.module';
 import {PaymentRoutingModule} from './payment.routing';
 import {PaymentComponent} from './payment.component';
-import {DropdownModule} from 'primeng/dropdown';
+import {SelectModule} from 'primeng/select';
 
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -13,7 +13,7 @@ import {DropdownModule} from 'primeng/dropdown';
         PaymentRoutingModule,
         AppCommonModule,
         HeaderBreadCrumbModule,
-        DropdownModule,
+        SelectModule,
     ],
     declarations: [
         PaymentComponent

@@ -3,8 +3,8 @@
 <div class="flex flex-column gap-3">
   <p-panel [header]="'language' | translate">
     <div class="flex justify-content-center gap-3">
-        <p-dropdown #langSelect [(ngModel)]="selectedLang" [options]="translate.getLangs()" (onChange)="onChangeLang($event)">
-        </p-dropdown>
+        <p-select #langSelect [(ngModel)]="selectedLang" [options]="translate.getLangs()" (onChange)="onChangeLang($event)">
+        </p-select>
     </div>
   </p-panel>
 
