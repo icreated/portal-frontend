@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import FormUtils from '../../core/utils/FormUtils';
 import {UsersService} from '../../api/services/users.service';
-import {handleAutoChangeDetectionStatus} from '@angular/cdk/testing';
 
 @Component({
     selector: 'app-forgot-password',
     templateUrl: './forgot-password.component.html',
     styleUrls: ['./forgot-password.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgotPasswordComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder, private router: Router,
               private toastService: ToastService, private authenticationService: AuthenticationService,
-              private userService: UsersService) {
+              private userService: UsersService, private cdr: ChangeDetectorRef) {
 
       this.forgotForm = this.formBuilder.group({
           email: ['', []],
@@ -30,23 +30,19 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-      // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) {
           this.router.navigate(['/']);
       }
   }
 
-  // convenience getter for easy access to form fields
   get f() {
       return this.forgotForm.controls;
   }
-
 
   send() {
       this.toastService.clear();
       this.submitted = true;
 
-      // stop here if form is invalid
       if (this.forgotForm.invalid) {
           return;
       }
@@ -57,13 +53,14 @@ export class ForgotPasswordComponent implements OnInit {
           this.toastService.addSingle('success', '', 'email-sent', true);
           FormUtils.cleanForm(this.forgotForm);
           this.loading = false;
+          this.cdr.markForCheck();
           this.router.navigate(['/']);
         },
         error => {
           this.error = error;
           this.loading = false;
           this.forgotForm.reset();
-
+          this.cdr.markForCheck();
           this.toastService.handleCommonErrorMessages(error);
         });
 

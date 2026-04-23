@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -6,7 +6,8 @@ import {TranslateService} from '@ngx-translate/core';
     selector: 'app-password',
     templateUrl: './password.component.html',
     styleUrls: ['./password.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordComponent implements OnInit, AfterViewInit {
 

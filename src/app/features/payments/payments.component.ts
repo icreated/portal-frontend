@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {environment} from 'src/environments/environment';
 import {Payment} from "../../api/models/payment";
 import {PaymentsService} from "../../api/services/payments.service";
@@ -7,22 +8,16 @@ import {PaymentsService} from "../../api/services/payments.service";
     selector: 'app-payments',
     templateUrl: 'payments.component.html',
     styleUrls: ['payments.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaymentsComponent implements OnInit {
+export class PaymentsComponent {
 
   env = environment;
-  payments: Payment[] = [];
+  payments: Signal<Payment[]>;
 
   constructor(private paymentService: PaymentsService) {
-  }
-
-  ngOnInit() {
-      this.paymentService.getPayments().subscribe(
-          data => {
-              this.payments = data;
-          }
-      );
+    this.payments = toSignal(this.paymentService.getPayments(), { initialValue: [] as Payment[] });
   }
 
 }

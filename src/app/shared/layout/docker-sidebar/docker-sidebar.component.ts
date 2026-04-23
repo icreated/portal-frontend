@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {CustomMenuItem} from 'src/app/core/models/menu-item.model';
@@ -27,7 +27,8 @@ import {filter} from 'rxjs/operators';
             ]),
         ]),
     ],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DockerSidebarComponent implements OnInit {
 
@@ -40,9 +41,9 @@ export class DockerSidebarComponent implements OnInit {
   isTitleShowed = false;
 
   constructor(private routeStateService: RouteStateService, private sessionService: SessionService,
-              private menuDataService: MenuDataService, private applicationStateService: ApplicationStateService) {
+              private menuDataService: MenuDataService, private applicationStateService: ApplicationStateService,
+              private cdr: ChangeDetectorRef) {
   }
-
 
   ngOnInit() {
       this.items = this.menuDataService.getMenuList();
@@ -62,10 +63,11 @@ export class DockerSidebarComponent implements OnInit {
           if (!this.isMenuDocked) {
             setTimeout(() => {
               this.isTitleShowed = true;
+              this.cdr.markForCheck();
             }, 100);
           }
+          this.cdr.markForCheck();
       });
-
 
       this.applicationStateService.isMobileResolution().subscribe(isMobile => {
           this.isMobile = isMobile;
@@ -82,15 +84,14 @@ export class DockerSidebarComponent implements OnInit {
               this.isTitleShowed = !this.isMenuDocked;
               this.cssEvent.next(this.isMenuDocked ? 'ng-content-docked' : 'ng-content');
           }
+          this.cdr.markForCheck();
       });
 
       const activeMenu = this.sessionService.getItem('active-menu');
       this.selectedItem = activeMenu ? activeMenu : 'Home';
   }
 
-  // on menu click event
   onMenuClick(menu: CustomMenuItem) {
-      // if child are available then open child
       if (menu.childs) {
           this.toggleSubMenu(menu);
           return;
@@ -102,7 +103,6 @@ export class DockerSidebarComponent implements OnInit {
       this.selectedItem = menu.label;
       this.sessionService.setItem('active-menu', menu.label);
       this.routeStateService.add(menu.label, menu.routerLink, null, true);
-      // hide menu bar after menu click for mobile layout
       setTimeout(() => {
           this.applicationStateService.isMobileResolution()
               .pipe(
@@ -114,10 +114,9 @@ export class DockerSidebarComponent implements OnInit {
       }, 100);
   }
 
-
-  // toggle sub menu on click
   toggleSubMenu(menu: CustomMenuItem) {
       menu.isChildVisible = !menu.isChildVisible;
+      this.cdr.markForCheck();
   }
 
 }

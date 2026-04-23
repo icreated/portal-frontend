@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -6,7 +6,8 @@ import {TranslateService} from '@ngx-translate/core';
     selector: 'app-input',
     templateUrl: './input.component.html',
     styleUrls: ['./input.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent implements OnInit {
 

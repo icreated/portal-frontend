@@ -1,40 +1,37 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {LoaderService} from 'src/app/core/services/loader.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from './core/services/authentication-service';
 import {ThemeService} from './core/services/theme.service';
-import {User} from './api/models/user';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   title = 'Web Portal';
-  showLoader = false;
+  showLoader: Signal<boolean>;
 
-  currentUser: User | null = null;
-
-  constructor( private loaderService: LoaderService, private sessionService: SessionService,
+  constructor(private loaderService: LoaderService, private sessionService: SessionService,
     private authenticationService: AuthenticationService, private themeService: ThemeService,
     translate: TranslateService) {
+
+      this.showLoader = toSignal(this.loaderService.getStatus(), { initialValue: false });
 
       const theme = this.sessionService.getItem('selected-theme');
       theme ? this.themeService.selectTheme(theme) :
           this.themeService.selectTheme(this.themeService.getThemes()[0]);
 
-      this.authenticationService.currentUser.subscribe(user => this.currentUser = user);
-
-      // this language will be used as a fallback when a translation isn't found in the current language
       translate.setDefaultLang('en');
       translate.addLangs(['en', 'fr']);
       let language = this.sessionService.getItem('ng-prime-language');
       if (language) {
-          // the lang to use, if the lang isn't available, it will use the current loader to get them
           translate.use(language);
       } else {
           const browserLang = translate.getBrowserLang();
@@ -43,11 +40,6 @@ export class AppComponent implements OnInit {
           }
           this.sessionService.setItem('ng-prime-language', language);
       }
-  }
-
-  ngOnInit() {
-      this.loaderService.getStatus()
-          .subscribe((status) => this.showLoader = status);
   }
 
 }

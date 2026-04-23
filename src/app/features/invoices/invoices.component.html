@@ -1,6 +1,6 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 <p-panel [header]="'invoices-list' | translate">
-    <p-table selectionMode="single" [value]="invoices" [paginator]="true" [rows]="env.pageSize" styleClass="p-datatable-striped">
+    <p-table selectionMode="single" [value]="invoices()" [paginator]="true" [rows]="env.pageSize" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="id">#<p-sortIcon field="id"></p-sortIcon></th>

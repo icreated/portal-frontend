@@ -16,75 +16,81 @@ export class ThemeService {
 
   getThemes(): DesignTemplate[] {
     return [
+      // Slate — neutral professional dark (header→sidebar gradient: slate-600→800)
       {
-        mainBackground: '#f5f5f5',
+        mainBackground: '#f1f5f9',
         headerColor: '#ffffff',
-        headerBgColor: '#6f6f88',
-        headerBgColor2: '#3b3b48',
-        menubarBackground: '#525262',
-        menubarColor: '#f5f5f5',
-        activeMenuColor: '#919191',
-        primaryColor: '#0078d4',
+        headerBgColor: '#475569',
+        headerBgColor2: '#1e293b',
+        menubarBackground: '#334155',
+        menubarColor: '#e2e8f0',   // 8.4:1 on menubar
+        activeMenuColor: '#cbd5e1', // 6.8:1 on menubar
+        primaryColor: '#2563eb',   // 5.2:1 with white text
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
+      // Airy — clean light with indigo accent (light sidebar)
       {
-        mainBackground: '#ffffff',
-        headerColor: '#000000',
+        mainBackground: '#f8fafc',
+        headerColor: '#1e293b',    // 16.8:1 on white header
         headerBgColor: '#ffffff',
-        headerBgColor2: '#878787',
-        menubarBackground: '#878787',
-        menubarColor: '#000000',
-        activeMenuColor: '#cccccc',
-        primaryColor: '#0078d4',
+        headerBgColor2: '#e2e8f0',
+        menubarBackground: '#f1f5f9',
+        menubarColor: '#374151',   // 9.8:1 on light sidebar
+        activeMenuColor: '#4f46e5', // 5.8:1 on light sidebar
+        primaryColor: '#4f46e5',   // 5.8:1 with white text
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
+      // Ocean — teal (header→sidebar: teal-700→900)
       {
-        mainBackground: '#f4f3ef',
+        mainBackground: '#f0fdfa',
         headerColor: '#ffffff',
-        headerBgColor: '#6cc7cf',
-        headerBgColor2: '#66615b',
-        menubarBackground: '#66615b',
-        menubarColor: '#f5f5f5',
-        activeMenuColor: '#51cbce',
-        primaryColor: '#0078d4',
+        headerBgColor: '#0f766e',  // 5.5:1 with white
+        headerBgColor2: '#134e4a',
+        menubarBackground: '#134e4a',
+        menubarColor: '#ccfbf1',   // 8.3:1 on teal-900
+        activeMenuColor: '#5eead4', // 6.5:1 on teal-900
+        primaryColor: '#0f766e',   // 5.5:1 with white text
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
+      // Royal — deep navy blue (blue-700→900)
       {
-        mainBackground: '#f5f5f5',
+        mainBackground: '#eff6ff',
         headerColor: '#ffffff',
-        headerBgColor: '#2d5394',
-        headerBgColor2: '#2d5394',
-        menubarBackground: '#839de2',
-        menubarColor: '#f5f5f5',
-        activeMenuColor: '#2d5394',
-        primaryColor: '#0078d4',
+        headerBgColor: '#1d4ed8',  // 7.0:1 with white
+        headerBgColor2: '#1e3a8a',
+        menubarBackground: '#1e3a8a',
+        menubarColor: '#bfdbfe',   // 7.3:1 on blue-900
+        activeMenuColor: '#93c5fd', // 5.8:1 on blue-900
+        primaryColor: '#2563eb',   // 5.2:1 with white text
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
+      // Berry — rich purple (purple-700→900)
       {
-        mainBackground: '#f5f5f5',
+        mainBackground: '#fdf4ff',
         headerColor: '#ffffff',
-        headerBgColor: '#79425a',
-        headerBgColor2: '#79425a',
-        menubarBackground: '#935b74',
-        menubarColor: '#f5f5f5',
-        activeMenuColor: '#440c25',
-        primaryColor: '#0078d4',
+        headerBgColor: '#7e22ce',  // 7.0:1 with white
+        headerBgColor2: '#581c87',
+        menubarBackground: '#581c87',
+        menubarColor: '#f3e8ff',   // 10.9:1 on purple-900
+        activeMenuColor: '#d8b4fe', // 6.7:1 on purple-900
+        primaryColor: '#9333ea',   // 5.4:1 with white text
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
+      // Forest — deep green (green-700→800)
       {
-        mainBackground: '#f5f5f5',
+        mainBackground: '#f0fdf4',
         headerColor: '#ffffff',
-        headerBgColor: '#277375',
-        headerBgColor2: '#277375',
-        menubarBackground: '#f5f5f5',
-        menubarColor: '#277375',
-        activeMenuColor: '#277375',
-        primaryColor: '#277375',
+        headerBgColor: '#15803d',  // 5.0:1 with white
+        headerBgColor2: '#14532d',
+        menubarBackground: '#14532d',
+        menubarColor: '#dcfce7',   // 8.3:1 on green-800
+        activeMenuColor: '#4ade80', // 5.3:1 on green-800
+        primaryColor: '#15803d',   // 5.0:1 with white text
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       }

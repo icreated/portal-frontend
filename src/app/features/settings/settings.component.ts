@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionService} from '../../core/services/session.service';
 
@@ -6,7 +6,8 @@ import {SessionService} from '../../core/services/session.service';
     selector: 'app-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -9,15 +9,16 @@ import {map, mergeMap} from 'rxjs/operators';
     selector: 'app-header-breadcrumb',
     templateUrl: 'header-breadcrumb.component.html',
     styleUrls: ['header-breadcrumb.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderBreadcrumbComponent implements OnInit {
 
   items: MenuItem[] = [];
   home: MenuItem = {icon: 'pi pi-home', routerLink: ['/main/dashboard']};
 
-
-  constructor(private routeStateService: RouteStateService, private translationService: TranslateService) {
+  constructor(private routeStateService: RouteStateService, private translationService: TranslateService,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class HeaderBreadcrumbComponent implements OnInit {
                   this.onClickBreadcrumb(route.id);
               }
           });
+          this.cdr.markForCheck();
       });
   }
 

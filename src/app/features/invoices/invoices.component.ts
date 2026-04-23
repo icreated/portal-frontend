@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {Document} from 'src/app/api/models/document';
 import {environment} from 'src/environments/environment';
@@ -9,23 +10,17 @@ import {InvoicesService} from "../../api/services/invoices.service";
     selector: 'app-invoices',
     templateUrl: 'invoices.component.html',
     styleUrls: ['invoices.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InvoicesComponent implements OnInit {
+export class InvoicesComponent {
 
   env = environment;
-  invoices: Document[] = [];
+  invoices: Signal<Document[]>;
 
   constructor(private routeStateService: RouteStateService, private invoiceService: InvoicesService,
               public state: ApplicationStateService) {
-  }
-
-  ngOnInit() {
-      this.invoiceService.getInvoices().subscribe(
-          data => {
-              this.invoices = data;
-          }
-      );
+    this.invoices = toSignal(this.invoiceService.getInvoices(), { initialValue: [] as Document[] });
   }
 
   goToInvoiceLines(invoiceId: number) {

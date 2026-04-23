@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
@@ -10,7 +10,8 @@ import {ApplicationStateService} from '../../../core/services/application-state.
     selector: 'app-header',
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 
@@ -20,15 +21,20 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private routeStateService: RouteStateService,
               private sessionService: SessionService, private applicationStateService: ApplicationStateService,
-              private menuDataService: MenuDataService, private authenticationService: AuthenticationService) {
+              private menuDataService: MenuDataService, private authenticationService: AuthenticationService,
+              private cdr: ChangeDetectorRef) {
       this.displayNotifications = false;
   }
 
   ngOnInit(): void {
-       this.menuDataService.toggleMenuBar.subscribe(menuState => this.isDocked = menuState.isMenuDocked);
-    this.applicationStateService.isMobileResolution().subscribe(isMobile => {
-      this.isMobile = isMobile;
-    });
+      this.menuDataService.toggleMenuBar.subscribe(menuState => {
+          this.isDocked = menuState.isMenuDocked;
+          this.cdr.markForCheck();
+      });
+      this.applicationStateService.isMobileResolution().subscribe(isMobile => {
+          this.isMobile = isMobile;
+          this.cdr.markForCheck();
+      });
   }
 
   logout() {
@@ -48,7 +54,6 @@ export class HeaderComponent implements OnInit {
     if (this.isMobile) {
       menuState.isMenuOpened = !menuState.isMenuOpened;
     }
-    //
     this.menuDataService.toggleMenuBar.next(menuState);
   }
 }

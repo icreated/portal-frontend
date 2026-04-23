@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {environment} from 'src/environments/environment';
-import {PaymentsService} from "../../api/services/payments.service";
 import {OpenItem} from "../../api/models/open-item";
 import {InvoicesService} from "../../api/services/invoices.service";
 
@@ -10,7 +9,8 @@ import {InvoicesService} from "../../api/services/invoices.service";
     selector: 'app-dashboard',
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
@@ -18,16 +18,17 @@ export class DashboardComponent implements OnInit {
   openItems: OpenItem[] = [];
   openTotal = 0;
 
-
   msgs: any[];
 
   constructor(translate: TranslateService,
               private invoicesService: InvoicesService,
-              private routeStateService: RouteStateService) {
+              private routeStateService: RouteStateService,
+              private cdr: ChangeDetectorRef) {
 
       this.msgs = [];
       translate.get('welcome-message').subscribe((text: string) => {
           this.msgs.push({severity: 'success', summary: '', detail: text});
+          this.cdr.markForCheck();
       });
   }
 
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit {
             .map(item => item.openAmt)
             .reduce((a, b) => a + b, 0);
         }
-
+        this.cdr.markForCheck();
       });
   }
 

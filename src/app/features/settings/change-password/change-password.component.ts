@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {first, map} from 'rxjs/operators';
@@ -13,7 +13,8 @@ import {UsersService} from '../../../api/services/users.service';
     selector: 'app-change-password',
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordComponent implements OnInit {
 
@@ -25,18 +26,14 @@ export class ChangePasswordComponent implements OnInit {
 
     constructor(private formBuilder: UntypedFormBuilder, private router: Router, private toastService: ToastService,
                 private userService: UsersService, private authenticationService: AuthenticationService,
-                private translateService: TranslateService) {
+                private translateService: TranslateService, private cdr: ChangeDetectorRef) {
 
         this.passwordForm = this.formBuilder.group({
             password: [null, Validators.compose([Validators.required])],
             newPassword: [null, Validators.compose([
-                // 1. Password Field is Required
                 Validators.required,
-                // 2. check whether the entered password has a number
                 ValidationService.patternValidator(/\d/, {hasNumber: true}),
-                // 3. check whether the entered password has upper case letter
                 ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-                // 4. Has a minimum length of 8 characters
                 Validators.minLength(8)])
             ],
 
@@ -47,10 +44,12 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.translateService.onLangChange.subscribe((event: LangChangeEvent) => this.currentLang = event.lang);
+        this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+            this.currentLang = event.lang;
+            this.cdr.markForCheck();
+        });
     }
 
-    // convenience getter for easy access to form fields
     get f() {
         return this.passwordForm.controls;
     }
@@ -58,7 +57,6 @@ export class ChangePasswordComponent implements OnInit {
     update() {
         this.toastService.clear();
         this.submitted = true;
-        // stop here if form is invalid
         if (this.passwordForm.invalid) {
             return;
         }
@@ -75,12 +73,14 @@ export class ChangePasswordComponent implements OnInit {
                 () => {
                     this.loading = false;
                     FormUtils.cleanForm(this.passwordForm);
+                    this.cdr.markForCheck();
                     this.toastService.addSingle('success', '', 'password-updated', true);
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
                     this.passwordForm.reset();
+                    this.cdr.markForCheck();
                     this.toastService.addSingle('error', '', 'password-not-updated', true);
                 });
     }

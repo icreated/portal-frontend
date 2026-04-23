@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
@@ -11,7 +11,8 @@ import {UsersService} from '../../api/services/users.service';
     selector: 'app-update-password',
     templateUrl: './update-password.component.html',
     styleUrls: ['./update-password.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UpdatePasswordComponent implements OnInit {
 
@@ -23,19 +24,14 @@ export class UpdatePasswordComponent implements OnInit {
 
     constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
                 private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService,
-                private userService: UsersService) {
+                private userService: UsersService, private cdr: ChangeDetectorRef) {
 
         this.forgotForm = this.formBuilder.group({
             newPassword: [null, Validators.compose([
-                // 1. Password Field is Required
                 Validators.required,
-                // 2. check whether the entered password has a number
                 ValidationService.patternValidator(/\d/, {hasNumber: true}),
-                // 3. check whether the entered password has upper case letter
                 ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-                // 4. Has a minimum length of 8 characters
                 Validators.minLength(8),
-                // 4. Has a maximum length of 20 characters
                 Validators.maxLength(20)])
             ],
             confirmPassword: [null, Validators.compose([Validators.required])]
@@ -45,14 +41,12 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
         this.token = this.route.snapshot.params['token'];
     }
 
-    // convenience getter for easy access to form fields
     get f() {
         return this.forgotForm.controls;
     }
@@ -61,7 +55,6 @@ export class UpdatePasswordComponent implements OnInit {
         this.toastService.clear();
         this.submitted = true;
 
-        // stop here if form is invalid
         if (this.forgotForm.invalid) {
             return;
         }
@@ -71,6 +64,7 @@ export class UpdatePasswordComponent implements OnInit {
                 () => {
                     FormUtils.cleanForm(this.forgotForm);
                     this.loading = false;
+                    this.cdr.markForCheck();
                     this.router.navigateByUrl('/');
                     this.toastService.addSingle('success', '', 'password-updated', true);
                 },
@@ -78,6 +72,7 @@ export class UpdatePasswordComponent implements OnInit {
                     this.error = error;
                     this.loading = false;
                     this.forgotForm.reset();
+                    this.cdr.markForCheck();
                     this.toastService.addSingle('error', '', 'password-not-updated', true);
                 }
             );

@@ -2,13 +2,20 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Node version
+
+**Requires Node 22.12+ or 24** (Angular 21's `@angular/compiler-cli` is ESM-only). Use `.nvmrc`:
+```bash
+nvm use   # picks up Node 24 from .nvmrc
+```
+
 ## Commands
 
 ```bash
 npm install          # install dependencies
 ng serve             # dev server at http://localhost:4200
 ng build             # development build
-ng build --prod      # production build
+ng build --configuration production  # production build
 ng test              # run Karma/Jasmine tests (all specs)
 ng lint              # ESLint check
 npm run ng-openapi-gen  # regenerate src/app/api/ from openapi.yaml
@@ -21,7 +28,7 @@ ng test --include='**/invoices.component.spec.ts'
 
 ## Architecture
 
-**Angular 16** SPA backed by a REST API (default: `http://localhost:8080/portal/api`). Backend pairing: [portal-api](https://github.com/icreated/portal-api). Dev login: `gardenusr / GardenUser`.
+**Angular 21** SPA backed by a REST API (default: `http://localhost:8080/portal/api`). Backend pairing: [portal-api](https://github.com/icreated/portal-api). Dev login: `gardenusr / GardenUser`.
 
 ### Module layout
 
@@ -49,3 +56,11 @@ src/app/
 - **i18n**: `@ngx-translate` with JSON translation files loaded via `TranslateHttpLoader`. Language codes mapped to locale strings in `environment.langMap`.
 - **Forms**: `@rxweb/reactive-form-validators` is used alongside Angular's built-in validators.
 - **API URL**: change `environment.apiUrl` in `src/environments/environment.ts` to point at a different backend (e.g. the json-server mock at port 3000).
+- **Templates**: use Angular 21 built-in control flow (`@for`, `@if`, `@switch`) — not the legacy `*ngFor`/`*ngIf` directives.
+
+### PrimeNG 21 notes
+
+- Theme: `providePrimeNG({ theme: { preset: Aura } })` in `AppModule`. Preset imported from `@primeuix/themes/aura` (not `@primeng/themes`).
+- No static CSS in `angular.json` styles — PrimeNG styles are injected at runtime by the theme engine.
+- Component renames from older PrimeNG: `OverlayPanel→Popover`, `Calendar→DatePicker`, `Sidebar→Drawer`, `Dropdown→Select`, `InputTextarea→Textarea`.
+- `ora` is pinned to v5 via `"overrides": { "ora": "5" }` in `package.json` to keep `@angular-devkit/build-angular` spinner working under Node 24 (ora v8+ is ESM-only and incompatible with the CJS spinner wrapper).

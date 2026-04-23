@@ -51,7 +51,7 @@ import Aura from '@primeuix/themes/aura';
         MessageService,
         AuthGuard,
         provideHttpClient(withInterceptorsFromDi()),
-        providePrimeNG({ theme: { preset: Aura } })
+        providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: false } } })
     ] })
 export class AppModule {
 }

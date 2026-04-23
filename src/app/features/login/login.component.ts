@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
@@ -12,7 +12,8 @@ import FormUtils from '../../core/utils/FormUtils';
     selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
 
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
               private router: Router, private toastService: ToastService, private routeStateService: RouteStateService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService, private cdr: ChangeDetectorRef) {
 
       this.loginForm = this.formBuilder.group({
           username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
@@ -33,22 +34,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-      // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) {
           this.router.navigate(['/']);
       }
-      // get return url from route parameters or default to '/'
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
   get f() {
       return this.loginForm.controls;
   }
 
   onSubmit() {
       this.submitted = true;
-      // stop here if form is invalid
       if (this.loginForm.invalid) {
           return;
       }
@@ -63,6 +60,7 @@ export class LoginComponent implements OnInit {
                   this.toastService.clear();
                   FormUtils.cleanForm(this.loginForm);
                   this.loading = false;
+                  this.cdr.markForCheck();
                   this.toastService.addSingle('error', '', 'login-invalid-user', true);
               });
   }

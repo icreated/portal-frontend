@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {environment} from 'src/environments/environment';
 import {InvoicesService} from "../../../api/services/invoices.service";
@@ -8,7 +8,8 @@ import {Invoice} from "../../../api/models/invoice";
     selector: 'app-invoice-detail',
     templateUrl: 'invoice-detail.component.html',
     styleUrls: ['invoice-detail.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoiceDetailComponent implements OnInit {
 
@@ -17,7 +18,8 @@ export class InvoiceDetailComponent implements OnInit {
 
   constructor(
     private invoiceService: InvoicesService,
-    private routeStateService: RouteStateService) {
+    private routeStateService: RouteStateService,
+    private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class InvoiceDetailComponent implements OnInit {
       this.invoiceService.getInvoice({id: routeState.data}).subscribe(
           data => {
               this.invoice = data;
+              this.cdr.markForCheck();
           });
   }
 

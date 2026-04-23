@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -14,7 +14,8 @@ import {CommonService} from '../../../api/services/common.service';
     selector: 'app-payment',
     templateUrl: 'payment.component.html',
     styleUrls: ['payment.component.css'],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentComponent implements OnInit {
 
@@ -51,11 +52,12 @@ export class PaymentComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder, public paymentService: PaymentsService,
               private invoicesService: InvoicesService, private commonService: CommonService,
-              private router: Router, private routeStateService: RouteStateService) {
+              private router: Router, private routeStateService: RouteStateService,
+              private cdr: ChangeDetectorRef) {
 
       this.cardFormGroup = this.formBuilder.group({
           cardType: ['', Validators.required],
-          creditCard: ['', [Validators.required, Validators.pattern('^\\d*$')]], // RxwebValidators.creditCard ({fieldName:'cardType'})
+          creditCard: ['', [Validators.required, Validators.pattern('^\\d*$')]],
           holderName: ['', Validators.required],
           expirationMonth: ['', Validators.required],
           expirationYear: ['', Validators.required],
@@ -71,6 +73,7 @@ export class PaymentComponent implements OnInit {
           )
       ).subscribe(total => {
           this.openTotal = total;
+          this.cdr.markForCheck();
           if (this.openTotal === 0) {
               this.routeStateService.loadPrevious();
               this.router.navigate(['/main/dashboard']);
@@ -78,14 +81,13 @@ export class PaymentComponent implements OnInit {
       });
       this.commonService.getCreditCardTypes().subscribe(data => {
           this.creditCardTypes = data;
+          this.cdr.markForCheck();
       });
   }
 
-  // convenience getter for easy access to form fields
   get f() {
       return this.cardFormGroup.controls;
   }
-
 
   onSubmit() {
       this.submitted = true;
@@ -106,7 +108,7 @@ export class PaymentComponent implements OnInit {
       this.paymentService.createPayment({body: creditCard}).subscribe(() => {
           this.loading = false;
           creditCard = {} as CreditCard;
-          // TODO show result message
+          this.cdr.markForCheck();
           this.back();
       });
   }
