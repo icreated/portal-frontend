@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {Document} from 'src/app/api/models/document';
@@ -15,13 +15,12 @@ import {InvoicesService} from "../../api/services/invoices.service";
 })
 export class InvoicesComponent {
 
-  env = environment;
-  invoices: Signal<Document[]>;
+  private routeStateService = inject(RouteStateService);
+  private invoiceService = inject(InvoicesService);
+  state = inject(ApplicationStateService);
 
-  constructor(private routeStateService: RouteStateService, private invoiceService: InvoicesService,
-              public state: ApplicationStateService) {
-    this.invoices = toSignal(this.invoiceService.getInvoices(), { initialValue: [] as Document[] });
-  }
+  env = environment;
+  invoices: Signal<Document[]> = toSignal(this.invoiceService.getInvoices(), { initialValue: [] as Document[] });
 
   goToInvoiceLines(invoiceId: number) {
       this.routeStateService.add('invoice-detail', '/main/invoice-detail', invoiceId, false);

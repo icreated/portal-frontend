@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -19,10 +19,25 @@ import {CommonService} from '../../../api/services/common.service';
 })
 export class PaymentComponent implements OnInit {
 
+  private formBuilder = inject(UntypedFormBuilder);
+  paymentService = inject(PaymentsService);
+  private invoicesService = inject(InvoicesService);
+  private commonService = inject(CommonService);
+  private router = inject(Router);
+  private routeStateService = inject(RouteStateService);
+  private cdr = inject(ChangeDetectorRef);
+
   env = environment;
   loading = false;
   submitted = false;
-  cardFormGroup: UntypedFormGroup;
+  cardFormGroup: UntypedFormGroup = this.formBuilder.group({
+      cardType: ['', Validators.required],
+      creditCard: ['', [Validators.required, Validators.pattern('^\\d*$')]],
+      holderName: ['', Validators.required],
+      expirationMonth: ['', Validators.required],
+      expirationYear: ['', Validators.required],
+      cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
+  });
   openTotal: number = 0;
 
   creditCardTypes: ValueLabel[] = [];
@@ -49,21 +64,6 @@ export class PaymentComponent implements OnInit {
       {label: '2026', value: 2026},
       {label: '2027', value: 2027},
   ];
-
-  constructor(private formBuilder: UntypedFormBuilder, public paymentService: PaymentsService,
-              private invoicesService: InvoicesService, private commonService: CommonService,
-              private router: Router, private routeStateService: RouteStateService,
-              private cdr: ChangeDetectorRef) {
-
-      this.cardFormGroup = this.formBuilder.group({
-          cardType: ['', Validators.required],
-          creditCard: ['', [Validators.required, Validators.pattern('^\\d*$')]],
-          holderName: ['', Validators.required],
-          expirationMonth: ['', Validators.required],
-          expirationYear: ['', Validators.required],
-          cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
-      });
-  }
 
   ngOnInit() {
       this.invoicesService.getOpenItems().pipe(

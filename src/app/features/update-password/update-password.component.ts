@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
@@ -16,29 +16,30 @@ import {UsersService} from '../../api/services/users.service';
 })
 export class UpdatePasswordComponent implements OnInit {
 
+    private formBuilder = inject(UntypedFormBuilder);
+    private route = inject(ActivatedRoute);
+    private router = inject(Router);
+    private toastService = inject(ToastService);
+    private authenticationService = inject(AuthenticationService);
+    private userService = inject(UsersService);
+    private cdr = inject(ChangeDetectorRef);
+
     token = '';
-    forgotForm: UntypedFormGroup;
+    forgotForm: UntypedFormGroup = this.formBuilder.group({
+        newPassword: [null, Validators.compose([
+            Validators.required,
+            ValidationService.patternValidator(/\d/, {hasNumber: true}),
+            ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+            Validators.minLength(8),
+            Validators.maxLength(20)])
+        ],
+        confirmPassword: [null, Validators.compose([Validators.required])]
+    },
+    {validators: [ValidationService.passwordMatchValidator]}
+    );
     loading = false;
     submitted = false;
     error = '';
-
-    constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
-                private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService,
-                private userService: UsersService, private cdr: ChangeDetectorRef) {
-
-        this.forgotForm = this.formBuilder.group({
-            newPassword: [null, Validators.compose([
-                Validators.required,
-                ValidationService.patternValidator(/\d/, {hasNumber: true}),
-                ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-                Validators.minLength(8),
-                Validators.maxLength(20)])
-            ],
-            confirmPassword: [null, Validators.compose([Validators.required])]
-        },
-        {validators: [ValidationService.passwordMatchValidator]}
-        );
-    }
 
     ngOnInit(): void {
         if (this.authenticationService.currentUserValue) {

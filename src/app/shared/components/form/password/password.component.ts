@@ -1,6 +1,5 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewEncapsulation} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-password',
@@ -9,7 +8,9 @@ import {TranslateService} from '@ngx-translate/core';
     standalone: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PasswordComponent implements OnInit, AfterViewInit {
+export class PasswordComponent implements AfterViewInit {
+
+  private element = inject(ElementRef);
 
   @Input() control = new UntypedFormControl();
   @Input() submitted = false;
@@ -20,15 +21,10 @@ export class PasswordComponent implements OnInit, AfterViewInit {
 
   // @ts-ignore
   uniqueId = this.constructor['ɵcmp'].id;
-  constructor(private translate: TranslateService, private element: ElementRef) {}
 
   ngAfterViewInit(): void {
       const input = this.element.nativeElement.getElementsByTagName('input')[0];
       input.setAttribute('autocomplete', 'password'+this.uniqueId);
-  }
-
-  ngOnInit(): void {
-
   }
 
   get inputStyle() {

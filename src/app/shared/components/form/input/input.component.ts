@@ -1,6 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-input',
@@ -9,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
     standalone: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements OnInit {
+export class InputComponent {
 
   @Input() control = new UntypedFormControl();
   @Input() submitted = false;
@@ -19,11 +18,5 @@ export class InputComponent implements OnInit {
 
   // @ts-ignore
   uniqueId = this.constructor['ɵcmp'].id;
-
-  constructor(private translate: TranslateService) {}
-
-  ngOnInit(): void {
-
-  }
 
 }

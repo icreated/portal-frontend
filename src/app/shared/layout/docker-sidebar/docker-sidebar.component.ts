@@ -32,6 +32,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class DockerSidebarComponent implements OnInit {
 
+  private routeStateService = inject(RouteStateService);
+  private sessionService = inject(SessionService);
+  private menuDataService = inject(MenuDataService);
+  private applicationStateService = inject(ApplicationStateService);
+  private cdr = inject(ChangeDetectorRef);
   private destroyRef = inject(DestroyRef);
 
   @Input() isMobile = false;
@@ -41,11 +46,6 @@ export class DockerSidebarComponent implements OnInit {
   isMenuOpened = false;
   isMenuDocked = true;
   isTitleShowed = false;
-
-  constructor(private routeStateService: RouteStateService, private sessionService: SessionService,
-              private menuDataService: MenuDataService, private applicationStateService: ApplicationStateService,
-              private cdr: ChangeDetectorRef) {
-  }
 
   ngOnInit() {
       this.items = this.menuDataService.getMenuList();

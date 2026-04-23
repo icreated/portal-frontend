@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {environment} from 'src/environments/environment';
 import {InvoicesService} from "../../../api/services/invoices.service";
@@ -13,14 +13,12 @@ import {Invoice} from "../../../api/models/invoice";
 })
 export class InvoiceDetailComponent implements OnInit {
 
+  private invoiceService = inject(InvoicesService);
+  private routeStateService = inject(RouteStateService);
+  private cdr = inject(ChangeDetectorRef);
+
   env = environment;
   invoice: Invoice = {} as Invoice;
-
-  constructor(
-    private invoiceService: InvoicesService,
-    private routeStateService: RouteStateService,
-    private cdr: ChangeDetectorRef) {
-  }
 
   ngOnInit() {
       const routeState = this.routeStateService.getCurrent();

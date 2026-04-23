@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
@@ -15,19 +15,17 @@ import {UsersService} from '../../api/services/users.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  forgotForm: UntypedFormGroup;
+  private formBuilder = inject(UntypedFormBuilder);
+  private router = inject(Router);
+  private toastService = inject(ToastService);
+  private authenticationService = inject(AuthenticationService);
+  private userService = inject(UsersService);
+  private cdr = inject(ChangeDetectorRef);
+
+  forgotForm: UntypedFormGroup = this.formBuilder.group({ email: ['', []] });
   loading = false;
   submitted = false;
   error = '';
-
-  constructor(private formBuilder: UntypedFormBuilder, private router: Router,
-              private toastService: ToastService, private authenticationService: AuthenticationService,
-              private userService: UsersService, private cdr: ChangeDetectorRef) {
-
-      this.forgotForm = this.formBuilder.group({
-          email: ['', []],
-      });
-  }
 
   ngOnInit() {
       if (this.authenticationService.currentUserValue) {

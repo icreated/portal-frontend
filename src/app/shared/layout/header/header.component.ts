@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {Router} from '@angular/router';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
@@ -15,26 +16,32 @@ import {ApplicationStateService} from '../../../core/services/application-state.
 })
 export class HeaderComponent implements OnInit {
 
-  displayNotifications: boolean;
+  private router = inject(Router);
+  private routeStateService = inject(RouteStateService);
+  private sessionService = inject(SessionService);
+  private applicationStateService = inject(ApplicationStateService);
+  private menuDataService = inject(MenuDataService);
+  private authenticationService = inject(AuthenticationService);
+  private cdr = inject(ChangeDetectorRef);
+  private destroyRef = inject(DestroyRef);
+
+  displayNotifications = false;
   isDocked = true;
   isMobile = false;
 
-  constructor(private router: Router, private routeStateService: RouteStateService,
-              private sessionService: SessionService, private applicationStateService: ApplicationStateService,
-              private menuDataService: MenuDataService, private authenticationService: AuthenticationService,
-              private cdr: ChangeDetectorRef) {
-      this.displayNotifications = false;
-  }
-
   ngOnInit(): void {
-      this.menuDataService.toggleMenuBar.subscribe(menuState => {
-          this.isDocked = menuState.isMenuDocked;
-          this.cdr.markForCheck();
-      });
-      this.applicationStateService.isMobileResolution().subscribe(isMobile => {
-          this.isMobile = isMobile;
-          this.cdr.markForCheck();
-      });
+      this.menuDataService.toggleMenuBar
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(menuState => {
+              this.isDocked = menuState.isMenuDocked;
+              this.cdr.markForCheck();
+          });
+      this.applicationStateService.isMobileResolution()
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(isMobile => {
+              this.isMobile = isMobile;
+              this.cdr.markForCheck();
+          });
   }
 
   logout() {

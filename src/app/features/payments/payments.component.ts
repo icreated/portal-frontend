@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {environment} from 'src/environments/environment';
 import {Payment} from "../../api/models/payment";
@@ -13,11 +13,9 @@ import {PaymentsService} from "../../api/services/payments.service";
 })
 export class PaymentsComponent {
 
-  env = environment;
-  payments: Signal<Payment[]>;
+  private paymentService = inject(PaymentsService);
 
-  constructor(private paymentService: PaymentsService) {
-    this.payments = toSignal(this.paymentService.getPayments(), { initialValue: [] as Payment[] });
-  }
+  env = environment;
+  payments: Signal<Payment[]> = toSignal(this.paymentService.getPayments(), { initialValue: [] as Payment[] });
 
 }

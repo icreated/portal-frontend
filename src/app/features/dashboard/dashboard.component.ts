@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {environment} from 'src/environments/environment';
@@ -14,31 +14,25 @@ import {InvoicesService} from "../../api/services/invoices.service";
 })
 export class DashboardComponent implements OnInit {
 
+  private translate = inject(TranslateService);
+  private invoicesService = inject(InvoicesService);
+  private routeStateService = inject(RouteStateService);
+  private cdr = inject(ChangeDetectorRef);
+
   currencyISO = environment.currencyISO;
   openItems: OpenItem[] = [];
   openTotal = 0;
+  msgs: any[] = [];
 
-  msgs: any[];
-
-  constructor(translate: TranslateService,
-              private invoicesService: InvoicesService,
-              private routeStateService: RouteStateService,
-              private cdr: ChangeDetectorRef) {
-
-      this.msgs = [];
-      translate.get('welcome-message').subscribe((text: string) => {
+  ngOnInit() {
+      this.translate.get('welcome-message').subscribe((text: string) => {
           this.msgs.push({severity: 'success', summary: '', detail: text});
           this.cdr.markForCheck();
       });
-  }
-
-  ngOnInit() {
       this.invoicesService.getOpenItems().subscribe(data => {
         if (data) {
           this.openItems = data;
-          this.openTotal = data
-            .map(item => item.openAmt)
-            .reduce((a, b) => a + b, 0);
+          this.openTotal = data.map(item => item.openAmt).reduce((a, b) => a + b, 0);
         }
         this.cdr.markForCheck();
       });

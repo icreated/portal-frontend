@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {first, map} from 'rxjs/operators';
@@ -18,36 +19,39 @@ import {UsersService} from '../../../api/services/users.service';
 })
 export class ChangePasswordComponent implements OnInit {
 
-    passwordForm: UntypedFormGroup;
+    private formBuilder = inject(UntypedFormBuilder);
+    private router = inject(Router);
+    private toastService = inject(ToastService);
+    private userService = inject(UsersService);
+    private authenticationService = inject(AuthenticationService);
+    private translateService = inject(TranslateService);
+    private cdr = inject(ChangeDetectorRef);
+    private destroyRef = inject(DestroyRef);
+
+    passwordForm: UntypedFormGroup = this.formBuilder.group({
+        password: [null, Validators.compose([Validators.required])],
+        newPassword: [null, Validators.compose([
+            Validators.required,
+            ValidationService.patternValidator(/\d/, {hasNumber: true}),
+            ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+            Validators.minLength(8)])
+        ],
+        confirmPassword: [null, Validators.compose([Validators.required])]
+    },
+    {validators: [ValidationService.passwordMatchValidator]}
+    );
     loading = false;
     submitted = false;
     error = '';
     currentLang = 'en';
 
-    constructor(private formBuilder: UntypedFormBuilder, private router: Router, private toastService: ToastService,
-                private userService: UsersService, private authenticationService: AuthenticationService,
-                private translateService: TranslateService, private cdr: ChangeDetectorRef) {
-
-        this.passwordForm = this.formBuilder.group({
-            password: [null, Validators.compose([Validators.required])],
-            newPassword: [null, Validators.compose([
-                Validators.required,
-                ValidationService.patternValidator(/\d/, {hasNumber: true}),
-                ValidationService.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-                Validators.minLength(8)])
-            ],
-
-            confirmPassword: [null, Validators.compose([Validators.required])]
-        },
-        {validators: [ValidationService.passwordMatchValidator]}
-        );
-    }
-
     ngOnInit(): void {
-        this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-            this.currentLang = event.lang;
-            this.cdr.markForCheck();
-        });
+        this.translateService.onLangChange
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((event: LangChangeEvent) => {
+                this.currentLang = event.lang;
+                this.cdr.markForCheck();
+            });
     }
 
     get f() {

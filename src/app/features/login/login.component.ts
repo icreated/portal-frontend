@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
@@ -17,21 +17,21 @@ import FormUtils from '../../core/utils/FormUtils';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: UntypedFormGroup;
+  private formBuilder = inject(UntypedFormBuilder);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private toastService = inject(ToastService);
+  private routeStateService = inject(RouteStateService);
+  private authenticationService = inject(AuthenticationService);
+  private cdr = inject(ChangeDetectorRef);
+
+  loginForm: UntypedFormGroup = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      password: ['', [Validators.required]]
+  });
   loading = false;
   submitted = false;
   returnUrl = '/';
-
-  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
-              private router: Router, private toastService: ToastService, private routeStateService: RouteStateService,
-              private authenticationService: AuthenticationService, private cdr: ChangeDetectorRef) {
-
-      this.loginForm = this.formBuilder.group({
-          username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-          password: ['', [Validators.required]]
-      });
-
-  }
 
   ngOnInit() {
       if (this.authenticationService.currentUserValue) {

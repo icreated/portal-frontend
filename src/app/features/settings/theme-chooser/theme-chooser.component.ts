@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {SessionService} from '../../../core/services/session.service';
 import {ThemeService} from '../../../core/services/theme.service';
 import {DesignTemplate} from "../../../core/models/design-template.model";
@@ -12,13 +12,12 @@ import {DesignTemplate} from "../../../core/models/design-template.model";
 })
 export class ThemeChooserComponent implements OnInit {
 
+  private sessionService = inject(SessionService);
+  private themeService = inject(ThemeService);
+
   themes!: DesignTemplate[];
   theme!: DesignTemplate;
-
   fonts!: string[];
-
-  constructor(private sessionService: SessionService, private themeService: ThemeService) {
-  }
 
   ngOnInit(): void {
     this.themes = this.themeService.getThemes();

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -14,12 +14,12 @@ import {map, mergeMap} from 'rxjs/operators';
 })
 export class HeaderBreadcrumbComponent implements OnInit {
 
+  private routeStateService = inject(RouteStateService);
+  private translationService = inject(TranslateService);
+  private cdr = inject(ChangeDetectorRef);
+
   items: MenuItem[] = [];
   home: MenuItem = {icon: 'pi pi-home', routerLink: ['/main/dashboard']};
-
-  constructor(private routeStateService: RouteStateService, private translationService: TranslateService,
-              private cdr: ChangeDetectorRef) {
-  }
 
   ngOnInit() {
       const routes = this.routeStateService.getAll();

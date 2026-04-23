@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit, Signal} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {LoaderService} from 'src/app/core/services/loader.service';
 import {SessionService} from 'src/app/core/services/session.service';
@@ -13,30 +13,32 @@ import {ThemeService} from './core/services/theme.service';
     standalone: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'Web Portal';
-  showLoader: Signal<boolean>;
 
-  constructor(private loaderService: LoaderService, private sessionService: SessionService,
-    private authenticationService: AuthenticationService, private themeService: ThemeService,
-    translate: TranslateService) {
+  private loaderService = inject(LoaderService);
+  private sessionService = inject(SessionService);
+  private authenticationService = inject(AuthenticationService);
+  private themeService = inject(ThemeService);
+  private translate = inject(TranslateService);
 
-      this.showLoader = toSignal(this.loaderService.getStatus(), { initialValue: false });
+  showLoader: Signal<boolean> = toSignal(this.loaderService.getStatus(), { initialValue: false });
 
+  ngOnInit() {
       const theme = this.sessionService.getItem('selected-theme');
       theme ? this.themeService.selectTheme(theme) :
           this.themeService.selectTheme(this.themeService.getThemes()[0]);
 
-      translate.setDefaultLang('en');
-      translate.addLangs(['en', 'fr']);
+      this.translate.setDefaultLang('en');
+      this.translate.addLangs(['en', 'fr']);
       let language = this.sessionService.getItem('ng-prime-language');
       if (language) {
-          translate.use(language);
+          this.translate.use(language);
       } else {
-          const browserLang = translate.getBrowserLang();
+          const browserLang = this.translate.getBrowserLang();
           if (browserLang != null) {
-              language = translate.getLangs().includes(browserLang) ? browserLang : 'en';
+              language = this.translate.getLangs().includes(browserLang) ? browserLang : 'en';
           }
           this.sessionService.setItem('ng-prime-language', language);
       }

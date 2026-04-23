@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionService} from '../../core/services/session.service';
 
@@ -11,16 +11,16 @@ import {SessionService} from '../../core/services/session.service';
 })
 export class SettingsComponent implements OnInit {
 
+  translate = inject(TranslateService);
+  private sessionService = inject(SessionService);
+
   selectedLang = 'en';
 
-  constructor(public translate: TranslateService, private sessionService: SessionService) {
+  ngOnInit(): void {
       const language = this.sessionService.getItem('ng-prime-language');
       if (language) {
           this.selectedLang = language;
       }
-  }
-
-  ngOnInit(): void {
   }
 
   onChangeLang(event: any) {
