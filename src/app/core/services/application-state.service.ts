@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, fromEvent, Observable} from 'rxjs';
-import {distinctUntilChanged, map} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,11 +11,12 @@ export class ApplicationStateService {
     windowSize$ = new BehaviorSubject(this.getWindowSize());
 
     constructor() {
-        this.windowSize$.pipe(
-            distinctUntilChanged());
-
         fromEvent(window, 'resize')
-            .pipe(map(this.getWindowSize))
+            .pipe(
+                debounceTime(100),
+                map(() => this.getWindowSize()),
+                distinctUntilChanged((a, b) => a.width === b.width)
+            )
             .subscribe(this.windowSize$);
     }
 

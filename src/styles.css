@@ -271,7 +271,7 @@ a {
 @media only screen and (max-width: 992px) {
 
   .toggle-menu-button {
-    display: none;
+    display: block;
   }
   .user-name {
     display: none;

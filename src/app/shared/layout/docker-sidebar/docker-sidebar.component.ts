@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {CustomMenuItem} from 'src/app/core/models/menu-item.model';
 import {MenuDataService} from 'src/app/core/services/menu-data.service';
 import {ApplicationStateService} from 'src/app/core/services/application-state.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'docker-sidebar',
@@ -32,6 +32,8 @@ import {filter} from 'rxjs/operators';
 })
 export class DockerSidebarComponent implements OnInit {
 
+  private destroyRef = inject(DestroyRef);
+
   @Input() isMobile = false;
   @Output() cssEvent = new EventEmitter<string>();
   items: CustomMenuItem[] = [];
@@ -48,44 +50,48 @@ export class DockerSidebarComponent implements OnInit {
   ngOnInit() {
       this.items = this.menuDataService.getMenuList();
 
-      this.menuDataService.toggleMenuBar.subscribe(menuState => {
-          if (this.isMobile) {
-            this.isMenuOpened = !menuState.isMenuOpened;
-            this.isMenuDocked = false;
-            this.cssEvent.next(this.isMenuOpened ? 'ng-content-hidden' : 'ng-content-overlay');
-          } else {
-            this.isMenuOpened = menuState.isMenuOpened;
-            this.isMenuDocked = menuState.isMenuDocked;
-            this.cssEvent.next( menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
-          }
-
-          this.isTitleShowed = false;
-          if (!this.isMenuDocked) {
-            setTimeout(() => {
-              this.isTitleShowed = true;
-              this.cdr.markForCheck();
-            }, 100);
-          }
-          this.cdr.markForCheck();
-      });
-
-      this.applicationStateService.isMobileResolution().subscribe(isMobile => {
-          this.isMobile = isMobile;
-          if (this.isMobile) {
-              this.isMenuOpened = true;
-              this.isTitleShowed = false;
-              this.isMenuDocked = false;
-              this.cssEvent.next('ng-content-hidden');
-          } else {
-              if (this.isMenuOpened) {
-                  this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: false});
+      this.menuDataService.toggleMenuBar
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(menuState => {
+              if (this.isMobile) {
+                this.isMenuOpened = !menuState.isMenuOpened;
+                this.isMenuDocked = false;
+                this.cssEvent.next(this.isMenuOpened ? 'ng-content-hidden' : 'ng-content-overlay');
+              } else {
+                this.isMenuOpened = menuState.isMenuOpened;
+                this.isMenuDocked = menuState.isMenuDocked;
+                this.cssEvent.next( menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
               }
-              this.isMenuOpened = false;
-              this.isTitleShowed = !this.isMenuDocked;
-              this.cssEvent.next(this.isMenuDocked ? 'ng-content-docked' : 'ng-content');
-          }
-          this.cdr.markForCheck();
-      });
+
+              this.isTitleShowed = false;
+              if (!this.isMenuDocked) {
+                setTimeout(() => {
+                  this.isTitleShowed = true;
+                  this.cdr.markForCheck();
+                }, 100);
+              }
+              this.cdr.markForCheck();
+          });
+
+      this.applicationStateService.isMobileResolution()
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(isMobile => {
+              this.isMobile = isMobile;
+              if (this.isMobile) {
+                  this.isMenuOpened = true;
+                  this.isTitleShowed = false;
+                  this.isMenuDocked = false;
+                  this.cssEvent.next('ng-content-hidden');
+              } else {
+                  if (this.isMenuOpened) {
+                      this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: false});
+                  }
+                  this.isMenuOpened = false;
+                  this.isTitleShowed = !this.isMenuDocked;
+                  this.cssEvent.next(this.isMenuDocked ? 'ng-content-docked' : 'ng-content');
+              }
+              this.cdr.markForCheck();
+          });
 
       const activeMenu = this.sessionService.getItem('active-menu');
       this.selectedItem = activeMenu ? activeMenu : 'Home';
@@ -103,15 +109,9 @@ export class DockerSidebarComponent implements OnInit {
       this.selectedItem = menu.label;
       this.sessionService.setItem('active-menu', menu.label);
       this.routeStateService.add(menu.label, menu.routerLink, null, true);
-      setTimeout(() => {
-          this.applicationStateService.isMobileResolution()
-              .pipe(
-                  filter(isMobile => isMobile)
-              ).subscribe(isMobile => {
-                  const menuState = { isMenuOpened: false, isMenuDocked: this.isMenuDocked };
-                  this.menuDataService.toggleMenuBar.next(menuState);
-              });
-      }, 100);
+      if (this.isMobile) {
+          this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: this.isMenuDocked });
+      }
   }
 
   toggleSubMenu(menu: CustomMenuItem) {
