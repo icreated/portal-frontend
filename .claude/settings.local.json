@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx ng *)",
+      "WebFetch(domain:angular.dev)",
+      "WebFetch(domain:update.angular.io)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(git stash *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
