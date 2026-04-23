@@ -5,7 +5,7 @@ import {ErrorComponent} from './shared/error/error.component';
 import {PipeModule} from './core/pipes/pipe.module';
 import {CommonModule} from '@angular/common';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {InputComponent} from './shared/components/form/input/input.component';
 import {PasswordComponent} from './shared/components/form/password/password.component';

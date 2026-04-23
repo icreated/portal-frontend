@@ -1,9 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 import {RegularService} from './regular.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import {environment} from '../../../environments/environment';
 import {ValueLabel} from "../../api/models/value-label";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('RegulrService', () => {
     let commonService: RegularService;
@@ -12,9 +13,9 @@ describe('RegulrService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [TranslateService],
-            imports: [HttpClientTestingModule, TranslateModule.forRoot()]
-        });
+    imports: [TranslateModule.forRoot()],
+    providers: [TranslateService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
         commonService = TestBed.inject(RegularService);
         translateService = TestBed.inject(TranslateService);
         httpMock = TestBed.inject(HttpTestingController);

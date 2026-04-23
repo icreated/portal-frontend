@@ -4,11 +4,12 @@ import {DashboardComponent} from './dashboard.component';
 import {RouteStateService} from '../../core/services/route-state.service';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {OpenItem} from "../../api/models/open-item";
 import {InvoicesService} from "../../api/services/invoices.service";
 import {PaymentsService} from "../../api/services/payments.service";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 describe('DashboardComponent', () => {
@@ -25,11 +26,11 @@ describe('DashboardComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [DashboardComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [PaymentsService],
-            imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule, TranslateModule.forRoot()]
-        }).compileComponents();
+    declarations: [DashboardComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+    providers: [PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     });
 
     beforeEach(() => {

@@ -11,7 +11,7 @@ import {AppRoutingModule} from 'src/app/app.routing.module';
 import {LayoutComponent} from 'src/app/shared/layout/layout.component';
 import {HeaderComponent} from 'src/app/shared/layout/header/header.component';
 import {FooterComponent} from 'src/app/shared/layout/footer/footer.component';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {AppCommonModule} from 'src/app/app.common.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -21,41 +21,35 @@ import {DockerSidebarComponent} from './shared/layout/docker-sidebar/docker-side
 import {ApiModule} from './api/api.module';
 import {environment} from '../environments/environment';
 
-@NgModule({
-    declarations: [
-      AppComponent,
-      LayoutComponent,
-      DockerSidebarComponent,
-      HeaderComponent,
-      FooterComponent
-    ],
-    imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      AppRoutingModule,
-      HttpClientModule,
-      AppCommonModule.forRoot(),
-      ApiModule.forRoot({rootUrl: environment.apiUrl}),
-      TranslateModule.forRoot({
-          loader: {
-          provide: TranslateLoader,
-          useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
-          deps: [HttpClient]
-          },
-          isolate: false
-          }),
+@NgModule({ declarations: [
+        AppComponent,
+        LayoutComponent,
+        DockerSidebarComponent,
+        HeaderComponent,
+        FooterComponent
     ],
     exports: [],
-    providers: [
-      {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-      {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-      MessageService,
-      AuthGuard
-    ],
     bootstrap: [
-      AppComponent
-    ]
-})
+        AppComponent
+    ], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        AppCommonModule.forRoot(),
+        ApiModule.forRoot({ rootUrl: environment.apiUrl }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
+                deps: [HttpClient]
+            },
+            isolate: false
+        })], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        MessageService,
+        AuthGuard,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
 }
 

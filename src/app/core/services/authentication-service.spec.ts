@@ -1,9 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 
 import {AuthenticationService} from './authentication-service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import {environment} from '../../../environments/environment';
 import {User} from '../../api/models/user';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 describe('AuthenticationService', () => {
@@ -19,8 +20,9 @@ describe('AuthenticationService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule]
-        });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
         store = {} as any;
         spyOn(localStorage, 'getItem').and.callFake((key) => store[`${key}`]);
         spyOn(localStorage, 'setItem').and.callFake((key, value) => store[`${key}`] = value + '');

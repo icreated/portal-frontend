@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InvoiceDetailComponent} from './invoice-detail.component';
 import {RouteStateService} from '../../../core/services/route-state.service';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {of} from 'rxjs';
 import {PipeModule} from '../../../core/pipes/pipe.module';
@@ -12,6 +12,7 @@ import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InvoicesService} from "../../../api/services/invoices.service";
 import {Invoice} from "../../../api/models/invoice";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('InvoiceDetailComponent', () => {
     let component: InvoiceDetailComponent;
@@ -23,12 +24,12 @@ describe('InvoiceDetailComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [InvoiceDetailComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [InvoicesService],
-            imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
-                HttpClientTestingModule, TranslateModule.forRoot(), PipeModule]
-        }).compileComponents();
+    declarations: [InvoiceDetailComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(), PipeModule],
+    providers: [InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     });
 
     beforeEach(() => {

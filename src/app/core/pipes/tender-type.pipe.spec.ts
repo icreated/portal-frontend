@@ -2,8 +2,9 @@ import {TenderTypeFormatPipe} from './tender-type.pipe';
 import {RegularService} from '../services/regular.service';
 import {TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {of} from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TenderTypeFormatPipe', () => {
 
@@ -12,9 +13,9 @@ describe('TenderTypeFormatPipe', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [RegularService, TranslateService],
-            imports: [HttpClientTestingModule, TranslateModule.forRoot()]
-        });
+    imports: [TranslateModule.forRoot()],
+    providers: [RegularService, TranslateService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
         commonService = TestBed.inject(RegularService);
         pipe = new TenderTypeFormatPipe(commonService);
     });

@@ -6,10 +6,11 @@ import {MenuDataService} from '../../../core/services/menu-data.service';
 import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {RouteStateService} from '../../../core/services/route-state.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 describe('HeaderComponent', () => {
@@ -22,12 +23,12 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [SessionService, MenuDataService],
-      imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
-        HttpClientTestingModule, TranslateModule.forRoot()]
-    }).compileComponents();
+    declarations: [HeaderComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot()],
+    providers: [SessionService, MenuDataService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
 
   });
 

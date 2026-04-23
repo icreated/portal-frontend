@@ -3,10 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaymentsComponent } from './payments.component';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {PaymentsService} from "../../api/services/payments.service";
 import {Payment} from "../../api/models/payment";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PaymentsComponent', () => {
     let component: PaymentsComponent;
@@ -19,11 +20,11 @@ describe('PaymentsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [PaymentsComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [PaymentsService],
-            imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule, TranslateModule.forRoot()]
-        }).compileComponents();
+    declarations: [PaymentsComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+    providers: [PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     });
 
     beforeEach(() => {
