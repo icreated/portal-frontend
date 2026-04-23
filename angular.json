@@ -11,19 +11,18 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/portal-frontend",
+            "outputPath": {
+              "base": "dist/portal-frontend",
+              "browser": ""
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": [],
             "tsConfig": "src/tsconfig.app.json",
             "optimization": false,
             "sourceMap": true,
-            "namedChunks": true,
-            "extractLicenses": false,
-            "vendorChunk": false,
-            "buildOptimizer": false,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -34,11 +33,8 @@
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",
               "./src/styles.css"
             ],
-            "scripts": [
-            ],
-            "allowedCommonJsDependencies": [
-
-            ]
+            "scripts": [],
+            "allowedCommonJsDependencies": []
           },
           "configurations": {
             "production": {
@@ -51,21 +47,14 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+              "extractLicenses": true
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "sourceMap": true,
-              "namedChunks": true,
-              "vendorChunk": true,
-              "extractLicenses": false
+              "sourceMap": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -75,8 +64,12 @@
           "configurations": {
             "production": {
               "buildTarget": "portal-frontend:build:production"
+            },
+            "development": {
+              "buildTarget": "portal-frontend:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
