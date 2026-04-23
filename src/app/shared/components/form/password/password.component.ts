@@ -1,11 +1,17 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, Input, ViewEncapsulation} from '@angular/core';
-import {UntypedFormControl} from '@angular/forms';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, Input} from '@angular/core';
+import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
+import {PasswordModule} from 'primeng/password';
+import {InputGroupModule} from 'primeng/inputgroup';
+import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
+import {DividerModule} from 'primeng/divider';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-password',
     templateUrl: './password.component.html',
     styleUrls: ['./password.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [ReactiveFormsModule, PasswordModule, InputGroupModule, InputGroupAddonModule, DividerModule, TranslateModule],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordComponent implements AfterViewInit {

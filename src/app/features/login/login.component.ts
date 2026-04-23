@@ -1,10 +1,15 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {TranslateModule} from '@ngx-translate/core';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {ToastService} from 'src/app/core/services/toast.service';
+import {InputComponent} from 'src/app/shared/components/form/input/input.component';
+import {PasswordComponent} from 'src/app/shared/components/form/password/password.component';
 import FormUtils from '../../core/utils/FormUtils';
 
 
@@ -12,7 +17,8 @@ import FormUtils from '../../core/utils/FormUtils';
     selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [ReactiveFormsModule, RouterLink, ButtonModule, PanelModule, TranslateModule, InputComponent, PasswordComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {

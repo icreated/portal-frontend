@@ -1,12 +1,15 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
 import {first, map} from 'rxjs/operators';
+import {LangChangeEvent, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import {PasswordComponent} from 'src/app/shared/components/form/password/password.component';
 import FormUtils from '../../../core/utils/FormUtils';
 import {UsersService} from '../../../api/services/users.service';
 
@@ -14,7 +17,8 @@ import {UsersService} from '../../../api/services/users.service';
     selector: 'app-change-password',
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [ReactiveFormsModule, TranslateModule, PanelModule, ButtonModule, PasswordComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordComponent implements OnInit {

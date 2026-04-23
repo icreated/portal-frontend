@@ -11,7 +11,8 @@ import {ApplicationStateService} from '../../../core/services/application-state.
     selector: 'app-header',
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {

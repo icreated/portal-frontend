@@ -1,12 +1,19 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import {FormsModule} from '@angular/forms';
+import {SelectModule} from 'primeng/select';
+import {PanelModule} from 'primeng/panel';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SessionService} from '../../core/services/session.service';
+import {HeaderBreadcrumbComponent} from '../../shared/layout/header-breadcrumb/header-breadcrumb.component';
+import {ThemeChooserComponent} from './theme-chooser/theme-chooser.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 @Component({
     selector: 'app-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [HeaderBreadcrumbComponent, FormsModule, TranslateModule, PanelModule, SelectModule, ThemeChooserComponent, ChangePasswordComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {

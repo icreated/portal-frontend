@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {CustomMenuItem} from 'src/app/core/models/menu-item.model';
@@ -11,23 +13,16 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     selector: 'docker-sidebar',
     templateUrl: 'docker-sidebar.component.html',
     styleUrls: ['docker-sidebar.component.css'],
+    standalone: true,
+    imports: [NgClass, NgTemplateOutlet, TranslateModule],
     animations: [
         trigger('dockedOpen', [
-            state('true', style({
-                width: '50px',
-            })),
-            state('false', style({
-                width: '12rem',
-            })),
-            transition('true => false', [
-                animate('.1s')
-            ]),
-            transition('false => true', [
-                animate('.1s')
-            ]),
+            state('true', style({ width: '50px' })),
+            state('false', style({ width: '12rem' })),
+            transition('true => false', [animate('.1s')]),
+            transition('false => true', [animate('.1s')]),
         ]),
     ],
-    standalone: false,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DockerSidebarComponent implements OnInit {
@@ -60,9 +55,8 @@ export class DockerSidebarComponent implements OnInit {
               } else {
                 this.isMenuOpened = menuState.isMenuOpened;
                 this.isMenuDocked = menuState.isMenuDocked;
-                this.cssEvent.next( menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
+                this.cssEvent.next(menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
               }
-
               this.isTitleShowed = false;
               if (!this.isMenuDocked) {
                 setTimeout(() => {
@@ -84,7 +78,7 @@ export class DockerSidebarComponent implements OnInit {
                   this.cssEvent.next('ng-content-hidden');
               } else {
                   if (this.isMenuOpened) {
-                      this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: false});
+                      this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: false });
                   }
                   this.isMenuOpened = false;
                   this.isTitleShowed = !this.isMenuDocked;

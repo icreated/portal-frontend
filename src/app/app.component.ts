@@ -1,5 +1,8 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit, Signal} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {ToastModule} from 'primeng/toast';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {LoaderService} from 'src/app/core/services/loader.service';
 import {SessionService} from 'src/app/core/services/session.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -10,7 +13,8 @@ import {ThemeService} from './core/services/theme.service';
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [RouterOutlet, ToastModule, ProgressSpinnerModule],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {

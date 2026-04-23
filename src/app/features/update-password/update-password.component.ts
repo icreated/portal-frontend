@@ -1,9 +1,13 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {TranslateModule} from '@ngx-translate/core';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
+import {PasswordComponent} from 'src/app/shared/components/form/password/password.component';
 import FormUtils from '../../core/utils/FormUtils';
 import {UsersService} from '../../api/services/users.service';
 
@@ -11,7 +15,8 @@ import {UsersService} from '../../api/services/users.service';
     selector: 'app-update-password',
     templateUrl: './update-password.component.html',
     styleUrls: ['./update-password.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [ReactiveFormsModule, ButtonModule, PanelModule, TranslateModule, PasswordComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UpdatePasswordComponent implements OnInit {

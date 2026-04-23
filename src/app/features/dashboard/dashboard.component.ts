@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import {CurrencyPipe} from '@angular/common';
+import {CardModule} from 'primeng/card';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {environment} from 'src/environments/environment';
 import {OpenItem} from "../../api/models/open-item";
@@ -9,7 +11,8 @@ import {InvoicesService} from "../../api/services/invoices.service";
     selector: 'app-dashboard',
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [TranslateModule, CardModule, CurrencyPipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {

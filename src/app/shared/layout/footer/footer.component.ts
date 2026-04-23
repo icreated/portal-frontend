@@ -5,7 +5,8 @@ import {environment} from 'src/environments/environment';
     selector: 'app-footer',
     templateUrl: 'footer.component.html',
     styleUrls: ['footer.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {

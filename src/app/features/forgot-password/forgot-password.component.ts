@@ -1,8 +1,12 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
+import {Router, RouterLink} from '@angular/router';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {TranslateModule} from '@ngx-translate/core';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
+import {InputComponent} from 'src/app/shared/components/form/input/input.component';
 import FormUtils from '../../core/utils/FormUtils';
 import {UsersService} from '../../api/services/users.service';
 
@@ -10,7 +14,8 @@ import {UsersService} from '../../api/services/users.service';
     selector: 'app-forgot-password',
     templateUrl: './forgot-password.component.html',
     styleUrls: ['./forgot-password.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [ReactiveFormsModule, RouterLink, ButtonModule, PanelModule, TranslateModule, InputComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgotPasswordComponent implements OnInit {

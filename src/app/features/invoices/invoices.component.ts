@@ -1,16 +1,23 @@
 import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
+import {CurrencyPipe, DatePipe} from '@angular/common';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {TableModule} from 'primeng/table';
+import {PanelModule} from 'primeng/panel';
+import {TranslateModule} from '@ngx-translate/core';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {Document} from 'src/app/api/models/document';
 import {environment} from 'src/environments/environment';
 import {ApplicationStateService} from '../../core/services/application-state.service';
 import {InvoicesService} from "../../api/services/invoices.service";
+import {DocStatusFormatPipe} from '../../core/pipes/doc-status-value.pipe';
+import {HeaderBreadcrumbComponent} from '../../shared/layout/header-breadcrumb/header-breadcrumb.component';
 
 @Component({
     selector: 'app-invoices',
     templateUrl: 'invoices.component.html',
     styleUrls: ['invoices.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [HeaderBreadcrumbComponent, TranslateModule, PanelModule, TableModule, DocStatusFormatPipe, DatePipe, CurrencyPipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoicesComponent {

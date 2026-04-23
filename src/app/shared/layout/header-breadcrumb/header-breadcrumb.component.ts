@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {TranslateService} from '@ngx-translate/core';
 import {from} from 'rxjs';
@@ -9,7 +10,8 @@ import {map, mergeMap} from 'rxjs/operators';
     selector: 'app-header-breadcrumb',
     templateUrl: 'header-breadcrumb.component.html',
     styleUrls: ['header-breadcrumb.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [BreadcrumbModule],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderBreadcrumbComponent implements OnInit {

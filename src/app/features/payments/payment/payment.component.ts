@@ -1,20 +1,28 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {CurrencyPipe, NgClass} from '@angular/common';
+import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {environment} from 'src/environments/environment';
+import {InputTextModule} from 'primeng/inputtext';
+import {SelectModule} from 'primeng/select';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {TranslateModule} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
+import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {environment} from 'src/environments/environment';
 import {ValueLabel} from "../../../api/models/value-label";
 import {PaymentsService} from "../../../api/services/payments.service";
 import {CreditCard} from "../../../api/models/credit-card";
 import {InvoicesService} from "../../../api/services/invoices.service";
 import {CommonService} from '../../../api/services/common.service';
+import {HeaderBreadcrumbComponent} from '../../../shared/layout/header-breadcrumb/header-breadcrumb.component';
 
 @Component({
     selector: 'app-payment',
     templateUrl: 'payment.component.html',
     styleUrls: ['payment.component.css'],
-    standalone: false,
+    standalone: true,
+    imports: [HeaderBreadcrumbComponent, ReactiveFormsModule, TranslateModule, PanelModule, SelectModule, InputTextModule, ButtonModule, NgClass, CurrencyPipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentComponent implements OnInit {
