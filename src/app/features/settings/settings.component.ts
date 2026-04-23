@@ -3,8 +3,8 @@ import {FormsModule} from '@angular/forms';
 import {SelectModule} from 'primeng/select';
 import {PanelModule} from 'primeng/panel';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {SessionService} from '../../core/services/session.service';
-import {HeaderBreadcrumbComponent} from '../../shared/layout/header-breadcrumb/header-breadcrumb.component';
+import {SessionService} from '@core/services/session.service';
+import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header-breadcrumb.component';
 import {ThemeChooserComponent} from './theme-chooser/theme-chooser.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 

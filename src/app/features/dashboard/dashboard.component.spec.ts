@@ -1,14 +1,14 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DashboardComponent} from './dashboard.component';
-import {RouteStateService} from '../../core/services/route-state.service';
+import {RouteStateService} from '@core/route-state.service';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {OpenItem} from "../../api/models/open-item";
-import {InvoicesService} from "../../api/services/invoices.service";
-import {PaymentsService} from "../../api/services/payments.service";
+import {OpenItem} from '@api/open-item';
+import {InvoicesService} from '@api/invoices.service';
+import {PaymentsService} from '@api/payments.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 

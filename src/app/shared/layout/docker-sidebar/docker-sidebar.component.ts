@@ -2,11 +2,11 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, Event
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {SessionService} from 'src/app/core/services/session.service';
-import {CustomMenuItem} from 'src/app/core/models/menu-item.model';
-import {MenuDataService} from 'src/app/core/services/menu-data.service';
-import {ApplicationStateService} from 'src/app/core/services/application-state.service';
+import {RouteStateService} from '@core/services/route-state.service';
+import {SessionService} from '@core/services/session.service';
+import {CustomMenuItem} from '@core/models/menu-item.model';
+import {MenuDataService} from '@core/services/menu-data.service';
+import {ApplicationStateService} from '@core/services/application-state.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({

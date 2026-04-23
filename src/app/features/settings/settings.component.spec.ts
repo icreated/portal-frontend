@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SettingsComponent } from './settings.component';
-import {SessionService} from '../../core/services/session.service';
+import {SessionService} from '@core/session.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('SettingsComponent', () => {

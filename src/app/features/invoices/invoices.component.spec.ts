@@ -1,14 +1,14 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InvoicesComponent } from './invoices.component';
-import {Document} from 'src/app/api/models/document';
+import {Document} from '@api/models/document';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouteStateService} from '../../core/services/route-state.service';
-import {ApplicationStateService} from '../../core/services/application-state.service';
-import {InvoicesService} from "../../api/services/invoices.service";
+import {RouteStateService} from '@core/route-state.service';
+import {ApplicationStateService} from '@core/application-state.service';
+import {InvoicesService} from '@api/invoices.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('InvoicesComponent', () => {

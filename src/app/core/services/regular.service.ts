@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
-import {ValueLabel} from "../../api/models/value-label";
+import {ValueLabel} from '@api/models/value-label';
 import {ToastService} from './toast.service';
 
 

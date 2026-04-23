@@ -5,8 +5,8 @@ import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {PaymentsService} from "../../api/services/payments.service";
-import {Payment} from "../../api/models/payment";
+import {PaymentsService} from '@api/payments.service';
+import {Payment} from '@api/payment';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PaymentsComponent', () => {

@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {AuthenticationService} from './authentication-service';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import {environment} from '../../../environments/environment';
-import {User} from '../../api/models/user';
+import {User} from '@api/user';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 

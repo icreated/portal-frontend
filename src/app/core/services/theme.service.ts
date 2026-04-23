@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {CustomMenuItem} from "../models/menu-item.model";
-import {DesignTemplate} from "../models/design-template.model";
+import {CustomMenuItem} from '@core/models/menu-item.model';
+import {DesignTemplate} from '@core/models/design-template.model';
 
 @Injectable({
   providedIn: 'root',

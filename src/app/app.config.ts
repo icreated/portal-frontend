@@ -8,9 +8,9 @@ import {MessageService} from 'primeng/api';
 import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {appRoutes} from './app.routes';
-import {jwtInterceptor} from './core/interceptors/jwt-interceptor';
-import {errorInterceptor} from './core/interceptors/error-interceptor';
-import {ApiModule} from './api/api.module';
+import {jwtInterceptor} from '@core/interceptors/jwt-interceptor';
+import {errorInterceptor} from '@core/interceptors/error-interceptor';
+import {ApiModule} from '@api/api.module';
 import {environment} from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {

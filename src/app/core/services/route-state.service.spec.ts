@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {RouteStateService} from './route-state.service';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
-import {RouteState} from '../models/route-state.model';
+import {RouteState} from '@core/route-state.model';
 
 describe('RouteStateService', () => {
     let service: RouteStateService;

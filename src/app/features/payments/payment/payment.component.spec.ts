@@ -1,8 +1,8 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PaymentComponent} from './payment.component';
-import {RouteStateService} from '../../../core/services/route-state.service';
-import {RegularService} from '../../../core/services/regular.service';
+import {RouteStateService} from '@core/route-state.service';
+import {RegularService} from '@core/regular.service';
 import {UntypedFormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -11,9 +11,9 @@ import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
-import {InvoicesService} from "../../../api/services/invoices.service";
-import {OpenItem} from "../../../api/models/open-item";
-import {PaymentsService} from "../../../api/services";
+import {InvoicesService} from '@api/invoices.service';
+import {OpenItem} from '@api/open-item';
+import {PaymentsService} from '@api/';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PaymentComponent', () => {

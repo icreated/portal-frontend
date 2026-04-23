@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {Router} from '@angular/router';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {SessionService} from 'src/app/core/services/session.service';
-import {MenuDataService} from 'src/app/core/services/menu-data.service';
-import {AuthenticationService} from '../../../core/services/authentication-service';
-import {ApplicationStateService} from '../../../core/services/application-state.service';
+import {RouteStateService} from '@core/services/route-state.service';
+import {SessionService} from '@core/services/session.service';
+import {MenuDataService} from '@core/services/menu-data.service';
+import {AuthenticationService} from '@core/services/authentication-service';
+import {ApplicationStateService} from '@core/services/application-state.service';
 
 @Component({
     selector: 'app-header',

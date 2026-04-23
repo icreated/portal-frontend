@@ -4,13 +4,13 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {Document} from 'src/app/api/models/document';
+import {RouteStateService} from '@core/services/route-state.service';
+import {Document} from '@api/models/document';
 import {environment} from 'src/environments/environment';
-import {ApplicationStateService} from '../../core/services/application-state.service';
-import {InvoicesService} from "../../api/services/invoices.service";
-import {DocStatusFormatPipe} from '../../core/pipes/doc-status-value.pipe';
-import {HeaderBreadcrumbComponent} from '../../shared/layout/header-breadcrumb/header-breadcrumb.component';
+import {ApplicationStateService} from '@core/services/application-state.service';
+import {InvoicesService} from '@api/services/invoices.service';
+import {DocStatusFormatPipe} from '@core/pipes/doc-status-value.pipe';
+import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header-breadcrumb.component';
 
 @Component({
     selector: 'app-invoices',

@@ -2,7 +2,7 @@ import {DocStatusFormatPipe} from './doc-status-value.pipe';
 import {TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import {RegularService} from '../services/regular.service';
+import {RegularService} from '@core/regular.service';
 import {of} from 'rxjs';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 

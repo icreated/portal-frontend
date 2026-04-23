@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {CustomMenuItem} from '../models/menu-item.model';
+import {CustomMenuItem} from '@core/models/menu-item.model';
 
 export interface MenuState {
     isMenuOpened: boolean;

@@ -4,12 +4,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {TranslateModule} from '@ngx-translate/core';
-import {AuthenticationService} from 'src/app/core/services/authentication-service';
-import {ToastService} from 'src/app/core/services/toast.service';
-import {ValidationService} from 'src/app/core/services/validation.service';
-import {PasswordComponent} from 'src/app/shared/components/form/password/password.component';
-import FormUtils from '../../core/utils/FormUtils';
-import {UsersService} from '../../api/services/users.service';
+import {AuthenticationService} from '@core/services/authentication-service';
+import {ToastService} from '@core/services/toast.service';
+import {ValidationService} from '@core/services/validation.service';
+import {PasswordComponent} from '@shared/components/form/password/password.component';
+import FormUtils from '@core/utils/FormUtils';
+import {UsersService} from '@api/services/users.service';
 
 @Component({
     selector: 'app-update-password',

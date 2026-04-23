@@ -1,5 +1,5 @@
 import {inject, Pipe, PipeTransform} from '@angular/core';
-import {CommonService} from '../../api/services/common.service';
+import {CommonService} from '@api/services/common.service';
 import {TranslateService} from '@ngx-translate/core';
 
 @Pipe({ name: 'tenderType', pure: false, standalone: true })

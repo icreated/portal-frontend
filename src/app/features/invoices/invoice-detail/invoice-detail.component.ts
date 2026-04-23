@@ -4,12 +4,12 @@ import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
 import {ButtonModule} from 'primeng/button';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {RouteStateService} from '@core/services/route-state.service';
 import {environment} from 'src/environments/environment';
-import {InvoicesService} from "../../../api/services/invoices.service";
-import {Invoice} from "../../../api/models/invoice";
-import {DocStatusFormatPipe} from '../../../core/pipes/doc-status-value.pipe';
-import {HeaderBreadcrumbComponent} from '../../../shared/layout/header-breadcrumb/header-breadcrumb.component';
+import {InvoicesService} from '@api/services/invoices.service';
+import {Invoice} from '@api/models/invoice';
+import {DocStatusFormatPipe} from '@core/pipes/doc-status-value.pipe';
+import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header-breadcrumb.component';
 
 @Component({
     selector: 'app-invoice-detail',

@@ -2,10 +2,10 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} f
 import {CurrencyPipe} from '@angular/common';
 import {CardModule} from 'primeng/card';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {RouteStateService} from '@core/services/route-state.service';
 import {environment} from 'src/environments/environment';
-import {OpenItem} from "../../api/models/open-item";
-import {InvoicesService} from "../../api/services/invoices.service";
+import {OpenItem} from '@api/models/open-item';
+import {InvoicesService} from '@api/services/invoices.service';
 
 @Component({
     selector: 'app-dashboard',

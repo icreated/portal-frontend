@@ -6,9 +6,9 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {PanelModule} from 'primeng/panel';
 import {SelectModule} from 'primeng/select';
 import {TranslateModule} from '@ngx-translate/core';
-import {SessionService} from '../../../core/services/session.service';
-import {ThemeService} from '../../../core/services/theme.service';
-import {DesignTemplate} from "../../../core/models/design-template.model";
+import {SessionService} from '@core/services/session.service';
+import {ThemeService} from '@core/services/theme.service';
+import {DesignTemplate} from '@core/models/design-template.model';
 
 @Component({
     selector: 'app-theme-chooser',

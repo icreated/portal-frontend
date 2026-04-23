@@ -3,11 +3,11 @@ import {RouterOutlet} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {LoaderService} from 'src/app/core/services/loader.service';
-import {SessionService} from 'src/app/core/services/session.service';
+import {LoaderService} from '@core/services/loader.service';
+import {SessionService} from '@core/services/session.service';
 import {TranslateService} from '@ngx-translate/core';
-import {AuthenticationService} from './core/services/authentication-service';
-import {ThemeService} from './core/services/theme.service';
+import {AuthenticationService} from '@core/services/authentication-service';
+import {ThemeService} from '@core/services/theme.service';
 
 @Component({
     selector: 'app-root',

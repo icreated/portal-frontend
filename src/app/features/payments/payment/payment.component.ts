@@ -8,14 +8,14 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {TranslateModule} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
+import {RouteStateService} from '@core/services/route-state.service';
 import {environment} from 'src/environments/environment';
-import {ValueLabel} from "../../../api/models/value-label";
-import {PaymentsService} from "../../../api/services/payments.service";
-import {CreditCard} from "../../../api/models/credit-card";
-import {InvoicesService} from "../../../api/services/invoices.service";
-import {CommonService} from '../../../api/services/common.service';
-import {HeaderBreadcrumbComponent} from '../../../shared/layout/header-breadcrumb/header-breadcrumb.component';
+import {ValueLabel} from '@api/models/value-label';
+import {PaymentsService} from '@api/services/payments.service';
+import {CreditCard} from '@api/models/credit-card';
+import {InvoicesService} from '@api/services/invoices.service';
+import {CommonService} from '@api/services/common.service';
+import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header-breadcrumb.component';
 
 @Component({
     selector: 'app-payment',

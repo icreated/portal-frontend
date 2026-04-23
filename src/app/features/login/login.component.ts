@@ -5,12 +5,12 @@ import {first} from 'rxjs/operators';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {TranslateModule} from '@ngx-translate/core';
-import {AuthenticationService} from 'src/app/core/services/authentication-service';
-import {RouteStateService} from 'src/app/core/services/route-state.service';
-import {ToastService} from 'src/app/core/services/toast.service';
-import {InputComponent} from 'src/app/shared/components/form/input/input.component';
-import {PasswordComponent} from 'src/app/shared/components/form/password/password.component';
-import FormUtils from '../../core/utils/FormUtils';
+import {AuthenticationService} from '@core/services/authentication-service';
+import {RouteStateService} from '@core/services/route-state.service';
+import {ToastService} from '@core/services/toast.service';
+import {InputComponent} from '@shared/components/form/input/input.component';
+import {PasswordComponent} from '@shared/components/form/password/password.component';
+import FormUtils from '@core/utils/FormUtils';
 
 
 @Component({

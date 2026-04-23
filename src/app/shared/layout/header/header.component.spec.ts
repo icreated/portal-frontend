@@ -1,15 +1,15 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {HeaderComponent} from './header.component';
-import {SessionService} from '../../../core/services/session.service';
-import {MenuDataService} from '../../../core/services/menu-data.service';
+import {SessionService} from '@core/session.service';
+import {MenuDataService} from '@core/menu-data.service';
 import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-import {RouteStateService} from '../../../core/services/route-state.service';
+import {RouteStateService} from '@core/route-state.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 

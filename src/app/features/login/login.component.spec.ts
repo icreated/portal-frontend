@@ -1,8 +1,8 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
-import {ToastService} from '../../core/services/toast.service';
-import {AuthenticationService} from '../../core/services/authentication-service';
+import {ToastService} from '@core/toast.service';
+import {AuthenticationService} from '@core/authentication-service';
 import {MessageService} from 'primeng/api';
 import {AppCommonModule} from '../../app.common.module';
 import {RouterTestingModule} from '@angular/router/testing';
