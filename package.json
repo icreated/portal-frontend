@@ -34,6 +34,9 @@
     "tslib": "^2.2.0",
     "zone.js": "^0.15.1"
   },
+  "overrides": {
+    "ora": "5"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.24",
     "@angular-eslint/builder": "^20.7.0",
