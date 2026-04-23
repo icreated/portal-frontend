@@ -21,7 +21,7 @@ import {DockerSidebarComponent} from './shared/layout/docker-sidebar/docker-side
 import {ApiModule} from './api/api.module';
 import {environment} from '../environments/environment';
 import {providePrimeNG} from 'primeng/config';
-import Aura from '@primeng/themes/aura';
+import Aura from '@primeuix/themes/aura';
 
 @NgModule({ declarations: [
         AppComponent,
