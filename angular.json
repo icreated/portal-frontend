@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "portal-frontend:build"
+            "buildTarget": "portal-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "portal-frontend:build:production"
+              "buildTarget": "portal-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "portal-frontend:build"
+            "buildTarget": "portal-frontend:build"
           }
         },
         "test": {
