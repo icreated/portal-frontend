@@ -20,6 +20,8 @@ import {ErrorInterceptor} from './core/interceptors/error-interceptor';
 import {DockerSidebarComponent} from './shared/layout/docker-sidebar/docker-sidebar.component';
 import {ApiModule} from './api/api.module';
 import {environment} from '../environments/environment';
+import {providePrimeNG} from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -48,7 +50,8 @@ import {environment} from '../environments/environment';
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         MessageService,
         AuthGuard,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        providePrimeNG({ theme: { preset: Aura } })
     ] })
 export class AppModule {
 }

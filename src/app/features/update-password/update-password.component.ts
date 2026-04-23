@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
 import {ValidationService} from 'src/app/core/services/validation.service';
-import {Message} from 'primeng/api';
+import {ToastMessageOptions} from 'primeng/api';
 import FormUtils from '../../core/utils/FormUtils';
 import {UsersService} from '../../api/services/users.service';
 
@@ -21,7 +21,7 @@ export class UpdatePasswordComponent implements OnInit {
     loading = false;
     submitted = false;
     error = '';
-    msgs: Message[] = [];
+    msgs: ToastMessageOptions[] = [];
 
     constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
                 private router: Router, private toastService: ToastService, private authenticationService: AuthenticationService,

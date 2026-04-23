@@ -5,7 +5,7 @@ import {first} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {RouteStateService} from 'src/app/core/services/route-state.service';
 import {ToastService} from 'src/app/core/services/toast.service';
-import {Message} from 'primeng/api';
+import {ToastMessageOptions} from 'primeng/api';
 import FormUtils from '../../core/utils/FormUtils';
 
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl = '/';
-  msgs: Message[] = [];
+  msgs: ToastMessageOptions[] = [];
 
   constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute,
               private router: Router, private toastService: ToastService, private routeStateService: RouteStateService,

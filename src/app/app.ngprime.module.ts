@@ -13,7 +13,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CalendarModule } from 'primeng/calendar';
 import { SidebarModule } from 'primeng/sidebar';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { Textarea } from 'primeng/inputtextarea';
 import { MessagesModule } from 'primeng/messages';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
@@ -42,7 +42,7 @@ import {FieldsetModule} from "primeng/fieldset";
         CalendarModule,
         SidebarModule,
         DynamicDialogModule,
-        InputTextareaModule,
+        Textarea,
         MessagesModule,
         DataViewModule,
         ColorPickerModule,

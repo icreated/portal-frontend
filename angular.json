@@ -29,8 +29,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/primeng/resources/themes/fluent-light/theme.css",
-              "./node_modules/primeng/resources/primeng.css",
               "./node_modules/primeicons/primeicons.css",
               "./node_modules/primeflex/primeflex.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",

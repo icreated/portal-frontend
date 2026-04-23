@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Message, MessageService} from 'primeng/api';
+import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class ToastService {
      * @param messages
      * array of message type {severity:'success', summary:'Service Message', detail:'Via MessageService'}
      */
-    addMultiple(messages: Message[]) {
+    addMultiple(messages: ToastMessageOptions[]) {
         this.messageService.addAll(messages);
     }
 

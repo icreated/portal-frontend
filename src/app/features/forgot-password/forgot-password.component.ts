@@ -3,7 +3,7 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from 'src/app/core/services/authentication-service';
 import {ToastService} from 'src/app/core/services/toast.service';
-import {Message} from 'primeng/api';
+import {ToastMessageOptions} from 'primeng/api';
 import FormUtils from '../../core/utils/FormUtils';
 import {UsersService} from '../../api/services/users.service';
 import {handleAutoChangeDetectionStatus} from '@angular/cdk/testing';
@@ -20,7 +20,7 @@ export class ForgotPasswordComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
-  msgs: Message[] = [];
+  msgs: ToastMessageOptions[] = [];
 
   constructor(private formBuilder: UntypedFormBuilder, private router: Router,
               private toastService: ToastService, private authenticationService: AuthenticationService,
