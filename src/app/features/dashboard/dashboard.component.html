@@ -1,15 +1,19 @@
 <div class="grid">
   <div class="col-12 md:col-6 lg:col-3">
-    <a (click)="goToPayment()" *ngIf="openTotal > 0">
-      <p-card styleClass="overview-box-1">
-        <div>{{ 'click-to-pay' | translate}}</div>
-        <h1>{{openTotal | currency: currencyISO}}</h1>
+    @if (openTotal > 0) {
+      <a (click)="goToPayment()">
+        <p-card styleClass="overview-box-1">
+          <div>{{ 'click-to-pay' | translate}}</div>
+          <h1>{{openTotal | currency: currencyISO}}</h1>
+        </p-card>
+      </a>
+    }
+    @if (openTotal <= 0) {
+      <p-card styleClass="overview-box-1" >
+        <div>&nbsp;</div>
+        <h1>{{ 'paid-off' | translate }}</h1>
       </p-card>
-    </a>
-    <p-card styleClass="overview-box-1"  *ngIf="openTotal <= 0">
-      <div>&nbsp;</div>
-      <h1>{{ 'paid-off' | translate }}</h1>
-    </p-card>
+    }
   </div>
   <div class="col-12 md:col-6 lg:col-3">
     <p-card styleClass="overview-box-2">
