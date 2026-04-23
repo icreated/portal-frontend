@@ -9,7 +9,7 @@ import {PanelModule} from 'primeng/panel';
 import {TranslateModule} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
 import {RouteStateService} from '@core/services/route-state.service';
-import {environment} from 'src/environments/environment';
+import {environment} from '@env/environment';
 import {ValueLabel} from '@api/models/value-label';
 import {PaymentsService} from '@api/services/payments.service';
 import {CreditCard} from '@api/models/credit-card';

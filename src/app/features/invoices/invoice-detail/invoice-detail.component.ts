@@ -5,7 +5,7 @@ import {PanelModule} from 'primeng/panel';
 import {ButtonModule} from 'primeng/button';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouteStateService} from '@core/services/route-state.service';
-import {environment} from 'src/environments/environment';
+import {environment} from '@env/environment';
 import {InvoicesService} from '@api/services/invoices.service';
 import {Invoice} from '@api/models/invoice';
 import {DocStatusFormatPipe} from '@core/pipes/doc-status-value.pipe';

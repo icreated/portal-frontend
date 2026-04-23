@@ -20,7 +20,7 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "optimization": false,
             "sourceMap": true,
             "assets": [
@@ -81,8 +81,8 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": [],
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "styles": [
               "src/styles.css"
             ],

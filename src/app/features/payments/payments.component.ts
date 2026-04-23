@@ -4,7 +4,7 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
 import {TranslateModule} from '@ngx-translate/core';
-import {environment} from 'src/environments/environment';
+import {environment} from '@env/environment';
 import {Payment} from '@api/models/payment';
 import {PaymentsService} from '@api/services/payments.service';
 import {DocStatusFormatPipe} from '@core/pipes/doc-status-value.pipe';
