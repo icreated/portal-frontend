@@ -9,7 +9,10 @@
       "WebFetch(domain:github.com)",
       "Bash(git stash *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(npm info *)",
+      "Bash(node -e \"const v=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\); console.log\\(v.filter\\(x=>x.startsWith\\('17'\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(npm install *)"
     ]
   }
 }
