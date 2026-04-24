@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {RouteState} from '@core/models/route-state.model';
 import {Router} from '@angular/router';
 
@@ -11,8 +11,7 @@ import {Router} from '@angular/router';
  */
 export class RouteStateService {
 
-    constructor(private router: Router) {
-    }
+    private router = inject(Router);
 
     private static saveToStorage(routeStates: any) {
         localStorage.setItem('routeState', JSON.stringify(routeStates));

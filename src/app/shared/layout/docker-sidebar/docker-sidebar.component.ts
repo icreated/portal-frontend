@@ -10,7 +10,7 @@ import {ApplicationStateService} from '@core/services/application-state.service'
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
-    selector: 'docker-sidebar',
+    selector: 'app-docker-sidebar',
     templateUrl: 'docker-sidebar.component.html',
     styleUrls: ['docker-sidebar.component.css'],
     standalone: true,

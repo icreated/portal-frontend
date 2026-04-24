@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -11,8 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
  */
 export class ToastService {
 
-    constructor(private messageService: MessageService, private translationService: TranslateService) {
-    }
+    private messageService = inject(MessageService);
+    private translationService = inject(TranslateService);
 
     /**
      * add single toast message

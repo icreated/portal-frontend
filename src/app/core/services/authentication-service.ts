@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -11,7 +11,9 @@ export class AuthenticationService {
 
     public currentUserSubject: BehaviorSubject<User | null>;
 
-    constructor(private http: HttpClient) {
+    private http = inject(HttpClient);
+
+    constructor() {
         const storageUser = localStorage.getItem('currentUser');
         const user = storageUser ? JSON.parse(storageUser) as User : null;
         this.currentUserSubject = new BehaviorSubject<User | null>(user);
