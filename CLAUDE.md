@@ -65,11 +65,18 @@ Defined in `tsconfig.json` — use these in all imports:
 - **DI pattern**: use `inject()` function at field level — not constructor injection.
 - **Signals for async data**: fetch API data with `toSignal(service.getData(), { initialValue: [] })` to convert Observables to Signals at the component boundary. Keep components free of subscriptions.
 - **API client**: `src/app/api/` is fully generated. To add/modify an endpoint, edit `openapi.yaml` then run `npm run ng-openapi-gen`. Import from `@api/services` and `@api/models`.
+- **Standalone components everywhere**: there are no NgModules in `src/app/` (only the generated `api.module.ts` in `src/app/api/`). Each component declares its own `imports` array.
+- **Zoneless change detection**: `provideZonelessChangeDetection()` is set in `app.config.ts`. Use `ChangeDetectionStrategy.OnPush` on every component and rely on Signals or `async` pipe to trigger re-renders.
+- **DI pattern**: use `inject()` function at field level — not constructor injection.
+- **Signals for async data**: fetch API data with `toSignal(service.getData(), { initialValue: [] })` to convert Observables to Signals at the component boundary. Keep components free of subscriptions.
+- **API client**: `src/app/api/` is fully generated. To add/modify an endpoint, edit `openapi.yaml` then run `npm run ng-openapi-gen`. Import from `@api/services` and `@api/models`.
 - **Auth**: JWT token is kept in `localStorage` under `currentUser`. `AuthenticationService` exposes `currentUser$` (Observable) and `currentUserValue` (sync). `JwtInterceptor` attaches the token to every request matching `environment.apiUrl`.
+- **i18n**: `@ngx-translate` with JSON translation files loaded via `TranslateHttpLoader`. Language codes mapped to locale strings in `environment.langMap`. `RegularService.getLang()` returns the locale string for the current language.
 - **i18n**: `@ngx-translate` with JSON translation files loaded via `TranslateHttpLoader`. Language codes mapped to locale strings in `environment.langMap`. `RegularService.getLang()` returns the locale string for the current language.
 - **Forms**: `@rxweb/reactive-form-validators` is used alongside Angular's built-in validators.
 - **API URL**: change `environment.apiUrl` in `src/environments/environment.ts` to point at a different backend (e.g. the json-server mock at port 3000).
 - **Templates**: use Angular 21 built-in control flow (`@for`, `@if`, `@switch`) — not the legacy `*ngFor`/`*ngIf` directives.
+- **Routing**: all routes use `loadComponent` (standalone lazy loading). Authenticated routes are nested under `/main` (rendered inside `LayoutComponent`) and protected by `authGuard`.
 - **Routing**: all routes use `loadComponent` (standalone lazy loading). Authenticated routes are nested under `/main` (rendered inside `LayoutComponent`) and protected by `authGuard`.
 
 ### PrimeNG 21 notes
