@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleMenu() {
-    let menuState = this.menuDataService.toggleMenuBar.value;
+    const menuState = this.menuDataService.toggleMenuBar.value;
     menuState.isMenuDocked = !menuState.isMenuDocked;
     if (this.isMobile) {
       menuState.isMenuOpened = !menuState.isMenuOpened;

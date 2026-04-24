@@ -25,7 +25,7 @@ export class PasswordComponent implements AfterViewInit {
   @Input() label = 'Name';
   @Input() icon = undefined;
 
-  // @ts-ignore
+  // @ts-expect-error: accessing internal Angular compiler metadata
   uniqueId = this.constructor['ɵcmp'].id;
 
   ngAfterViewInit(): void {

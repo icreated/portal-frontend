@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
 import {ValidationService} from './validation.service';
-import {AbstractControl, UntypedFormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder} from '@angular/forms';
 
 describe('ValidationService', () => {
     let formBuilder: UntypedFormBuilder;

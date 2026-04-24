@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {CustomMenuItem} from '@core/models/menu-item.model';
 import {DesignTemplate} from '@core/models/design-template.model';
 
 @Injectable({
@@ -107,7 +106,7 @@ export class ThemeService {
    * @param value on selecting theme set theme variable globally
    */
   selectTheme(template: DesignTemplate) {
-    let style = document.documentElement.style;
+    const style = document.documentElement.style;
     style.setProperty(`--main-background`, template.mainBackground);
     style.setProperty(`--header-footer-color`, template.headerColor);
     style.setProperty(`--header-footer-bg-color`, template.headerBgColor);

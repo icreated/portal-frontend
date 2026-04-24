@@ -22,7 +22,7 @@ export class InputComponent {
   @Input() label = 'Name';
   @Input() icon = undefined;
 
-  // @ts-ignore
+  // @ts-expect-error: accessing internal Angular compiler metadata
   uniqueId = this.constructor['ɵcmp'].id;
 
 }
