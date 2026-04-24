@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -21,7 +21,7 @@ import {UsersService} from '@api/services/users.service';
 })
 export class UpdatePasswordComponent implements OnInit {
 
-    private formBuilder = inject(UntypedFormBuilder);
+    private formBuilder = inject(FormBuilder);
     private route = inject(ActivatedRoute);
     private router = inject(Router);
     private toastService = inject(ToastService);
@@ -30,7 +30,7 @@ export class UpdatePasswordComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
 
     token = '';
-    forgotForm: UntypedFormGroup = this.formBuilder.group({
+    forgotForm: FormGroup = this.formBuilder.group({
         newPassword: [null, Validators.compose([
             Validators.required,
             ValidationService.patternValidator(/\d/, {hasNumber: true}),

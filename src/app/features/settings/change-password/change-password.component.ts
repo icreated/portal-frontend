@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -23,7 +23,7 @@ import {UsersService} from '@api/services/users.service';
 })
 export class ChangePasswordComponent implements OnInit {
 
-    private formBuilder = inject(UntypedFormBuilder);
+    private formBuilder = inject(FormBuilder);
     private router = inject(Router);
     private toastService = inject(ToastService);
     private userService = inject(UsersService);
@@ -32,7 +32,7 @@ export class ChangePasswordComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
     private destroyRef = inject(DestroyRef);
 
-    passwordForm: UntypedFormGroup = this.formBuilder.group({
+    passwordForm: FormGroup = this.formBuilder.group({
         password: [null, Validators.compose([Validators.required])],
         newPassword: [null, Validators.compose([
             Validators.required,

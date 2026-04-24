@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputGroupModule} from 'primeng/inputgroup';
@@ -16,7 +16,7 @@ import {TranslateModule} from '@ngx-translate/core';
 })
 export class InputComponent {
 
-  control = input(new UntypedFormControl());
+  control = input(new FormControl());
   submitted = input(false);
   type = input('input');
   label = input('Name');

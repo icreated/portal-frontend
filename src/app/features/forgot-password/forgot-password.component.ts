@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -20,14 +20,14 @@ import {UsersService} from '@api/services/users.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  private formBuilder = inject(UntypedFormBuilder);
+  private formBuilder = inject(FormBuilder);
   private router = inject(Router);
   private toastService = inject(ToastService);
   private authenticationService = inject(AuthenticationService);
   private userService = inject(UsersService);
   private cdr = inject(ChangeDetectorRef);
 
-  forgotForm: UntypedFormGroup = this.formBuilder.group({ email: ['', []] });
+  forgotForm: FormGroup = this.formBuilder.group({ email: ['', []] });
   loading = false;
   submitted = false;
   error = '';

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -23,7 +23,7 @@ import FormUtils from '@core/utils/FormUtils';
 })
 export class LoginComponent implements OnInit {
 
-  private formBuilder = inject(UntypedFormBuilder);
+  private formBuilder = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private toastService = inject(ToastService);
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   private authenticationService = inject(AuthenticationService);
   private cdr = inject(ChangeDetectorRef);
 
-  loginForm: UntypedFormGroup = this.formBuilder.group({
+  loginForm: FormGroup = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       password: ['', [Validators.required]]
   });

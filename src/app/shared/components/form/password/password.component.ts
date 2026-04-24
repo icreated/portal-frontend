@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, input} from '@angular/core';
-import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {PasswordModule} from 'primeng/password';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
@@ -18,7 +18,7 @@ export class PasswordComponent implements AfterViewInit {
 
   private element = inject(ElementRef);
 
-  control = input(new UntypedFormControl());
+  control = input(new FormControl());
   submitted = input(false);
   toggleMask = input(false);
   feedback = input(false);

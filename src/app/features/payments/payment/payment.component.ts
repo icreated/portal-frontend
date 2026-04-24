@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {CurrencyPipe, NgClass} from '@angular/common';
-import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {InputTextModule} from 'primeng/inputtext';
 import {SelectModule} from 'primeng/select';
@@ -27,7 +27,7 @@ import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header
 })
 export class PaymentComponent implements OnInit {
 
-  private formBuilder = inject(UntypedFormBuilder);
+  private formBuilder = inject(FormBuilder);
   paymentService = inject(PaymentsService);
   private invoicesService = inject(InvoicesService);
   private commonService = inject(CommonService);
@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit {
   env = environment;
   loading = false;
   submitted = false;
-  cardFormGroup: UntypedFormGroup = this.formBuilder.group({
+  cardFormGroup: FormGroup = this.formBuilder.group({
       cardType: ['', Validators.required],
       creditCard: ['', [Validators.required, Validators.pattern('^\\d*$')]],
       holderName: ['', Validators.required],

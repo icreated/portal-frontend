@@ -1,13 +1,8 @@
-import {AbstractControl, UntypedFormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup} from '@angular/forms';
 
 export default class FormUtils {
 
-    /**
-     * Remove all values and errors from form
-     *
-     * @param form
-     */
-    static cleanForm(form: UntypedFormGroup) {
+    static cleanForm(form: FormGroup) {
         if (form) {
             form.reset();
             Object.keys(form.controls).forEach(key => {
@@ -28,7 +23,7 @@ export default class FormUtils {
         if (!control) {
             return null;
         }
-        const group = control.parent as UntypedFormGroup;
+        const group = control.parent as FormGroup;
         if (!group) {
             return null;
         }
