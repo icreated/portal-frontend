@@ -2,7 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PaymentsComponent} from './payments.component';
 import {of} from 'rxjs';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {PaymentsService} from '@api/services/payments.service';
@@ -20,9 +20,9 @@ describe('PaymentsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PaymentsComponent, RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+            imports: [PaymentsComponent, TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            providers: [provideRouter([]), PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
 
         paymentService = TestBed.inject(PaymentsService);

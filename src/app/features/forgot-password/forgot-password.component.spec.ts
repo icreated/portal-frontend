@@ -2,11 +2,11 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ForgotPasswordComponent} from './forgot-password.component';
 import {ToastService} from '@core/services/toast.service';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {EMPTY} from 'rxjs';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {UsersService} from '@api/services/users.service';
@@ -21,10 +21,10 @@ describe('ForgotPasswordComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ForgotPasswordComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+            imports: [ForgotPasswordComponent,
                 TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [MessageService, UsersService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            providers: [provideAnimations(), provideRouter([]), MessageService, UsersService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
     });
 

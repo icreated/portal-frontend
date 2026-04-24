@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import {NgClass} from '@angular/common';
 import {InputTextModule} from 'primeng/inputtext';
@@ -16,11 +16,11 @@ import {TranslateModule} from '@ngx-translate/core';
 })
 export class InputComponent {
 
-  @Input() control = new UntypedFormControl();
-  @Input() submitted = false;
-  @Input() type = 'input';
-  @Input() label = 'Name';
-  @Input() icon = undefined;
+  control = input(new UntypedFormControl());
+  submitted = input(false);
+  type = input('input');
+  label = input('Name');
+  icon = input<string>();
 
   // @ts-expect-error: accessing internal Angular compiler metadata
   uniqueId = this.constructor['ɵcmp'].id;

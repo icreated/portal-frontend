@@ -3,8 +3,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UpdatePasswordComponent} from './update-password.component';
 import {ToastService} from '@core/services/toast.service';
 import {MessageService} from 'primeng/api';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideRouter} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
@@ -24,10 +24,10 @@ describe('UpdatePasswordComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [UpdatePasswordComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+            imports: [UpdatePasswordComponent,
                 TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [
+            providers: [provideAnimations(), provideRouter([]), 
                 MessageService,
                 UsersService,
                 {provide: ActivatedRoute, useValue: {snapshot: {params: {token: ''}}}},

@@ -3,10 +3,10 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PaymentComponent} from './payment.component';
 import {RouteStateService} from '@core/services/route-state.service';
 import {CommonService} from '@api/services/common.service';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
 import {InvoicesService} from '@api/services/invoices.service';
@@ -29,10 +29,10 @@ describe('PaymentComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PaymentComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+            imports: [PaymentComponent,
                 TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [InvoicesService, PaymentsService, CommonService,
+            providers: [provideAnimations(), provideRouter([]), InvoicesService, PaymentsService, CommonService,
                 provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
     });

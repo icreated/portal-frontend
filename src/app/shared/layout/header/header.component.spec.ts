@@ -3,8 +3,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {HeaderComponent} from './header.component';
 import {SessionService} from '@core/services/session.service';
 import {MenuDataService} from '@core/services/menu-data.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
@@ -22,10 +22,10 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-        imports: [HeaderComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+        imports: [HeaderComponent,
             TranslateModule.forRoot()],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        providers: [SessionService, MenuDataService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        providers: [provideAnimations(), provideRouter([]), SessionService, MenuDataService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     }).compileComponents();
   });
 

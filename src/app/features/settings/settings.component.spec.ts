@@ -4,7 +4,7 @@ import {SettingsComponent} from './settings.component';
 import {SessionService} from '@core/services/session.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
@@ -16,9 +16,9 @@ describe('SettingsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SettingsComponent, TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
+            imports: [SettingsComponent, TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [SessionService, MessageService,
+            providers: [provideRouter([]), SessionService, MessageService,
                 provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
     });

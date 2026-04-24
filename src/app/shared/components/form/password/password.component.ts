@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, Input} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, input} from '@angular/core';
 import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import {PasswordModule} from 'primeng/password';
 import {InputGroupModule} from 'primeng/inputgroup';
@@ -18,12 +18,12 @@ export class PasswordComponent implements AfterViewInit {
 
   private element = inject(ElementRef);
 
-  @Input() control = new UntypedFormControl();
-  @Input() submitted = false;
-  @Input() toggleMask = false;
-  @Input() feedback = false;
-  @Input() label = 'Name';
-  @Input() icon = undefined;
+  control = input(new UntypedFormControl());
+  submitted = input(false);
+  toggleMask = input(false);
+  feedback = input(false);
+  label = input('Name');
+  icon = input<string>();
 
   // @ts-expect-error: accessing internal Angular compiler metadata
   uniqueId = this.constructor['ɵcmp'].id;
@@ -34,8 +34,8 @@ export class PasswordComponent implements AfterViewInit {
   }
 
   get inputStyle() {
-      const classes = this.icon ? 'input-icon-style password-custom' : 'password-custom';
-      return this.submitted && this.control.errors ? classes +' ng-invalid ng-dirty' : classes;
+      const classes = this.icon() ? 'input-icon-style password-custom' : 'password-custom';
+      return this.submitted() && this.control().errors ? classes +' ng-invalid ng-dirty' : classes;
   }
 
 }

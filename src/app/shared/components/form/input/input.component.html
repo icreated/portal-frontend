@@ -1,25 +1,24 @@
 <p-inputgroup>
-  @if (icon) {
-    <p-inputgroup-addon><i class='fa' [class]="icon"></i></p-inputgroup-addon>
+  @if (icon()) {
+    <p-inputgroup-addon><i class='fa' [class]="icon()"></i></p-inputgroup-addon>
   }
-  <input [type]="type" [formControl]="control" size="30" pInputText class="p-inputtext"
-    [ngClass]="{ 'ng-invalid ng-dirty': submitted &&  control.errors}"
-    [placeholder]="label | translate" [autocomplete]="'control'+uniqueId" [attr.aria-describedby]="'v'+uniqueId"/>
+  <input [type]="type()" [formControl]="control()" size="30" pInputText class="p-inputtext"
+    [ngClass]="{ 'ng-invalid ng-dirty': submitted() && control().errors}"
+    [placeholder]="label() | translate" [autocomplete]="'control'+uniqueId" [attr.aria-describedby]="'v'+uniqueId"/>
 </p-inputgroup>
-@if (submitted &&  control.errors) {
+@if (submitted() && control().errors) {
   <small [id]="'v'+uniqueId" class="p-error">
-    @if (control.errors.required || control.pristine) {
+    @if (control().errors?.required || control().pristine) {
       <div>{{ 'required' | translate }}</div>
     }
-    @if (control.errors.pattern) {
+    @if (control().errors?.pattern) {
       <div>{{ 'format-wrong-msg' | translate }}</div>
     }
-    @if (control.hasError('minlength')) {
-      <div>{{ 'minlength-msg' | translate: {min: control.errors.minlength?.requiredLength} }}</div>
+    @if (control().hasError('minlength')) {
+      <div>{{ 'minlength-msg' | translate: {min: control().errors?.minlength?.requiredLength} }}</div>
     }
-    @if (control.hasError('maxlength')) {
-      <div>{{ 'maxlength-msg' | translate: {max: control.errors.maxlength?.requiredLength} }}</div>
+    @if (control().hasError('maxlength')) {
+      <div>{{ 'maxlength-msg' | translate: {max: control().errors?.maxlength?.requiredLength} }}</div>
     }
   </small>
 }
-

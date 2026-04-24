@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DashboardComponent} from './dashboard.component';
 import {RouteStateService} from '@core/services/route-state.service';
 import {of} from 'rxjs';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {OpenItem} from '@api/models/open-item';
@@ -25,9 +25,9 @@ describe('DashboardComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [DashboardComponent, RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+            imports: [DashboardComponent, TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [InvoicesService, PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            providers: [provideRouter([]), InvoicesService, PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
 
         invoiceService = TestBed.inject(InvoicesService);

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, output} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
@@ -34,8 +34,8 @@ export class DockerSidebarComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private destroyRef = inject(DestroyRef);
 
-  @Input() isMobile = false;
-  @Output() cssEvent = new EventEmitter<string>();
+  cssEvent = output<string>();
+  isMobile = false;
   items: CustomMenuItem[] = [];
   selectedItem = '';
   isMenuOpened = false;
@@ -51,11 +51,11 @@ export class DockerSidebarComponent implements OnInit {
               if (this.isMobile) {
                 this.isMenuOpened = !menuState.isMenuOpened;
                 this.isMenuDocked = false;
-                this.cssEvent.next(this.isMenuOpened ? 'ng-content-hidden' : 'ng-content-overlay');
+                this.cssEvent.emit(this.isMenuOpened ? 'ng-content-hidden' : 'ng-content-overlay');
               } else {
                 this.isMenuOpened = menuState.isMenuOpened;
                 this.isMenuDocked = menuState.isMenuDocked;
-                this.cssEvent.next(menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
+                this.cssEvent.emit(menuState.isMenuDocked ? 'ng-content-docked' : 'ng-content');
               }
               this.isTitleShowed = false;
               if (!this.isMenuDocked) {
@@ -75,14 +75,14 @@ export class DockerSidebarComponent implements OnInit {
                   this.isMenuOpened = true;
                   this.isTitleShowed = false;
                   this.isMenuDocked = false;
-                  this.cssEvent.next('ng-content-hidden');
+                  this.cssEvent.emit('ng-content-hidden');
               } else {
                   if (this.isMenuOpened) {
                       this.menuDataService.toggleMenuBar.next({ isMenuOpened: false, isMenuDocked: false });
                   }
                   this.isMenuOpened = false;
                   this.isTitleShowed = !this.isMenuDocked;
-                  this.cssEvent.next(this.isMenuDocked ? 'ng-content-docked' : 'ng-content');
+                  this.cssEvent.emit(this.isMenuDocked ? 'ng-content-docked' : 'ng-content');
               }
               this.cdr.markForCheck();
           });

@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InvoicesComponent} from './invoices.component';
 import {Document} from '@api/models/document';
 import {of} from 'rxjs';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouteStateService} from '@core/services/route-state.service';
@@ -22,9 +22,9 @@ describe('InvoicesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [InvoicesComponent, RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+            imports: [InvoicesComponent, TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            providers: [provideRouter([]), InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
 
         invoiceService = TestBed.inject(InvoicesService);

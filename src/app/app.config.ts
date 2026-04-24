@@ -1,4 +1,5 @@
 import {ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection} from '@angular/core';
+import {ApiConfiguration} from '@api/api-configuration';
 import {provideRouter} from '@angular/router';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {HttpClient, provideHttpClient, withInterceptors} from '@angular/common/http';
@@ -10,7 +11,6 @@ import Aura from '@primeuix/themes/aura';
 import {appRoutes} from './app.routes';
 import {jwtInterceptor} from '@core/interceptors/jwt-interceptor';
 import {errorInterceptor} from '@core/interceptors/error-interceptor';
-import {ApiModule} from '@api/api.module';
 import {environment} from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
@@ -19,6 +19,7 @@ export const appConfig: ApplicationConfig = {
         provideZonelessChangeDetection(),
         provideHttpClient(withInterceptors([jwtInterceptor, errorInterceptor])),
         provideAnimationsAsync(),
+        { provide: ApiConfiguration, useValue: { rootUrl: environment.apiUrl } },
         importProvidersFrom(
             TranslateModule.forRoot({
                 loader: {
@@ -26,8 +27,7 @@ export const appConfig: ApplicationConfig = {
                     useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
                     deps: [HttpClient]
                 }
-            }),
-            ApiModule.forRoot({ rootUrl: environment.apiUrl })
+            })
         ),
         providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: false } } }),
         MessageService,

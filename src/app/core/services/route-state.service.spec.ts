@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {RouteStateService} from './route-state.service';
 import {Router} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {RouteState} from '@core/models/route-state.model';
 
 describe('RouteStateService', () => {
@@ -16,7 +16,7 @@ describe('RouteStateService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule.withRoutes([])]
+            providers: [provideRouter([])]
         });
         service = TestBed.inject(RouteStateService);
         router = TestBed.inject(Router);

@@ -2,12 +2,12 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InvoiceDetailComponent} from './invoice-detail.component';
 import {RouteStateService} from '@core/services/route-state.service';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {of} from 'rxjs';
 import {RouteState} from '@core/models/route-state.model';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {InvoicesService} from '@api/services/invoices.service';
 import {Invoice} from '@api/models/invoice';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
@@ -22,10 +22,10 @@ describe('InvoiceDetailComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [InvoiceDetailComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+            imports: [InvoiceDetailComponent,
                 TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            providers: [provideAnimations(), provideRouter([]), InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
     });
 
