@@ -1,10 +1,10 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ThemeChooserComponent} from './theme-chooser.component';
-import {ThemeService} from '@core/theme.service';
-import {SessionService} from '@core/session.service';
+import {ThemeService} from '@core/services/theme.service';
+import {SessionService} from '@core/services/session.service';
 import {TranslateModule} from '@ngx-translate/core';
-import {DesignTemplate} from '@core/design-template.model';
+import {DesignTemplate} from '@core/models/design-template.model';
 
 
 describe('ThemeChooserComponent', () => {
@@ -15,10 +15,9 @@ describe('ThemeChooserComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ThemeChooserComponent],
+            imports: [ThemeChooserComponent, TranslateModule.forRoot()],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [SessionService, ThemeService],
-            imports: [TranslateModule.forRoot()]
+            providers: [SessionService, ThemeService]
         }).compileComponents();
     });
 

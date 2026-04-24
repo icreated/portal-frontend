@@ -1,30 +1,30 @@
 import {DocStatusFormatPipe} from './doc-status-value.pipe';
 import {TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import {RegularService} from '@core/regular.service';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import {CommonService} from '@api/services/common.service';
 import {of} from 'rxjs';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('DocStatusFormatPipe', () => {
 
-    let commonService: RegularService;
+    let commonService: CommonService;
     let pipe: DocStatusFormatPipe;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-    imports: [TranslateModule.forRoot()],
-    providers: [RegularService, TranslateService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
-        commonService = TestBed.inject(RegularService);
-        pipe = new DocStatusFormatPipe(commonService);
+            imports: [TranslateModule.forRoot()],
+            providers: [CommonService, DocStatusFormatPipe, TranslateService,
+                provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        });
+        commonService = TestBed.inject(CommonService);
+        pipe = TestBed.inject(DocStatusFormatPipe);
     });
 
     it('should transform CO to Completed', () => {
         const key = 'CO';
-        const value = 'Completed';
-        spyOn(commonService, 'getReferenceDocStatus').and.returnValue(of(value));
-        expect(pipe.transform(key)).toEqual(value);
+        spyOn(commonService, 'getDocStatus').and.returnValue(of({label: 'Completed', value: 'CO'}));
+        expect(pipe.transform(key)).toEqual('Completed');
     });
 
 });

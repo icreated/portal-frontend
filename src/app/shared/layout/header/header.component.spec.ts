@@ -1,16 +1,15 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {HeaderComponent} from './header.component';
-import {SessionService} from '@core/session.service';
-import {MenuDataService} from '@core/menu-data.service';
-import {AppCommonModule} from '../../../app.common.module';
+import {SessionService} from '@core/services/session.service';
+import {MenuDataService} from '@core/services/menu-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-import {RouteStateService} from '@core/route-state.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {RouteStateService} from '@core/services/route-state.service';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 
 describe('HeaderComponent', () => {
@@ -23,13 +22,11 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [HeaderComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot()],
-    providers: [SessionService, MenuDataService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
-
+        imports: [HeaderComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+            TranslateModule.forRoot()],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        providers: [SessionService, MenuDataService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -42,9 +39,6 @@ describe('HeaderComponent', () => {
     routeStateService = TestBed.inject(RouteStateService);
     router = TestBed.inject(Router);
     spyOn(router, 'navigate');
-  });
-
-  afterEach(() => {
   });
 
   describe('onInit', () => {
@@ -71,7 +65,7 @@ describe('HeaderComponent', () => {
     it('should get false', () => {
       component.toggleMenu();
       menuDataService.toggleMenuBar.subscribe((result) => {
-        expect(result).toBeFalsy()
+        expect(result.isMenuDocked).toBeFalsy();
       });
     });
   });

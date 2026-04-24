@@ -1,16 +1,15 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
-import {ToastService} from '@core/toast.service';
-import {AuthenticationService} from '@core/authentication-service';
+import {ToastService} from '@core/services/toast.service';
+import {AuthenticationService} from '@core/services/authentication-service';
 import {MessageService} from 'primeng/api';
-import {AppCommonModule} from '../../app.common.module';
 import {RouterTestingModule} from '@angular/router/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EMPTY} from 'rxjs';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -23,12 +22,11 @@ describe('LoginComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    declarations: [LoginComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot()],
-    providers: [MessageService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+            imports: [LoginComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+                TranslateModule.forRoot()],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [MessageService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -1,13 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PaymentsComponent } from './payments.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {PaymentsComponent} from './payments.component';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {PaymentsService} from '@api/payments.service';
-import {Payment} from '@api/payment';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {PaymentsService} from '@api/services/payments.service';
+import {Payment} from '@api/models/payment';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('PaymentsComponent', () => {
     let component: PaymentsComponent;
@@ -20,27 +20,20 @@ describe('PaymentsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    declarations: [PaymentsComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
-    providers: [PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
-    });
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(PaymentsComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+            imports: [PaymentsComponent, RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [PaymentsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        }).compileComponents();
 
         paymentService = TestBed.inject(PaymentsService);
+        spyOn(paymentService, 'getPayments').and.returnValue(of(paymentItems));
+
+        fixture = TestBed.createComponent(PaymentsComponent);
+        component = fixture.componentInstance;
     });
 
-    describe('onInit', () => {
-        it('should have given number of payments on init', () => {
-            spyOn(paymentService, 'getPayments').and.returnValue(of(paymentItems));
-            component.ngOnInit();
-            expect(component).toBeTruthy();
-            expect(component.payments.length).toBe(2);
-        });
+    it('should have given number of payments', () => {
+        expect(component).toBeTruthy();
+        expect(component.payments().length).toBe(2);
     });
 });

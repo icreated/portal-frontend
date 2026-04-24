@@ -1,9 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { InputComponent } from './input.component';
-import {AppCommonModule} from '../../../../app.common.module';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {InputComponent} from './input.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {FormControl, FormControlName} from '@angular/forms';
 
 describe('InputComponent', () => {
     let component: InputComponent;
@@ -11,10 +8,8 @@ describe('InputComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ InputComponent ],
-            imports: [AppCommonModule, TranslateModule.forRoot()],
-        })
-            .compileComponents();
+            imports: [InputComponent, TranslateModule.forRoot()],
+        }).compileComponents();
     });
 
     beforeEach(() => {

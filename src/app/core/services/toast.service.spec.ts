@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 
 import {ToastService} from './toast.service';
-import {Message, MessageService} from 'primeng/api';
+import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
@@ -55,8 +55,8 @@ describe('ToastService', () => {
 
     it('should check that messageService.addMultiple is called', () => {
         const messages = [];
-        messages.push({severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Web Portal'} as Message);
-        messages.push({severity: 'error', summary: 'error', detail: 'Strange error is here'} as Message);
+        messages.push({severity: 'info', summary: 'welcomeMessage', detail: 'Welcome to Web Portal'} as ToastMessageOptions);
+        messages.push({severity: 'error', summary: 'error', detail: 'Strange error is here'} as ToastMessageOptions);
 
         toastService.addMultiple(messages);
         expect(messageServiceSpy.addAll).toHaveBeenCalled();

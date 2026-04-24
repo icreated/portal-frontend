@@ -1,22 +1,20 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { InvoicesComponent } from './invoices.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {InvoicesComponent} from './invoices.component';
 import {Document} from '@api/models/document';
 import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {RouteStateService} from '@core/route-state.service';
-import {ApplicationStateService} from '@core/application-state.service';
-import {InvoicesService} from '@api/invoices.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {RouteStateService} from '@core/services/route-state.service';
+import {InvoicesService} from '@api/services/invoices.service';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('InvoicesComponent', () => {
     let component: InvoicesComponent;
     let fixture: ComponentFixture<InvoicesComponent>;
     let invoiceService: InvoicesService;
     let routeStateService: RouteStateService;
-    let state: ApplicationStateService;
 
     const item1 = {} as Document;
     const item2 = {} as Document;
@@ -24,40 +22,29 @@ describe('InvoicesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    declarations: [InvoicesComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
-    providers: [InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
-    });
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(InvoicesComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
+            imports: [InvoicesComponent, RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        }).compileComponents();
 
         invoiceService = TestBed.inject(InvoicesService);
+        spyOn(invoiceService, 'getInvoices').and.returnValue(of(invoiceItems));
+
+        fixture = TestBed.createComponent(InvoicesComponent);
+        component = fixture.componentInstance;
         routeStateService = TestBed.inject(RouteStateService);
-        state = TestBed.inject(ApplicationStateService);
     });
 
-    describe('onInit', () => {
-        it('should have given number of invoices on init', () => {
-            spyOn(invoiceService, 'getInvoices').and.returnValue(of(invoiceItems));
-            component.ngOnInit();
-            expect(component).toBeTruthy();
-            expect(component.invoices.length).toBe(2);
-        });
+    it('should have given number of invoices', () => {
+        expect(component).toBeTruthy();
+        expect(component.invoices().length).toBe(2);
     });
 
     describe('goToInvoiceLines', () => {
         it('should call RouteStateService', () => {
             spyOn(routeStateService, 'add');
-            const invoiceId = 100;
-            component.goToInvoiceLines(invoiceId);
+            component.goToInvoiceLines(100);
             expect(routeStateService.add).toHaveBeenCalled();
         });
     });
-
-
 });

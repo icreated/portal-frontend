@@ -1,20 +1,18 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PaymentComponent} from './payment.component';
-import {RouteStateService} from '@core/route-state.service';
-import {RegularService} from '@core/regular.service';
-import {UntypedFormBuilder} from '@angular/forms';
+import {RouteStateService} from '@core/services/route-state.service';
+import {CommonService} from '@api/services/common.service';
 import {RouterTestingModule} from '@angular/router/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
-import {InvoicesService} from '@api/invoices.service';
-import {OpenItem} from '@api/open-item';
-import {PaymentsService} from '@api/';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {InvoicesService} from '@api/services/invoices.service';
+import {OpenItem} from '@api/models/open-item';
+import {PaymentsService} from '@api/services/payments.service';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('PaymentComponent', () => {
     let component: PaymentComponent;
@@ -22,8 +20,7 @@ describe('PaymentComponent', () => {
     let invoiceService: InvoicesService;
     let paymentService: PaymentsService;
     let routeStateService: RouteStateService;
-    let commonService: RegularService;
-    let formBuilder: UntypedFormBuilder;
+    let commonService: CommonService;
     let router: Router;
 
     const item1 = {openAmt: 1984} as OpenItem;
@@ -32,22 +29,21 @@ describe('PaymentComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    declarations: [PaymentComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot()],
-    providers: [InvoicesService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+            imports: [PaymentComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+                TranslateModule.forRoot()],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [InvoicesService, PaymentsService, CommonService,
+                provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        }).compileComponents();
     });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PaymentComponent);
         component = fixture.componentInstance;
 
-        formBuilder = TestBed.inject(UntypedFormBuilder);
         paymentService = TestBed.inject(PaymentsService);
         invoiceService = TestBed.inject(InvoicesService);
-        commonService = TestBed.inject(RegularService);
+        commonService = TestBed.inject(CommonService);
         router = TestBed.inject(Router);
         routeStateService = TestBed.inject(RouteStateService);
     });
@@ -55,12 +51,14 @@ describe('PaymentComponent', () => {
     describe('onInit', () => {
         it('should get given open items list and openItem total', () => {
             spyOn(invoiceService, 'getOpenItems').and.returnValue(of(openItems));
+            spyOn(commonService, 'getCreditCardTypes').and.returnValue(of([]));
             component.ngOnInit();
             expect(component).toBeTruthy();
             expect(component.openTotal).toBe(4005);
         });
         it('should get 0 if empty list and navigate to dashboard', () => {
             spyOn(invoiceService, 'getOpenItems').and.returnValue(of([]));
+            spyOn(commonService, 'getCreditCardTypes').and.returnValue(of([]));
             spyOn(routeStateService, 'loadPrevious');
             spyOn(router, 'navigate');
             component.ngOnInit();
@@ -82,7 +80,7 @@ describe('PaymentComponent', () => {
             component.onSubmit();
             expect(component.cardFormGroup.valid).toBe(true);
         });
-        it('should check if payment card data aren\'t valid (without holder name)', () => {
+        it('should check if payment card data are invalid without holder name', () => {
             component.f.cardType.setValue('C');
             component.f.creditCard.setValue('1984198419841984');
             component.f.expirationMonth.setValue('12');
@@ -91,7 +89,6 @@ describe('PaymentComponent', () => {
             component.onSubmit();
             expect(component.cardFormGroup.valid).toBe(false);
         });
-        // TODO Check if payment is done, error
     });
 
     describe('back', () => {
@@ -101,5 +98,4 @@ describe('PaymentComponent', () => {
             expect(routeStateService.loadPrevious).toHaveBeenCalled();
         });
     });
-
 });

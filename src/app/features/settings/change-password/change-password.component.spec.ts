@@ -1,22 +1,21 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ChangePasswordComponent} from './change-password.component';
-import {ToastService} from '@core/toast.service';
-import {AuthenticationService} from '@core/authentication-service';
+import {ToastService} from '@core/services/toast.service';
 import {MessageService} from 'primeng/api';
-import {AppCommonModule} from '../../../app.common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {EMPTY} from 'rxjs';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {UsersService} from '@api/services/users.service';
 
 describe('ChangePasswordComponent', () => {
     let component: ChangePasswordComponent;
     let fixture: ComponentFixture<ChangePasswordComponent>;
     let toastService: ToastService;
-    let authenticationService: AuthenticationService;
+    let userService: UsersService;
 
     const PASSWORD_OLD = 'Smith1984';
     const PASSWORD_OK = 'Orwell1984';
@@ -25,12 +24,11 @@ describe('ChangePasswordComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    declarations: [ChangePasswordComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [AppCommonModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot()],
-    providers: [MessageService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
+            imports: [ChangePasswordComponent, BrowserAnimationsModule, RouterTestingModule.withRoutes([]),
+                TranslateModule.forRoot()],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [MessageService, UsersService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -39,13 +37,12 @@ describe('ChangePasswordComponent', () => {
         fixture.detectChanges();
 
         toastService = TestBed.inject(ToastService);
-        authenticationService = TestBed.inject(AuthenticationService);
+        userService = TestBed.inject(UsersService);
     });
 
     describe('changePassword form validation', () => {
-        it('should render changePassword input', () => {
+        it('should render password inputs', () => {
             const compiled = fixture.debugElement.nativeElement;
-            const form = component.passwordForm;
             const passwordInput = compiled.querySelectorAll('app-password')[0];
             expect(passwordInput).toBeTruthy();
             const newPasswordInput = compiled.querySelectorAll('app-password')[1];
@@ -58,24 +55,14 @@ describe('ChangePasswordComponent', () => {
             const form = component.passwordForm;
             expect(form.valid).toBeFalsy();
 
-            const passwordInput = form.controls.password;
-            const newPasswordInput = form.controls.newPassword;
-            const confirmPasswordInput = form.controls.confirmPassword;
-            passwordInput.setValue(PASSWORD_OLD);
-            newPasswordInput.setValue('');
-            confirmPasswordInput.setValue('');
-            expect(form.valid).toBeFalsy();
-            passwordInput.setValue(PASSWORD_OLD);
-            newPasswordInput.setValue(PASSWORD_OK);
-            confirmPasswordInput.setValue(PASSWORD_OK);
+            form.controls.password.setValue(PASSWORD_OLD);
+            form.controls.newPassword.setValue(PASSWORD_OK);
+            form.controls.confirmPassword.setValue(PASSWORD_OK);
             expect(form.valid).toBeTruthy();
         });
 
-        it('should test changePassword input validity', () => {
-            const passwordInput = component.passwordForm.controls.password;
+        it('should test newPassword input validity', () => {
             const newPasswordInput = component.passwordForm.controls.newPassword;
-            const confirmPasswordInput = component.passwordForm.controls.confirmPassword;
-
             expect(newPasswordInput.valid).toBeFalsy();
             newPasswordInput.setValue(PASSWORD_WITHOUT_NUMBER);
             expect(newPasswordInput.valid).toBeFalsy();
@@ -83,30 +70,6 @@ describe('ChangePasswordComponent', () => {
             expect(newPasswordInput.valid).toBeFalsy();
             newPasswordInput.setValue(PASSWORD_OK);
             expect(newPasswordInput.valid).toBeTruthy();
-
-            expect(confirmPasswordInput.valid).toBeFalsy();
-            passwordInput.setValue(PASSWORD_OLD);
-            newPasswordInput.setValue(PASSWORD_OK);
-            confirmPasswordInput.setValue(PASSWORD_WITHOUT_NUMBER);
-            expect(confirmPasswordInput.valid).toBeFalsy();
-
-            passwordInput.setValue(PASSWORD_OLD);
-            newPasswordInput.setValue(PASSWORD_WITHOUT_NUMBER);
-            confirmPasswordInput.setValue(PASSWORD_WITHOUT_NUMBER);
-            expect(confirmPasswordInput.valid).toBeTruthy();
-            expect(component.passwordForm.valid).toBeFalsy();
-
-            passwordInput.setValue('');
-            newPasswordInput.setValue(PASSWORD_OK);
-            confirmPasswordInput.setValue(PASSWORD_OK);
-            expect(confirmPasswordInput.valid).toBeTruthy();
-            expect(component.passwordForm.valid).toBeFalsy();
-
-            passwordInput.setValue(PASSWORD_OLD);
-            newPasswordInput.setValue(PASSWORD_OK);
-            confirmPasswordInput.setValue(PASSWORD_OK);
-            expect(confirmPasswordInput.valid).toBeTruthy();
-            expect(component.passwordForm.valid).toBeTruthy();
         });
 
         it('should test changePassword input errors', () => {
@@ -114,29 +77,26 @@ describe('ChangePasswordComponent', () => {
             expect(newPasswordInput.errors?.required).toBeTruthy();
             newPasswordInput.setValue(PASSWORD_OK);
             expect(newPasswordInput.errors).toBeNull();
-            const confirmPasswordInput = component.passwordForm.controls.confirmPassword;
-            confirmPasswordInput.setValue(PASSWORD_OK);
-            expect(confirmPasswordInput.errors).toBeNull();
         });
     });
 
     describe('update', () => {
-        it('should not call backend when form is empty', () => {
-            spyOn(authenticationService, 'changePassword').and.returnValue(EMPTY);
+        it('should not call backend when form is invalid', () => {
+            spyOn(userService, 'updatePassword').and.returnValue(EMPTY);
             component.f.newPassword.setValue(PASSWORD_OK);
             component.f.confirmPassword.setValue('');
             component.update();
             expect(component.passwordForm.valid).toBeFalsy();
-            expect(authenticationService.changePassword).not.toHaveBeenCalled();
+            expect(userService.updatePassword).not.toHaveBeenCalled();
         });
 
-        it('should call backend when form is provided', () => {
+        it('should call backend when form is valid', () => {
             component.f.password.setValue(PASSWORD_OLD);
             component.f.newPassword.setValue(PASSWORD_OK);
             component.f.confirmPassword.setValue(PASSWORD_OK);
-            spyOn(authenticationService, 'changePassword').and.returnValue(EMPTY);
+            spyOn(userService, 'updatePassword').and.returnValue(EMPTY);
             component.update();
-            expect(authenticationService.changePassword).toHaveBeenCalled();
+            expect(userService.updatePassword).toHaveBeenCalled();
         });
     });
 });

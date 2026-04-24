@@ -20,6 +20,9 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types": [
+      "jasmine"
+    ],
     "paths": {
       "@api/*": ["./src/app/api/*"],
       "@core/*": ["./src/app/core/*"],
