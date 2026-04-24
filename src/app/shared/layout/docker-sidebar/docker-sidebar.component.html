@@ -1,4 +1,4 @@
-<div [@dockedOpen]="isMenuDocked" class="sidebar" [ngClass]="{'menu-content-hidden': isMenuOpened}">
+<div class="sidebar" [class.docked]="isMenuDocked" [ngClass]="{'menu-content-hidden': isMenuOpened}">
   <ul class="np-menu">
     <ng-template #recursiveList let-list>
       @for (menu of list; track menu) {

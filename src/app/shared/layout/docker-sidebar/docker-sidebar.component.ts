@@ -7,7 +7,6 @@ import {SessionService} from '@core/services/session.service';
 import {CustomMenuItem} from '@core/models/menu-item.model';
 import {MenuDataService} from '@core/services/menu-data.service';
 import {ApplicationStateService} from '@core/services/application-state.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'app-docker-sidebar',
@@ -15,14 +14,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     styleUrls: ['docker-sidebar.component.css'],
     standalone: true,
     imports: [NgClass, NgTemplateOutlet, TranslateModule],
-    animations: [
-        trigger('dockedOpen', [
-            state('true', style({ width: '50px' })),
-            state('false', style({ width: '12rem' })),
-            transition('true => false', [animate('.1s')]),
-            transition('false => true', [animate('.1s')]),
-        ]),
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DockerSidebarComponent implements OnInit {

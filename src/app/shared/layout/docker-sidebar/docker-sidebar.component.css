@@ -12,6 +12,12 @@
   left: 0;
   height: calc(100%);
   z-index: 1;
+  width: 12rem;
+  transition: width .1s;
+}
+
+.sidebar.docked {
+  width: 50px;
 }
 
 .np-menu {
