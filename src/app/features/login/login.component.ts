@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       if (this.authenticationService.currentUserValue) {
           this.router.navigate(['/']);
       }
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/main/dashboard';
   }
 
   get f() {
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           .pipe(first())
           .subscribe(
               () => {
-                  this.routeStateService.add('Dashboard', '/main/dashboard', null, true);
+                  this.routeStateService.add('Dashboard', this.returnUrl, null, true);
               },
               error => {
                   this.toastService.clear();

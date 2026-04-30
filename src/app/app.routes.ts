@@ -34,5 +34,9 @@ export const appRoutes: Routes = [
         path: '',
         redirectTo: 'main/dashboard',
         pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: '/error'
     }
 ];
