@@ -11,6 +11,8 @@
   "format-wrong" : "Format ou données sont incorrects",
   "data-not-found" : "Données non trouvées",
   "server-error" : "Erreur serveur",
+  "error-403" : "Accès refusé — vous n'avez pas la permission.",
+  "error-404" : "Ressource introuvable.",
 
   "welcome-message": "Bienvenue à Icreated Web Portal.",
   "credit-card-payment" : "Paiement avec la carte de crédit",

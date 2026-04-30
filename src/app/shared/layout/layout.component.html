@@ -1,4 +1,7 @@
 <app-header></app-header>
+@if (isLoading$ | async) {
+  <p-progressbar mode="indeterminate" styleClass="global-loader"></p-progressbar>
+}
 <app-docker-sidebar (cssEvent)="setCss($event)"></app-docker-sidebar>
 <div [class]="css">
   <router-outlet></router-outlet>
