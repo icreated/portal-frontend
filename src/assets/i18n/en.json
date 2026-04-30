@@ -18,6 +18,7 @@
   "invoice-detail" : "Invoice Detail",
   "payments" : "Payments",
   "settings" : "Settings",
+  "logout" : "Logout",
 
   "header" : "Header",
   "documentNo" : "DocumentNo",

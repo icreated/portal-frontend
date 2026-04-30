@@ -1,0 +1,60 @@
+.ng-header-right {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.user-profile-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 24px;
+  padding: .35rem .75rem .35rem .35rem;
+  cursor: pointer;
+  color: inherit;
+  transition: background .2s;
+}
+
+.user-profile-btn:hover {
+  background: rgba(255, 255, 255, .22);
+}
+
+.user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .25);
+  font-weight: 700;
+  font-size: .75rem;
+  letter-spacing: .05em;
+  flex-shrink: 0;
+}
+
+.user-name {
+  font-size: .85rem;
+  font-weight: 500;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-chevron {
+  font-size: .65rem;
+  opacity: .8;
+}
+
+@media (max-width: 480px) {
+  .user-name { display: none; }
+}
