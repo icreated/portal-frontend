@@ -1,0 +1,27 @@
+<p-inputgroup>
+  @if (icon()) {
+    <p-inputgroup-addon><i class="fa" [class]="icon()"></i></p-inputgroup-addon>
+  }
+  <textarea
+    pTextarea
+    [formControl]="control()"
+    [rows]="rows()"
+    [placeholder]="label() | translate"
+    [ngClass]="{ 'ng-invalid ng-dirty': submitted() && control().errors }"
+    [attr.aria-describedby]="'v' + uniqueId"
+    class="w-full">
+  </textarea>
+</p-inputgroup>
+@if (submitted() && control().errors) {
+  <small [id]="'v' + uniqueId" class="p-error">
+    @if (control().errors?.['required']) {
+      <div>{{ 'required' | translate }}</div>
+    }
+    @if (control().hasError('minlength')) {
+      <div>{{ 'minlength-msg' | translate: {min: control().errors?.['minlength']?.requiredLength} }}</div>
+    }
+    @if (control().hasError('maxlength')) {
+      <div>{{ 'maxlength-msg' | translate: {max: control().errors?.['maxlength']?.requiredLength} }}</div>
+    }
+  </small>
+}

@@ -1,0 +1,22 @@
+<p-inputgroup>
+  @if (icon()) {
+    <p-inputgroup-addon><i class="fa" [class]="icon()"></i></p-inputgroup-addon>
+  }
+  <p-select
+    [formControl]="control()"
+    [options]="options()"
+    [optionLabel]="optionLabel()!"
+    [optionValue]="optionValue()!"
+    [placeholder]="placeholder() || (label() | translate)"
+    [ngClass]="{ 'ng-invalid ng-dirty': submitted() && control().errors }"
+    styleClass="w-full"
+    [attr.aria-describedby]="'v' + uniqueId">
+  </p-select>
+</p-inputgroup>
+@if (submitted() && control().errors) {
+  <small [id]="'v' + uniqueId" class="p-error">
+    @if (control().errors?.['required']) {
+      <div>{{ 'required' | translate }}</div>
+    }
+  </small>
+}

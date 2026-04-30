@@ -1,0 +1,4 @@
+:host ::ng-deep .p-select {
+    border-radius: 0 2px 2px 0;
+    width: 100%;
+}
