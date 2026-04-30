@@ -9,4 +9,6 @@ export interface User {
   name: string;
   token?: string;
   username: string;
+  /** List of role codes assigned to the user, e.g. ['ADMIN', 'USER'] */
+  roles?: string[];
 }
