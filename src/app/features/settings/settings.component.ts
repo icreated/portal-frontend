@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core'
 import {FormsModule} from '@angular/forms';
 import {SelectModule} from 'primeng/select';
 import {PanelModule} from 'primeng/panel';
+import {Tabs, TabList, Tab, TabPanels, TabPanel} from 'primeng/tabs';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {SessionService} from '@core/services/session.service';
 import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header-breadcrumb.component';
@@ -13,7 +14,7 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.css'],
     standalone: true,
-    imports: [HeaderBreadcrumbComponent, FormsModule, TranslateModule, PanelModule, SelectModule, ThemeChooserComponent, ChangePasswordComponent],
+    imports: [HeaderBreadcrumbComponent, FormsModule, TranslateModule, PanelModule, SelectModule, Tabs, TabList, Tab, TabPanels, TabPanel, ThemeChooserComponent, ChangePasswordComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {

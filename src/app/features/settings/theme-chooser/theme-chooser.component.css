@@ -1,0 +1,88 @@
+.theme-card {
+  background: var(--p-surface-0, #fff);
+  border: 1px solid var(--p-surface-200, #e2e8f0);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  margin-bottom: 1.25rem;
+}
+
+.theme-card-header {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .85rem 1.25rem;
+  font-weight: 600;
+  font-size: .95rem;
+  border-bottom: 1px solid var(--p-surface-200, #e2e8f0);
+  background: var(--p-surface-50, #f8fafc);
+}
+
+.theme-card-header i {
+  font-size: 1rem;
+  color: var(--p-primary-color, #6366f1);
+}
+
+.theme-card-body {
+  padding: 1.25rem;
+}
+
+/* Presets */
+.presets-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.preset-swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s, border-color .15s;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+
+.preset-swatch:hover {
+  transform: scale(1.1);
+  border-color: var(--p-primary-color, #6366f1);
+}
+
+.preset-swatch.active {
+  border-color: var(--p-primary-color, #6366f1);
+  transform: scale(1.1);
+}
+
+.preset-swatch i {
+  color: #fff;
+  font-size: .85rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* Color rows */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .85rem 1.5rem;
+}
+
+.color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.color-row label {
+  font-size: .875rem;
+  color: var(--p-text-color, #334155);
+  flex: 1;
+}
+
+:host ::ng-deep .font-select {
+  min-width: 140px;
+}

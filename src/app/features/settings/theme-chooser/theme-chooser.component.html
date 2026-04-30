@@ -1,67 +1,100 @@
-<p-panel [header]="'theme-chooser' | translate" class="m-2">
-
-  <p-fieldset legend="Preconfigured Templates" class="m-2">
-    <div class="grid grid-nogutter flex justify-content-center flex-wrap card-container m-2" style="height:100%">
-      @for (theme of themes; track theme) {
-        <div class="col-2 md:col-1 lg:col-1">
-          <button pButton type="button" (click)="selectTheme(theme)" [style]="'background-color:' + theme.headerBgColor"
-          class="p-colorpicker-preview"></button>
-        </div>
+<!-- Presets -->
+<div class="theme-card">
+  <div class="theme-card-header">
+    <i class="pi pi-th-large"></i>
+    <span>{{ 'theme-presets' | translate }}</span>
+  </div>
+  <div class="theme-card-body">
+    <div class="presets-grid">
+      @for (t of themes; track t) {
+        <button
+          type="button"
+          class="preset-swatch"
+          [class.active]="t === theme"
+          [title]="t.name"
+          [style.background]="'linear-gradient(135deg, ' + t.headerBgColor + ' 50%, ' + t.headerBgColor2 + ' 50%)'"
+          (click)="selectTheme(t)">
+          @if (t === theme) {
+            <i class="pi pi-check"></i>
+          }
+        </button>
       }
     </div>
-  </p-fieldset>
+  </div>
+</div>
 
-  <p-fieldset legend="General" class="m-2">
-    <div class="grid">
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_main_background' | translate }}</label>
+<!-- General -->
+<div class="theme-card">
+  <div class="theme-card-header">
+    <i class="pi pi-sliders-h"></i>
+    <span>{{ 'theme-general' | translate }}</span>
+  </div>
+  <div class="theme-card-body">
+    <div class="color-grid">
+      <div class="color-row">
+        <label>{{ 'color_main_background' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.mainBackground" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_button_background' | translate }}</label>
+      <div class="color-row">
+        <label>{{ 'color_button_background' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.primaryColor" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_button_text' | translate }}</label>
+      <div class="color-row">
+        <label>{{ 'color_button_text' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.primaryColorText" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'font-text' | translate }}</label>
-        <p-select [options]="fonts" [(ngModel)]="theme.fontFamily" (onChange)="updateTheme()"></p-select>
+      <div class="color-row">
+        <label>{{ 'font-text' | translate }}</label>
+        <p-select [options]="fonts" [(ngModel)]="theme.fontFamily" (onChange)="updateTheme()" styleClass="font-select"></p-select>
       </div>
     </div>
-  </p-fieldset>
+  </div>
+</div>
 
-  <p-fieldset legend="Header">
-    <div class="grid">
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_header_bg1' | translate }}</label>
+<!-- Header -->
+<div class="theme-card">
+  <div class="theme-card-header">
+    <i class="pi pi-window-maximize"></i>
+    <span>{{ 'theme-header' | translate }}</span>
+  </div>
+  <div class="theme-card-body">
+    <div class="color-grid">
+      <div class="color-row">
+        <label>{{ 'color_header_bg1' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.headerBgColor" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_header_bg2' | translate }}</label>
+      <div class="color-row">
+        <label>{{ 'color_header_bg2' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.headerBgColor2" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_header_color' | translate }}</label>
-        <p-colorPicker class="p-col" [(ngModel)]="theme.headerColor" (onChange)="updateTheme()"></p-colorPicker>
+      <div class="color-row">
+        <label>{{ 'color_header_color' | translate }}</label>
+        <p-colorPicker [(ngModel)]="theme.headerColor" (onChange)="updateTheme()"></p-colorPicker>
       </div>
     </div>
-  </p-fieldset>
-  <p-fieldset legend="Sidebar" class="m-2">
-    <div class="grid">
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_menu_background' | translate }}</label>
-        <p-colorPicker class="p-col" [(ngModel)]="theme.menubarBackground" (onChange)="updateTheme()"></p-colorPicker>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="theme-card">
+  <div class="theme-card-header">
+    <i class="pi pi-bars"></i>
+    <span>{{ 'theme-sidebar' | translate }}</span>
+  </div>
+  <div class="theme-card-body">
+    <div class="color-grid">
+      <div class="color-row">
+        <label>{{ 'color_menu_background' | translate }}</label>
+        <p-colorPicker [(ngModel)]="theme.menubarBackground" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_menubar' | translate }}</label>
+      <div class="color-row">
+        <label>{{ 'color_menubar' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.menubarColor" (onChange)="updateTheme()"></p-colorPicker>
       </div>
-      <div class="lg:col-4 md:col-12 sm:col-12">
-        <label class="mr-2">{{ 'color_active_menu' | translate }}</label>
+      <div class="color-row">
+        <label>{{ 'color_active_menu' | translate }}</label>
         <p-colorPicker [(ngModel)]="theme.activeMenuColor" (onChange)="updateTheme()"></p-colorPicker>
       </div>
     </div>
-  </p-fieldset>
-</p-panel>
+  </div>
+</div>

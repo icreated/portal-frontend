@@ -3,7 +3,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
-import {PanelModule} from 'primeng/panel';
 import {first, map} from 'rxjs/operators';
 import {LangChangeEvent, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '@core/services/authentication-service';
@@ -18,7 +17,7 @@ import {UsersService} from '@api/services/users.service';
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, TranslateModule, PanelModule, ButtonModule, PasswordComponent],
+    imports: [ReactiveFormsModule, TranslateModule, ButtonModule, PasswordComponent],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordComponent implements OnInit {

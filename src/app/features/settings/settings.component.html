@@ -1,15 +1,56 @@
 <app-header-breadcrumb></app-header-breadcrumb>
 
-<div class="flex flex-column gap-3">
-  <p-panel [header]="'language' | translate">
-    <div class="flex justify-content-center gap-3">
-        <p-select #langSelect [(ngModel)]="selectedLang" [options]="translate.getLangs()" (onChange)="onChangeLang($event)">
-        </p-select>
-    </div>
-  </p-panel>
+<div class="settings-container">
+  <p-tabs [value]="0">
+    <p-tablist>
+      <p-tab [value]="0">
+        <i class="pi pi-palette mr-2"></i>
+        {{ 'settings-tab-appearance' | translate }}
+      </p-tab>
+      <p-tab [value]="1">
+        <i class="pi pi-user mr-2"></i>
+        {{ 'settings-tab-account' | translate }}
+      </p-tab>
+    </p-tablist>
 
-  <app-theme-chooser></app-theme-chooser>
+    <p-tabpanels>
 
-  <app-change-password></app-change-password>
+      <!-- TAB APPARENCE -->
+      <p-tabpanel [value]="0">
+        <div class="tab-content">
 
+          <!-- Langue -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="pi pi-globe"></i>
+              <span>{{ 'language' | translate }}</span>
+            </div>
+            <div class="settings-card-body">
+              <p-select
+                #langSelect
+                [(ngModel)]="selectedLang"
+                [options]="translate.getLangs()"
+                (onChange)="onChangeLang($event)"
+                styleClass="w-full"
+              ></p-select>
+            </div>
+          </div>
+
+          <!-- Thème -->
+          <app-theme-chooser></app-theme-chooser>
+
+        </div>
+      </p-tabpanel>
+
+      <!-- TAB COMPTE -->
+      <p-tabpanel [value]="1">
+        <div class="tab-content">
+          <div class="account-tab-wrapper">
+            <app-change-password></app-change-password>
+          </div>
+        </div>
+      </p-tabpanel>
+
+    </p-tabpanels>
+  </p-tabs>
 </div>

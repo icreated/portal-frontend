@@ -83,6 +83,12 @@
 
   "language" : "Langue",
   "theme-chooser" : "Thème",
+  "settings-tab-appearance" : "Apparence",
+  "settings-tab-account" : "Compte",
+  "theme-presets" : "Thèmes prédéfinis",
+  "theme-general" : "Général",
+  "theme-header" : "En-tête",
+  "theme-sidebar" : "Barre latérale",
 
   "required" : "Obligatoire",
   "minlength-msg" : "{{min}} caractères minimum!",

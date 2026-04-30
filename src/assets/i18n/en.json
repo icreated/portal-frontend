@@ -79,6 +79,12 @@
 
   "language" : "Language",
   "theme-chooser" : "Theme Chooser",
+  "settings-tab-appearance" : "Appearance",
+  "settings-tab-account" : "Account",
+  "theme-presets" : "Preset Themes",
+  "theme-general" : "General",
+  "theme-header" : "Header",
+  "theme-sidebar" : "Sidebar",
 
   "required" : "Required",
   "minlength-msg" : "At least {{min}} characters",
