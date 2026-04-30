@@ -1,18 +1,23 @@
-<div class="row error-box">
-    <div class="col-sm-12">
-        <div class="text-center">
-            <h1> Error 404</h1>
-            <h2 class="font-xl">
-                <strong>
-                    <i class="fa fa-fw fa-exclamation-triangle fa-lg"></i> Page <u>Not</u> Found
-                </strong>
-            </h2>
-            <p>
-                The page you requested could not be found, either contact your webmaster or try again.
-            </p>
-            <p>
-                Use your browsers <b>Back</b> button to navigate to the page you have prevously come from.
-            </p>
-        </div>
+<div class="error-page">
+  <div class="error-card">
+    <div class="error-icon">
+      <i class="pi pi-exclamation-circle"></i>
     </div>
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">{{ 'error-404-title' | translate }}</h2>
+    <p class="error-message">{{ 'error-404-message' | translate }}</p>
+    <div class="error-actions">
+      <a routerLink="/main/dashboard" pButton
+         icon="pi pi-home"
+         [label]="'home' | translate"
+         class="p-button-raised">
+      </a>
+      <button pButton
+              icon="pi pi-arrow-left"
+              [label]="'back' | translate"
+              class="p-button-outlined"
+              (click)="history.back()">
+      </button>
+    </div>
+  </div>
 </div>

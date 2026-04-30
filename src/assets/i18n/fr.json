@@ -13,6 +13,8 @@
   "server-error" : "Erreur serveur",
   "error-403" : "Accès refusé — vous n'avez pas la permission.",
   "error-404" : "Ressource introuvable.",
+  "error-404-title" : "Page introuvable",
+  "error-404-message" : "La page demandée est introuvable. Vérifiez l'URL ou retournez à l'accueil.",
 
   "welcome-message": "Bienvenue à Icreated Web Portal.",
   "credit-card-payment" : "Paiement avec la carte de crédit",
