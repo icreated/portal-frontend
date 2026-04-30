@@ -1,0 +1,99 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--p-surface-0, #fff);
+  border: 1px solid var(--p-surface-200, #e2e8f0);
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  transition: transform .15s, box-shadow .15s;
+}
+
+.stat-card.clickable {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.stat-card.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.1);
+}
+
+.stat-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--p-surface-100, #f1f5f9);
+  flex-shrink: 0;
+}
+
+.stat-card-icon i {
+  font-size: 1.5rem;
+}
+
+.stat-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  min-width: 0;
+}
+
+.stat-title {
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--p-surface-500, #64748b);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--p-surface-800, #1e293b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-trend {
+  font-size: .78rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+}
+
+.stat-trend.trend-up   { color: #10b981; }
+.stat-trend.trend-down { color: #ef4444; }
+
+/* Colored left border per card type */
+.stat-amber  { border-left: 4px solid #f59e0b; }
+.stat-indigo { border-left: 4px solid #6366f1; }
+.stat-green  { border-left: 4px solid #10b981; }
+.stat-red    { border-left: 4px solid #ef4444; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.dashboard-panel {
+  background: var(--p-surface-0, #fff);
+  border: 1px solid var(--p-surface-200, #e2e8f0);
+  border-radius: 14px;
+  min-height: 200px;
+  padding: 1.25rem;
+}

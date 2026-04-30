@@ -1,18 +1,29 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, signal} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
 import {CardModule} from 'primeng/card';
+import {SkeletonModule} from 'primeng/skeleton';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {RouteStateService} from '@core/services/route-state.service';
 import {environment} from '@env/environment';
 import {OpenItem} from '@api/models/open-item';
 import {InvoicesService} from '@api/services/invoices.service';
 
+interface StatCard {
+  titleKey: string;
+  value: number | string;
+  icon: string;
+  iconColor: string;
+  bgClass: string;
+  routerLink?: string;
+  trend?: number;
+}
+
 @Component({
     selector: 'app-dashboard',
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css'],
     standalone: true,
-    imports: [TranslateModule, CardModule, CurrencyPipe],
+    imports: [TranslateModule, CardModule, SkeletonModule, CurrencyPipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
@@ -24,7 +35,8 @@ export class DashboardComponent implements OnInit {
 
   currencyISO = environment.currencyISO;
   openItems: OpenItem[] = [];
-  openTotal = 0;
+  isLoading = signal(true);
+  statCards: StatCard[] = [];
   msgs: any[] = [];
 
   ngOnInit() {
@@ -35,8 +47,18 @@ export class DashboardComponent implements OnInit {
       this.invoicesService.getOpenItems().subscribe(data => {
         if (data) {
           this.openItems = data;
-          this.openTotal = data.map(item => item.openAmt).reduce((a, b) => a + b, 0);
+          this.statCards = [
+            {
+              titleKey: 'stat-open-balance',
+              value: data.map(item => item.openAmt).reduce((a, b) => a + b, 0),
+              icon: 'pi pi-wallet',
+              iconColor: '#6366f1',
+              bgClass: 'stat-indigo',
+              routerLink: '/main/invoices'
+            }
+          ];
         }
+        this.isLoading.set(false);
         this.cdr.markForCheck();
       });
   }

@@ -17,71 +17,77 @@ export class ThemeService {
     return [
       // Slate — neutral professional dark (header→sidebar gradient: slate-600→800)
       {
+        name: 'Slate',
         mainBackground: '#f1f5f9',
         headerColor: '#ffffff',
         headerBgColor: '#475569',
         headerBgColor2: '#1e293b',
         menubarBackground: '#334155',
-        menubarColor: '#e2e8f0',   // 8.4:1 on menubar
-        activeMenuColor: '#cbd5e1', // 6.8:1 on menubar
-        primaryColor: '#2563eb',   // 5.2:1 with white text
+        menubarColor: '#e2e8f0',
+        activeMenuColor: '#cbd5e1',
+        primaryColor: '#2563eb',
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
       // Airy — clean light with indigo accent (light sidebar)
       {
+        name: 'Airy',
         mainBackground: '#f8fafc',
-        headerColor: '#1e293b',    // 16.8:1 on white header
+        headerColor: '#1e293b',
         headerBgColor: '#ffffff',
         headerBgColor2: '#e2e8f0',
         menubarBackground: '#f1f5f9',
-        menubarColor: '#374151',   // 9.8:1 on light sidebar
-        activeMenuColor: '#4f46e5', // 5.8:1 on light sidebar
-        primaryColor: '#4f46e5',   // 5.8:1 with white text
+        menubarColor: '#374151',
+        activeMenuColor: '#4f46e5',
+        primaryColor: '#4f46e5',
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
       // Ocean — teal (header→sidebar: teal-700→900)
       {
+        name: 'Ocean',
         mainBackground: '#f0fdfa',
         headerColor: '#ffffff',
-        headerBgColor: '#0f766e',  // 5.5:1 with white
+        headerBgColor: '#0f766e',
         headerBgColor2: '#134e4a',
         menubarBackground: '#134e4a',
-        menubarColor: '#ccfbf1',   // 8.3:1 on teal-900
-        activeMenuColor: '#5eead4', // 6.5:1 on teal-900
-        primaryColor: '#0f766e',   // 5.5:1 with white text
+        menubarColor: '#ccfbf1',
+        activeMenuColor: '#5eead4',
+        primaryColor: '#0f766e',
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
       // Royal — deep navy blue (blue-700→900)
       {
+        name: 'Royal',
         mainBackground: '#eff6ff',
         headerColor: '#ffffff',
-        headerBgColor: '#1d4ed8',  // 7.0:1 with white
+        headerBgColor: '#1d4ed8',
         headerBgColor2: '#1e3a8a',
         menubarBackground: '#1e3a8a',
-        menubarColor: '#bfdbfe',   // 7.3:1 on blue-900
-        activeMenuColor: '#93c5fd', // 5.8:1 on blue-900
-        primaryColor: '#2563eb',   // 5.2:1 with white text
+        menubarColor: '#bfdbfe',
+        activeMenuColor: '#93c5fd',
+        primaryColor: '#2563eb',
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
       // Berry — rich purple (purple-700→900)
       {
+        name: 'Berry',
         mainBackground: '#fdf4ff',
         headerColor: '#ffffff',
-        headerBgColor: '#7e22ce',  // 7.0:1 with white
+        headerBgColor: '#7e22ce',
         headerBgColor2: '#581c87',
         menubarBackground: '#581c87',
-        menubarColor: '#f3e8ff',   // 10.9:1 on purple-900
-        activeMenuColor: '#d8b4fe', // 6.7:1 on purple-900
-        primaryColor: '#9333ea',   // 5.4:1 with white text
+        menubarColor: '#f3e8ff',
+        activeMenuColor: '#d8b4fe',
+        primaryColor: '#9333ea',
         primaryColorText: '#ffffff',
         fontFamily: 'Rubik'
       },
       // Forest — deep green (green-700→800)
       {
+        name: 'Forest',
         mainBackground: '#f0fdf4',
         headerColor: '#ffffff',
         headerBgColor: '#15803d',  // 5.0:1 with white

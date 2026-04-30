@@ -1,46 +1,45 @@
-<div class="grid">
-  <div class="col-12 md:col-6 lg:col-3">
-    @if (openTotal > 0) {
-      <a (click)="goToPayment()">
-        <p-card styleClass="overview-box-1">
-          <div>{{ 'click-to-pay' | translate}}</div>
-          <h1>{{openTotal | currency: currencyISO}}</h1>
-        </p-card>
-      </a>
+<!-- Stat Cards -->
+<div class="stat-grid">
+  @for (card of statCards; track card.titleKey) {
+    @if (isLoading) {
+      <div class="stat-card stat-card-skeleton">
+        <p-skeleton height="90px" borderRadius="12px"></p-skeleton>
+      </div>
+    } @else {
+      <div class="stat-card" [ngClass]="card.bgClass"
+           [class.clickable]="!!card.routerLink"
+           [routerLink]="card.routerLink ?? null">
+        <div class="stat-card-icon">
+          <i [class]="card.icon" [style.color]="card.iconColor"></i>
+        </div>
+        <div class="stat-card-body">
+          <span class="stat-title">{{ card.titleKey | translate }}</span>
+          <span class="stat-value">
+            @if (card.titleKey === 'stat-open-balance') {
+              {{ card.value | currency: currencyISO }}
+            } @else {
+              {{ card.value }}
+            }
+          </span>
+          @if (card.trend !== undefined) {
+            <span class="stat-trend" [ngClass]="card.trend >= 0 ? 'trend-up' : 'trend-down'">
+              <i [class]="card.trend >= 0 ? 'pi pi-arrow-up' : 'pi pi-arrow-down'"></i>
+              {{ card.trend | number: '1.1-1' }}%
+            </span>
+          }
+        </div>
+      </div>
     }
-    @if (openTotal <= 0) {
-      <p-card styleClass="overview-box-1" >
-        <div>&nbsp;</div>
-        <h1>{{ 'paid-off' | translate }}</h1>
-      </p-card>
-    }
+  }
+</div>
+
+<!-- Content area — add charts/tables here -->
+<div class="dashboard-grid">
+  <div class="dashboard-panel">
+    <!-- e.g. <app-invoices-chart></app-invoices-chart> -->
   </div>
-  <div class="col-12 md:col-6 lg:col-3">
-    <p-card styleClass="overview-box-2">
-      &nbsp;
-      <h1>&nbsp;</h1>
-    </p-card>
-  </div>
-  <div class="col-12 md:col-6 lg:col-3">
-    <p-card styleClass="overview-box-3">
-      &nbsp;
-      <h1>&nbsp;</h1>
-    </p-card>
-  </div>
-  <div class="col-12 md:col-6 lg:col-3">
-    <p-card styleClass="overview-box-4">
-      &nbsp;
-      <h1>&nbsp;</h1>
-    </p-card>
+  <div class="dashboard-panel">
+    <!-- e.g. <app-recent-payments></app-recent-payments> -->
   </div>
 </div>
 
-
-<div class="grid">
-  <div class="col-12 md:col-6 lg:col-6">
-
-  </div>
-  <div class="col-12 md:col-6 lg:col-6">
-
-  </div>
-</div>

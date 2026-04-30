@@ -12,8 +12,7 @@
           class="preset-swatch"
           [class.active]="t === theme"
           [title]="t.name"
-          [style.background]="'linear-gradient(135deg, ' + t.headerBgColor + ' 50%, ' + t.headerBgColor2 + ' 50%)'"
-          (click)="selectTheme(t)">
+          [style.background]="'linear-gradient(135deg, ' + t.headerBgColor + ' 50%, ' + t.headerBgColor2 + ' 50%)'"\n          (click)="selectTheme(t)">
           @if (t === theme) {
             <i class="pi pi-check"></i>
           }

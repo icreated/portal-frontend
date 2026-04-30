@@ -1,4 +1,6 @@
 export interface DesignTemplate {
+  /** Display name for this preset (shown in tooltip) */
+  name: string;
   mainBackground: string;
   headerColor: string;
   headerBgColor: string;

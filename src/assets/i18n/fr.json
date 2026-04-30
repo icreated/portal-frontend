@@ -31,6 +31,10 @@
   "confirm-yes" : "Oui",
   "confirm-no" : "Non",
   "confirm-delete" : "Voulez-vous vraiment supprimer cet élément ? Cette action est irréversible.",
+  "stat-open-balance" : "Solde ouvert",
+  "stat-invoices"     : "Factures",
+  "stat-payments"     : "Paiements",
+  "stat-overdue"      : "En retard",
 
   "header" : "Entête",
   "documentNo" : "Numéro",
