@@ -5,7 +5,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {HttpClient, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MessageService} from 'primeng/api';
+import {MessageService, ConfirmationService} from 'primeng/api';
 import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {appRoutes} from './app.routes';
@@ -32,5 +32,6 @@ export const appConfig: ApplicationConfig = {
         ),
         providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: false } } }),
         MessageService,
+        ConfirmationService,
     ]
 };

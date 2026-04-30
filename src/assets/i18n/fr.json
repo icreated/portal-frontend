@@ -27,6 +27,10 @@
   "payments" : "Paiements",
   "settings" : "Propriétés",
   "logout" : "Déconnexion",
+  "confirm-title" : "Confirmation",
+  "confirm-yes" : "Oui",
+  "confirm-no" : "Non",
+  "confirm-delete" : "Voulez-vous vraiment supprimer cet élément ? Cette action est irréversible.",
 
   "header" : "Entête",
   "documentNo" : "Numéro",
