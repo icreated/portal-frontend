@@ -13,7 +13,7 @@
   background: var(--p-surface-0, #fff);
   border: 1px solid var(--p-surface-200, #e2e8f0);
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 1px 4px rgba(0,0,0,.06);
 }
 
@@ -35,6 +35,7 @@
 
 .settings-card-body {
   padding: 1.25rem;
+  overflow: visible;
 }
 
 .account-tab-wrapper {
