@@ -6,7 +6,7 @@
       <p-panel [header]="'header' | translate">
         <p><b>{{ 'documentNo' | translate }} :</b> {{ invoice.documentNo }}</p>
         <p><b>{{ 'description' | translate }}:</b> {{ invoice.description }}</p>
-        <p><b>{{ 'status' | translate }} :</b> {{ invoice.docStatus | docStatus }}</p>
+        <p><b>{{ 'status' | translate }} :</b> {{ invoice.docStatus | docStatus | async }}</p>
         <p><b>{{ 'date' | translate }} :</b> {{ invoice.date | date: env.dateFormat }}</p>
         <p><b>{{ 'total' | translate }} :</b> {{ invoice.grandTotal | currency: env.currencyISO }}</p>
       </p-panel>

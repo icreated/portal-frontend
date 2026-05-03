@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
-import {CurrencyPipe, DatePipe} from '@angular/common';
+import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
 import {ButtonModule} from 'primeng/button';
@@ -16,7 +16,7 @@ import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header
     templateUrl: 'invoice-detail.component.html',
     styleUrls: ['invoice-detail.component.css'],
     standalone: true,
-    imports: [HeaderBreadcrumbComponent, TranslateModule, PanelModule, TableModule, ButtonModule, DocStatusFormatPipe, DatePipe, CurrencyPipe],
+    imports: [HeaderBreadcrumbComponent, TranslateModule, PanelModule, TableModule, ButtonModule, DocStatusFormatPipe, AsyncPipe, DatePipe, CurrencyPipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoiceDetailComponent implements OnInit {

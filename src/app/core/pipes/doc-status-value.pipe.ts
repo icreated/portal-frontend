@@ -1,23 +1,18 @@
 import {inject, Pipe, PipeTransform} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {CommonService} from '@api/services/common.service';
 import {TranslateService} from '@ngx-translate/core';
 
-@Pipe({ name: 'docStatus', pure: false, standalone: true })
+@Pipe({ name: 'docStatus', standalone: true })
 export class DocStatusFormatPipe implements PipeTransform {
 
   private commonService = inject(CommonService);
   private translate = inject(TranslateService);
 
-  private cachedValue: any = null;
-  private cachedData: any = null;
-
-  transform(value: any) {
-    if (value !== this.cachedValue) {
-      this.cachedData = null;
-      this.cachedValue = value;
-      this.commonService.getDocStatus({ language: this.translate.currentLang || 'en', value })
-        .subscribe(result => { this.cachedData = result.label; });
-    }
-    return this.cachedData;
+  transform(value: any): Observable<string | null> {
+    if (value == null) return of(null);
+    return this.commonService.getDocStatus({ language: this.translate.currentLang || 'en', value })
+      .pipe(map(result => result.label));
   }
 }
