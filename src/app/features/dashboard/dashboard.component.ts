@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, signal} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
+import {RouterLink} from '@angular/router';
 import {CardModule} from 'primeng/card';
 import {SkeletonModule} from 'primeng/skeleton';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
@@ -23,7 +24,7 @@ interface StatCard {
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.css'],
     standalone: true,
-    imports: [TranslateModule, CardModule, SkeletonModule, CurrencyPipe],
+    imports: [TranslateModule, CardModule, SkeletonModule, CurrencyPipe, RouterLink],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {

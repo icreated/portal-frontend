@@ -1,7 +1,7 @@
 <!-- Stat Cards -->
 <div class="stat-grid">
   @for (card of statCards; track card.titleKey) {
-    @if (isLoading) {
+    @if (isLoading()) {
       <div class="stat-card stat-card-skeleton">
         <p-skeleton height="90px" borderRadius="12px"></p-skeleton>
       </div>
