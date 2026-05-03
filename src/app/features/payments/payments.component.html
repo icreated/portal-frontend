@@ -14,7 +14,7 @@
         <ng-template pTemplate="body" let-payment>
             <tr>
                 <td class="ui-table-hide-sm">{{ payment.documentNo }}</td>
-                <td>{{ payment.tenderType | tenderType }}</td>
+                <td>{{ payment.tenderType | tenderType | async }}</td>
                 <td class="ui-table-hide-sm">{{ payment.description }}</td>
                 <td class="ui-table-hide-sm">{{ payment.docStatus | docStatus | async }}</td>
                 <td>{{ payment.date | date: env.dateFormat }}</td>
