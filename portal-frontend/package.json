@@ -1,7 +1,0 @@
-{
-  "name": "portal-frontend",
-  "version": "1.0.0",
-  "devDependencies": {
-    "@types/jest": "^27.0.0"
-  }
-}
