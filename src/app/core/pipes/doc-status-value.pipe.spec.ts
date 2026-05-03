@@ -21,10 +21,13 @@ describe('DocStatusFormatPipe', () => {
         pipe = TestBed.inject(DocStatusFormatPipe);
     });
 
-    it('should transform CO to Completed', () => {
+    it('should transform CO to Completed', (done) => {
         const key = 'CO';
         spyOn(commonService, 'getDocStatus').and.returnValue(of({label: 'Completed', value: 'CO'}));
-        expect(pipe.transform(key)).toEqual('Completed');
+        pipe.transform(key).subscribe(result => {
+            expect(result).toEqual('Completed');
+            done();
+        });
     });
 
 });

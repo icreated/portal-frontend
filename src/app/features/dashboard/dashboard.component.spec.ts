@@ -42,12 +42,17 @@ describe('DashboardComponent', () => {
     });
 
     describe('onInit', () => {
-        it('should get given open items list and openItem total', () => {
+        it('should load open items and create stat cards', (done) => {
             (invoiceService.getOpenItems as jasmine.Spy).and.returnValue(of(openItems));
             component.ngOnInit();
-            expect(component).toBeTruthy();
-            expect(component.openItems.length).toBe(2);
-            expect(component.openTotal).toBe(4005);
+            setTimeout(() => {
+                expect(component).toBeTruthy();
+                expect(component.openItems.length).toBe(2);
+                expect(component.statCards.length).toBe(1);
+                expect(component.statCards[0].value).toBe(4005);
+                expect(component.isLoading()).toBe(false);
+                done();
+            }, 0);
         });
     });
 

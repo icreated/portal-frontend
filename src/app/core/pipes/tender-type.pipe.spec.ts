@@ -21,10 +21,13 @@ describe('TenderTypeFormatPipe', () => {
         pipe = TestBed.inject(TenderTypeFormatPipe);
     });
 
-    it('should transform C to CreditCard', () => {
+    it('should transform C to CreditCard', (done) => {
         const key = 'C';
         spyOn(commonService, 'getTenderType').and.returnValue(of({label: 'CreditCard', value: 'C'}));
-        expect(pipe.transform(key)).toEqual('CreditCard');
+        pipe.transform(key).subscribe(result => {
+            expect(result).toEqual('CreditCard');
+            done();
+        });
     });
 
 });
