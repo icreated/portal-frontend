@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
-import {CurrencyPipe, DatePipe} from '@angular/common';
+import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
@@ -16,7 +16,7 @@ import {HeaderBreadcrumbComponent} from '@shared/layout/header-breadcrumb/header
     templateUrl: 'payments.component.html',
     styleUrls: ['payments.component.css'],
     standalone: true,
-    imports: [HeaderBreadcrumbComponent, TranslateModule, PanelModule, TableModule, DocStatusFormatPipe, TenderTypeFormatPipe, DatePipe, CurrencyPipe],
+    imports: [HeaderBreadcrumbComponent, TranslateModule, PanelModule, TableModule, DocStatusFormatPipe, TenderTypeFormatPipe, AsyncPipe, DatePipe, CurrencyPipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentsComponent {

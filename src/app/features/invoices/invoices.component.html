@@ -14,7 +14,7 @@
             <tr>
                 <td><a (click)="goToInvoiceLines(invoice.id)">{{ invoice.documentNo }}</a></td>
                 <td class="ui-table-hide-sm">{{ invoice.description }}</td>
-                <td>{{ invoice.docStatus | docStatus }}</td>
+                <td>{{ invoice.docStatus | docStatus | async }}</td>
                 <td>{{ invoice.date | date: env.dateFormat }}</td>
                 <td>{{ invoice.grandTotal | currency: env.currencyISO }}</td>
             </tr>
